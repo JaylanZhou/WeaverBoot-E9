@@ -1,0 +1,39 @@
+package com.weaverboot.frame.ioc.beans.bean.definition.handler.register.impl;
+
+import com.weaverboot.frame.ioc.beans.bean.definition.factory.register.impl.DefaultWeaRBDFFactory;
+import com.weaverboot.frame.ioc.beans.bean.definition.factory.register.inte.WeaRBDFFactory;
+import com.weaverboot.frame.ioc.beans.bean.definition.factory.register.inte.WeaRegisterBeanDefinitionFactory;
+import com.weaverboot.frame.ioc.beans.bean.definition.utils.WeaIocCheckUtils;
+import com.weaverboot.frame.ioc.beans.bean.definition.handler.register.inte.WeaRegisterBeanDefinitionHandler;
+
+import java.lang.annotation.Annotation;
+
+public class DefaultWeaRegisterBeanDefinitionHandler implements WeaRegisterBeanDefinitionHandler {
+
+    private WeaRBDFFactory weaRBDFFactory;
+
+    public DefaultWeaRegisterBeanDefinitionHandler(){
+
+        weaRBDFFactory = new DefaultWeaRBDFFactory();
+
+    }
+
+
+    @Override
+    public void registerBeanDefinition(Class clazz) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+
+        Annotation annotation = WeaIocCheckUtils.checkAnnotationComponenet(clazz);
+
+        if (annotation != null){
+
+            System.out.println("注册了！" + clazz.getName());
+
+            WeaRegisterBeanDefinitionFactory weaRegisterBeanDefinitionFactory = weaRBDFFactory.getFactory(clazz);
+
+            weaRegisterBeanDefinitionFactory.creatWeaBeanDefinition(clazz,annotation);
+
+        }
+
+    }
+
+}
