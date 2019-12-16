@@ -24,6 +24,8 @@ public class WeaIocInitServlet extends HttpServlet {
 
             WeaApplicationContext weaApplicationContext = new DefaultWeaApplicationContext();
 
+            baseBean.writeLog("IOC根目录:" + DefaultWeaScanBeanDefinitionHandler.basePath);
+
             weaApplicationContext.refresh();
 
         } catch (Exception e){

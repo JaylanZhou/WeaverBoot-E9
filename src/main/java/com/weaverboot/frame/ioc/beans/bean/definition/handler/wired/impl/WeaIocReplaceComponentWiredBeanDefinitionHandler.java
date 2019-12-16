@@ -11,20 +11,23 @@ public class WeaIocReplaceComponentWiredBeanDefinitionHandler extends AbstractWe
 
 
     @Override
-    public synchronized Object wiredBean(AbstractWeaBeanDefinition abstractWeaBeanDefinition) throws IllegalAccessException, ClassNotFoundException, InstantiationException, IOException {
+    public Object wiredBean(AbstractWeaBeanDefinition abstractWeaBeanDefinition) throws IllegalAccessException, ClassNotFoundException, InstantiationException, IOException {
 
-        beforeWiredOperate(abstractWeaBeanDefinition);
+        synchronized (lockObject) {
 
-        Object object = super.wiredBean(abstractWeaBeanDefinition);
+            beforeWiredOperate(abstractWeaBeanDefinition);
 
-        WeaAopHandler weaAopHandler = WeaAopProperties.DEFAULT_WEA_AOP_HANDLER.newInstance();
+            Object object = super.wiredBean(abstractWeaBeanDefinition);
 
-        weaAopHandler.initReplace(abstractWeaBeanDefinition);
+            WeaAopHandler weaAopHandler = WeaAopProperties.DEFAULT_WEA_AOP_HANDLER.newInstance();
 
-        afterWiredOperate(abstractWeaBeanDefinition);
+            weaAopHandler.initReplace(abstractWeaBeanDefinition);
 
-        return object;
+            afterWiredOperate(abstractWeaBeanDefinition);
 
+            return object;
+
+        }
 
     }
 

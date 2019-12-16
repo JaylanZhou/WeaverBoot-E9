@@ -8,6 +8,7 @@ import com.weaverboot.frame.ioc.resource.patcher.WeaPathMatcher;
 import com.weaverboot.frame.ioc.beans.bean.definition.handler.register.impl.DefaultWeaRegisterBeanDefinitionHandler;
 import com.weaverboot.frame.ioc.beans.bean.definition.handler.register.inte.WeaRegisterBeanDefinitionHandler;
 import com.weaverboot.frame.ioc.beans.bean.definition.handler.scan.inte.WeaScanBeanDefinitionHandler;
+import com.weaverboot.tools.baseTools.BaseTools;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -36,27 +37,35 @@ public class DefaultWeaScanBeanDefinitionHandler implements WeaScanBeanDefinitio
 
     public void scanBeanDefinition() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 
-        List<File> fileList = getScanPackageList(WeaIocProperties.SCAN_PACKAGE);
+        if (BaseTools.notNullString(WeaIocProperties.SCAN_PACKAGE)) {
 
-        for (File f : fileList
-        ) {
+            List<File> fileList = getScanPackageList(WeaIocProperties.SCAN_PACKAGE);
 
-            for (File fa : f.listFiles()
+            for (File f : fileList
             ) {
 
-                String faName = fa.getPath();
+                for (File fa : f.listFiles()
+                ) {
 
-                if (faName.endsWith(CLASS_SUFFIX)){
+                    String faName = fa.getPath();
 
-                    faName = WeaIocFormatUtils.formatClassName(faName,basePath);
+                    if (faName.endsWith(CLASS_SUFFIX)) {
 
-                    Class clazz = this.getClass().getClassLoader().loadClass(faName);
+                        faName = WeaIocFormatUtils.formatClassName(faName, basePath);
 
-                    weaRegisterBeanDefinitionHandler.registerBeanDefinition(clazz);
+                        Class clazz = this.getClass().getClassLoader().loadClass(faName);
+
+                        weaRegisterBeanDefinitionHandler.registerBeanDefinition(clazz);
+
+                    }
 
                 }
 
             }
+
+        } else {
+
+            throw new RuntimeException("扫描包为空，请检查weaverboot.properties的scanPackage属性");
 
         }
 
@@ -78,9 +87,13 @@ public class DefaultWeaScanBeanDefinitionHandler implements WeaScanBeanDefinitio
 
             File[] files = file.listFiles();
 
-            for (int i = 0; i < files.length; i++) {
+            if (files != null && files.length > 0) {
 
-                checkPath(fileList,files[i],scanPackage);
+                for (int i = 0; i < files.length; i++) {
+
+                    checkPath(fileList, files[i], scanPackage);
+
+                }
 
             }
 
@@ -114,21 +127,23 @@ public class DefaultWeaScanBeanDefinitionHandler implements WeaScanBeanDefinitio
 
     }
 
-    private void initBasePath(){
+    private void initBasePath() {
 
-//        if (!basePath.startsWith("/")){
-//
-//            basePath = "/" + basePath;
-//
-//        }
-//
-//        basePath = (basePath + "classbean/").replaceAll("\\\\","/");
-//
-//        BaseBean baseBean = new BaseBean();
-//
-//        baseBean.writeLog("IOC根目录:" + basePath);
+        if (!BaseTools.notNullString(basePath)) {
 
-        basePath = this.getClass().getClassLoader().getResource("").getPath();
+            basePath = this.getClass().getClassLoader().getResource("").getPath();
+
+        } else {
+
+            if (!basePath.startsWith("/")) {
+
+                basePath = "/" + basePath;
+
+            }
+
+            basePath = (basePath + "classbean/").replaceAll("\\\\", "/");
+
+        }
 
     }
 

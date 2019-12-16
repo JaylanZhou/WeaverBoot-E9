@@ -1,9 +1,6 @@
 package com.weaverboot.frame.ioc.resource.util;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class StringUtils {
 
@@ -58,6 +55,5 @@ public class StringUtils {
     public static String[] toStringArray(Collection<String> collection) {
         return (collection != null && collection.size() > 0 && !collection.isEmpty() ? collection.toArray(EMPTY_STRING_ARRAY) : EMPTY_STRING_ARRAY);
     }
-
 
 }

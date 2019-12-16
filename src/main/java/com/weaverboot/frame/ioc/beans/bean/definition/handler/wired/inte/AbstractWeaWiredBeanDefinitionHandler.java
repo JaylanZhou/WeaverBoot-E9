@@ -18,6 +18,8 @@ public abstract class AbstractWeaWiredBeanDefinitionHandler implements WeaWiredB
 
     private WeaIocValueHandler weaIocValueHandler;
 
+    protected static Object lockObject = new Object();
+
     public WeaIocAutowiredHandler getWeaIocAutowiredHandler() throws IllegalAccessException, InstantiationException {
 
         if (weaIocAutowiredHandler == null){
@@ -58,20 +60,25 @@ public abstract class AbstractWeaWiredBeanDefinitionHandler implements WeaWiredB
 
             WeaIocContainer.getBeandefinitionMap().put(beanId,abstractWeaBeanDefinition);
 
-        } else {
-
-            WeaIocContainer.getEarlyBeandefinitionMap().put(beanId,abstractWeaBeanDefinition);
-
         }
+
     }
 
-    protected void beforeWiredOperate(AbstractWeaBeanDefinition abstractWeaBeanDefinition){
+    protected void beforeWiredOperate(AbstractWeaBeanDefinition abstractWeaBeanDefinition) throws InstantiationException, IllegalAccessException {
+
+        Object object = createBean(abstractWeaBeanDefinition);
+
+        abstractWeaBeanDefinition.setBeanObject(object);
 
         String beanId = abstractWeaBeanDefinition.getBeanId();
 
-        WeaIocContainer.getEarlyBeandefinitionMap().remove(beanId);
+        if (WeaIocCheckUtils.checkIsSingleton(abstractWeaBeanDefinition)) {
 
-        WeaIocContainer.setBeingCreateBeandefinition(beanId,abstractWeaBeanDefinition);
+            WeaIocContainer.getEarlyBeandefinitionMap().remove(beanId);
+
+            WeaIocContainer.setBeingCreateBeandefinition(beanId, abstractWeaBeanDefinition);
+
+        }
 
     }
 
@@ -96,7 +103,7 @@ public abstract class AbstractWeaWiredBeanDefinitionHandler implements WeaWiredB
     @Override
     public synchronized Object wiredBean(AbstractWeaBeanDefinition abstractWeaBeanDefinition) throws IllegalAccessException, ClassNotFoundException, InstantiationException, IOException {
 
-        Object object = createBean(abstractWeaBeanDefinition);
+        Object object = abstractWeaBeanDefinition.getBeanObject();
 
         Field[] fields = object.getClass().getDeclaredFields();
 
@@ -109,8 +116,6 @@ public abstract class AbstractWeaWiredBeanDefinitionHandler implements WeaWiredB
 
 
         }
-
-        abstractWeaBeanDefinition.setBeanObject(object);
 
         return object;
 

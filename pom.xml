@@ -5,10 +5,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.weaver</groupId>
-  <artifactId>weaverboot-e9</artifactId>
+  <artifactId>WeaverBoot-E9</artifactId>
   <version>1.0.0</version>
 
-  <name>weaverboot-e9</name>
+  <name>WeaverBoot-E9</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 

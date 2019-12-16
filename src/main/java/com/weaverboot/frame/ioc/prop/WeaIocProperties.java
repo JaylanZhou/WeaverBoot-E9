@@ -17,6 +17,7 @@ import com.weaverboot.frame.ioc.beans.bean.definition.handler.wired.factory.impl
 import com.weaverboot.frame.ioc.beans.bean.definition.handler.wired.factory.inte.WeaWiredBeanDefinitionFactory;
 import com.weaverboot.frame.ioc.beans.bean.definition.handler.wired.impl.WeaIocReplaceComponentWiredBeanDefinitionHandler;
 import com.weaverboot.frame.ioc.beans.bean.definition.handler.wired.inte.WeaWiredBeanDefinitionHandler;
+import com.weaverboot.tools.baseTools.BaseTools;
 import weaver.general.BaseBean;
 import weaver.general.GCONST;
 
@@ -33,13 +34,13 @@ public class WeaIocProperties {
 
     public static String SCAN_PACKAGE;
 
-    private static String BASIC_SCAN_PACKAGE = "com.**.Impl;com.**.impl";
-
     private static String IOC_PROPERTIES_NAME = "weaverboot";
 
     private static String SCAN_PACKAGE_NAME = "scanPackage";
 
     private static String PROPERTIES_SUFFIX = ".properties";
+
+    public static String CUSTOM_PROPERTIES_URL = "";
 
     public static Class<? extends WeaRegisterIocAnnoHandler> DEFAULT_WEA_REGISTER_IOC_ANNO_HANDLER = DefaultWeaRegisterIocAnnoHandler.class;
 
@@ -53,16 +54,6 @@ public class WeaIocProperties {
 
     static {
 
-        BaseBean baseBean = new BaseBean();
-
-        SCAN_PACKAGE = baseBean.getPropValue(IOC_PROPERTIES_NAME,SCAN_PACKAGE_NAME);
-
-        if (SCAN_PACKAGE == null || SCAN_PACKAGE.equals("")){
-
-            SCAN_PACKAGE = BASIC_SCAN_PACKAGE;
-
-        }
-
         IOC_PROPERTIES = new Properties();
 
         try {
@@ -75,16 +66,28 @@ public class WeaIocProperties {
 
         } catch (FileNotFoundException e) {
 
-            baseBean.writeLog("未找到weaver_ioc.properties文件");
+                try {
 
-            e.printStackTrace();
+                    InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("weaverboot.properties");
+
+                    BufferedReader bf = new BufferedReader(new InputStreamReader(inputStream));
+
+                    IOC_PROPERTIES.load(bf);
+
+                } catch (IOException ex) {
+
+                    throw new RuntimeException("未找到weaverboot.properties文件");
+
+                }
+
 
         } catch (IOException e) {
 
-            baseBean.writeLog("流读取配置文件失败，原因为:" + e.getMessage());
+            throw new RuntimeException("流读取配置文件失败，原因为:" + e.getMessage());
 
-            e.printStackTrace();
         }
+
+        SCAN_PACKAGE = IOC_PROPERTIES.getProperty("scanPackage");
 
     }
 

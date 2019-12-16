@@ -12,8 +12,10 @@ import com.weaverboot.frame.ioc.beans.context.inte.WeaApplicationContext;
 import com.weaverboot.frame.ioc.prop.WeaIocProperties;
 
 import java.io.IOException;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.HashMap;
 import java.util.Map;
 
 public class DefaultWeaApplicationContext implements WeaApplicationContext {
@@ -22,7 +24,7 @@ public class DefaultWeaApplicationContext implements WeaApplicationContext {
 
     private WeaInitBeanDefinitionHandler weaInitBeanDefinitionHandler;
 
-    public DefaultWeaApplicationContext(){
+    public DefaultWeaApplicationContext() {
 
         weaInitBeanDefinitionHandler = new DefaultWeaInitBeanDefinitionHandler();
 
@@ -66,43 +68,61 @@ public class DefaultWeaApplicationContext implements WeaApplicationContext {
     @Override
     public Object getBean(String beanId) {
 
-        if (WeaIocContainer.getBeanDefinition(beanId) == null){
+        if (WeaIocContainer.getBeanDefinition(beanId) == null) {
 
-            if (WeaIocContainer.getEarlyBeanDefinition(beanId) == null){
+            if (WeaIocContainer.getBeingCreateBeanDefinition(beanId) == null){
 
-                throw new RuntimeException("在容器中未找到:" + beanId);
+                if (WeaIocContainer.getEarlyBeanDefinition(beanId) == null) {
 
-            } else {
+                    throw new RuntimeException("在容器中未找到:" + beanId);
 
-                AbstractWeaBeanDefinition abstractWeaBeanDefinition = WeaIocContainer.getEarlyBeanDefinition(beanId);
+                } else {
 
-                try {
+                    AbstractWeaBeanDefinition abstractWeaBeanDefinition;
 
-                    WeaWiredBeanDefinitionFactory weaWiredBeanDefinitionFactory = WeaIocProperties.DEFAULT_WEA_WIRED_BEAN_DEFINITION_FACTORY.newInstance();
+                    if (WeaIocContainer.getBeingCreateBeanDefinition(beanId) != null) {
 
-                    WeaWiredBeanDefinitionHandler weaWiredBeanDefinitionHandler = weaWiredBeanDefinitionFactory.getHandler(abstractWeaBeanDefinition);
+                        abstractWeaBeanDefinition = WeaIocContainer.getBeingCreateBeanDefinition(beanId);
 
-                    Object object = weaWiredBeanDefinitionHandler.wiredBean(abstractWeaBeanDefinition);
+                    } else {
 
-                    return object;
+                        abstractWeaBeanDefinition = WeaIocContainer.getEarlyBeanDefinition(beanId);
 
-                } catch (InstantiationException e) {
+                    }
 
-                    throw new RuntimeException("获取bean发生错误，原因为:" + e.getMessage());
+                    try {
 
-                } catch (IllegalAccessException e) {
+                        WeaWiredBeanDefinitionFactory weaWiredBeanDefinitionFactory = WeaIocProperties.DEFAULT_WEA_WIRED_BEAN_DEFINITION_FACTORY.newInstance();
 
-                    throw new RuntimeException("获取bean发生错误，原因为:" + e.getMessage());
+                        WeaWiredBeanDefinitionHandler weaWiredBeanDefinitionHandler = weaWiredBeanDefinitionFactory.getHandler(abstractWeaBeanDefinition);
 
-                } catch (ClassNotFoundException e) {
+                        Object object = weaWiredBeanDefinitionHandler.wiredBean(abstractWeaBeanDefinition);
 
-                    throw new RuntimeException("获取bean发生错误，原因为:" + e.getMessage());
+                        return object;
 
-                } catch (IOException e) {
+                    } catch (InstantiationException e) {
 
-                    throw new RuntimeException("获取bean发生错误，原因为:" + e.getMessage());
+                        throw new RuntimeException("获取bean发生错误，原因为:" + e.getMessage());
+
+                    } catch (IllegalAccessException e) {
+
+                        throw new RuntimeException("获取bean发生错误，原因为:" + e.getMessage());
+
+                    } catch (ClassNotFoundException e) {
+
+                        throw new RuntimeException("获取bean发生错误，原因为:" + e.getMessage());
+
+                    } catch (IOException e) {
+
+                        throw new RuntimeException("获取bean发生错误，原因为:" + e.getMessage());
+
+                    }
 
                 }
+
+             } else {
+
+                return WeaIocContainer.getBeingCreateBeanDefinition(beanId);
 
             }
 
@@ -115,7 +135,75 @@ public class DefaultWeaApplicationContext implements WeaApplicationContext {
     }
 
     @Override
-    public Map<AbstractWeaBeanDefinition, Map<String,Method>> getReplaceApi(String apiUrl) {
+    public <T> T getBean(String beanId, Class<T> tClass) {
+
+        Object object = getBean(beanId);
+
+        return (T) object;
+    }
+
+    @Override
+    public Map<String, Object> getBeansWithAnnotation(Class<Annotation> annotationClass) {
+
+        try {
+
+            WeaWiredBeanDefinitionFactory weaWiredBeanDefinitionFactory = WeaIocProperties.DEFAULT_WEA_WIRED_BEAN_DEFINITION_FACTORY.newInstance();
+
+            Map<String,Object> resultMap = new HashMap<>();
+
+            for (String beanId : WeaIocContainer.getEarlyBeandefinitionMap().keySet()
+            ) {
+
+                AbstractWeaBeanDefinition abstractWeaBeanDefinition = WeaIocContainer.getEarlyBeandefinitionMap().get(beanId);
+
+                if (abstractWeaBeanDefinition.getBeanClass().isAnnotationPresent(annotationClass)) {
+
+                    Object object = weaWiredBeanDefinitionFactory.getHandler(abstractWeaBeanDefinition).wiredBean(abstractWeaBeanDefinition);
+
+                    resultMap.put(beanId,object);
+
+                }
+
+            }
+
+            for (String beanId : WeaIocContainer.getBeandefinitionMap().keySet()
+                 ) {
+
+                AbstractWeaBeanDefinition abstractWeaBeanDefinition = WeaIocContainer.getBeanDefinition(beanId);
+
+                if (abstractWeaBeanDefinition.getBeanClass().isAnnotationPresent(annotationClass)) {
+
+                    Object object = abstractWeaBeanDefinition.getBeanObject();
+
+                    resultMap.put(beanId,object);
+
+                }
+
+            }
+
+        } catch (IllegalAccessException e) {
+
+            e.printStackTrace();
+
+        } catch (ClassNotFoundException e) {
+
+            e.printStackTrace();
+
+        } catch (InstantiationException e) {
+
+            e.printStackTrace();
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+
+        }
+
+        return null;
+    }
+
+    @Override
+    public Map<AbstractWeaBeanDefinition, Map<String, Method>> getReplaceApi(String apiUrl) {
 
         return WeaIocContainer.getReplaceAfter(apiUrl);
 

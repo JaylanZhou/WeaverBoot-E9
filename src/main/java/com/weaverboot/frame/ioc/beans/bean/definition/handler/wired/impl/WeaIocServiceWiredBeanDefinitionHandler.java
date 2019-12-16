@@ -8,15 +8,19 @@ import java.io.IOException;
 public class WeaIocServiceWiredBeanDefinitionHandler extends AbstractWeaWiredBeanDefinitionHandler {
 
     @Override
-    public synchronized Object wiredBean(AbstractWeaBeanDefinition abstractWeaBeanDefinition) throws IllegalAccessException, ClassNotFoundException, InstantiationException, IOException {
+    public Object wiredBean(AbstractWeaBeanDefinition abstractWeaBeanDefinition) throws IllegalAccessException, ClassNotFoundException, InstantiationException, IOException {
 
-        beforeWiredOperate(abstractWeaBeanDefinition);
+        synchronized (lockObject) {
 
-        Object object = super.wiredBean(abstractWeaBeanDefinition);
+            beforeWiredOperate(abstractWeaBeanDefinition);
 
-        afterWiredOperate(abstractWeaBeanDefinition);
+            Object object = super.wiredBean(abstractWeaBeanDefinition);
 
-        return object;
+            afterWiredOperate(abstractWeaBeanDefinition);
+
+            return object;
+
+        }
 
     }
 }

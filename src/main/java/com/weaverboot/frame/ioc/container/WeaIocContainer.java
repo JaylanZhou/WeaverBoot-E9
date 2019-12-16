@@ -97,6 +97,8 @@ public class WeaIocContainer {
 
         BEANDEFINITION_MAP.clear();
 
+
+
         REPLACE_AFTER_API_MAP.clear();
 
     }
