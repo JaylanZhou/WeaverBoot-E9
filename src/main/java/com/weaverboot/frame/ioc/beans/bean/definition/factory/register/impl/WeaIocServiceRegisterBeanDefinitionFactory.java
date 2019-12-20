@@ -9,7 +9,30 @@ import com.weaverboot.tools.baseTools.BaseTools;
 
 import java.lang.annotation.Annotation;
 
+/**
+ *
+ * 默认 WeaIocService 注册逻辑处理类
+ *
+ * @Author : Jaylan Zhou
+ *
+ * @Date : 2019-12-17
+ *
+ */
+
 public class WeaIocServiceRegisterBeanDefinitionFactory extends AbstractWeaRegisterBeanDefinitionFactory {
+
+    /**
+     *
+     * 注册默认的WeaIocService类
+     *
+     * @param clazz
+     * @param annotation
+     * @return
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     * @throws ClassNotFoundException
+     */
+
     @Override
     public AbstractWeaBeanDefinition creatWeaBeanDefinition(Class clazz, Annotation annotation) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
 

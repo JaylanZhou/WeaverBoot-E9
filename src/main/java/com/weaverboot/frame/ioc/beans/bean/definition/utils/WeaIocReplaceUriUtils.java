@@ -1,9 +1,11 @@
 package com.weaverboot.frame.ioc.beans.bean.definition.utils;
 
+import com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefinition;
+import com.weaverboot.frame.ioc.beans.context.impl.DefaultWeaApplicationContext;
+import com.weaverboot.frame.ioc.beans.context.inte.WeaApplicationContext;
 import com.weaverboot.frame.ioc.container.WeaIocContainer;
 import com.weaverboot.frame.ioc.beans.bean.definition.handler.replace.weaReplaceParam.impl.WeaAfterReplaceParam;
 import com.weaverboot.frame.ioc.beans.bean.definition.handler.replace.weaReplaceParam.impl.WeaBeforeReplaceParam;
-import com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefinition;
 import weaver.general.BaseBean;
 
 import java.lang.reflect.InvocationTargetException;
@@ -12,7 +14,6 @@ import java.util.Map;
 
 public class WeaIocReplaceUriUtils {
 
-    private WeaIocReplaceUriUtils(){}
 
     public static boolean checkAfterUrl(String apiUrl){
 
@@ -28,13 +29,15 @@ public class WeaIocReplaceUriUtils {
 
     public static String invokeReplaceApiAfterMethod(WeaAfterReplaceParam weaAfterReplaceParam) throws InvocationTargetException, IllegalAccessException {
 
-        Map<com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefinition, Map<String,Method>> resultMap = WeaIocContainer.getReplaceAfter(weaAfterReplaceParam.getApiUrl());
+        WeaApplicationContext weaApplicationContext = new DefaultWeaApplicationContext();
+
+        Map<AbstractWeaBeanDefinition, Map<String,Method>> resultMap = WeaIocContainer.getReplaceAfter(weaAfterReplaceParam.getApiUrl());
 
         String replaceBody = weaAfterReplaceParam.getData();
 
         if (resultMap != null) {
 
-            for (com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefinition ab : resultMap.keySet()
+            for (AbstractWeaBeanDefinition ab : resultMap.keySet()
             ) {
 
                 Map<String,Method> methodMap = resultMap.get(ab);
@@ -44,7 +47,7 @@ public class WeaIocReplaceUriUtils {
 
                     Method method = methodMap.get(s);
 
-                    weaAfterReplaceParam.setData((String) method.invoke(ab.getBeanObject(),weaAfterReplaceParam));
+                    weaAfterReplaceParam.setData((String) method.invoke(weaApplicationContext.getBean(ab.getBeanId()),weaAfterReplaceParam));
 
                 }
 
@@ -58,11 +61,11 @@ public class WeaIocReplaceUriUtils {
 
     public static void invokeReplaceApiBeforeMethod(WeaBeforeReplaceParam weaBeforeReplaceParam) throws InvocationTargetException, IllegalAccessException {
 
-        Map<com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefinition, Map<String,Method>> resultMap = WeaIocContainer.getReplaceBefore(weaBeforeReplaceParam.getApiUrl());
+        Map<AbstractWeaBeanDefinition, Map<String,Method>> resultMap = WeaIocContainer.getReplaceBefore(weaBeforeReplaceParam.getApiUrl());
+
+        WeaApplicationContext weaApplicationContext = new DefaultWeaApplicationContext();
 
         if (resultMap != null) {
-
-            BaseBean baseBean = new BaseBean();
 
             for (AbstractWeaBeanDefinition ab : resultMap.keySet()
             ) {
@@ -74,7 +77,7 @@ public class WeaIocReplaceUriUtils {
 
                     Method method = methodMap.get(s);
 
-                    method.invoke(ab.getBeanObject(),weaBeforeReplaceParam);
+                    method.invoke(weaApplicationContext.getBean(ab.getBeanId()),weaBeforeReplaceParam);
 
                 }
 

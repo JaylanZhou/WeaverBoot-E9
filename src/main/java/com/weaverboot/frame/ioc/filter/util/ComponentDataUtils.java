@@ -4,14 +4,14 @@ import com.alibaba.fastjson.JSONObject;
 import com.weaverboot.weaComponent.impl.weaForm.inte.AbstractWeaForm;
 import com.weaverboot.weaComponent.impl.weaTree.inte.AbstractWeaChildTree;
 import com.weaverboot.weaComponent.impl.weaTree.inte.AbstractWeaFatherTree;
-import com.weaverboot.weaResultMsg.impl.formResult.inte.AbstractWeaFormReciveResultMsg;
+import com.weaverboot.weaResultMsg.impl.formResult.inte.AbstractWeaFormReciveComponentResultMsg;
 import com.weaverboot.weaComponent.impl.weaTab.inte.AbstractWeaTab;
 
 public class ComponentDataUtils {
 
     private ComponentDataUtils(){}
 
-    public static  <T extends AbstractWeaForm>T getFormItem(AbstractWeaFormReciveResultMsg abstractWeaFormReciveResultMsg,int groupIndex,int itemIndex,Class<T> tClass) throws IllegalAccessException, InstantiationException {
+    public static  <T extends AbstractWeaForm>T getFormItem(AbstractWeaFormReciveComponentResultMsg abstractWeaFormReciveResultMsg, int groupIndex, int itemIndex, Class<T> tClass) throws IllegalAccessException, InstantiationException {
 
         JSONObject jsonObject = (JSONObject) abstractWeaFormReciveResultMsg.getCondition().get(groupIndex).getItems().get(itemIndex);
 
@@ -21,13 +21,13 @@ public class ComponentDataUtils {
 
     }
 
-    public static void setFormItem(AbstractWeaFormReciveResultMsg abstractWeaFormReciveResultMsg,int groupIndex,int itemIndex,AbstractWeaForm abstractWeaForm){
+    public static void setFormItem(AbstractWeaFormReciveComponentResultMsg abstractWeaFormReciveResultMsg, int groupIndex, int itemIndex, AbstractWeaForm abstractWeaForm){
 
         abstractWeaFormReciveResultMsg.getCondition().get(groupIndex).getItems().set(itemIndex,abstractWeaForm);
 
     }
 
-    public static <T extends AbstractWeaFatherTree>T getFatherTreeNode(AbstractWeaFormReciveResultMsg abstractWeaFormReciveResultMsg, int groupIndex,Class<T> tClass){
+    public static <T extends AbstractWeaFatherTree>T getFatherTreeNode(AbstractWeaFormReciveComponentResultMsg abstractWeaFormReciveResultMsg, int groupIndex, Class<T> tClass){
 
         JSONObject jsonObject = (JSONObject) abstractWeaFormReciveResultMsg.getWeaTree().get(groupIndex);
 
@@ -37,7 +37,7 @@ public class ComponentDataUtils {
 
     }
 
-    public static void setFatherTreeNode(AbstractWeaFormReciveResultMsg abstractWeaFormReciveResultMsg,int groupIndex,AbstractWeaFatherTree abstractWeaFatherTree){
+    public static void setFatherTreeNode(AbstractWeaFormReciveComponentResultMsg abstractWeaFormReciveResultMsg, int groupIndex, AbstractWeaFatherTree abstractWeaFatherTree){
 
         abstractWeaFormReciveResultMsg.getWeaTree().set(groupIndex,abstractWeaFatherTree);
 
@@ -59,7 +59,7 @@ public class ComponentDataUtils {
 
     }
 
-    public static <T extends com.weaverboot.weaComponent.impl.weaTab.inte.AbstractWeaTab>T getWeaTab(AbstractWeaFormReciveResultMsg abstractWeaFormReciveResultMsg, int itemIndex, Class<T> tClass){
+    public static <T extends com.weaverboot.weaComponent.impl.weaTab.inte.AbstractWeaTab>T getWeaTab(AbstractWeaFormReciveComponentResultMsg abstractWeaFormReciveResultMsg, int itemIndex, Class<T> tClass){
 
         JSONObject jsonObject = (JSONObject) abstractWeaFormReciveResultMsg.getWeaTab().get(itemIndex);
 
@@ -69,7 +69,7 @@ public class ComponentDataUtils {
 
     }
 
-    public static void setWeaTab(AbstractWeaFormReciveResultMsg abstractWeaFormReciveResultMsg, int itemIndex, AbstractWeaTab abstractWeaTab){
+    public static void setWeaTab(AbstractWeaFormReciveComponentResultMsg abstractWeaFormReciveResultMsg, int itemIndex, AbstractWeaTab abstractWeaTab){
 
         abstractWeaFormReciveResultMsg.getWeaTab().set(itemIndex,abstractWeaTab);
 

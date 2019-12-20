@@ -16,6 +16,8 @@ public interface WeaApplicationContext {
 
     Map<String,Object> getBeansWithAnnotation(Class<Annotation> annotationClass);
 
-    Map<AbstractWeaBeanDefinition, Map<String,Method>> getReplaceApi(String apiUrl);
+    Map<AbstractWeaBeanDefinition, Map<String,Method>> getReplaceAfterApi(String apiUrl);
+
+    Map<AbstractWeaBeanDefinition, Map<String,Method>> getReplaceBeforeApi(String apiUrl);
 
 }

@@ -2,12 +2,12 @@ package com.weaverboot.frame.ioc.beans.bean.definition.handler.replace.impl;
 
 import com.weaverboot.frame.ioc.anno.methodAnno.WeaReplaceAfter;
 import com.weaverboot.frame.ioc.anno.methodAnno.WeaReplaceBefore;
+import com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefinition;
 import com.weaverboot.frame.ioc.container.WeaIocContainer;
 import com.weaverboot.frame.ioc.anno.classAnno.WeaIocReplaceComponent;
 import com.weaverboot.frame.ioc.beans.bean.definition.handler.replace.inte.AbstractWeaIocReplaceHandler;
-import com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefinition;
-import com.weaverboot.frame.ioc.beans.bean.definition.utils.WeaIocCheckUtils;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,14 +15,11 @@ import java.util.TreeMap;
 
 public class DefaultWeaIocReplaceHandler extends AbstractWeaIocReplaceHandler {
 
+
     @Override
-    public void getReplaceForm(AbstractWeaBeanDefinition abstractWeaBeanDefinition) throws IllegalAccessException, ClassNotFoundException, InstantiationException {
+    public void getReplaceForm(AbstractWeaBeanDefinition abstractWeaBeanDefinition,Object object) throws IllegalAccessException, ClassNotFoundException, InstantiationException, IOException {
 
-        if (abstractWeaBeanDefinition.getBeanObject().getClass().isAnnotationPresent(WeaIocReplaceComponent.class)) {
-
-            Object object = abstractWeaBeanDefinition.getBeanObject();
-
-            WeaIocCheckUtils.checkIsOrInitObject(object,abstractWeaBeanDefinition);
+        if (abstractWeaBeanDefinition.getBeanClass().isAnnotationPresent(WeaIocReplaceComponent.class)) {
 
             Method[] methods = object.getClass().getMethods();
 
@@ -39,13 +36,13 @@ public class DefaultWeaIocReplaceHandler extends AbstractWeaIocReplaceHandler {
 
     }
 
-    public void checkReplaceAfter(Method method, com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefinition abstractWeaBeanDefinition){
+    public void checkReplaceAfter(Method method, AbstractWeaBeanDefinition abstractWeaBeanDefinition){
 
         if (method.isAnnotationPresent(WeaReplaceAfter.class)) {
 
             String apiUrl = method.getAnnotation(WeaReplaceAfter.class).value();
 
-            Map<com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefinition, Map<String,Method>> abstractWeaBeanDefinitionMap = WeaIocContainer.getReplaceAfter(apiUrl);
+            Map<AbstractWeaBeanDefinition, Map<String,Method>> abstractWeaBeanDefinitionMap = WeaIocContainer.getReplaceAfter(apiUrl);
 
             if (abstractWeaBeanDefinitionMap != null) {
 
@@ -85,7 +82,7 @@ public class DefaultWeaIocReplaceHandler extends AbstractWeaIocReplaceHandler {
 
     }
 
-    public void checkReplaceBefore(Method method, com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefinition abstractWeaBeanDefinition){
+    public void checkReplaceBefore(Method method, AbstractWeaBeanDefinition abstractWeaBeanDefinition){
 
         if (method.isAnnotationPresent(WeaReplaceBefore.class)) {
 

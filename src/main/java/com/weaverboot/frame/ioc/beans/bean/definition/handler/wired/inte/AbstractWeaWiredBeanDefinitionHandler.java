@@ -92,6 +92,8 @@ public abstract class AbstractWeaWiredBeanDefinitionHandler implements WeaWiredB
 
         } else {
 
+            System.out.println("创建的beanclass为:" + abstractWeaBeanDefinition.getBeanClass());
+
             return abstractWeaBeanDefinition.getBeanClass().newInstance();
 
         }
@@ -110,7 +112,7 @@ public abstract class AbstractWeaWiredBeanDefinitionHandler implements WeaWiredB
         for (Field field : fields
         ) {
 
-            getWeaIocAutowiredHandler().autoWiredField(field,object);
+            getWeaIocAutowiredHandler().autoWiredField(abstractWeaBeanDefinition,field,object);
 
             getWeaIocValueHandler().valueField(field,object);
 

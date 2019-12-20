@@ -10,6 +10,7 @@ import com.weaverboot.frame.ioc.beans.bean.definition.handler.scan.inte.WeaScanB
 import com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefinition;
 import com.weaverboot.frame.ioc.beans.context.inte.WeaApplicationContext;
 import com.weaverboot.frame.ioc.prop.WeaIocProperties;
+import weaver.general.BaseBean;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
@@ -23,6 +24,8 @@ public class DefaultWeaApplicationContext implements WeaApplicationContext {
     private WeaScanBeanDefinitionHandler weaScanBeanDefinitionHandler;
 
     private WeaInitBeanDefinitionHandler weaInitBeanDefinitionHandler;
+
+    private BaseBean baseBean = new BaseBean();
 
     public DefaultWeaApplicationContext() {
 
@@ -43,24 +46,10 @@ public class DefaultWeaApplicationContext implements WeaApplicationContext {
 
             weaInitBeanDefinitionHandler.initBeanDefinition();
 
-        } catch (ClassNotFoundException e) {
+        } catch (Exception e) {
 
-            e.printStackTrace();
+            baseBean.writeLog("获取bean发生错误，原因为:" + e.getMessage());
 
-        } catch (IllegalAccessException e) {
-
-            e.printStackTrace();
-
-        } catch (InstantiationException e) {
-
-            e.printStackTrace();
-
-        } catch (InvocationTargetException e) {
-
-            e.printStackTrace();
-
-        } catch (IOException e) {
-            e.printStackTrace();
         }
 
     }
@@ -203,9 +192,16 @@ public class DefaultWeaApplicationContext implements WeaApplicationContext {
     }
 
     @Override
-    public Map<AbstractWeaBeanDefinition, Map<String, Method>> getReplaceApi(String apiUrl) {
+    public Map<AbstractWeaBeanDefinition, Map<String, Method>> getReplaceAfterApi(String apiUrl) {
 
         return WeaIocContainer.getReplaceAfter(apiUrl);
+
+    }
+
+    @Override
+    public Map<AbstractWeaBeanDefinition, Map<String, Method>> getReplaceBeforeApi(String apiUrl) {
+
+        return WeaIocContainer.getReplaceBefore(apiUrl);
 
     }
 

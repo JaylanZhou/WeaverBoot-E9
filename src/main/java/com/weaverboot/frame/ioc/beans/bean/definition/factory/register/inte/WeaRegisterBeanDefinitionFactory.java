@@ -4,7 +4,29 @@ import com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefini
 
 import java.lang.annotation.Annotation;
 
+/**
+ *
+ * BeanDefinition 创建工厂
+ *
+ * @Author : Jaylan Zhou
+ *
+ * @Date : 2019-12-17
+ *
+ */
+
 public interface WeaRegisterBeanDefinitionFactory {
+
+    /**
+     *
+     * 创建 BeanDefinition
+     *
+     * @param clazz
+     * @param annotation
+     * @return
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     * @throws ClassNotFoundException
+     */
 
     AbstractWeaBeanDefinition creatWeaBeanDefinition(Class clazz, Annotation annotation) throws InstantiationException, IllegalAccessException, ClassNotFoundException;
 

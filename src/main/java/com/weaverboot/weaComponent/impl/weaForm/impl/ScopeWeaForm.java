@@ -3,15 +3,15 @@ package com.weaverboot.weaComponent.impl.weaForm.impl;
 import com.api.browser.util.ConditionType;
 import com.weaverboot.weaComponent.impl.weaForm.inte.AbstractWeaForm;
 
-public class TimeRangePickerWeaForm extends AbstractWeaForm {
+public class ScopeWeaForm extends AbstractWeaForm {
 
-    private final ConditionType conditionType = ConditionType.TIMERANGEPICKER;
+    private final ConditionType conditionType = ConditionType.SCOPE;
 
     private String startValue;
 
     private String endValue;
 
-    public TimeRangePickerWeaForm(String label,String ... name){
+    public ScopeWeaForm(String label, String ... name){
 
         super();
 
@@ -21,7 +21,7 @@ public class TimeRangePickerWeaForm extends AbstractWeaForm {
 
     }
 
-    public TimeRangePickerWeaForm(){
+    public ScopeWeaForm(){
 
         super();
 

@@ -21,7 +21,7 @@ public class WeaIocReplaceComponentWiredBeanDefinitionHandler extends AbstractWe
 
             WeaAopHandler weaAopHandler = WeaAopProperties.DEFAULT_WEA_AOP_HANDLER.newInstance();
 
-            weaAopHandler.initReplace(abstractWeaBeanDefinition);
+            weaAopHandler.initReplace(abstractWeaBeanDefinition,object);
 
             afterWiredOperate(abstractWeaBeanDefinition);
 

@@ -2,14 +2,14 @@ package com.weaverboot.weaResultMsg.impl.formResult.inte;
 
 import com.alibaba.fastjson.JSONObject;
 import com.weaverboot.weaComponent.impl.weaForm.weaFormGroup.DefaultWeaFormGroup;
-import com.weaverboot.weaResultMsg.inte.AbstractWeaResultMsg;
+import com.weaverboot.weaResultMsg.inte.AbstractWeaComponentResultMsg;
 import com.weaverboot.weaComponent.impl.weaTab.inte.AbstractWeaTab;
 import com.weaverboot.weaComponent.impl.weaTree.inte.AbstractWeaFatherTree;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractWeaFormResultMsg extends AbstractWeaResultMsg {
+public abstract class AbstractWeaFormComponentResultMsg extends AbstractWeaComponentResultMsg {
 
     private List<DefaultWeaFormGroup> condition;
 
@@ -25,7 +25,7 @@ public abstract class AbstractWeaFormResultMsg extends AbstractWeaResultMsg {
         this.condition = condition;
     }
 
-    public AbstractWeaFormResultMsg addItem(DefaultWeaFormGroup defaultWeaFormGroup){
+    public AbstractWeaFormComponentResultMsg addItem(DefaultWeaFormGroup defaultWeaFormGroup){
 
         if (condition == null){
 
@@ -39,7 +39,7 @@ public abstract class AbstractWeaFormResultMsg extends AbstractWeaResultMsg {
 
     }
 
-    public AbstractWeaFormResultMsg addTree(com.weaverboot.weaComponent.impl.weaTree.inte.AbstractWeaFatherTree abstractWeaFatherTree){
+    public AbstractWeaFormComponentResultMsg addTree(com.weaverboot.weaComponent.impl.weaTree.inte.AbstractWeaFatherTree abstractWeaFatherTree){
 
         if (weaTree == null){
 
@@ -53,7 +53,7 @@ public abstract class AbstractWeaFormResultMsg extends AbstractWeaResultMsg {
 
     }
 
-    public AbstractWeaFormResultMsg addTab(com.weaverboot.weaComponent.impl.weaTab.inte.AbstractWeaTab abstractWeaTab){
+    public AbstractWeaFormComponentResultMsg addTab(com.weaverboot.weaComponent.impl.weaTab.inte.AbstractWeaTab abstractWeaTab){
 
         if (weaTab == null){
 

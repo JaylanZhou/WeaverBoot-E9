@@ -15,7 +15,7 @@ public class DefaultWeaIocAutowiredHandler extends AbstractWeaIocAutowiredHandle
 
 
     @Override
-    public void autoWiredField(Field field,Object object) throws IllegalAccessException, ClassNotFoundException, InstantiationException, IOException {
+    public void autoWiredField(AbstractWeaBeanDefinition abstractWeaBeanDefinition,Field field,Object object) throws IllegalAccessException, ClassNotFoundException, InstantiationException, IOException {
 
         if (field.isAnnotationPresent(WeaAutowired.class)){
 
@@ -29,7 +29,7 @@ public class DefaultWeaIocAutowiredHandler extends AbstractWeaIocAutowiredHandle
 
             }
 
-            Object resultObject = checkDependcy(beanId,field);
+            Object resultObject = checkDependcy(abstractWeaBeanDefinition,beanId,field);
 
             field.setAccessible(true);
 

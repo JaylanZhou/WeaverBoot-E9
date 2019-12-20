@@ -6,7 +6,7 @@
 
   <groupId>com.weaver</groupId>
   <artifactId>WeaverBoot-E9</artifactId>
-  <version>1.0.0</version>
+  <version>0.0.2</version>
 
   <name>WeaverBoot-E9</name>
   <!-- FIXME change it to the project's website -->
@@ -73,11 +73,6 @@
       <groupId>org.apache.httpcomponents</groupId>
       <artifactId>httpclient</artifactId>
       <version>4.5.6</version>
-    </dependency>
-    <dependency>
-      <groupId>com.weaver</groupId>
-      <artifactId>WeaverBoot</artifactId>
-      <version>1.2.1</version>
     </dependency>
     <dependency>
       <groupId>org.dom4j</groupId>

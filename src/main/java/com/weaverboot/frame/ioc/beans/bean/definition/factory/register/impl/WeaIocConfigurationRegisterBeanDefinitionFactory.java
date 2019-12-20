@@ -15,7 +15,30 @@ import com.weaverboot.tools.baseTools.BaseTools;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
+/**
+ *
+ * WeaIocConfiguration 配置注解的默认注册工厂类
+ *
+ * @Author : Jaylan Zhou
+ *
+ * @Date : 2019-12-17
+ *
+ */
+
 public class WeaIocConfigurationRegisterBeanDefinitionFactory extends AbstractWeaRegisterBeanDefinitionFactory {
+
+    /**
+     *
+     * WeaIocConfiguration的注册方法
+     *
+     * @param clazz
+     * @param annotation
+     * @return
+     * @throws IllegalAccessException
+     * @throws ClassNotFoundException
+     * @throws InstantiationException
+     */
+
     @Override
     public AbstractWeaBeanDefinition creatWeaBeanDefinition(Class clazz, Annotation annotation) throws IllegalAccessException, ClassNotFoundException, InstantiationException {
 
@@ -54,6 +77,16 @@ public class WeaIocConfigurationRegisterBeanDefinitionFactory extends AbstractWe
         return weaBeanDefinition;
 
     }
+
+    /**
+     *
+     * 注册配置类中的Bean
+     *
+     * @param clazz
+     * @throws IllegalAccessException
+     * @throws ClassNotFoundException
+     * @throws InstantiationException
+     */
 
     private void registerConfigurationBean(Class clazz) throws IllegalAccessException, ClassNotFoundException, InstantiationException {
 

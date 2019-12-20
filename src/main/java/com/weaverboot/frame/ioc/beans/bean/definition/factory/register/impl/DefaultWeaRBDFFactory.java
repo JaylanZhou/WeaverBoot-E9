@@ -8,8 +8,25 @@ import com.weaverboot.frame.ioc.beans.bean.definition.factory.register.inte.Abst
 import com.weaverboot.frame.ioc.beans.bean.definition.factory.register.inte.WeaRegisterBeanDefinitionFactory;
 import com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefinition;
 
+/**
+ *
+ * 获取不同注解的注册工厂 默认实现类
+ *
+ * @Author : Jaylan Zhou
+ *
+ * @Date : 2019-12-17
+ *
+ */
+
 public class DefaultWeaRBDFFactory extends AbstractWeaRBDFFactory {
 
+    /**
+     *
+     * 获取不同种类的注册工厂
+     *
+     * @param abstractWeaBeanDefinitionClass
+     * @return
+     */
 
     @Override
     public WeaRegisterBeanDefinitionFactory getFactory(Class<AbstractWeaBeanDefinition> abstractWeaBeanDefinitionClass) {

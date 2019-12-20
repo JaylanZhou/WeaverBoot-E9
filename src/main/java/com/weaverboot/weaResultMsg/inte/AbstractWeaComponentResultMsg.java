@@ -2,7 +2,7 @@ package com.weaverboot.weaResultMsg.inte;
 
 import weaver.hrm.User;
 
-public abstract class AbstractWeaResultMsg implements WeaResultMsgInte {
+public abstract class AbstractWeaComponentResultMsg implements WeaResultMsgInte {
 
     private boolean hasRight = false;
 

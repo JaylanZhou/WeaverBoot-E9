@@ -1,9 +1,9 @@
 package com.weaverboot.weaResultMsg.impl.tableResult;
 
 import com.alibaba.fastjson.JSONObject;
-import com.weaverboot.weaResultMsg.inte.AbstractWeaResultMsg;
+import com.weaverboot.weaResultMsg.inte.AbstractWeaComponentResultMsg;
 
-public class WeaTableResultMsg extends AbstractWeaResultMsg {
+public class WeaTableComponentResultMsg extends AbstractWeaComponentResultMsg {
 
     @Override
     public String resultToSerialization() {

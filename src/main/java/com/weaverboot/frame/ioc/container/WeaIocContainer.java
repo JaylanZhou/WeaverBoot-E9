@@ -97,7 +97,9 @@ public class WeaIocContainer {
 
         BEANDEFINITION_MAP.clear();
 
+        BEING_CREATE_BEANDEFINITION_MAP.clear();
 
+        EARLY_BEANDEFINITION_MAP.clear();
 
         REPLACE_AFTER_API_MAP.clear();
 

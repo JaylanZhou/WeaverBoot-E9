@@ -109,10 +109,6 @@ public abstract class AbstractWeaForm extends AbstractWeaComponent {
 
     private String regExp;
 
-    private String startValue;
-
-    private String endValue;
-
     private String helpfulTip;
 
     private Map<String, Object> helpfulTipProps = new HashMap<String, Object>();
@@ -355,22 +351,6 @@ public abstract class AbstractWeaForm extends AbstractWeaComponent {
 
     public void setRegExp(String regExp) {
         this.regExp = regExp;
-    }
-
-    public String getStartValue() {
-        return startValue;
-    }
-
-    public void setStartValue(String startValue) {
-        this.startValue = startValue;
-    }
-
-    public String getEndValue() {
-        return endValue;
-    }
-
-    public void setEndValue(String endValue) {
-        this.endValue = endValue;
     }
 
     public String getHelpfulTip() {
