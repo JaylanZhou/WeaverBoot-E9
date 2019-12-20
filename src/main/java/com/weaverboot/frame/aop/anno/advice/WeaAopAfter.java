@@ -1,12 +1,12 @@
-package com.weaverboot.frame.aop.anno;
+package com.weaverboot.frame.aop.anno.advice;
 
 import java.lang.annotation.*;
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface WeaAopBefore {
+public @interface WeaAopAfter {
 
-    String value() default "";
+    String value();
 
 }

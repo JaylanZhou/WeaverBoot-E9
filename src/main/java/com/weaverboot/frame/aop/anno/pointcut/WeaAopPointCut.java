@@ -1,4 +1,4 @@
-package com.weaverboot.frame.aop.anno;
+package com.weaverboot.frame.aop.anno.pointcut;
 
 import java.lang.annotation.*;
 

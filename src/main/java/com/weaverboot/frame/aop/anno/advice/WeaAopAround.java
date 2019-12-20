@@ -1,4 +1,4 @@
-package com.weaverboot.frame.aop.anno;
+package com.weaverboot.frame.aop.anno.advice;
 
 import java.lang.annotation.*;
 
@@ -7,6 +7,6 @@ import java.lang.annotation.*;
 @Documented
 public @interface WeaAopAround {
 
-    String value() default "";
+    String value();
 
 }

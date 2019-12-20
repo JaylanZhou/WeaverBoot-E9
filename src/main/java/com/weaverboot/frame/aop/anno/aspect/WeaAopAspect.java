@@ -1,4 +1,4 @@
-package com.weaverboot.frame.aop.anno;
+package com.weaverboot.frame.aop.anno.aspect;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
