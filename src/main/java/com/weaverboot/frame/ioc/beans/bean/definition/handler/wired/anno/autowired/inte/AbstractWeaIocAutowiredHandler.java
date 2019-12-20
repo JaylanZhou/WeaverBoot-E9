@@ -1,13 +1,19 @@
 package com.weaverboot.frame.ioc.beans.bean.definition.handler.wired.anno.autowired.inte;
 
+import com.weaverboot.frame.ioc.anno.classAnno.WeaIocPrimary;
 import com.weaverboot.frame.ioc.beans.bean.definition.handler.wired.factory.inte.WeaWiredBeanDefinitionFactory;
 import com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefinition;
 import com.weaverboot.frame.ioc.container.WeaIocContainer;
 import com.weaverboot.frame.ioc.prop.WeaIocProperties;
+import com.weaverboot.tools.baseTools.BaseTools;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -51,7 +57,6 @@ public abstract class AbstractWeaIocAutowiredHandler implements WeaIocAutowiredH
      *
      * 依赖注入核心逻辑
      *
-     * @param beingBeanDefinition
      * @param beanId 依赖的对象beanId
      * @param field 需要注入的属性field
      * @return
@@ -61,7 +66,7 @@ public abstract class AbstractWeaIocAutowiredHandler implements WeaIocAutowiredH
      * @throws IOException
      */
 
-    protected Object checkDependcy(AbstractWeaBeanDefinition beingBeanDefinition,String beanId, Field field) throws InstantiationException, IllegalAccessException, ClassNotFoundException, IOException {
+    protected Object checkDependcy(String beanId, Field field,boolean isCustomBeanId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, IOException {
 
         if (WeaIocContainer.getBeanDefinition(beanId) == null){ //如果创建好的集合中没有，检查正在创建的集合
 
@@ -69,7 +74,9 @@ public abstract class AbstractWeaIocAutowiredHandler implements WeaIocAutowiredH
 
                 if (WeaIocContainer.getEarlyBeanDefinition(beanId) == null) { //如果初始化未创建集合中还没有，检查是否是接口
 
-                    return checkIsImplBeanAndWired(beingBeanDefinition,field); //检查是否是接口，是否有对应的实现类并注入，否则报错
+                    System.out.println("需要检查的beanid :" + beanId);
+
+                    return checkIsImplBeanAndWired(field,isCustomBeanId); //检查是否是接口，是否有对应的实现类并注入，否则报错
 
                 } else { //如果初始化未创建的集合中有，则优先注入此对象
 
@@ -96,7 +103,6 @@ public abstract class AbstractWeaIocAutowiredHandler implements WeaIocAutowiredH
      *
      * 检查三个集合中都没有的注入属性是否为接口或抽象类，并找到对应的实现类注入，否则报错
      *
-     * @param beingBeanDefinition
      * @param field 需要被检查的field
      * @return
      * @throws InstantiationException
@@ -105,12 +111,14 @@ public abstract class AbstractWeaIocAutowiredHandler implements WeaIocAutowiredH
      * @throws IOException
      */
 
-    private Object checkIsImplBeanAndWired(AbstractWeaBeanDefinition beingBeanDefinition,Field field) throws InstantiationException, IllegalAccessException, ClassNotFoundException, IOException {
+    private Object checkIsImplBeanAndWired(Field field,boolean isCustomBeanId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, IOException {
 
         Class fieldType = field.getType();
 
         //检查field是不是接口或抽象类
-        if (fieldType.isInterface() || Modifier.isAbstract(fieldType.getModifiers())){
+        if ((fieldType.isInterface() || Modifier.isAbstract(fieldType.getModifiers())) && !isCustomBeanId){
+
+            Set<Object> wiredObjectList = new HashSet<>();
 
             //从初始化集合中寻找实现类
             for (String early : WeaIocContainer.getEarlyBeandefinitionMap().keySet()
@@ -120,7 +128,7 @@ public abstract class AbstractWeaIocAutowiredHandler implements WeaIocAutowiredH
 
                 if (fieldType.isAssignableFrom(abstractWeaBeanDefinition.getBeanClass())) {
 
-                    return getWeaWiredBeanDefinitionFactory().getHandler(abstractWeaBeanDefinition).wiredBean(abstractWeaBeanDefinition);
+                    wiredObjectList.add(getWeaWiredBeanDefinitionFactory().getHandler(abstractWeaBeanDefinition).wiredBean(abstractWeaBeanDefinition));
 
                 }
 
@@ -134,7 +142,7 @@ public abstract class AbstractWeaIocAutowiredHandler implements WeaIocAutowiredH
 
                 if (fieldType.isAssignableFrom(abstractWeaBeanDefinition.getBeanClass())) {
 
-                    return abstractWeaBeanDefinition.getBeanObject();
+                    wiredObjectList.add(abstractWeaBeanDefinition.getBeanObject());
 
                 }
 
@@ -148,19 +156,81 @@ public abstract class AbstractWeaIocAutowiredHandler implements WeaIocAutowiredH
 
                 if (fieldType.isAssignableFrom(abstractWeaBeanDefinition.getBeanClass())) {
 
-                    return abstractWeaBeanDefinition.getBeanObject();
+                    wiredObjectList.add(abstractWeaBeanDefinition.getBeanObject());
 
                 }
 
             }
 
-            //如果都找不到直接报错
-            throw new RuntimeException("未找到:" + fieldType + "的实现类");
+            return getWiredInterfaceObject(wiredObjectList,fieldType.getName());
+
 
         } else {
 
             //如果其不是接口，直接报错
-            throw new RuntimeException("未找到:" + fieldType + " 的注册类");
+            throw new RuntimeException("未找到:" + fieldType + "的注册类");
+
+        }
+
+    }
+
+    public Object getWiredInterfaceObject(Set<Object> objectSet,String fieldType){
+
+        boolean hasPrimayObject = false;
+
+        Object objectResult = null;
+
+        if (objectSet != null && objectSet.size() > 0) {
+
+            if (objectSet.size() == 1){
+
+                objectResult = objectSet.iterator().next();
+
+                return objectResult;
+
+            }
+
+            for (Object object : objectSet
+            ) {
+
+                if (object.getClass().isAnnotationPresent(WeaIocPrimary.class)) {
+
+                    if (!hasPrimayObject) {
+
+                        hasPrimayObject = true;
+
+                        objectResult = object;
+
+                    } else {
+
+                        throw new RuntimeException(fieldType + "有多个实现类含有注解@WeaIocPrimary,请指定唯一一个实现类");
+
+                    }
+
+                }
+
+            }
+
+            if (!hasPrimayObject){
+
+                throw new RuntimeException(fieldType + "有多个实现类，且未指定@WeaIocPrimary,请指定其中一个类为实现类");
+
+            } else {
+
+                if (objectResult == null){
+
+                    throw new RuntimeException("注册类为空，请通知作者检查注册逻辑");
+
+                }
+
+                return objectResult;
+
+            }
+
+
+        } else {
+
+            throw new RuntimeException("未找到:" + fieldType + "的实现类");
 
         }
 

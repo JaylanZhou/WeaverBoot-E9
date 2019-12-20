@@ -9,13 +9,15 @@ import com.weaverboot.frame.ioc.beans.bean.definition.handler.register.impl.Defa
 import com.weaverboot.frame.ioc.beans.bean.definition.handler.register.inte.WeaRegisterBeanDefinitionHandler;
 import com.weaverboot.frame.ioc.beans.bean.definition.handler.scan.inte.WeaScanBeanDefinitionHandler;
 import com.weaverboot.tools.baseTools.BaseTools;
+import com.weaverboot.tools.logTools.LogTools;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DefaultWeaScanBeanDefinitionHandler implements WeaScanBeanDefinitionHandler {
-
 
     private WeaPathMatcher weaPathMatcher;
 
@@ -35,7 +37,7 @@ public class DefaultWeaScanBeanDefinitionHandler implements WeaScanBeanDefinitio
 
     }
 
-    public void scanBeanDefinition() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public void scanBeanDefinition() {
 
         if (BaseTools.notNullString(WeaIocProperties.SCAN_PACKAGE)) {
 
@@ -51,11 +53,24 @@ public class DefaultWeaScanBeanDefinitionHandler implements WeaScanBeanDefinitio
 
                     if (faName.endsWith(CLASS_SUFFIX)) {
 
+                        try {
+
+
                         faName = WeaIocFormatUtils.formatClassName(faName, basePath);
 
                         Class clazz = this.getClass().getClassLoader().loadClass(faName);
 
                         weaRegisterBeanDefinitionHandler.registerBeanDefinition(clazz);
+
+                        } catch (Exception e){
+
+                            LogTools.writeLog("扫描发生错误，原因为:" + e.getMessage());
+
+                        } catch (Throwable t){
+
+                            LogTools.writeLog("扫描发生错误，原因为:" + t.getMessage());
+
+                        }
 
                     }
 

@@ -3,6 +3,7 @@ package com.weaverboot.http.httpClient.tools;
 import com.weaverboot.tools.enumTools.frame.EncodeCondition;
 import com.weaverboot.tools.enumTools.frame.http.HttpContentTypeCondition;
 import com.weaverboot.tools.enumTools.frame.http.HttpMethodCondition;
+import com.weaverboot.tools.logTools.LogTools;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.*;
@@ -237,27 +238,27 @@ public class HttpClientBuildTools {
 
             resultString = EntityUtils.toString(response.getEntity(), encodeCondition.toString());
 
-            baseBean.writeLog("返回成功:\n" + resultString);
+            LogTools.writeLog("返回成功:\n" + resultString);
 
 
         }else if(response.getStatusLine().getStatusCode() == 400){
 
             resultString = EntityUtils.toString(response.getEntity(), encodeCondition.toString());
 
-            baseBean.writeLog("400错误:\n" + resultString);
+            LogTools.writeLog("400错误:\n" + resultString);
 
 
         }else if(response.getStatusLine().getStatusCode() == 404){
 
             resultString = EntityUtils.toString(response.getEntity(), encodeCondition.toString());
 
-            baseBean.writeLog("404错误:\n" + resultString);
+            LogTools.writeLog("404错误:\n" + resultString);
 
         }else if(response.getStatusLine().getStatusCode() == 500){
 
             resultString = EntityUtils.toString(response.getEntity(), encodeCondition.toString());
 
-            baseBean.writeLog("500错误:\n" + resultString);
+            LogTools.writeLog("500错误:\n" + resultString);
 
         }else{
 
@@ -267,7 +268,7 @@ public class HttpClientBuildTools {
 
             }
 
-            baseBean.writeLog("返回信息:\n" + resultString);
+            LogTools.writeLog("返回信息:\n" + resultString);
 
             resultString = String.valueOf(response.getStatusLine().getStatusCode());
 

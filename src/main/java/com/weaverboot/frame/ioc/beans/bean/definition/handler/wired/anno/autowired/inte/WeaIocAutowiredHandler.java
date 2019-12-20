@@ -7,6 +7,6 @@ import java.lang.reflect.Field;
 
 public interface WeaIocAutowiredHandler {
 
-    void autoWiredField(AbstractWeaBeanDefinition abstractWeaBeanDefinition,Field field, Object object) throws IllegalAccessException, ClassNotFoundException, InstantiationException, IOException;
+    void autoWiredField(Field field, Object object) throws IllegalAccessException, ClassNotFoundException, InstantiationException, IOException;
 
 }

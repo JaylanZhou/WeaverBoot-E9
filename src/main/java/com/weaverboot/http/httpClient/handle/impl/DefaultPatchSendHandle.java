@@ -5,6 +5,7 @@ import com.weaverboot.http.httpClient.tools.HttpClientBuildTools;
 import com.weaverboot.http.httpClient.tools.HttpConnectionPoolTools;
 import com.weaverboot.tools.enumTools.frame.EncodeCondition;
 import com.weaverboot.tools.enumTools.frame.http.HttpContentTypeCondition;
+import com.weaverboot.tools.logTools.LogTools;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPatch;
 import weaver.general.BaseBean;
@@ -43,7 +44,7 @@ public class DefaultPatchSendHandle implements PatchSendHandle {
 
         } catch (IOException e) {
 
-            baseBean.writeLog("框架报错，原因为:" + e.getMessage());
+            LogTools.writeLog("框架报错，原因为:" + e.getMessage());
 
             throw new RuntimeException(e.getMessage());
 
@@ -70,7 +71,7 @@ public class DefaultPatchSendHandle implements PatchSendHandle {
 
         } catch (IOException e) {
 
-            baseBean.writeLog("框架报错，原因为:" + e.getMessage());
+            LogTools.writeLog("框架报错，原因为:" + e.getMessage());
 
             throw new RuntimeException(e.getMessage());
 

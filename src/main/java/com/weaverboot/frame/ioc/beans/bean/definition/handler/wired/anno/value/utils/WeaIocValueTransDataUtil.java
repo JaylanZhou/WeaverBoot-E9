@@ -2,6 +2,7 @@ package com.weaverboot.frame.ioc.beans.bean.definition.handler.wired.anno.value.
 
 import com.weaverboot.frame.ioc.prop.WeaIocProperties;
 import com.weaverboot.tools.baseTools.BaseTools;
+import com.weaverboot.tools.logTools.LogTools;
 import weaver.general.BaseBean;
 
 import java.io.*;
@@ -33,7 +34,7 @@ public class WeaIocValueTransDataUtil {
 
         if (!BaseTools.notNullString(valueTrans)){
 
-            baseBean.writeLog("未找到对应属性" + value);
+            LogTools.writeLog("未找到对应属性" + value);
 
             return null;
 

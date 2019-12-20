@@ -4,6 +4,7 @@ import com.weaverboot.frame.ioc.anno.fieldAnno.WeaIocValue;
 import com.weaverboot.frame.ioc.beans.bean.definition.handler.wired.anno.value.inte.AbstractWeaIocValueHandler;
 import com.weaverboot.frame.ioc.beans.bean.definition.handler.wired.anno.value.utils.WeaIocValueTransDataUtil;
 import com.weaverboot.tools.baseTools.BaseTools;
+import com.weaverboot.tools.logTools.LogTools;
 import weaver.general.BaseBean;
 
 import java.io.*;
@@ -76,7 +77,7 @@ public class DefaultWeaIocValueHandler extends AbstractWeaIocValueHandler {
 
                 else{
 
-                    baseBean.writeLog("@WeaIocValue注解只允许标注在get，set方法上，方法 " + method.getName() + " 注入失败");
+                    LogTools.writeLog("@WeaIocValue注解只允许标注在get，set方法上，方法 " + method.getName() + " 注入失败");
 
                 }
 

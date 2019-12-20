@@ -3,6 +3,7 @@ package com.weaverboot.tools.frameTools.basedao;
 import com.weaverboot.frame.dao.anno.Association;
 import com.weaverboot.frame.dao.anno.Collection;
 import com.weaverboot.tools.baseTools.BaseTools;
+import com.weaverboot.tools.logTools.LogTools;
 import com.weaverboot.tools.threadTools.ThreadTools;
 import weaver.conn.RecordSet;
 import weaver.conn.RecordSetTrans;
@@ -136,7 +137,7 @@ public class RefTools extends BaseBean {
 
             if (outLog) {
 
-                baseBean.writeLog("事务执行语句:" + sql);
+                LogTools.writeLog("事务执行语句:" + sql);
 
             }
 
@@ -174,7 +175,7 @@ public class RefTools extends BaseBean {
 
             if (outLog){
 
-                baseBean.writeLog("执行语句:" + sql);
+                LogTools.writeLog("执行语句:" + sql);
 
             }
 

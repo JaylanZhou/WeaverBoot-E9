@@ -1,6 +1,7 @@
 package com.weaverboot.tools.frameTools.basedao;
 
 import com.weaverboot.tools.baseTools.BaseTools;
+import com.weaverboot.tools.logTools.LogTools;
 import com.weaverboot.tools.threadTools.ThreadTools;
 import com.weaverboot.tools.transactionTools.data.RecordSetTransStack;
 import weaver.conn.RecordSet;
@@ -50,7 +51,7 @@ public class ExcuteTools {
 
             if (outLog) {
 
-                baseBean.writeLog("事务执行语句:" + sql);
+                LogTools.writeLog("事务执行语句:" + sql);
 
             }
 
@@ -86,7 +87,7 @@ public class ExcuteTools {
 
             if (outLog){
 
-                baseBean.writeLog("执行语句:" + sql);
+                LogTools.writeLog("执行语句:" + sql);
 
             }
 
@@ -152,7 +153,7 @@ public class ExcuteTools {
 
             if (outLog) {
 
-                baseBean.writeLog("事务执行语句:" + sql);
+                LogTools.writeLog("事务执行语句:" + sql);
 
             }
 
@@ -180,7 +181,7 @@ public class ExcuteTools {
 
             if (outLog) {
 
-                baseBean.writeLog("执行语句:" + sql);
+                LogTools.writeLog("执行语句:" + sql);
 
             }
 
@@ -227,7 +228,7 @@ public class ExcuteTools {
 
         if (outLog) {
 
-            baseBean.writeLog("执行语句:" + sql);
+            LogTools.writeLog("执行语句:" + sql);
 
         }
 
@@ -293,7 +294,7 @@ public class ExcuteTools {
 
             if (outLog) {
 
-                baseBean.writeLog("事务执行语句:" + sql);
+                LogTools.writeLog("事务执行语句:" + sql);
 
             }
 
@@ -333,7 +334,7 @@ public class ExcuteTools {
 
             if (outLog) {
 
-                baseBean.writeLog("执行语句:" + sql);
+                LogTools.writeLog("执行语句:" + sql);
 
             }
 
@@ -390,13 +391,13 @@ public class ExcuteTools {
 
             if (outLog) {
 
-                baseBean.writeLog("执行事务:" + sql);
+                LogTools.writeLog("执行事务:" + sql);
 
             }
 
             if(!isSuccess){
 
-                baseBean.writeLog("您于 " + TimeUtil.getCurrentDateString() + " 的操作失败，执行的Sql语句为: " + sql);
+                LogTools.writeLog("您于 " + TimeUtil.getCurrentDateString() + " 的操作失败，执行的Sql语句为: " + sql);
                 throw new RuntimeException("操作失败，请联系管理员！");
 
             }
@@ -409,13 +410,13 @@ public class ExcuteTools {
 
             if (outLog) {
 
-                baseBean.writeLog("执行语句:" + sql);
+                LogTools.writeLog("执行语句:" + sql);
 
             }
 
             if (!isSuccess) {
 
-                baseBean.writeLog("您于 " + TimeUtil.getCurrentDateString() + " 的操作失败，执行的Sql语句为: " + sql);
+                LogTools.writeLog("您于 " + TimeUtil.getCurrentDateString() + " 的操作失败，执行的Sql语句为: " + sql);
                 throw new RuntimeException("操作失败，请联系管理员！");
 
             }

@@ -3,6 +3,7 @@ package com.weaverboot.tools.jsonTools;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.weaverboot.tools.logTools.LogTools;
 import weaver.general.BaseBean;
 
 @Deprecated
@@ -26,7 +27,7 @@ public class FastJsonTools {
 
             BaseBean baseBean = new BaseBean();
 
-            baseBean.writeLog("字符串转换为JSONArray出错，原因为：" + e.getMessage());
+            LogTools.writeLog("字符串转换为JSONArray出错，原因为：" + e.getMessage());
 
             throw new RuntimeException(e.getMessage());
 
@@ -46,7 +47,7 @@ public class FastJsonTools {
 
             BaseBean baseBean = new BaseBean();
 
-            baseBean.writeLog("字符串转换为JSONObject出错，原因为：" + e.getMessage());
+            LogTools.writeLog("字符串转换为JSONObject出错，原因为：" + e.getMessage());
 
             throw new RuntimeException(e.getMessage());
 

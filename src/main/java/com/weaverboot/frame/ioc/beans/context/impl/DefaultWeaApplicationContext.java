@@ -10,6 +10,7 @@ import com.weaverboot.frame.ioc.beans.bean.definition.handler.scan.inte.WeaScanB
 import com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefinition;
 import com.weaverboot.frame.ioc.beans.context.inte.WeaApplicationContext;
 import com.weaverboot.frame.ioc.prop.WeaIocProperties;
+import com.weaverboot.tools.logTools.LogTools;
 import weaver.general.BaseBean;
 
 import java.io.IOException;
@@ -24,8 +25,6 @@ public class DefaultWeaApplicationContext implements WeaApplicationContext {
     private WeaScanBeanDefinitionHandler weaScanBeanDefinitionHandler;
 
     private WeaInitBeanDefinitionHandler weaInitBeanDefinitionHandler;
-
-    private BaseBean baseBean = new BaseBean();
 
     public DefaultWeaApplicationContext() {
 
@@ -48,7 +47,7 @@ public class DefaultWeaApplicationContext implements WeaApplicationContext {
 
         } catch (Exception e) {
 
-            baseBean.writeLog("获取bean发生错误，原因为:" + e.getMessage());
+            LogTools.writeLog("获取bean发生错误，原因为:" + e.getMessage());
 
         }
 
@@ -89,19 +88,9 @@ public class DefaultWeaApplicationContext implements WeaApplicationContext {
 
                         return object;
 
-                    } catch (InstantiationException e) {
+                    } catch (Exception e) {
 
-                        throw new RuntimeException("获取bean发生错误，原因为:" + e.getMessage());
-
-                    } catch (IllegalAccessException e) {
-
-                        throw new RuntimeException("获取bean发生错误，原因为:" + e.getMessage());
-
-                    } catch (ClassNotFoundException e) {
-
-                        throw new RuntimeException("获取bean发生错误，原因为:" + e.getMessage());
-
-                    } catch (IOException e) {
+                        LogTools.writeLog("获取bean发生错误，原因为:" + e.getMessage());
 
                         throw new RuntimeException("获取bean发生错误，原因为:" + e.getMessage());
 

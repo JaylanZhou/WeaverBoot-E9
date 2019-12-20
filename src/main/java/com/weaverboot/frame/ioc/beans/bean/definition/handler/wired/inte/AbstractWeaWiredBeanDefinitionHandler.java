@@ -112,7 +112,7 @@ public abstract class AbstractWeaWiredBeanDefinitionHandler implements WeaWiredB
         for (Field field : fields
         ) {
 
-            getWeaIocAutowiredHandler().autoWiredField(abstractWeaBeanDefinition,field,object);
+            getWeaIocAutowiredHandler().autoWiredField(field,object);
 
             getWeaIocValueHandler().valueField(field,object);
 

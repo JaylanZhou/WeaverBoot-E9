@@ -1,6 +1,7 @@
 package com.weaverboot.tools.frameTools.basedao;
 
 import com.weaverboot.tools.baseTools.BaseTools;
+import com.weaverboot.tools.logTools.LogTools;
 import com.weaverboot.tools.threadTools.ThreadTools;
 import com.weaverboot.tools.transactionTools.data.RecordSetTransStack;
 import weaver.conn.RecordSet;
@@ -41,7 +42,7 @@ public class DataORMTools  {
 
         if (outLog) {
 
-            baseBean.writeLog("事务执行语句:" + sql);
+            LogTools.writeLog("事务执行语句:" + sql);
 
         }
 

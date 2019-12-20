@@ -8,6 +8,7 @@ import com.weaverboot.frame.ioc.anno.fieldAnno.WeaAutowired;
 import com.weaverboot.frame.ioc.beans.context.impl.DefaultWeaApplicationContext;
 import com.weaverboot.frame.ioc.beans.context.inte.WeaApplicationContext;
 import com.weaverboot.tools.baseTools.BaseTools;
+import com.weaverboot.tools.logTools.LogTools;
 import weaver.general.BaseBean;
 
 import javax.ws.rs.ext.Provider;
@@ -71,7 +72,7 @@ public class WeaAutowiredJerseyInjector implements InjectableProvider<WeaAutowir
 
                 } catch (Exception e){
 
-                    baseBean.writeLog("出错了，原因为:" + e.getMessage());
+                    LogTools.writeLog("出错了，原因为:" + e.getMessage());
 
                     throw new RuntimeException(e.getMessage());
 

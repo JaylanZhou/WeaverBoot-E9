@@ -6,6 +6,7 @@ import com.weaverboot.http.httpClient.tools.HttpConnectionPoolTools;
 import com.weaverboot.http.httpClient.tools.HttpMethodWithEntity;
 import com.weaverboot.tools.enumTools.frame.EncodeCondition;
 import com.weaverboot.tools.enumTools.frame.http.HttpContentTypeCondition;
+import com.weaverboot.tools.logTools.LogTools;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import weaver.general.BaseBean;
 
@@ -42,7 +43,7 @@ public class DefaultDeleteSendHandle implements DeleteSendHandle {
 
         } catch (IOException e) {
 
-            baseBean.writeLog("框架报错，原因为:" + e.getMessage());
+            LogTools.writeLog("框架报错，原因为:" + e.getMessage());
 
             throw new RuntimeException(e.getMessage());
 
@@ -69,7 +70,7 @@ public class DefaultDeleteSendHandle implements DeleteSendHandle {
 
         } catch (IOException e) {
 
-            baseBean.writeLog("框架报错，原因为:" + e.getMessage());
+            LogTools.writeLog("框架报错，原因为:" + e.getMessage());
 
             throw new RuntimeException(e.getMessage());
 

@@ -4,6 +4,7 @@ import com.weaverboot.frame.ioc.anno.fieldAnno.WeaAutowired;
 import com.weaverboot.frame.ioc.beans.bean.definition.handler.wired.anno.autowired.inte.AbstractWeaIocAutowiredHandler;
 import com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefinition;
 import com.weaverboot.tools.baseTools.BaseTools;
+import com.weaverboot.tools.logTools.LogTools;
 import weaver.general.BaseBean;
 
 import java.io.IOException;
@@ -15,7 +16,9 @@ public class DefaultWeaIocAutowiredHandler extends AbstractWeaIocAutowiredHandle
 
 
     @Override
-    public void autoWiredField(AbstractWeaBeanDefinition abstractWeaBeanDefinition,Field field,Object object) throws IllegalAccessException, ClassNotFoundException, InstantiationException, IOException {
+    public void autoWiredField(Field field,Object object) throws IllegalAccessException, ClassNotFoundException, InstantiationException, IOException {
+
+        boolean isCustomBeanId = false;
 
         if (field.isAnnotationPresent(WeaAutowired.class)){
 
@@ -27,9 +30,11 @@ public class DefaultWeaIocAutowiredHandler extends AbstractWeaIocAutowiredHandle
 
                 beanId = weaAutowired.value();
 
+                isCustomBeanId = true;
+
             }
 
-            Object resultObject = checkDependcy(abstractWeaBeanDefinition,beanId,field);
+            Object resultObject = checkDependcy(beanId,field,isCustomBeanId);
 
             field.setAccessible(true);
 
@@ -39,7 +44,7 @@ public class DefaultWeaIocAutowiredHandler extends AbstractWeaIocAutowiredHandle
 
             } catch (Exception e){
 
-                baseBean.writeLog("无法将:" + object.getClass().getName() + " 注册为:" + field.getType().getTypeName() + "，请检查注入类型");
+                LogTools.writeLog("无法将:" + object.getClass().getName() + " 注册为:" + field.getType().getTypeName() + "，请检查注入类型");
 
             }
 

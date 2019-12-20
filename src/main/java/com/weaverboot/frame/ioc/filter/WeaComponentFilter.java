@@ -5,6 +5,7 @@ import com.weaverboot.frame.ioc.beans.bean.definition.handler.replace.weaReplace
 import com.weaverboot.frame.ioc.beans.bean.definition.handler.replace.weaReplaceParam.impl.WeaBeforeReplaceParam;
 import com.weaverboot.frame.ioc.beans.bean.definition.utils.WeaIocReplaceUriUtils;
 import com.weaverboot.frame.ioc.filter.wrapper.ComponentResponseWrapper;
+import com.weaverboot.tools.logTools.LogTools;
 import weaver.general.BaseBean;
 
 import javax.servlet.*;
@@ -57,7 +58,7 @@ public class WeaComponentFilter implements Filter {
 
             } catch (Exception e) {
 
-                baseBean.writeLog("替换路径:" + apiUrl + "的前置方法失败，原因为:" + e.getMessage());
+                LogTools.writeLog("替换路径:" + apiUrl + "的前置方法失败，原因为:" + e.getMessage());
 
             }
 
@@ -93,7 +94,7 @@ public class WeaComponentFilter implements Filter {
 
             } catch (Exception e) {
 
-                baseBean.writeLog("替换路径:" + apiUrl + "的后置方法失败，原因为:" + e.getMessage());
+                LogTools.writeLog("替换路径:" + apiUrl + "的后置方法失败，原因为:" + e.getMessage());
 
             }
 

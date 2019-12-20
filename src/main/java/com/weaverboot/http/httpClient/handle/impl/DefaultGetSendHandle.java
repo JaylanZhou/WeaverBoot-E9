@@ -4,6 +4,7 @@ import com.weaverboot.http.httpClient.handle.inte.GetSendHandle;
 import com.weaverboot.http.httpClient.tools.HttpClientBuildTools;
 import com.weaverboot.http.httpClient.tools.HttpConnectionPoolTools;
 import com.weaverboot.tools.enumTools.frame.EncodeCondition;
+import com.weaverboot.tools.logTools.LogTools;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import weaver.general.BaseBean;
@@ -37,7 +38,7 @@ public class DefaultGetSendHandle implements GetSendHandle {
 
         }catch (Exception e){
 
-            baseBean.writeLog("框架报错，原因为:" + e.getMessage());
+            LogTools.writeLog("框架报错，原因为:" + e.getMessage());
 
             throw new RuntimeException(e.getMessage());
 
@@ -49,7 +50,7 @@ public class DefaultGetSendHandle implements GetSendHandle {
 
             } catch (IOException e) {
 
-                baseBean.writeLog("框架报错：关闭连接失败，原因为 " + e.getMessage());
+                LogTools.writeLog("框架报错：关闭连接失败，原因为 " + e.getMessage());
 
                 throw new RuntimeException(e.getMessage());
 
@@ -74,7 +75,7 @@ public class DefaultGetSendHandle implements GetSendHandle {
 
         }catch (Exception e){
 
-            baseBean.writeLog("框架报错，原因为:" + e.getMessage());
+            LogTools.writeLog("框架报错，原因为:" + e.getMessage());
 
             throw new RuntimeException(e.getMessage());
 
@@ -86,7 +87,7 @@ public class DefaultGetSendHandle implements GetSendHandle {
 
             } catch (IOException e) {
 
-                baseBean.writeLog("框架报错，原因为:" + e.getMessage());
+                LogTools.writeLog("框架报错，原因为:" + e.getMessage());
 
                 throw new RuntimeException(e.getMessage());
 

@@ -1,5 +1,6 @@
 package com.weaverboot.http.dom4j;
 
+import com.weaverboot.tools.logTools.LogTools;
 import org.dom4j.Document;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
@@ -37,7 +38,7 @@ public class Dom4jTools{
 
             BaseBean baseBean = new BaseBean();
 
-            baseBean.writeLog("创建xml文档错误，原因为:" + e.getMessage());
+            LogTools.writeLog("创建xml文档错误，原因为:" + e.getMessage());
 
             throw new RuntimeException(e.getMessage());
 

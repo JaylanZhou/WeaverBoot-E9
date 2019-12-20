@@ -3,6 +3,7 @@ package com.weaverboot.frame.ioc.prop.init;
 import com.weaverboot.frame.ioc.beans.bean.definition.handler.scan.impl.DefaultWeaScanBeanDefinitionHandler;
 import com.weaverboot.frame.ioc.beans.context.impl.DefaultWeaApplicationContext;
 import com.weaverboot.frame.ioc.beans.context.inte.WeaApplicationContext;
+import com.weaverboot.tools.logTools.LogTools;
 import weaver.general.BaseBean;
 
 import javax.servlet.ServletContext;
@@ -24,13 +25,13 @@ public class WeaIocInitServlet extends HttpServlet {
 
             WeaApplicationContext weaApplicationContext = new DefaultWeaApplicationContext();
 
-            baseBean.writeLog("IOC根目录:" + DefaultWeaScanBeanDefinitionHandler.basePath);
+            LogTools.writeLog("IOC根目录:" + DefaultWeaScanBeanDefinitionHandler.basePath);
 
             weaApplicationContext.refresh();
 
         } catch (Exception e){
 
-            baseBean.writeLog("IOC初始化失败，原因为:" + e.getMessage());
+            LogTools.writeLog("IOC初始化失败，原因为:" + e.getMessage());
 
         }
     }

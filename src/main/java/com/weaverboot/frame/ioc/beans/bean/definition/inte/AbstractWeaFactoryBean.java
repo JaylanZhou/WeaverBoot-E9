@@ -1,5 +1,6 @@
 package com.weaverboot.frame.ioc.beans.bean.definition.inte;
 
+import com.weaverboot.tools.logTools.LogTools;
 import weaver.general.BaseBean;
 
 import java.lang.reflect.InvocationTargetException;
@@ -26,19 +27,19 @@ public abstract class AbstractWeaFactoryBean implements WeaFactoryBean {
 
             } catch (IllegalAccessException e) {
 
-                baseBean.writeLog("通过指定构造方法注入错误，原因为:" + e.getMessage());
+                LogTools.writeLog("通过指定构造方法注入错误，原因为:" + e.getMessage());
 
                 e.printStackTrace();
 
             } catch (InvocationTargetException e) {
 
-                baseBean.writeLog("通过指定构造方法注入错误，原因为:" + e.getMessage());
+                LogTools.writeLog("通过指定构造方法注入错误，原因为:" + e.getMessage());
 
                 e.printStackTrace();
 
             } catch (InstantiationException e) {
 
-                baseBean.writeLog("通过指定构造方法注入错误，原因为:" + e.getMessage());
+                LogTools.writeLog("通过指定构造方法注入错误，原因为:" + e.getMessage());
 
                 e.printStackTrace();
 

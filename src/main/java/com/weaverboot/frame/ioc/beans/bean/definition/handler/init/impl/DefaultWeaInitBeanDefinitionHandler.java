@@ -3,6 +3,7 @@ package com.weaverboot.frame.ioc.beans.bean.definition.handler.init.impl;
 import com.weaverboot.frame.ioc.beans.bean.definition.handler.init.inte.AbstractWeaInitBeanDefinitionHandler;
 import com.weaverboot.frame.ioc.container.WeaIocContainer;
 import com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefinition;
+import com.weaverboot.tools.logTools.LogTools;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -29,7 +30,17 @@ public class DefaultWeaInitBeanDefinitionHandler extends AbstractWeaInitBeanDefi
 
             if (abstractWeaBeanDefinition != null && !abstractWeaBeanDefinition.isLazyInit()){
 
-                getWeaWiredBeanDefinitionFactory().getHandler(abstractWeaBeanDefinition).wiredBean(abstractWeaBeanDefinition);
+                try {
+
+                    getWeaWiredBeanDefinitionFactory().getHandler(abstractWeaBeanDefinition).wiredBean(abstractWeaBeanDefinition);
+
+                } catch (Exception e){
+
+                    LogTools.writeLog(abstractWeaBeanDefinition.getBeanClassName() + "注册错误，原因为:" + e.getMessage());
+
+                    continue;
+
+                }
 
             } else {
 

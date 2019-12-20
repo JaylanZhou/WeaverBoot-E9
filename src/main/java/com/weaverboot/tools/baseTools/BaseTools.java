@@ -4,6 +4,7 @@ package com.weaverboot.tools.baseTools;
 import com.weaverboot.frame.dao.anno.Association;
 import com.weaverboot.frame.dao.anno.Collection;
 import com.weaverboot.frame.dao.anno.DisableColumn;
+import com.weaverboot.tools.logTools.LogTools;
 import weaver.conn.RecordSet;
 import weaver.general.BaseBean;
 import weaver.hrm.HrmUserVarify;
@@ -184,7 +185,7 @@ public class BaseTools {
 
             BaseBean baseBean = new BaseBean();
 
-            baseBean.writeLog("获取最大ID错误，原因为：" + e.getMessage());
+            LogTools.writeLog("获取最大ID错误，原因为：" + e.getMessage());
 
         }
 
