@@ -5,12 +5,13 @@ import com.weaverboot.weaComponent.impl.weaForm.inte.AbstractWeaForm;
 import com.weaverboot.weaComponent.impl.weaForm.selectOptions.DefaultSelectOption;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class SelectLinkageWeaForm extends AbstractWeaForm {
 
-    private final ConditionType conditionType = ConditionType.SELECT;
+    private final ConditionType conditionType = ConditionType.SELECT_LINKAGE;
 
     /**
      * 选择框联动数据
@@ -45,6 +46,20 @@ public class SelectLinkageWeaForm extends AbstractWeaForm {
     public SelectLinkageWeaForm(){
 
         super();
+
+    }
+
+    public SelectLinkageWeaForm putLinkageDatas(String key,AbstractWeaForm abstractWeaForm){
+
+        if (this.selectLinkageDatas == null){
+
+            this.selectLinkageDatas = new HashMap<>();
+
+        }
+
+        this.selectLinkageDatas.put(key,abstractWeaForm);
+
+        return this;
 
     }
 

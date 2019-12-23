@@ -66,7 +66,8 @@ public abstract class AbstractWeaIocAutowiredHandler implements WeaIocAutowiredH
      * @throws IOException
      */
 
-    protected Object checkDependcy(String beanId, Field field,boolean isCustomBeanId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, IOException {
+    @Override
+    public Object checkDependcy(String beanId, Field field,boolean isCustomBeanId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, IOException {
 
         if (WeaIocContainer.getBeanDefinition(beanId) == null){ //如果创建好的集合中没有，检查正在创建的集合
 
@@ -76,7 +77,7 @@ public abstract class AbstractWeaIocAutowiredHandler implements WeaIocAutowiredH
 
                     System.out.println("需要检查的beanid :" + beanId);
 
-                    return checkIsImplBeanAndWired(field,isCustomBeanId); //检查是否是接口，是否有对应的实现类并注入，否则报错
+                    return checkIsImplBeanAndWired(field.getType(),isCustomBeanId); //检查是否是接口，是否有对应的实现类并注入，否则报错
 
                 } else { //如果初始化未创建的集合中有，则优先注入此对象
 
@@ -103,7 +104,7 @@ public abstract class AbstractWeaIocAutowiredHandler implements WeaIocAutowiredH
      *
      * 检查三个集合中都没有的注入属性是否为接口或抽象类，并找到对应的实现类注入，否则报错
      *
-     * @param field 需要被检查的field
+     * @param fieldType 需要被检查的field
      * @return
      * @throws InstantiationException
      * @throws IllegalAccessException
@@ -111,9 +112,8 @@ public abstract class AbstractWeaIocAutowiredHandler implements WeaIocAutowiredH
      * @throws IOException
      */
 
-    private Object checkIsImplBeanAndWired(Field field,boolean isCustomBeanId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, IOException {
-
-        Class fieldType = field.getType();
+    @Override
+    public Object checkIsImplBeanAndWired(Class fieldType,boolean isCustomBeanId) throws InstantiationException, IllegalAccessException, ClassNotFoundException, IOException {
 
         //检查field是不是接口或抽象类
         if ((fieldType.isInterface() || Modifier.isAbstract(fieldType.getModifiers())) && !isCustomBeanId){
@@ -174,7 +174,7 @@ public abstract class AbstractWeaIocAutowiredHandler implements WeaIocAutowiredH
 
     }
 
-    public Object getWiredInterfaceObject(Set<Object> objectSet,String fieldType){
+    private Object getWiredInterfaceObject(Set<Object> objectSet,String fieldType){
 
         boolean hasPrimayObject = false;
 

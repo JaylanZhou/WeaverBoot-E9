@@ -15,10 +15,6 @@ public class LogTools {
 
     private final static Logger logger = null;
 
-    private LogTools(){
-
-    }
-
     public static void writeLog(String value){
 
         if (logger != null){

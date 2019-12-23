@@ -1,13 +1,16 @@
-package com.weaverboot.weaComponent.impl.weaTable.inte;
+package com.weaverboot.weaComponent.impl.weaTable.table.inte;
 
+import com.api.browser.util.BoolAttr;
 import com.cloudstore.eccom.constant.WeaBoolAttr;
 import com.cloudstore.eccom.constant.WeaMobileShowType;
 import com.cloudstore.eccom.pc.table.WeaTableCheckboxpopedom;
 import com.cloudstore.eccom.pc.table.WeaTableColumn;
 import com.cloudstore.eccom.pc.table.WeaTableOperates;
 import com.cloudstore.eccom.pc.table.WeaTableType;
+import com.weaverboot.weaComponent.impl.weaTable.column.inte.AbstractWeaTableColumn;
 import com.weaverboot.weaComponent.inte.AbstractWeaComponent;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractWeaTable extends AbstractWeaComponent {
@@ -39,7 +42,7 @@ public abstract class AbstractWeaTable extends AbstractWeaComponent {
 
     private String sqlprimarykey;
 
-    private String sqlsortway;
+    private String sqlsortway = "";
 
     private String sqlisdistinct;
 
@@ -51,10 +54,10 @@ public abstract class AbstractWeaTable extends AbstractWeaComponent {
     private String rowstylefield;
 
     //是否打开主键排序字段
-    private WeaBoolAttr openPrimaryKeyOrder=WeaBoolAttr.FALSE;
+    private WeaBoolAttr openPrimaryKeyOrder = WeaBoolAttr.FALSE;
 
     //是否打开复合排序
-    private WeaBoolAttr mergeOrder=WeaBoolAttr.FALSE;
+    private WeaBoolAttr mergeOrder = WeaBoolAttr.FALSE;
 
     //快速分页 true 或 false
     private String fastpage;
@@ -65,7 +68,7 @@ public abstract class AbstractWeaTable extends AbstractWeaComponent {
 
     private String decimalFormat;
     //列相关
-    private List<WeaTableColumn> columns;
+    private List<AbstractWeaTableColumn> columns;
     //操作菜单相关 operate的权限控制
     private WeaTableOperates operates;
     //主要用于checkbox 权限控制
@@ -81,6 +84,23 @@ public abstract class AbstractWeaTable extends AbstractWeaComponent {
 
     //移动端模版属性
     private String mobileshowtemplate;
+
+    public AbstractWeaTable() {
+
+        this.tableType = WeaTableType.NONE;
+
+        this.openPrimaryKeyOrder = WeaBoolAttr.FALSE.FALSE;
+
+        this.mobileshowtype = WeaMobileShowType.ListView;
+
+        this.columns = new ArrayList();
+
+        this.operates = new WeaTableOperates();
+
+        this.checkboxpopedom = new WeaTableCheckboxpopedom();
+
+        this.checkboxList = new ArrayList();
+    }
 
     public String getPageUID() {
         return pageUID;
@@ -274,11 +294,11 @@ public abstract class AbstractWeaTable extends AbstractWeaComponent {
         this.decimalFormat = decimalFormat;
     }
 
-    public List<WeaTableColumn> getColumns() {
+    public List<AbstractWeaTableColumn> getColumns() {
         return columns;
     }
 
-    public void setColumns(List<WeaTableColumn> columns) {
+    public void setColumns(List<AbstractWeaTableColumn> columns) {
         this.columns = columns;
     }
 

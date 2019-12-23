@@ -62,7 +62,7 @@ public class DefaultWeaApplicationContext implements WeaApplicationContext {
 
                 if (WeaIocContainer.getEarlyBeanDefinition(beanId) == null) {
 
-                    throw new RuntimeException("在容器中未找到:" + beanId);
+                    return null;
 
                 } else {
 

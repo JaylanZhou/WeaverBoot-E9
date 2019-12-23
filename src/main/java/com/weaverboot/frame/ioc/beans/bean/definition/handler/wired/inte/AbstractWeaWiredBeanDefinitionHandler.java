@@ -54,9 +54,10 @@ public abstract class AbstractWeaWiredBeanDefinitionHandler implements WeaWiredB
 
         String beanId = abstractWeaBeanDefinition.getBeanId();
 
-        WeaIocContainer.getBeingCreateBeandefinitionMap().remove(beanId);
 
         if (WeaIocCheckUtils.checkIsSingleton(abstractWeaBeanDefinition)){
+
+            WeaIocContainer.getBeingCreateBeandefinitionMap().remove(beanId);
 
             WeaIocContainer.getBeandefinitionMap().put(beanId,abstractWeaBeanDefinition);
 

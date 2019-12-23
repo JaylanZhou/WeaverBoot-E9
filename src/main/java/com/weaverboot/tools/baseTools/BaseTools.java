@@ -16,6 +16,7 @@ import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -122,6 +123,14 @@ public class BaseTools {
         return time + num;// 生成ID，由当前系统时间+随机数字，要16位，用于所有表生产唯一主键
     }
 
+    public static String createUUID(){
+
+        UUID uuid = UUID.randomUUID();
+
+        return uuid.toString();
+
+    }
+
     /**
      *
      * 获取当前登录用户ID
@@ -182,8 +191,6 @@ public class BaseTools {
             }
 
         }catch (Exception e){
-
-            BaseBean baseBean = new BaseBean();
 
             LogTools.writeLog("获取最大ID错误，原因为：" + e.getMessage());
 
