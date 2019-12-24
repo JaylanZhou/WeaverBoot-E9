@@ -78,6 +78,8 @@ public class WeaTableTools {
 
         AbstractWeaTable abstractWeaTable = tClass.newInstance();
 
+        parseWeaTableBasic(abstractWeaTable,root);
+
         parseWeaTableSql(abstractWeaTable,root);
 
         parseDefaultWeaCheckboxPopedom(abstractWeaTable,root);
@@ -92,7 +94,16 @@ public class WeaTableTools {
 
     }
 
-    private static AbstractWeaTable parseWeaTableBasic(AbstractWeaTable abstractWeaTable,Element root){
+    /**
+     *
+     * 解析table基本信息
+     *
+     * @param abstractWeaTable 拼装的table
+     * @param root 根节点
+     * @return
+     */
+
+    private static void parseWeaTableBasic(AbstractWeaTable abstractWeaTable,Element root){
 
 
 
@@ -148,11 +159,18 @@ public class WeaTableTools {
 
         abstractWeaTable.setPageBySelf(root.getAttributeValue("pageBySelf"));
 
-        return abstractWeaTable;
-
     }
 
-    private static AbstractWeaTable parseWeaTableSql(AbstractWeaTable abstractWeaTable,Element root){
+    /**
+     *
+     * 拼装table的sql部分信息
+     *
+     * @param abstractWeaTable
+     * @param root
+     * @return
+     */
+
+    private static void parseWeaTableSql(AbstractWeaTable abstractWeaTable,Element root){
 
         Element sql = root.getChild("sql");
 
@@ -192,11 +210,18 @@ public class WeaTableTools {
 
         }
 
-        return abstractWeaTable;
-
     }
 
-    private static AbstractWeaTable parseDefaultWeaCheckboxPopedom(AbstractWeaTable abstractWeaTable,Element root){
+    /**
+     *
+     * 拼装checkboxpopedom部分信息
+     *
+     * @param abstractWeaTable
+     * @param root
+     * @return
+     */
+
+    private static void parseDefaultWeaCheckboxPopedom(AbstractWeaTable abstractWeaTable,Element root){
 
         Element checkboxpopedom = root.getChild("checkboxpopedom");
 
@@ -212,11 +237,18 @@ public class WeaTableTools {
 
         }
 
-        return abstractWeaTable;
-
     }
 
-    private static AbstractWeaTable parseWeaTableCheckboxList(AbstractWeaTable abstractWeaTable,Element root){
+    /**
+     *
+     * 拼装checkboxlist 部分信息
+     *
+     * @param abstractWeaTable
+     * @param root
+     * @return
+     */
+
+    private static void parseWeaTableCheckboxList(AbstractWeaTable abstractWeaTable,Element root){
 
         Element checkboxList = root.getChild("checkboxList");
 
@@ -242,11 +274,18 @@ public class WeaTableTools {
 
         }
 
-        return abstractWeaTable;
-
     }
 
-    private static AbstractWeaTable parseWeaTableOperates(AbstractWeaTable abstractWeaTable,Element root){
+    /**
+     *
+     * 拼装tableoperates 部分信息
+     *
+     * @param abstractWeaTable
+     * @param root
+     * @return
+     */
+
+    private static void parseWeaTableOperates(AbstractWeaTable abstractWeaTable,Element root){
 
         Element operates = root.getChild("operates");
 
@@ -254,13 +293,13 @@ public class WeaTableTools {
 
             Element popedom = operates.getChild("popedom");
 
-            AbstractWeaTableOperates stob=new DefaultWeaTableOperates(); //暂时以defaultOperates代替
+            AbstractWeaTableOperates stob = new DefaultWeaTableOperates(); //暂时以defaultOperates代替
 
             if(popedom!=null)
 
             {
 
-                AbstractWeaTablePopedom pdom =new DefaultWeaTablePopedom(); // 暂时以default 代替
+                AbstractWeaTablePopedom pdom = new DefaultWeaTablePopedom(); // 暂时以default 代替
 
                 pdom.setAsync(Boolean.valueOf(popedom.getAttributeValue("async")));
 
@@ -306,11 +345,18 @@ public class WeaTableTools {
 
         }
 
-        return abstractWeaTable;
-
     }
 
-    private static AbstractWeaTable parseWeaTableHead(AbstractWeaTable abstractWeaTable,Element root){
+    /**
+     *
+     * 拼装head部分信息
+     *
+     * @param abstractWeaTable
+     * @param root
+     * @return
+     */
+
+    private static void parseWeaTableHead(AbstractWeaTable abstractWeaTable,Element root){
 
         Element head = root.getChild("head");
 
@@ -407,8 +453,6 @@ public class WeaTableTools {
             }
 
         }
-
-        return null;
 
     }
 
