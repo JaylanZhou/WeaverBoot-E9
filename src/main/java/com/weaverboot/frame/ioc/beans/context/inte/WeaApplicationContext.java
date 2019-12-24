@@ -12,7 +12,7 @@ public interface WeaApplicationContext {
 
     Object getBean(String beanName);
 
-    <T>T getBean(String beanId,Class<T> tClass);
+    <T>T getBean(Class<T> tClass);
 
     Map<String,Object> getBeansWithAnnotation(Class<Annotation> annotationClass);
 

@@ -1,12 +1,15 @@
 package com.weaverboot.weaResultMsg.impl.tableResult.inte;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.cloudstore.eccom.constant.WeaBelongType;
-import com.cloudstore.eccom.constant.WeaBoolAttr;
-import com.cloudstore.eccom.constant.WeaMobileViewType;
-import com.cloudstore.eccom.pc.table.*;
+import com.weaverboot.tools.enumTools.weaComponent.WeaBelongEnum;
+import com.weaverboot.tools.enumTools.weaComponent.WeaBooleanEnum;
+import com.weaverboot.tools.enumTools.weaComponent.WeaMobileViewTypeEnum;
+import com.weaverboot.weaComponent.impl.weaTable.checkboxPopedom.inte.AbstractWeaCheckboxPopedom;
 import com.weaverboot.weaComponent.impl.weaTable.column.inte.AbstractWeaTableColumn;
+import com.weaverboot.weaComponent.impl.weaTable.operate.inte.AbstractWeaTableOperate;
+import com.weaverboot.weaComponent.impl.weaTable.operates.inte.AbstractWeaTableOperates;
 import com.weaverboot.weaComponent.impl.weaTable.table.inte.AbstractWeaTable;
+import com.weaverboot.weaComponent.impl.weaTable.tablePopedom.inte.AbstractWeaTablePopedom;
 import com.weaverboot.weaResultMsg.inte.AbstractWeaComponentResultMsg;
 import weaver.general.Util;
 
@@ -219,13 +222,13 @@ public abstract class AbstractWeaTableComponentResultMsg extends AbstractWeaComp
 
         }
 
-        if(weaTale.getOpenPrimaryKeyOrder()==WeaBoolAttr.TRUE) {
+        if(weaTale.getOpenPrimaryKeyOrder()== WeaBooleanEnum.TRUE) {
 
             tableString.append(" openprimarykeyorder=\"").append(weaTale.getOpenPrimaryKeyOrder().getStringVal()).append(SUF_MARK);
 
         }
 
-        if(weaTale.getMergeOrder()==WeaBoolAttr.TRUE) {
+        if(weaTale.getMergeOrder()== WeaBooleanEnum.TRUE) {
 
             tableString.append(" mergeorder=\"").append(weaTale.getMergeOrder().getStringVal()).append(SUF_MARK);
 
@@ -234,7 +237,7 @@ public abstract class AbstractWeaTableComponentResultMsg extends AbstractWeaComp
         tableString.append("/>");
 
         //checkboxpopedom
-        WeaTableCheckboxpopedom checkboxpopedom =  weaTale.getCheckboxpopedom();
+        AbstractWeaCheckboxPopedom checkboxpopedom =  weaTale.getCheckboxpopedom();
 
         if(checkboxpopedom != null){
 
@@ -246,13 +249,13 @@ public abstract class AbstractWeaTableComponentResultMsg extends AbstractWeaComp
 
         }
 
-        List<WeaTableCheckboxpopedom> checkboxList = weaTale.getCheckboxList();
+        List<AbstractWeaCheckboxPopedom> checkboxList = weaTale.getCheckboxList();
 
         if(checkboxList != null && checkboxList.size() > 0) {
 
             tableString.append("<checkboxList>");
 
-            for(WeaTableCheckboxpopedom item:checkboxList)
+            for(AbstractWeaCheckboxPopedom item:checkboxList)
 
             {
 
@@ -269,7 +272,7 @@ public abstract class AbstractWeaTableComponentResultMsg extends AbstractWeaComp
         }
 
         //operates
-        WeaTableOperates operateBean  = weaTale.getOperates();
+        AbstractWeaTableOperates operateBean  = weaTale.getOperates();
 
         if(operateBean != null){
 
@@ -277,7 +280,7 @@ public abstract class AbstractWeaTableComponentResultMsg extends AbstractWeaComp
 
             //popedom
 
-            WeaTablePopedom popedom = operateBean.getPopedom();
+            AbstractWeaTablePopedom popedom = operateBean.getPopedom();
 
             if(popedom != null){
 
@@ -294,11 +297,11 @@ public abstract class AbstractWeaTableComponentResultMsg extends AbstractWeaComp
             }
 
             //operate
-            List<WeaTableOperate> operates = operateBean.getOperate();
+            List<AbstractWeaTableOperate> operates = operateBean.getOperate();
 
             if(operates != null && operates.size() > 0){
 
-                for(WeaTableOperate operate:operates){
+                for(AbstractWeaTableOperate operate:operates){
 
                     tableString.append("<operate ");
 
@@ -354,13 +357,13 @@ public abstract class AbstractWeaTableComponentResultMsg extends AbstractWeaComp
 
             }
 
-            if (colBean.getBelong() != WeaBelongType.PC) {
+            if (colBean.getBelong() != WeaBelongEnum.PC) {
 
                 tableString.append(" belong=\"").append(colBean.getBelong().getStringVal()).append(SUF_MARK);
 
             }
 
-            if (colBean.getMobileviewtype() != WeaMobileViewType.HIGHLIGHT) {
+            if (colBean.getMobileviewtype() != WeaMobileViewTypeEnum.HIGHLIGHT) {
 
                 tableString.append(" mobileviewtype=\"").append(colBean.getMobileviewtype().getStringVal()).append(SUF_MARK);
 
@@ -465,11 +468,11 @@ public abstract class AbstractWeaTableComponentResultMsg extends AbstractWeaComp
 
             tableString.append(" isInputCol=\"").append(colBean.getIsInputCol().toString()).append(SUF_MARK);
 
-            WeaBoolAttr isPrimarykey  = WeaBoolAttr.TRUE == colBean.getIsPrimarykey() ? colBean.getIsPrimarykey() : (Util.null2String(colBean.getColumn()).equalsIgnoreCase(primarykey) ? WeaBoolAttr.TRUE:WeaBoolAttr.FALSE);
+            WeaBooleanEnum isPrimarykey  = WeaBooleanEnum.TRUE == colBean.getIsPrimarykey() ? colBean.getIsPrimarykey() : (Util.null2String(colBean.getColumn()).equalsIgnoreCase(primarykey) ? WeaBooleanEnum.TRUE: WeaBooleanEnum.FALSE);
 
             tableString.append(" isPrimarykey=\"").append(isPrimarykey.toString()).append(SUF_MARK);
 
-            if(colBean.getIsBase64()==WeaBoolAttr.TRUE) {
+            if(colBean.getIsBase64()== WeaBooleanEnum.TRUE) {
 
                 tableString.append(" isBase64=\"").append(colBean.getIsBase64().getStringVal()).append(SUF_MARK);
 

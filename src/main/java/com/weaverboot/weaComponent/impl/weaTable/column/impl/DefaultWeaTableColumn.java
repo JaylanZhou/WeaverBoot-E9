@@ -1,9 +1,9 @@
 package com.weaverboot.weaComponent.impl.weaTable.column.impl;
 
-import com.cloudstore.eccom.constant.WeaAlignAttr;
-import com.cloudstore.eccom.constant.WeaBelongType;
-import com.cloudstore.eccom.constant.WeaBoolAttr;
-import com.cloudstore.eccom.constant.WeaMobileViewType;
+import com.weaverboot.tools.enumTools.weaComponent.WeaAlignEnum;
+import com.weaverboot.tools.enumTools.weaComponent.WeaBelongEnum;
+import com.weaverboot.tools.enumTools.weaComponent.WeaBooleanEnum;
+import com.weaverboot.tools.enumTools.weaComponent.WeaMobileViewTypeEnum;
 import com.weaverboot.weaComponent.impl.weaTable.column.inte.AbstractWeaTableColumn;
 
 /**
@@ -15,15 +15,15 @@ public class DefaultWeaTableColumn extends AbstractWeaTableColumn {
 
     public DefaultWeaTableColumn(String width, String text, String column, String orderkey, String transmethod) {
         super();
-        this.setAlign(WeaAlignAttr.LEFT);
-        this.setDataalign(WeaAlignAttr.LEFT);
-        this.setHide(WeaBoolAttr.FALSE);
+        this.setAlign(WeaAlignEnum.LEFT);
+        this.setDataalign(WeaAlignEnum.LEFT);
+        this.setHide(WeaBooleanEnum.FALSE);
         this.setShowType(0);
-        this.setIsPrimarykey(WeaBoolAttr.FALSE);
-        this.setIsInputCol(WeaBoolAttr.FALSE);
-        this.setDisplay(WeaBoolAttr.TRUE);
-        this.setBelong(WeaBelongType.PC);
-        this.setMobileviewtype(WeaMobileViewType.HIGHLIGHT);
+        this.setIsPrimarykey(WeaBooleanEnum.FALSE);
+        this.setIsInputCol(WeaBooleanEnum.FALSE);
+        this.setDisplay(WeaBooleanEnum.TRUE);
+        this.setBelong(WeaBelongEnum.PC);
+        this.setMobileviewtype(WeaMobileViewTypeEnum.HIGHLIGHT);
         this.setWidth(width);
         this.setText(text);
         this.setColumn(column);
@@ -33,56 +33,56 @@ public class DefaultWeaTableColumn extends AbstractWeaTableColumn {
 
     public DefaultWeaTableColumn() {
         super();
-        this.setAlign(WeaAlignAttr.LEFT);
-        this.setDataalign(WeaAlignAttr.LEFT);
-        this.setHide(WeaBoolAttr.FALSE);
+        this.setAlign(WeaAlignEnum.LEFT);
+        this.setDataalign(WeaAlignEnum.LEFT);
+        this.setHide(WeaBooleanEnum.FALSE);
         this.setShowType(0);
-        this.setIsPrimarykey(WeaBoolAttr.FALSE);
-        this.setIsInputCol(WeaBoolAttr.FALSE);
-        this.setDisplay(WeaBoolAttr.TRUE);
-        this.setBelong(WeaBelongType.PC);
-        this.setMobileviewtype(WeaMobileViewType.HIGHLIGHT);
+        this.setIsPrimarykey(WeaBooleanEnum.FALSE);
+        this.setIsInputCol(WeaBooleanEnum.FALSE);
+        this.setDisplay(WeaBooleanEnum.TRUE);
+        this.setBelong(WeaBelongEnum.PC);
+        this.setMobileviewtype(WeaMobileViewTypeEnum.HIGHLIGHT);
     }
 
     public DefaultWeaTableColumn(String column) {
-        this.setAlign(WeaAlignAttr.LEFT);
-        this.setDataalign(WeaAlignAttr.LEFT);
-        this.setHide(WeaBoolAttr.FALSE);
+        this.setAlign(WeaAlignEnum.LEFT);
+        this.setDataalign(WeaAlignEnum.LEFT);
+        this.setHide(WeaBooleanEnum.FALSE);
         this.setShowType(0);
-        this.setIsPrimarykey(WeaBoolAttr.FALSE);
-        this.setIsInputCol(WeaBoolAttr.FALSE);
-        this.setDisplay(WeaBoolAttr.TRUE);
-        this.setBelong(WeaBelongType.PC);
-        this.setMobileviewtype(WeaMobileViewType.HIGHLIGHT);
+        this.setIsPrimarykey(WeaBooleanEnum.FALSE);
+        this.setIsInputCol(WeaBooleanEnum.FALSE);
+        this.setDisplay(WeaBooleanEnum.TRUE);
+        this.setBelong(WeaBelongEnum.PC);
+        this.setMobileviewtype(WeaMobileViewTypeEnum.HIGHLIGHT);
         this.setColumn(column);
     }
 
-    public DefaultWeaTableColumn(WeaBoolAttr hide, String column) {
+    public DefaultWeaTableColumn(WeaBooleanEnum hide, String column) {
         super();
-        this.setAlign(WeaAlignAttr.LEFT);
-        this.setDataalign(WeaAlignAttr.LEFT);
-        this.setHide(WeaBoolAttr.FALSE);
+        this.setAlign(WeaAlignEnum.LEFT);
+        this.setDataalign(WeaAlignEnum.LEFT);
+        this.setHide(WeaBooleanEnum.FALSE);
         this.setShowType(0);
-        this.setIsPrimarykey(WeaBoolAttr.FALSE);
-        this.setIsInputCol(WeaBoolAttr.FALSE);
-        this.setDisplay(WeaBoolAttr.TRUE);
-        this.setBelong(WeaBelongType.PC);
-        this.setMobileviewtype(WeaMobileViewType.HIGHLIGHT);
+        this.setIsPrimarykey(WeaBooleanEnum.FALSE);
+        this.setIsInputCol(WeaBooleanEnum.FALSE);
+        this.setDisplay(WeaBooleanEnum.TRUE);
+        this.setBelong(WeaBelongEnum.PC);
+        this.setMobileviewtype(WeaMobileViewTypeEnum.HIGHLIGHT);
         this.setHide(hide);
         this.setColumn(column);
     }
 
     public DefaultWeaTableColumn(String width, String text, String column, String orderkey) {
         super();
-        this.setAlign(WeaAlignAttr.LEFT);
-        this.setDataalign(WeaAlignAttr.LEFT);
-        this.setHide(WeaBoolAttr.FALSE);
+        this.setAlign(WeaAlignEnum.LEFT);
+        this.setDataalign(WeaAlignEnum.LEFT);
+        this.setHide(WeaBooleanEnum.FALSE);
         this.setShowType(0);
-        this.setIsPrimarykey(WeaBoolAttr.FALSE);
-        this.setIsInputCol(WeaBoolAttr.FALSE);
-        this.setDisplay(WeaBoolAttr.TRUE);
-        this.setBelong(WeaBelongType.PC);
-        this.setMobileviewtype(WeaMobileViewType.HIGHLIGHT);
+        this.setIsPrimarykey(WeaBooleanEnum.FALSE);
+        this.setIsInputCol(WeaBooleanEnum.FALSE);
+        this.setDisplay(WeaBooleanEnum.TRUE);
+        this.setBelong(WeaBelongEnum.PC);
+        this.setMobileviewtype(WeaMobileViewTypeEnum.HIGHLIGHT);
         this.setWidth(width);
         this.setText(text);
         this.setColumn(column);
@@ -91,15 +91,15 @@ public class DefaultWeaTableColumn extends AbstractWeaTableColumn {
 
     public DefaultWeaTableColumn(String width, String text, String column) {
         super();
-        this.setAlign(WeaAlignAttr.LEFT);
-        this.setDataalign(WeaAlignAttr.LEFT);
-        this.setHide(WeaBoolAttr.FALSE);
+        this.setAlign(WeaAlignEnum.LEFT);
+        this.setDataalign(WeaAlignEnum.LEFT);
+        this.setHide(WeaBooleanEnum.FALSE);
         this.setShowType(0);
-        this.setIsPrimarykey(WeaBoolAttr.FALSE);
-        this.setIsInputCol(WeaBoolAttr.FALSE);
-        this.setDisplay(WeaBoolAttr.TRUE);
-        this.setBelong(WeaBelongType.PC);
-        this.setMobileviewtype(WeaMobileViewType.HIGHLIGHT);
+        this.setIsPrimarykey(WeaBooleanEnum.FALSE);
+        this.setIsInputCol(WeaBooleanEnum.FALSE);
+        this.setDisplay(WeaBooleanEnum.TRUE);
+        this.setBelong(WeaBelongEnum.PC);
+        this.setMobileviewtype(WeaMobileViewTypeEnum.HIGHLIGHT);
         this.setWidth(width);
         this.setText(text);
         this.setColumn(column);
@@ -107,15 +107,15 @@ public class DefaultWeaTableColumn extends AbstractWeaTableColumn {
 
     public DefaultWeaTableColumn(String width, String text, String column, String orderkey, int showType) {
         super();
-        this.setAlign(WeaAlignAttr.LEFT);
-        this.setDataalign(WeaAlignAttr.LEFT);
-        this.setHide(WeaBoolAttr.FALSE);
+        this.setAlign(WeaAlignEnum.LEFT);
+        this.setDataalign(WeaAlignEnum.LEFT);
+        this.setHide(WeaBooleanEnum.FALSE);
         this.setShowType(0);
-        this.setIsPrimarykey(WeaBoolAttr.FALSE);
-        this.setIsInputCol(WeaBoolAttr.FALSE);
-        this.setDisplay(WeaBoolAttr.TRUE);
-        this.setBelong(WeaBelongType.PC);
-        this.setMobileviewtype(WeaMobileViewType.HIGHLIGHT);
+        this.setIsPrimarykey(WeaBooleanEnum.FALSE);
+        this.setIsInputCol(WeaBooleanEnum.FALSE);
+        this.setDisplay(WeaBooleanEnum.TRUE);
+        this.setBelong(WeaBelongEnum.PC);
+        this.setMobileviewtype(WeaMobileViewTypeEnum.HIGHLIGHT);
         this.setWidth(width);
         this.setText(text);
         this.setColumn(column);
@@ -125,15 +125,15 @@ public class DefaultWeaTableColumn extends AbstractWeaTableColumn {
 
     public DefaultWeaTableColumn(String width, String text, String column, String orderkey, String transmethod, int showType) {
         super();
-        this.setAlign(WeaAlignAttr.LEFT);
-        this.setDataalign(WeaAlignAttr.LEFT);
-        this.setHide(WeaBoolAttr.FALSE);
+        this.setAlign(WeaAlignEnum.LEFT);
+        this.setDataalign(WeaAlignEnum.LEFT);
+        this.setHide(WeaBooleanEnum.FALSE);
         this.setShowType(0);
-        this.setIsPrimarykey(WeaBoolAttr.FALSE);
-        this.setIsInputCol(WeaBoolAttr.FALSE);
-        this.setDisplay(WeaBoolAttr.TRUE);
-        this.setBelong(WeaBelongType.PC);
-        this.setMobileviewtype(WeaMobileViewType.HIGHLIGHT);
+        this.setIsPrimarykey(WeaBooleanEnum.FALSE);
+        this.setIsInputCol(WeaBooleanEnum.FALSE);
+        this.setDisplay(WeaBooleanEnum.TRUE);
+        this.setBelong(WeaBelongEnum.PC);
+        this.setMobileviewtype(WeaMobileViewTypeEnum.HIGHLIGHT);
         this.setWidth(width);
         this.setText(text);
         this.setColumn(column);
@@ -144,15 +144,15 @@ public class DefaultWeaTableColumn extends AbstractWeaTableColumn {
 
     public DefaultWeaTableColumn(String width, String text, String column, String orderkey, String transmethod, String otherpara) {
         super();
-        this.setAlign(WeaAlignAttr.LEFT);
-        this.setDataalign(WeaAlignAttr.LEFT);
-        this.setHide(WeaBoolAttr.FALSE);
+        this.setAlign(WeaAlignEnum.LEFT);
+        this.setDataalign(WeaAlignEnum.LEFT);
+        this.setHide(WeaBooleanEnum.FALSE);
         this.setShowType(0);
-        this.setIsPrimarykey(WeaBoolAttr.FALSE);
-        this.setIsInputCol(WeaBoolAttr.FALSE);
-        this.setDisplay(WeaBoolAttr.TRUE);
-        this.setBelong(WeaBelongType.PC);
-        this.setMobileviewtype(WeaMobileViewType.HIGHLIGHT);
+        this.setIsPrimarykey(WeaBooleanEnum.FALSE);
+        this.setIsInputCol(WeaBooleanEnum.FALSE);
+        this.setDisplay(WeaBooleanEnum.TRUE);
+        this.setBelong(WeaBelongEnum.PC);
+        this.setMobileviewtype(WeaMobileViewTypeEnum.HIGHLIGHT);
         this.setWidth(width);
         this.setText(text);
         this.setColumn(column);
@@ -163,15 +163,15 @@ public class DefaultWeaTableColumn extends AbstractWeaTableColumn {
 
     public DefaultWeaTableColumn(String width, String text, String column, String orderkey, String transmethod, String otherpara, String customCol) {
         super();
-        this.setAlign(WeaAlignAttr.LEFT);
-        this.setDataalign(WeaAlignAttr.LEFT);
-        this.setHide(WeaBoolAttr.FALSE);
+        this.setAlign(WeaAlignEnum.LEFT);
+        this.setDataalign(WeaAlignEnum.LEFT);
+        this.setHide(WeaBooleanEnum.FALSE);
         this.setShowType(0);
-        this.setIsPrimarykey(WeaBoolAttr.FALSE);
-        this.setIsInputCol(WeaBoolAttr.FALSE);
-        this.setDisplay(WeaBoolAttr.TRUE);
-        this.setBelong(WeaBelongType.PC);
-        this.setMobileviewtype(WeaMobileViewType.HIGHLIGHT);
+        this.setIsPrimarykey(WeaBooleanEnum.FALSE);
+        this.setIsInputCol(WeaBooleanEnum.FALSE);
+        this.setDisplay(WeaBooleanEnum.TRUE);
+        this.setBelong(WeaBelongEnum.PC);
+        this.setMobileviewtype(WeaMobileViewTypeEnum.HIGHLIGHT);
         this.setWidth(width);
         this.setText(text);
         this.setColumn(column);
@@ -183,15 +183,15 @@ public class DefaultWeaTableColumn extends AbstractWeaTableColumn {
 
     public DefaultWeaTableColumn(String width, String text, String column, String orderkey, String transmethod, String otherpara, int showType) {
         super();
-        this.setAlign(WeaAlignAttr.LEFT);
-        this.setDataalign(WeaAlignAttr.LEFT);
-        this.setHide(WeaBoolAttr.FALSE);
+        this.setAlign(WeaAlignEnum.LEFT);
+        this.setDataalign(WeaAlignEnum.LEFT);
+        this.setHide(WeaBooleanEnum.FALSE);
         this.setShowType(0);
-        this.setIsPrimarykey(WeaBoolAttr.FALSE);
-        this.setIsInputCol(WeaBoolAttr.FALSE);
-        this.setDisplay(WeaBoolAttr.TRUE);
-        this.setBelong(WeaBelongType.PC);
-        this.setMobileviewtype(WeaMobileViewType.HIGHLIGHT);
+        this.setIsPrimarykey(WeaBooleanEnum.FALSE);
+        this.setIsInputCol(WeaBooleanEnum.FALSE);
+        this.setDisplay(WeaBooleanEnum.TRUE);
+        this.setBelong(WeaBelongEnum.PC);
+        this.setMobileviewtype(WeaMobileViewTypeEnum.HIGHLIGHT);
         this.setWidth(width);
         this.setText(text);
         this.setColumn(column);
@@ -203,15 +203,15 @@ public class DefaultWeaTableColumn extends AbstractWeaTableColumn {
 
     public DefaultWeaTableColumn(String column, String transmethod, String otherpara, int showType) {
         super();
-        this.setAlign(WeaAlignAttr.LEFT);
-        this.setDataalign(WeaAlignAttr.LEFT);
-        this.setHide(WeaBoolAttr.FALSE);
+        this.setAlign(WeaAlignEnum.LEFT);
+        this.setDataalign(WeaAlignEnum.LEFT);
+        this.setHide(WeaBooleanEnum.FALSE);
         this.setShowType(0);
-        this.setIsPrimarykey(WeaBoolAttr.FALSE);
-        this.setIsInputCol(WeaBoolAttr.FALSE);
-        this.setDisplay(WeaBoolAttr.TRUE);
-        this.setBelong(WeaBelongType.PC);
-        this.setMobileviewtype(WeaMobileViewType.HIGHLIGHT);
+        this.setIsPrimarykey(WeaBooleanEnum.FALSE);
+        this.setIsInputCol(WeaBooleanEnum.FALSE);
+        this.setDisplay(WeaBooleanEnum.TRUE);
+        this.setBelong(WeaBelongEnum.PC);
+        this.setMobileviewtype(WeaMobileViewTypeEnum.HIGHLIGHT);
         this.setColumn(column);
         this.setTransmethod(transmethod);
         this.setOtherpara(otherpara);

@@ -1,9 +1,9 @@
 package com.weaverboot.weaComponent.impl.weaTable.column.inte;
 
-import com.cloudstore.eccom.constant.WeaAlignAttr;
-import com.cloudstore.eccom.constant.WeaBelongType;
-import com.cloudstore.eccom.constant.WeaBoolAttr;
-import com.cloudstore.eccom.constant.WeaMobileViewType;
+import com.weaverboot.tools.enumTools.weaComponent.WeaAlignEnum;
+import com.weaverboot.tools.enumTools.weaComponent.WeaBelongEnum;
+import com.weaverboot.tools.enumTools.weaComponent.WeaBooleanEnum;
+import com.weaverboot.tools.enumTools.weaComponent.WeaMobileViewTypeEnum;
 import com.weaverboot.weaComponent.inte.AbstractWeaComponent;
 
 /**
@@ -17,11 +17,11 @@ import com.weaverboot.weaComponent.inte.AbstractWeaComponent;
 
 public abstract class AbstractWeaTableColumn extends AbstractWeaComponent {
 
-    private WeaAlignAttr align = WeaAlignAttr.LEFT; //支持对齐方式   center,left,right
+    private WeaAlignEnum align = WeaAlignEnum.LEFT; //支持对齐方式   center,left,right
 
-    private WeaAlignAttr dataalign = WeaAlignAttr.LEFT; //内容支持对齐方式   center,left,right
+    private WeaAlignEnum dataalign = WeaAlignEnum.LEFT; //内容支持对齐方式   center,left,right
 
-    private WeaBoolAttr hide = WeaBoolAttr.FALSE;;//标识隐藏字段
+    private WeaBooleanEnum hide = WeaBooleanEnum.FALSE;//标识隐藏字段
 
     private String width;
 
@@ -39,9 +39,9 @@ public abstract class AbstractWeaTableColumn extends AbstractWeaComponent {
 
     private int showType = 0; //主要对当列表在多选浏览框使用时 0： 显示 1：高亮显示 2：不显示
 
-    private WeaBoolAttr isPrimarykey = WeaBoolAttr.FALSE; //是否主键字段
+    private WeaBooleanEnum isPrimarykey = WeaBooleanEnum.FALSE; //是否主键字段
 
-    private WeaBoolAttr isInputCol = WeaBoolAttr.FALSE; //在输入框中显示的名称
+    private WeaBooleanEnum isInputCol = WeaBooleanEnum.FALSE; //在输入框中显示的名称
 
     private String transMethodForce;//强制处理transMethod，即使hide为true也处理。
 
@@ -51,13 +51,13 @@ public abstract class AbstractWeaTableColumn extends AbstractWeaComponent {
 
     private String key;//消除列相同时显示错位问题（实际使用中传入不同的key即可，tablestring中表现为_key）
 
-    private WeaBoolAttr display=WeaBoolAttr.TRUE; //默认显示
+    private WeaBooleanEnum display = WeaBooleanEnum.TRUE; //默认显示
 
     //移动端属性 是否移动端 0/1/2  (默认0)(0仅在PC端显示)(1仅在移动端显示)(2同时在PC及移动端显示)
-    private WeaBelongType belong=WeaBelongType.PC;
+    private WeaBelongEnum belong = WeaBelongEnum.PC;
 
     //移动端显示方式1/2  (single模式下生效)(1高亮显示、2第二行次要信息展示)
-    private WeaMobileViewType mobileviewtype=WeaMobileViewType.HIGHLIGHT;
+    private WeaMobileViewTypeEnum mobileviewtype = WeaMobileViewTypeEnum.HIGHLIGHT;
 
     ///移动端 转换函数
     private String mobiletransmethod;
@@ -66,34 +66,34 @@ public abstract class AbstractWeaTableColumn extends AbstractWeaComponent {
     private String mobileotherpara;
 
     ///字段内容转换成base64格式，防止被拦截
-    private WeaBoolAttr isBase64=WeaBoolAttr.FALSE;
+    private WeaBooleanEnum isBase64 = WeaBooleanEnum.FALSE;
 
     ///字段固定列
     private String fixed=null;//left,right,none
 
 
 
-    public WeaAlignAttr getAlign() {
+    public WeaAlignEnum getAlign() {
         return align;
     }
 
-    public void setAlign(WeaAlignAttr align) {
+    public void setAlign(WeaAlignEnum align) {
         this.align = align;
     }
 
-    public WeaAlignAttr getDataalign() {
+    public WeaAlignEnum getDataalign() {
         return dataalign;
     }
 
-    public void setDataalign(WeaAlignAttr dataalign) {
+    public void setDataalign(WeaAlignEnum dataalign) {
         this.dataalign = dataalign;
     }
 
-    public WeaBoolAttr getHide() {
+    public WeaBooleanEnum getHide() {
         return hide;
     }
 
-    public void setHide(WeaBoolAttr hide) {
+    public void setHide(WeaBooleanEnum hide) {
         this.hide = hide;
     }
 
@@ -161,19 +161,19 @@ public abstract class AbstractWeaTableColumn extends AbstractWeaComponent {
         this.showType = showType;
     }
 
-    public WeaBoolAttr getIsPrimarykey() {
+    public WeaBooleanEnum getIsPrimarykey() {
         return isPrimarykey;
     }
 
-    public void setIsPrimarykey(WeaBoolAttr isPrimarykey) {
+    public void setIsPrimarykey(WeaBooleanEnum isPrimarykey) {
         this.isPrimarykey = isPrimarykey;
     }
 
-    public WeaBoolAttr getIsInputCol() {
+    public WeaBooleanEnum getIsInputCol() {
         return isInputCol;
     }
 
-    public void setIsInputCol(WeaBoolAttr isInputCol) {
+    public void setIsInputCol(WeaBooleanEnum isInputCol) {
         this.isInputCol = isInputCol;
     }
 
@@ -209,27 +209,27 @@ public abstract class AbstractWeaTableColumn extends AbstractWeaComponent {
         this.key = key;
     }
 
-    public WeaBoolAttr getDisplay() {
+    public WeaBooleanEnum getDisplay() {
         return display;
     }
 
-    public void setDisplay(WeaBoolAttr display) {
+    public void setDisplay(WeaBooleanEnum display) {
         this.display = display;
     }
 
-    public WeaBelongType getBelong() {
+    public WeaBelongEnum getBelong() {
         return belong;
     }
 
-    public void setBelong(WeaBelongType belong) {
+    public void setBelong(WeaBelongEnum belong) {
         this.belong = belong;
     }
 
-    public WeaMobileViewType getMobileviewtype() {
+    public WeaMobileViewTypeEnum getMobileviewtype() {
         return mobileviewtype;
     }
 
-    public void setMobileviewtype(WeaMobileViewType mobileviewtype) {
+    public void setMobileviewtype(WeaMobileViewTypeEnum mobileviewtype) {
         this.mobileviewtype = mobileviewtype;
     }
 
@@ -249,11 +249,11 @@ public abstract class AbstractWeaTableColumn extends AbstractWeaComponent {
         this.mobileotherpara = mobileotherpara;
     }
 
-    public WeaBoolAttr getIsBase64() {
+    public WeaBooleanEnum getIsBase64() {
         return isBase64;
     }
 
-    public void setIsBase64(WeaBoolAttr isBase64) {
+    public void setIsBase64(WeaBooleanEnum isBase64) {
         this.isBase64 = isBase64;
     }
 
@@ -264,4 +264,6 @@ public abstract class AbstractWeaTableColumn extends AbstractWeaComponent {
     public void setFixed(String fixed) {
         this.fixed = fixed;
     }
+
+
 }

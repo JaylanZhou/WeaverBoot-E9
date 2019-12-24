@@ -1,17 +1,25 @@
 package com.weaverboot.weaComponent.impl.weaTable.table.inte;
-
-import com.api.browser.util.BoolAttr;
-import com.cloudstore.eccom.constant.WeaBoolAttr;
-import com.cloudstore.eccom.constant.WeaMobileShowType;
-import com.cloudstore.eccom.pc.table.WeaTableCheckboxpopedom;
-import com.cloudstore.eccom.pc.table.WeaTableColumn;
-import com.cloudstore.eccom.pc.table.WeaTableOperates;
-import com.cloudstore.eccom.pc.table.WeaTableType;
+import com.weaverboot.tools.enumTools.weaComponent.WeaBooleanEnum;
+import com.weaverboot.tools.enumTools.weaComponent.WeaMobileShowTypeEnum;
+import com.weaverboot.tools.enumTools.weaComponent.WeaTableTypeEnum;
+import com.weaverboot.weaComponent.impl.weaTable.checkboxPopedom.inte.AbstractWeaCheckboxPopedom;
 import com.weaverboot.weaComponent.impl.weaTable.column.inte.AbstractWeaTableColumn;
+import com.weaverboot.weaComponent.impl.weaTable.operates.impl.DefaultWeaTableOperates;
+import com.weaverboot.weaComponent.impl.weaTable.operates.inte.AbstractWeaTableOperates;
 import com.weaverboot.weaComponent.inte.AbstractWeaComponent;
-
+import com.weaverboot.weaComponent.impl.weaTable.checkboxPopedom.impl.DefaultWeaCheckboxPopedom;
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ *
+ * WeaTable 默认实现类
+ *
+ * @Author : Jaylan Zhou
+ *
+ * @Date : 2019-12-23
+ *
+ */
 
 public abstract class AbstractWeaTable extends AbstractWeaComponent {
 
@@ -20,7 +28,7 @@ public abstract class AbstractWeaTable extends AbstractWeaComponent {
 
     private String pageID;
 
-    private WeaTableType tableType=WeaTableType.NONE;//支持 none ,check ,
+    private WeaTableTypeEnum tableType= WeaTableTypeEnum.NONE;//支持 none ,check ,
 
     private String pagesize;
 
@@ -54,10 +62,10 @@ public abstract class AbstractWeaTable extends AbstractWeaComponent {
     private String rowstylefield;
 
     //是否打开主键排序字段
-    private WeaBoolAttr openPrimaryKeyOrder = WeaBoolAttr.FALSE;
+    private WeaBooleanEnum openPrimaryKeyOrder = WeaBooleanEnum.FALSE;
 
     //是否打开复合排序
-    private WeaBoolAttr mergeOrder = WeaBoolAttr.FALSE;
+    private WeaBooleanEnum mergeOrder = WeaBooleanEnum.FALSE;
 
     //快速分页 true 或 false
     private String fastpage;
@@ -70,36 +78,43 @@ public abstract class AbstractWeaTable extends AbstractWeaComponent {
     //列相关
     private List<AbstractWeaTableColumn> columns;
     //操作菜单相关 operate的权限控制
-    private WeaTableOperates operates;
+    private AbstractWeaTableOperates operates;
     //主要用于checkbox 权限控制
-    private WeaTableCheckboxpopedom checkboxpopedom;
+    private AbstractWeaCheckboxPopedom checkboxpopedom;
     //主要用于控制多套checkbox控制 一般不用
-    private List<WeaTableCheckboxpopedom> checkboxList;
+    private List<AbstractWeaCheckboxPopedom> checkboxList;
 
     //千分位合计处理字段 字段名逗号分隔
     private String countColumnsDbType;
 
     //移动端属性 single multi
-    private WeaMobileShowType mobileshowtype=WeaMobileShowType.ListView;
+    private WeaMobileShowTypeEnum mobileshowtype= WeaMobileShowTypeEnum.ListView;
 
     //移动端模版属性
     private String mobileshowtemplate;
 
+    //dataSource数据randomField数据
+    private WeaBooleanEnum randomFieldOpen;
+
+    //合计栏Tranmethod开关 0关 1开
+    private WeaBooleanEnum counttransmethod = WeaBooleanEnum.FALSE;
+
     public AbstractWeaTable() {
 
-        this.tableType = WeaTableType.NONE;
+        this.tableType = WeaTableTypeEnum.NONE;
 
-        this.openPrimaryKeyOrder = WeaBoolAttr.FALSE.FALSE;
+        this.openPrimaryKeyOrder = WeaBooleanEnum.FALSE.FALSE;
 
-        this.mobileshowtype = WeaMobileShowType.ListView;
+        this.mobileshowtype = WeaMobileShowTypeEnum.ListView;
 
         this.columns = new ArrayList();
 
-        this.operates = new WeaTableOperates();
+        this.operates = new DefaultWeaTableOperates();
 
-        this.checkboxpopedom = new WeaTableCheckboxpopedom();
+        this.checkboxpopedom = new DefaultWeaCheckboxPopedom();
 
         this.checkboxList = new ArrayList();
+
     }
 
     public String getPageUID() {
@@ -118,11 +133,11 @@ public abstract class AbstractWeaTable extends AbstractWeaComponent {
         this.pageID = pageID;
     }
 
-    public WeaTableType getTableType() {
+    public WeaTableTypeEnum getTableType() {
         return tableType;
     }
 
-    public void setTableType(WeaTableType tableType) {
+    public void setTableType(WeaTableTypeEnum tableType) {
         this.tableType = tableType;
     }
 
@@ -246,19 +261,19 @@ public abstract class AbstractWeaTable extends AbstractWeaComponent {
         this.rowstylefield = rowstylefield;
     }
 
-    public WeaBoolAttr getOpenPrimaryKeyOrder() {
+    public WeaBooleanEnum getOpenPrimaryKeyOrder() {
         return openPrimaryKeyOrder;
     }
 
-    public void setOpenPrimaryKeyOrder(WeaBoolAttr openPrimaryKeyOrder) {
+    public void setOpenPrimaryKeyOrder(WeaBooleanEnum openPrimaryKeyOrder) {
         this.openPrimaryKeyOrder = openPrimaryKeyOrder;
     }
 
-    public WeaBoolAttr getMergeOrder() {
+    public WeaBooleanEnum getMergeOrder() {
         return mergeOrder;
     }
 
-    public void setMergeOrder(WeaBoolAttr mergeOrder) {
+    public void setMergeOrder(WeaBooleanEnum mergeOrder) {
         this.mergeOrder = mergeOrder;
     }
 
@@ -302,27 +317,27 @@ public abstract class AbstractWeaTable extends AbstractWeaComponent {
         this.columns = columns;
     }
 
-    public WeaTableOperates getOperates() {
+    public AbstractWeaTableOperates getOperates() {
         return operates;
     }
 
-    public void setOperates(WeaTableOperates operates) {
+    public void setOperates(AbstractWeaTableOperates operates) {
         this.operates = operates;
     }
 
-    public WeaTableCheckboxpopedom getCheckboxpopedom() {
+    public AbstractWeaCheckboxPopedom getCheckboxpopedom() {
         return checkboxpopedom;
     }
 
-    public void setCheckboxpopedom(WeaTableCheckboxpopedom checkboxpopedom) {
+    public void setCheckboxpopedom(AbstractWeaCheckboxPopedom checkboxpopedom) {
         this.checkboxpopedom = checkboxpopedom;
     }
 
-    public List<WeaTableCheckboxpopedom> getCheckboxList() {
+    public List<AbstractWeaCheckboxPopedom> getCheckboxList() {
         return checkboxList;
     }
 
-    public void setCheckboxList(List<WeaTableCheckboxpopedom> checkboxList) {
+    public void setCheckboxList(List<AbstractWeaCheckboxPopedom> checkboxList) {
         this.checkboxList = checkboxList;
     }
 
@@ -334,11 +349,11 @@ public abstract class AbstractWeaTable extends AbstractWeaComponent {
         this.countColumnsDbType = countColumnsDbType;
     }
 
-    public WeaMobileShowType getMobileshowtype() {
+    public WeaMobileShowTypeEnum getMobileshowtype() {
         return mobileshowtype;
     }
 
-    public void setMobileshowtype(WeaMobileShowType mobileshowtype) {
+    public void setMobileshowtype(WeaMobileShowTypeEnum mobileshowtype) {
         this.mobileshowtype = mobileshowtype;
     }
 
@@ -349,4 +364,21 @@ public abstract class AbstractWeaTable extends AbstractWeaComponent {
     public void setMobileshowtemplate(String mobileshowtemplate) {
         this.mobileshowtemplate = mobileshowtemplate;
     }
+
+    public WeaBooleanEnum getRandomFieldOpen() {
+        return randomFieldOpen;
+    }
+
+    public void setRandomFieldOpen(WeaBooleanEnum randomFieldOpen) {
+        this.randomFieldOpen = randomFieldOpen;
+    }
+
+    public WeaBooleanEnum getCounttransmethod() {
+        return counttransmethod;
+    }
+
+    public void setCounttransmethod(WeaBooleanEnum counttransmethod) {
+        this.counttransmethod = counttransmethod;
+    }
+
 }

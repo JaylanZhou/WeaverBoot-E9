@@ -113,7 +113,9 @@ public class DefaultWeaApplicationContext implements WeaApplicationContext {
     }
 
     @Override
-    public <T> T getBean(String beanId, Class<T> tClass) {
+    public <T> T getBean(Class<T> tClass) {
+
+        String beanId = tClass.getName();
 
         Object object = getBean(beanId);
 
