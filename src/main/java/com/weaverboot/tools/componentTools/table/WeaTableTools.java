@@ -107,33 +107,43 @@ public class WeaTableTools {
 
 
 
-//        switch (root.getAttributeValue("tabletype")){
-//
-//            case "0" :
-//
-//                abstractWeaTable.setTableType();;
-//
-//                break;
-//
-//            case "1" :
-//
-//                abstractWeaTable.setTableType();
-//
-//                break;
-//
-//            case "2" :
-//
-//                abstractWeaTable.setTableType();
-//
-//                break;
-//
-//
-//            default:
-//
-//                break;
-//        }
+        switch (root.getAttributeValue("tabletype")){
 
-        abstractWeaTable.setTableType(WeaTableTypeEnum.NONE);
+            case "none" :
+
+                abstractWeaTable.setTableType(WeaTableTypeEnum.NONE);
+
+                break;
+
+            case "radio" :
+
+                abstractWeaTable.setTableType(WeaTableTypeEnum.RADIO);
+
+                break;
+
+            case "checkbox" :
+
+                abstractWeaTable.setTableType(WeaTableTypeEnum.CHECKBOX);
+
+                break;
+
+            case "thumbnail" :
+
+                abstractWeaTable.setTableType(WeaTableTypeEnum.THUMBNAIL);
+
+                break;
+
+            case "officalDoc" :
+
+                abstractWeaTable.setTableType(WeaTableTypeEnum.OFFICALDOC);
+
+                break;
+
+
+            default:
+
+                break;
+        }
 
         abstractWeaTable.setPageUID(root.getAttributeValue("pageUid"));
 
@@ -360,13 +370,11 @@ public class WeaTableTools {
 
         Element head = root.getChild("head");
 
-        Element operates = root.getChild("operates");
-
         if (head!=null) {
 
             List<AbstractWeaTableColumn> weaTableColumnArrayList = new ArrayList<>();
 
-            List colList = operates.getChildren("col");
+            List colList = head.getChildren("col");
 
             if(colList!=null) {
 
@@ -380,7 +388,7 @@ public class WeaTableTools {
 
                     col.setWidth(el.getAttributeValue("width"));
 
-                    switch (el.getAttributeValue("belong")){
+                    switch (Util.null2String(el.getAttributeValue("belong"))){
 
                         case "0" :
 
@@ -430,7 +438,7 @@ public class WeaTableTools {
 
                     col.setCollapse(el.getAttributeValue("collapse"));
 
-                    col.setDisplay(WeaBooleanEnum.TRUE.getStringVal().equals(el.getAttributeValue("display")) ? WeaBooleanEnum.TRUE : WeaBooleanEnum.FALSE);
+                    col.setDisplay(WeaBooleanEnum.TRUE.getBooleanStringVal().equals(el.getAttributeValue("display")) ? WeaBooleanEnum.TRUE : WeaBooleanEnum.FALSE);
 
 //                    col.setClassName(el.getAttributeValue("className"));
 

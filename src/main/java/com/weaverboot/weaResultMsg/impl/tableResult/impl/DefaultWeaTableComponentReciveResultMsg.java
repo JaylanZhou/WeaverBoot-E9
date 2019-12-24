@@ -22,6 +22,8 @@ public class DefaultWeaTableComponentReciveResultMsg extends AbstractWeaTableCom
 
         T t = WeaTableTools.checkTableStringConfig(sessionKey,tClass);
 
+        this.setWeaTable(t);
+
         return t;
 
     }

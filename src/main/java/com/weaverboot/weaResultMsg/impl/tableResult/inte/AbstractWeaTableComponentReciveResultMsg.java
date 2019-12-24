@@ -16,9 +16,7 @@ public abstract class AbstractWeaTableComponentReciveResultMsg extends AbstractW
     @Override
     public String resultToSerialization() {
 
-        String sessionKey = BaseTools.createUUID();
-
-        Util_TableMap.setVal(sessionKey, this.toTableString());
+        Util_TableMap.setVal(this.getDatas(), super.toTableString());
 
         this.setType(WeaResultDataType.LIST_SPLIT_DATA.getTypeid());
 

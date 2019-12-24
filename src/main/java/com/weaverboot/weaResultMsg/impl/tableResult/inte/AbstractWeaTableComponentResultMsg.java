@@ -18,7 +18,7 @@ import java.util.List;
 public abstract class AbstractWeaTableComponentResultMsg extends AbstractWeaComponentResultMsg {
 
     @JSONField(serialize = false)
-    private AbstractWeaTable weaTale;
+    private AbstractWeaTable weaTable;
 
     private int type;
 
@@ -82,17 +82,17 @@ public abstract class AbstractWeaTableComponentResultMsg extends AbstractWeaComp
         this.datas = datas;
     }
 
-    public AbstractWeaTable getWeaTale() {
-        return weaTale;
+    public AbstractWeaTable getWeaTable() {
+        return weaTable;
     }
 
-    public void setWeaTale(AbstractWeaTable weaTale) {
-        this.weaTale = weaTale;
+    public void setWeaTable(AbstractWeaTable weaTable) {
+        this.weaTable = weaTable;
     }
 
     public String toTableString() {
 
-        if (weaTale == null){
+        if (weaTable == null){
 
             throw new RuntimeException("消息体表单为空，请设置表单内容");
 
@@ -101,84 +101,84 @@ public abstract class AbstractWeaTableComponentResultMsg extends AbstractWeaComp
         StringBuilder tableString = new StringBuilder();
 
         // table
-        tableString.append("<table tabletype=\"").append(weaTale.getTableType()).append(SUF_MARK);
+        tableString.append("<table tabletype=\"").append(weaTable.getTableType()).append(SUF_MARK);
 
-        if (weaTale.getPageUID() != null) {
+        if (weaTable.getPageUID() != null) {
 
-            tableString.append(" pageUid=\"").append(weaTale.getPageUID()).append(SUF_MARK);
-
-        }
-
-        if(weaTale.getPageID() != null) {
-
-            tableString.append(" pageId=\"").append(weaTale.getPageID()).append(SUF_MARK);
+            tableString.append(" pageUid=\"").append(weaTable.getPageUID()).append(SUF_MARK);
 
         }
 
-        tableString.append(" pagesize=\"").append(weaTale.getPagesize()).append(SUF_MARK);
+        if(weaTable.getPageID() != null) {
 
-        if (weaTale.getDatasource() != null) {
-
-            tableString.append(" datasource=\"").append(weaTale.getDatasource()).append(SUF_MARK);
+            tableString.append(" pageId=\"").append(weaTable.getPageID()).append(SUF_MARK);
 
         }
 
-        if (weaTale.getSourceparams() != null) {
+        tableString.append(" pagesize=\"").append(weaTable.getPagesize()).append(SUF_MARK);
 
-            tableString.append(" sourceparams=\"").append(weaTale.getSourceparams()).append(SUF_MARK);
+        if (weaTable.getDatasource() != null) {
 
-        }
-
-        if(weaTale.getPageBySelf() != null) {
-
-            tableString.append(" pageBySelf=\"").append(weaTale.getPageBySelf()).append(SUF_MARK);
+            tableString.append(" datasource=\"").append(weaTable.getDatasource()).append(SUF_MARK);
 
         }
 
+        if (weaTable.getSourceparams() != null) {
 
-        if(weaTale.getRowstylefield() != null) {
-
-            tableString.append(" rowstylefield=\"").append(weaTale.getRowstylefield()).append(SUF_MARK);
+            tableString.append(" sourceparams=\"").append(weaTable.getSourceparams()).append(SUF_MARK);
 
         }
 
-        tableString.append(" mobileshowtype=\"").append(weaTale.getMobileshowtype().getStringVal()).append(SUF_MARK);
+        if(weaTable.getPageBySelf() != null) {
+
+            tableString.append(" pageBySelf=\"").append(weaTable.getPageBySelf()).append(SUF_MARK);
+
+        }
 
 
-        if(weaTale.getMobileshowtemplate() != null) {
+        if(weaTable.getRowstylefield() != null) {
 
-            tableString.append(" mobileshowtemplate=\"").append(weaTale.getMobileshowtemplate()).append(SUF_MARK);
+            tableString.append(" rowstylefield=\"").append(weaTable.getRowstylefield()).append(SUF_MARK);
+
+        }
+
+        tableString.append(" mobileshowtype=\"").append(weaTable.getMobileshowtype().getStringVal()).append(SUF_MARK);
+
+
+        if(weaTable.getMobileshowtemplate() != null) {
+
+            tableString.append(" mobileshowtemplate=\"").append(weaTable.getMobileshowtemplate()).append(SUF_MARK);
 
         }
 
         tableString.append(">");
 
         // sql
-        tableString.append("<sql backfields=\"").append(weaTale.getBackfields()).append(SUF_MARK);
+        tableString.append("<sql backfields=\"").append(weaTable.getBackfields()).append(SUF_MARK);
 
-        tableString.append(" sqlform=\"").append(Util.toHtmlForSplitPage(weaTale.getSqlform())).append(SUF_MARK);
+        tableString.append(" sqlform=\"").append(Util.toHtmlForSplitPage(weaTable.getSqlform())).append(SUF_MARK);
 
-        tableString.append(" sqlwhere=\"").append(Util.toHtmlForSplitPage(weaTale.getSqlwhere())).append(SUF_MARK);
+        tableString.append(" sqlwhere=\"").append(Util.toHtmlForSplitPage(weaTable.getSqlwhere())).append(SUF_MARK);
 
-        if(!"".equals(Util.null2String(weaTale.getSqlorderby()))){
+        if(!"".equals(Util.null2String(weaTable.getSqlorderby()))){
 
-            tableString.append(" sqlorderby=\"").append(weaTale.getSqlorderby()).append(SUF_MARK);
+            tableString.append(" sqlorderby=\"").append(weaTable.getSqlorderby()).append(SUF_MARK);
 
-            tableString.append(" sqlsortway=\"").append(weaTale.getSqlsortway()).append(SUF_MARK);
-
-        }
-
-        if(!"".equals(Util.null2String(weaTale.getSqlgroupby()))){
-
-            tableString.append(" sqlgroupby=\"").append(weaTale.getSqlgroupby()).append(SUF_MARK);
+            tableString.append(" sqlsortway=\"").append(weaTable.getSqlsortway()).append(SUF_MARK);
 
         }
 
-        tableString.append(" sqlprimarykey=\"").append(weaTale.getSqlprimarykey()).append(SUF_MARK);
+        if(!"".equals(Util.null2String(weaTable.getSqlgroupby()))){
 
-        tableString.append(" sqlisdistinct=\"").append(weaTale.getSqlisdistinct()).append(SUF_MARK);
+            tableString.append(" sqlgroupby=\"").append(weaTable.getSqlgroupby()).append(SUF_MARK);
 
-        String sumColumns =  Util.null2String(weaTale.getSumColumns());
+        }
+
+        tableString.append(" sqlprimarykey=\"").append(weaTable.getSqlprimarykey()).append(SUF_MARK);
+
+        tableString.append(" sqlisdistinct=\"").append(weaTable.getSqlisdistinct()).append(SUF_MARK);
+
+        String sumColumns =  Util.null2String(weaTable.getSumColumns());
 
         if(!"".equals(sumColumns)){
 
@@ -186,7 +186,7 @@ public abstract class AbstractWeaTableComponentResultMsg extends AbstractWeaComp
 
         }
 
-        String sumValues = Util.null2String(weaTale.getSumValues());
+        String sumValues = Util.null2String(weaTable.getSumValues());
 
         if(!"".equals(sumValues)) {
 
@@ -194,7 +194,7 @@ public abstract class AbstractWeaTableComponentResultMsg extends AbstractWeaComp
 
         }
 
-        String decimalFormat  = Util.null2String(weaTale.getDecimalFormat());
+        String decimalFormat  = Util.null2String(weaTable.getDecimalFormat());
 
         if(!"".equals(decimalFormat)){
 
@@ -202,7 +202,7 @@ public abstract class AbstractWeaTableComponentResultMsg extends AbstractWeaComp
 
         }
 
-        String poolname = Util.null2String(weaTale.getPoolname());
+        String poolname = Util.null2String(weaTable.getPoolname());
 
         if(!"".equals(poolname)){
 
@@ -210,34 +210,34 @@ public abstract class AbstractWeaTableComponentResultMsg extends AbstractWeaComp
 
         }
 
-        if(!"".equals(Util.null2String(weaTale.getCountColumnsDbType()))){
+        if(!"".equals(Util.null2String(weaTable.getCountColumnsDbType()))){
 
-            tableString.append(" countcolumnsdbtype=\"").append(weaTale.getCountColumnsDbType()).append(SUF_MARK);
-
-        }
-
-        if(!"".equals(Util.null2String(weaTale.getFastpage())) ) {
-
-            tableString.append(" fastpage=\"").append(weaTale.getFastpage()).append(SUF_MARK);
+            tableString.append(" countcolumnsdbtype=\"").append(weaTable.getCountColumnsDbType()).append(SUF_MARK);
 
         }
 
-        if(weaTale.getOpenPrimaryKeyOrder()== WeaBooleanEnum.TRUE) {
+        if(!"".equals(Util.null2String(weaTable.getFastpage())) ) {
 
-            tableString.append(" openprimarykeyorder=\"").append(weaTale.getOpenPrimaryKeyOrder().getStringVal()).append(SUF_MARK);
+            tableString.append(" fastpage=\"").append(weaTable.getFastpage()).append(SUF_MARK);
 
         }
 
-        if(weaTale.getMergeOrder()== WeaBooleanEnum.TRUE) {
+        if(weaTable.getOpenPrimaryKeyOrder()== WeaBooleanEnum.TRUE) {
 
-            tableString.append(" mergeorder=\"").append(weaTale.getMergeOrder().getStringVal()).append(SUF_MARK);
+            tableString.append(" openprimarykeyorder=\"").append(weaTable.getOpenPrimaryKeyOrder().getStringVal()).append(SUF_MARK);
+
+        }
+
+        if(weaTable.getMergeOrder()== WeaBooleanEnum.TRUE) {
+
+            tableString.append(" mergeorder=\"").append(weaTable.getMergeOrder().getStringVal()).append(SUF_MARK);
 
         }
 
         tableString.append("/>");
 
         //checkboxpopedom
-        AbstractWeaCheckboxPopedom checkboxpopedom =  weaTale.getCheckboxpopedom();
+        AbstractWeaCheckboxPopedom checkboxpopedom =  weaTable.getCheckboxpopedom();
 
         if(checkboxpopedom != null){
 
@@ -249,7 +249,7 @@ public abstract class AbstractWeaTableComponentResultMsg extends AbstractWeaComp
 
         }
 
-        List<AbstractWeaCheckboxPopedom> checkboxList = weaTale.getCheckboxList();
+        List<AbstractWeaCheckboxPopedom> checkboxList = weaTable.getCheckboxList();
 
         if(checkboxList != null && checkboxList.size() > 0) {
 
@@ -272,7 +272,7 @@ public abstract class AbstractWeaTableComponentResultMsg extends AbstractWeaComp
         }
 
         //operates
-        AbstractWeaTableOperates operateBean  = weaTale.getOperates();
+        AbstractWeaTableOperates operateBean  = weaTable.getOperates();
 
         if(operateBean != null){
 
@@ -334,7 +334,7 @@ public abstract class AbstractWeaTableComponentResultMsg extends AbstractWeaComp
             tableString.append("</operates>");
         }
 
-        String primarykey = Util.null2String(weaTale.getSqlprimarykey());
+        String primarykey = Util.null2String(weaTable.getSqlprimarykey());
 
         if(primarykey.indexOf(".") > 0){
 
@@ -345,7 +345,7 @@ public abstract class AbstractWeaTableComponentResultMsg extends AbstractWeaComp
         // col
         tableString.append("<head>");
 
-        List<AbstractWeaTableColumn> cols = weaTale.getColumns();
+        List<AbstractWeaTableColumn> cols = weaTable.getColumns();
 
         for (AbstractWeaTableColumn colBean : cols) {
 
