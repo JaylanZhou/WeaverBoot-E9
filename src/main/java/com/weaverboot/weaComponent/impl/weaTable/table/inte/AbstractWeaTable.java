@@ -3,6 +3,7 @@ import com.weaverboot.tools.enumTools.weaComponent.WeaBooleanEnum;
 import com.weaverboot.tools.enumTools.weaComponent.WeaMobileShowTypeEnum;
 import com.weaverboot.tools.enumTools.weaComponent.WeaTableTypeEnum;
 import com.weaverboot.weaComponent.impl.weaTable.checkboxPopedom.inte.AbstractWeaCheckboxPopedom;
+import com.weaverboot.weaComponent.impl.weaTable.column.impl.DefaultWeaTableColumn;
 import com.weaverboot.weaComponent.impl.weaTable.column.inte.AbstractWeaTableColumn;
 import com.weaverboot.weaComponent.impl.weaTable.operates.impl.DefaultWeaTableOperates;
 import com.weaverboot.weaComponent.impl.weaTable.operates.inte.AbstractWeaTableOperates;
@@ -28,7 +29,7 @@ public abstract class AbstractWeaTable extends AbstractWeaComponent {
 
     private String pageID;
 
-    private WeaTableTypeEnum tableType= WeaTableTypeEnum.NONE;//支持 none ,check ,
+    private WeaTableTypeEnum tableType = WeaTableTypeEnum.NONE;//支持 none ,check ,
 
     private String pagesize;
 

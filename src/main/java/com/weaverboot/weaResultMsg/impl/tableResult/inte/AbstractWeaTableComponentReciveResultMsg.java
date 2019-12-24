@@ -23,6 +23,9 @@ public abstract class AbstractWeaTableComponentReciveResultMsg extends AbstractW
         this.setType(WeaResultDataType.LIST_SPLIT_DATA.getTypeid());
 
         return JSONObject.toJSONString(this);
+
     }
+
+    public abstract <T extends AbstractWeaTable>T parseAndGetWeaTable(Class<T> tClass) throws Exception;
 
 }
