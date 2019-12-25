@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.cloudstore.dev.api.util.Util_TableMap;
 import com.cloudstore.eccom.constant.WeaResultDataType;
 import com.weaverboot.tools.baseTools.BaseTools;
+import com.weaverboot.tools.componentTools.table.WeaTableTools;
 import com.weaverboot.weaComponent.impl.weaTable.table.inte.AbstractWeaTable;
 
 /**
@@ -16,7 +17,7 @@ public abstract class AbstractWeaTableComponentReciveResultMsg extends AbstractW
     @Override
     public String resultToSerialization() {
 
-        Util_TableMap.setVal(this.getDatas(), super.toTableString());
+        WeaTableTools.setTableStringVal(this.getDatas(),super.toTableString());
 
         this.setType(WeaResultDataType.LIST_SPLIT_DATA.getTypeid());
 
@@ -27,3 +28,4 @@ public abstract class AbstractWeaTableComponentReciveResultMsg extends AbstractW
     public abstract <T extends AbstractWeaTable>T parseAndGetWeaTable(Class<T> tClass) throws Exception;
 
 }
+

@@ -3,8 +3,8 @@ import com.weaverboot.tools.enumTools.weaComponent.WeaBooleanEnum;
 import com.weaverboot.tools.enumTools.weaComponent.WeaMobileShowTypeEnum;
 import com.weaverboot.tools.enumTools.weaComponent.WeaTableTypeEnum;
 import com.weaverboot.weaComponent.impl.weaTable.checkboxPopedom.inte.AbstractWeaCheckboxPopedom;
-import com.weaverboot.weaComponent.impl.weaTable.column.impl.DefaultWeaTableColumn;
 import com.weaverboot.weaComponent.impl.weaTable.column.inte.AbstractWeaTableColumn;
+import com.weaverboot.weaComponent.impl.weaTable.operate.inte.AbstractWeaTableOperate;
 import com.weaverboot.weaComponent.impl.weaTable.operates.impl.DefaultWeaTableOperates;
 import com.weaverboot.weaComponent.impl.weaTable.operates.inte.AbstractWeaTableOperates;
 import com.weaverboot.weaComponent.inte.AbstractWeaComponent;
@@ -117,6 +117,16 @@ public abstract class AbstractWeaTable extends AbstractWeaComponent {
         this.checkboxList = new ArrayList();
 
     }
+
+    public abstract <T extends AbstractWeaTableColumn> T readWeaTableColumn(int index,Class<T> tClass);
+
+    public abstract <T extends AbstractWeaTableColumn> T readWeaTableColumnWithName(String columnText,Class<T> tClass);
+
+    public abstract <T extends AbstractWeaTableOperate> T readWeaTableOperate(int index, Class<T> tClass);
+
+    public abstract <T extends AbstractWeaTableOperate> T readWeaTableOperateWithName(String columnText,Class<T> tClass);
+
+    public abstract <T extends AbstractWeaCheckboxPopedom> T readWeaCheckboxPopedom(int index,Class<T> tClass);
 
     public String getPageUID() {
         return pageUID;

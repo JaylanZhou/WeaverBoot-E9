@@ -6,9 +6,12 @@ import com.weaverboot.weaComponent.impl.weaTable.column.inte.AbstractWeaTableCol
 import com.weaverboot.weaComponent.impl.weaTable.operate.inte.AbstractWeaTableOperate;
 import com.weaverboot.weaComponent.impl.weaTable.table.inte.AbstractWeaTable;
 
-public class DefaultWeaTable extends AbstractWeaTable {
-
-
+/**
+ * @Author : Jaylan Zhou
+ * @Date : 2019-12-25 16:27
+ * @Version : 1.0
+ */
+public class DocWeaTable extends AbstractWeaTable {
     @Override
     public <T extends AbstractWeaTableColumn> T readWeaTableColumn(int index, Class<T> tClass) {
 
@@ -28,7 +31,7 @@ public class DefaultWeaTable extends AbstractWeaTable {
     public <T extends AbstractWeaTableColumn> T readWeaTableColumnWithName(String columnText, Class<T> tClass) {
 
         for (AbstractWeaTableColumn ab : this.getColumns()
-             ) {
+        ) {
 
             if (BaseTools.notNullString(columnText) && columnText.equals(ab.getText())){
 
@@ -60,7 +63,7 @@ public class DefaultWeaTable extends AbstractWeaTable {
     public <T extends AbstractWeaTableOperate> T readWeaTableOperateWithName(String operateText, Class<T> tClass) {
 
         for (AbstractWeaTableOperate ab : this.getOperates().getOperate()
-             ) {
+        ) {
 
             if (BaseTools.notNullString(operateText) && ab.getText().equals(operateText)){
 

@@ -6,6 +6,7 @@ import com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefini
 import com.weaverboot.frame.ioc.container.WeaIocContainer;
 import com.weaverboot.frame.ioc.anno.classAnno.WeaIocReplaceComponent;
 import com.weaverboot.frame.ioc.beans.bean.definition.handler.replace.inte.AbstractWeaIocReplaceHandler;
+import com.weaverboot.tools.baseTools.BaseTools;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -42,41 +43,48 @@ public class DefaultWeaIocReplaceHandler extends AbstractWeaIocReplaceHandler {
 
             String apiUrl = method.getAnnotation(WeaReplaceAfter.class).value();
 
-            Map<AbstractWeaBeanDefinition, Map<String,Method>> abstractWeaBeanDefinitionMap = WeaIocContainer.getReplaceAfter(apiUrl);
+            apiUrl = apiUrl.startsWith("/") ? apiUrl : "/" + apiUrl;
 
-            if (abstractWeaBeanDefinitionMap != null) {
+            if (BaseTools.notNullString(apiUrl)) {
 
-                Map<String,Method> methodMap = abstractWeaBeanDefinitionMap.get(abstractWeaBeanDefinition);
+                Map<AbstractWeaBeanDefinition, Map<String, Method>> abstractWeaBeanDefinitionMap = WeaIocContainer.getReplaceAfter(apiUrl);
 
-                if (methodMap != null){
+                if (abstractWeaBeanDefinitionMap != null) {
 
-                    methodMap.put(method.getAnnotation(WeaReplaceAfter.class).order(),method);
+                    Map<String, Method> methodMap = abstractWeaBeanDefinitionMap.get(abstractWeaBeanDefinition);
+
+                    if (methodMap != null) {
+
+                        methodMap.put(method.getAnnotation(WeaReplaceAfter.class).order(), method);
+
+                    } else {
+
+                        methodMap = new TreeMap<>();
+
+                        methodMap.put(method.getAnnotation(WeaReplaceAfter.class).order(), method);
+
+                        abstractWeaBeanDefinitionMap.put(abstractWeaBeanDefinition, methodMap);
+
+                    }
 
                 } else {
 
-                    methodMap = new TreeMap<>();
+                    abstractWeaBeanDefinitionMap = new HashMap<>();
 
-                    methodMap.put(method.getAnnotation(WeaReplaceAfter.class).order(),method);
+                    Map<String, Method> methodMap = new TreeMap<>();
 
-                    abstractWeaBeanDefinitionMap.put(abstractWeaBeanDefinition,methodMap);
+                    methodMap.put(method.getAnnotation(WeaReplaceAfter.class).order(), method);
+
+                    abstractWeaBeanDefinitionMap.put(abstractWeaBeanDefinition, methodMap);
+
+                    WeaIocContainer.setReplaceAfter(apiUrl, abstractWeaBeanDefinitionMap);
 
                 }
 
-            } else {
-
-                abstractWeaBeanDefinitionMap = new HashMap<>();
-
-                Map<String,Method> methodMap = new TreeMap<>();
-
-                methodMap.put(method.getAnnotation(WeaReplaceAfter.class).order(),method);
-
-                abstractWeaBeanDefinitionMap.put(abstractWeaBeanDefinition, methodMap);
-
-                WeaIocContainer.setReplaceAfter(apiUrl, abstractWeaBeanDefinitionMap);
+                System.out.println("注册了url:" + apiUrl + "以及方法:" + method.getName());
 
             }
 
-            System.out.println("注册了url:" + apiUrl + "以及方法:" + method.getName());
 
         }
 

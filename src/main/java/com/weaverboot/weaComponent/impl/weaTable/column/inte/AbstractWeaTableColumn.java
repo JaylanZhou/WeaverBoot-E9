@@ -47,6 +47,10 @@ public abstract class AbstractWeaTableColumn extends AbstractWeaComponent {
 
     private String collapse; //合并行
 
+    private String labelid;
+
+    private String thumbnail;
+
     private String customCol;//控制显示列定制（false 不显示）
 
     private String key;//消除列相同时显示错位问题（实际使用中传入不同的key即可，tablestring中表现为_key）
@@ -265,5 +269,19 @@ public abstract class AbstractWeaTableColumn extends AbstractWeaComponent {
         this.fixed = fixed;
     }
 
+    public String getLabelid() {
+        return labelid;
+    }
 
+    public void setLabelid(String labelid) {
+        this.labelid = labelid;
+    }
+
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
+    }
 }

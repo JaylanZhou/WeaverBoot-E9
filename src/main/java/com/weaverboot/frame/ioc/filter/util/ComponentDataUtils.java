@@ -7,11 +7,12 @@ import com.weaverboot.weaComponent.impl.weaTree.inte.AbstractWeaFatherTree;
 import com.weaverboot.weaResultMsg.impl.formResult.inte.AbstractWeaFormReciveComponentResultMsg;
 import com.weaverboot.weaComponent.impl.weaTab.inte.AbstractWeaTab;
 
+@Deprecated
 public class ComponentDataUtils {
 
     private ComponentDataUtils(){}
 
-    public static  <T extends AbstractWeaForm>T getFormItem(AbstractWeaFormReciveComponentResultMsg abstractWeaFormReciveResultMsg, int groupIndex, int itemIndex, Class<T> tClass) throws IllegalAccessException, InstantiationException {
+    public static  <T extends AbstractWeaForm>T getFormItem(AbstractWeaFormReciveComponentResultMsg abstractWeaFormReciveResultMsg, int groupIndex, int itemIndex, Class<T> tClass) {
 
         JSONObject jsonObject = (JSONObject) abstractWeaFormReciveResultMsg.getCondition().get(groupIndex).getItems().get(itemIndex);
 
@@ -59,7 +60,7 @@ public class ComponentDataUtils {
 
     }
 
-    public static <T extends com.weaverboot.weaComponent.impl.weaTab.inte.AbstractWeaTab>T getWeaTab(AbstractWeaFormReciveComponentResultMsg abstractWeaFormReciveResultMsg, int itemIndex, Class<T> tClass){
+    public static <T extends AbstractWeaTab>T getWeaTab(AbstractWeaFormReciveComponentResultMsg abstractWeaFormReciveResultMsg, int itemIndex, Class<T> tClass){
 
         JSONObject jsonObject = (JSONObject) abstractWeaFormReciveResultMsg.getWeaTab().get(itemIndex);
 
