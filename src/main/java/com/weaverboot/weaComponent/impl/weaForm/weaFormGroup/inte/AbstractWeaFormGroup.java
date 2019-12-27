@@ -1,8 +1,9 @@
 package com.weaverboot.weaComponent.impl.weaForm.weaFormGroup.inte;
 
-import com.alibaba.fastjson.JSONObject;
+import com.weaverboot.tools.baseTools.BaseTools;
 import com.weaverboot.tools.enumTools.weaComponent.WeaFormGroupConditionType;
 import com.weaverboot.weaComponent.impl.weaForm.inte.AbstractWeaForm;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,9 +53,9 @@ public abstract class AbstractWeaFormGroup {
         this.titleTip = titleTip;
     }
 
-    public AbstractWeaFormGroup addItem(AbstractWeaForm abstractWeaForm){
+    public AbstractWeaFormGroup addItem(AbstractWeaForm abstractWeaForm) {
 
-        if (items == null){
+        if (items == null) {
 
             this.items = new ArrayList<>();
 
@@ -74,7 +75,7 @@ public abstract class AbstractWeaFormGroup {
         this.idHide = idHide;
     }
 
-    public <T extends AbstractWeaForm>T transFormItem(int itemIndex, Class<T> tClass) {
+    public <T extends AbstractWeaForm> T transFormItem(int itemIndex, Class<T> tClass) {
 
         AbstractWeaForm abstractWeaForm = (AbstractWeaForm) this.getItems().get(itemIndex);
 
@@ -84,7 +85,7 @@ public abstract class AbstractWeaFormGroup {
 
             resultForm.copyCommonAttr(abstractWeaForm);
 
-            this.getItems().set(itemIndex,resultForm);
+            this.getItems().set(itemIndex, resultForm);
 
             return resultForm;
 
@@ -96,7 +97,7 @@ public abstract class AbstractWeaFormGroup {
 
     }
 
-    public <T extends AbstractWeaForm>T readFormItem(int itemIndex, Class<T> tClass) {
+    public <T extends AbstractWeaForm> T readFormItem(int itemIndex, Class<T> tClass) {
 
         try {
 
@@ -110,19 +111,97 @@ public abstract class AbstractWeaFormGroup {
 
     }
 
+    public <T extends AbstractWeaForm> T readFormItemWithLabel(String labelName, Class<T> tClass) {
+
+        for (int i = 0; i < items.size(); i++) {
+
+            AbstractWeaForm abstractWeaForm = (AbstractWeaForm) items.get(i);
+
+            if (BaseTools.notNullString(labelName) && abstractWeaForm.getLabel().equals(labelName)) {
+
+                return (T) abstractWeaForm;
+
+            }
+
+        }
+
+        throw new RuntimeException("未找到label为" + labelName + "的form组件");
+
+    }
+
+    public <T extends AbstractWeaForm> List<T> readFormItemWithLabelList(String labelName, Class<T> tClass) {
+
+        List<T> tList = new ArrayList<>();
+
+        for (int i = 0; i < items.size(); i++) {
+
+            AbstractWeaForm abstractWeaForm = (AbstractWeaForm) items.get(i);
+
+            if (BaseTools.notNullString(labelName) && abstractWeaForm.getLabel().equals(labelName)) {
+
+                tList.add((T) abstractWeaForm);
+
+            }
+
+        }
+
+        if (BaseTools.notNullList(tList)){
+
+            return tList;
+
+        }
+
+        throw new RuntimeException("未找到label为" + labelName + "的form组件");
+
+    }
+
     public void removeFormItem(int itemIndex) {
 
         this.getItems().remove(itemIndex);
 
     }
 
-    public void addFormItem(int itemIndex,AbstractWeaForm abstractWeaForm){
+    public void removeFormItemWithLabel(String labelName) {
 
-        this.getItems().add(itemIndex,abstractWeaForm);
+        for (int i = 0; i < items.size(); i++) {
+
+            AbstractWeaForm abstractWeaForm = (AbstractWeaForm) items.get(i);
+
+            if (BaseTools.notNullString(labelName) && abstractWeaForm.getLabel().equals(labelName)) {
+
+                this.getItems().remove(i);
+
+                break;
+
+            }
+
+        }
 
     }
 
-    public void addFormItem(AbstractWeaForm abstractWeaForm){
+    public void removeFormItemWithLabelAll(String labelName) {
+
+        for (int i = 0; i < items.size(); i++) {
+
+            AbstractWeaForm abstractWeaForm = (AbstractWeaForm) items.get(i);
+
+            if (BaseTools.notNullString(labelName) && abstractWeaForm.getLabel().equals(labelName)) {
+
+                this.getItems().remove(i);
+
+            }
+
+        }
+
+    }
+
+    public void addFormItem(int itemIndex, AbstractWeaForm abstractWeaForm) {
+
+        this.getItems().add(itemIndex, abstractWeaForm);
+
+    }
+
+    public void addFormItem(AbstractWeaForm abstractWeaForm) {
 
         this.getItems().add(abstractWeaForm);
 
