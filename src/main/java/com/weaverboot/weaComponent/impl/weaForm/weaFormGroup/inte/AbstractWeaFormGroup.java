@@ -97,6 +97,78 @@ public abstract class AbstractWeaFormGroup {
 
     }
 
+    public <T extends AbstractWeaForm> T transFormItemWithLabel(String labelName, Class<T> tClass) {
+
+        for (int i = 0; i < items.size(); i++) {
+
+            AbstractWeaForm abstractWeaForm = (AbstractWeaForm) items.get(i);
+
+            try {
+
+                    if (BaseTools.notNullString(labelName) && abstractWeaForm.getLabel().equals(labelName)) {
+
+                    T resultForm = tClass.newInstance();
+
+                    resultForm.copyCommonAttr(abstractWeaForm);
+
+                    this.getItems().set(i,resultForm);
+
+                    return resultForm;
+
+                }
+
+            } catch (Exception e) {
+
+                throw new RuntimeException("创建" + tClass + "对象发生错误");
+
+            }
+
+        }
+
+        throw new RuntimeException("未找到label为" + labelName + "的form组件");
+
+    }
+
+    public <T extends AbstractWeaForm> List<T> transFormItemWithLabelList(String labelName, Class<T> tClass) {
+
+        List<T> tList = new ArrayList<>();
+
+        for (int i = 0; i < items.size(); i++) {
+
+            AbstractWeaForm abstractWeaForm = (AbstractWeaForm) items.get(i);
+
+            try {
+
+                    if (BaseTools.notNullString(labelName) && abstractWeaForm.getLabel().equals(labelName)) {
+
+                    T resultForm = tClass.newInstance();
+
+                    resultForm.copyCommonAttr(abstractWeaForm);
+
+                    tList.add(resultForm);
+
+                    this.getItems().set(i,resultForm);
+
+                }
+
+            } catch (Exception e) {
+
+                throw new RuntimeException("创建" + tClass + "对象发生错误");
+
+            }
+
+        }
+
+        if (BaseTools.notNullList(tList)){
+
+            return tList;
+
+        }
+
+        throw new RuntimeException("未找到label为" + labelName + "的form组件");
+
+    }
+
     public <T extends AbstractWeaForm> T readFormItem(int itemIndex, Class<T> tClass) {
 
         try {
