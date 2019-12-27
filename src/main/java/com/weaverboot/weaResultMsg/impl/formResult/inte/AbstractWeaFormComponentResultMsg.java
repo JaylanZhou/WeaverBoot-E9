@@ -2,6 +2,7 @@ package com.weaverboot.weaResultMsg.impl.formResult.inte;
 
 import com.alibaba.fastjson.JSONObject;
 import com.weaverboot.weaComponent.impl.weaForm.weaFormGroup.DefaultWeaFormGroup;
+import com.weaverboot.weaComponent.impl.weaForm.weaFormGroup.inte.AbstractWeaFormGroup;
 import com.weaverboot.weaResultMsg.inte.AbstractWeaComponentResultMsg;
 import com.weaverboot.weaComponent.impl.weaTab.inte.AbstractWeaTab;
 import com.weaverboot.weaComponent.impl.weaTree.inte.AbstractWeaFatherTree;
@@ -11,21 +12,21 @@ import java.util.List;
 
 public abstract class AbstractWeaFormComponentResultMsg extends AbstractWeaComponentResultMsg {
 
-    private List<DefaultWeaFormGroup> condition;
+    private List<? super AbstractWeaFormGroup> condition;
 
-    private List<? super com.weaverboot.weaComponent.impl.weaTree.inte.AbstractWeaFatherTree> weaTree;
+    private List<? super AbstractWeaFatherTree> weaTree;
 
-    private List<? super com.weaverboot.weaComponent.impl.weaTab.inte.AbstractWeaTab> weaTab;
+    private List<? super AbstractWeaTab> weaTab;
 
-    public List<DefaultWeaFormGroup> getCondition() {
+    public List<? super AbstractWeaFormGroup> getCondition() {
         return condition;
     }
 
-    public void setCondition(List<DefaultWeaFormGroup> condition) {
+    public void setCondition(List<? super AbstractWeaFormGroup> condition) {
         this.condition = condition;
     }
 
-    public AbstractWeaFormComponentResultMsg addItem(DefaultWeaFormGroup defaultWeaFormGroup){
+    public AbstractWeaFormComponentResultMsg addItem(AbstractWeaFormGroup abstractWeaFormGroup){
 
         if (condition == null){
 
@@ -33,13 +34,13 @@ public abstract class AbstractWeaFormComponentResultMsg extends AbstractWeaCompo
 
         }
 
-        condition.add(defaultWeaFormGroup);
+        condition.add(abstractWeaFormGroup);
 
         return this;
 
     }
 
-    public AbstractWeaFormComponentResultMsg addTree(com.weaverboot.weaComponent.impl.weaTree.inte.AbstractWeaFatherTree abstractWeaFatherTree){
+    public AbstractWeaFormComponentResultMsg addTree(AbstractWeaFatherTree abstractWeaFatherTree){
 
         if (weaTree == null){
 
@@ -53,7 +54,7 @@ public abstract class AbstractWeaFormComponentResultMsg extends AbstractWeaCompo
 
     }
 
-    public AbstractWeaFormComponentResultMsg addTab(com.weaverboot.weaComponent.impl.weaTab.inte.AbstractWeaTab abstractWeaTab){
+    public AbstractWeaFormComponentResultMsg addTab(AbstractWeaTab abstractWeaTab){
 
         if (weaTab == null){
 
@@ -67,7 +68,7 @@ public abstract class AbstractWeaFormComponentResultMsg extends AbstractWeaCompo
 
     }
 
-    public List<? super com.weaverboot.weaComponent.impl.weaTree.inte.AbstractWeaFatherTree> getWeaTree() {
+    public List<? super AbstractWeaFatherTree> getWeaTree() {
         return weaTree;
     }
 
@@ -75,7 +76,7 @@ public abstract class AbstractWeaFormComponentResultMsg extends AbstractWeaCompo
         this.weaTree = weaTree;
     }
 
-    public List<? super com.weaverboot.weaComponent.impl.weaTab.inte.AbstractWeaTab> getWeaTab() {
+    public List<? super AbstractWeaTab> getWeaTab() {
         return weaTab;
     }
 

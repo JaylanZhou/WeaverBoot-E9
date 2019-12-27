@@ -11,21 +11,21 @@ public class ComponentDataUtils {
 
     private ComponentDataUtils(){}
 
-    public static  <T extends AbstractWeaForm>T getFormItem(AbstractWeaFormReciveComponentResultMsg abstractWeaFormReciveResultMsg, int groupIndex, int itemIndex, Class<T> tClass) {
-
-        JSONObject jsonObject = (JSONObject) abstractWeaFormReciveResultMsg.getCondition().get(groupIndex).getItems().get(itemIndex);
-
-        T abstractWeaForm = JSONObject.parseObject(jsonObject.toJSONString(),tClass);
-
-        return abstractWeaForm;
-
-    }
-
-    public static void setFormItem(AbstractWeaFormReciveComponentResultMsg abstractWeaFormReciveResultMsg, int groupIndex, int itemIndex, AbstractWeaForm abstractWeaForm){
-
-        abstractWeaFormReciveResultMsg.getCondition().get(groupIndex).getItems().set(itemIndex,abstractWeaForm);
-
-    }
+//    public static  <T extends AbstractWeaForm>T getFormItem(AbstractWeaFormReciveComponentResultMsg abstractWeaFormReciveResultMsg, int groupIndex, int itemIndex, Class<T> tClass) {
+//
+//        JSONObject jsonObject = (JSONObject) abstractWeaFormReciveResultMsg.getCondition().get(groupIndex).getItems().get(itemIndex);
+//
+//        T abstractWeaForm = JSONObject.parseObject(jsonObject.toJSONString(),tClass);
+//
+//        return abstractWeaForm;
+//
+//    }
+//
+//    public static void setFormItem(AbstractWeaFormReciveComponentResultMsg abstractWeaFormReciveResultMsg, int groupIndex, int itemIndex, AbstractWeaForm abstractWeaForm){
+//
+//        abstractWeaFormReciveResultMsg.getCondition().get(groupIndex).getItems().set(itemIndex,abstractWeaForm);
+//
+//    }
 
     public static <T extends AbstractWeaFatherTree>T getFatherTreeNode(AbstractWeaFormReciveComponentResultMsg abstractWeaFormReciveResultMsg, int groupIndex, Class<T> tClass){
 

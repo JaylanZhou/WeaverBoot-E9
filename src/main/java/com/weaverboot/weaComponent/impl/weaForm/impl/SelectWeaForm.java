@@ -15,13 +15,13 @@ public class SelectWeaForm extends com.weaverboot.weaComponent.impl.weaForm.inte
     /**
      * 选择框联动数据
      */
-    private Map<String, com.weaverboot.weaComponent.impl.weaForm.inte.AbstractWeaForm> selectLinkageDatas;
+    private Map<String, AbstractWeaForm> selectLinkageDatas;
     /**
      * 选择框联动时定义select所占宽度 支持百分比、固定宽度
      */
     private String selectWidth;
 
-    private List<com.weaverboot.weaComponent.impl.weaForm.selectOptions.DefaultSelectOption> options;
+    private List<DefaultSelectOption> options;
 
     /**
      * select组件detailtype属性 1:正常显示，2:checkbox多选，3:radio单选

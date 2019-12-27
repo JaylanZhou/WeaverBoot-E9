@@ -40,4 +40,5 @@ public class BrowserWeaForm extends AbstractWeaForm {
     public void setBrowserConditionParam(BrowserBean browserConditionParam) {
         this.browserConditionParam = browserConditionParam;
     }
+
 }

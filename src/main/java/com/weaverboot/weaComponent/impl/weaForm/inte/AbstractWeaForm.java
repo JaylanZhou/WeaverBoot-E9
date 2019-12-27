@@ -150,6 +150,92 @@ public abstract class AbstractWeaForm extends AbstractWeaComponent {
 
     }
 
+    public void copyCommonAttr(AbstractWeaForm abstractWeaForm){
+
+        this.setBelong(abstractWeaForm.getBelong());
+
+        this.setBase64(abstractWeaForm.isBase64());
+
+        this.setCheckbox(abstractWeaForm.isCheckbox());
+
+        this.setCheckboxValue(abstractWeaForm.isCheckboxValue());
+
+        this.setClassName(abstractWeaForm.getClassName());
+
+        this.setColSpan(abstractWeaForm.getColSpan());
+
+        this.setCompDef(abstractWeaForm.getCompDef());
+
+        this.setCompValue(abstractWeaForm.getCompValue());
+
+        this.setCustomType(abstractWeaForm.getCustomType());
+
+        this.setDateGroup(abstractWeaForm.isDateGroup());
+
+        this.setDisplay(abstractWeaForm.getDisplay());
+
+        this.setDomkey(abstractWeaForm.getDomkey());
+
+        this.setEntSearch(abstractWeaForm.isEntSearch());
+
+        this.setFieldcol(abstractWeaForm.getFieldcol());
+
+        this.setHasBorder(abstractWeaForm.isHasBorder());
+
+        this.setHelpfulTip(abstractWeaForm.getHelpfulTip());
+
+        this.setHelpfulTipProps(abstractWeaForm.getHelpfulTipProps());
+
+        this.setHide(abstractWeaForm.isHide());
+
+        this.setInputType(abstractWeaForm.getInputType());
+
+        this.setKey(abstractWeaForm.getKey());
+
+        this.setLabel(abstractWeaForm.getLabel());
+
+        this.setLabelcol(abstractWeaForm.getLabelcol());
+
+        this.setLength(abstractWeaForm.getLength());
+
+        this.setMax(abstractWeaForm.getMax());
+
+        this.setMin(abstractWeaForm.getMin());
+
+        this.setOtherParams(abstractWeaForm.getOtherParams());
+
+        this.setParentDomkey(abstractWeaForm.getParentDomkey());
+
+        this.setPlaceholder(abstractWeaForm.getPlaceholder());
+
+        this.setPrecision(abstractWeaForm.getPrecision());
+
+        this.setQuickSearch(abstractWeaForm.isQuickSearch());
+
+        this.setRegExp(abstractWeaForm.getRegExp());
+
+        this.setRelatekey(abstractWeaForm.getRelatekey());
+
+        this.setRules(abstractWeaForm.getRules());
+
+        this.setShowOrder(abstractWeaForm.getShowOrder());
+
+        this.setStep(abstractWeaForm.getStep());
+
+        this.setStringLength(abstractWeaForm.getStringLength());
+
+        this.setTip(abstractWeaForm.getTip());
+
+        this.setTipPosition(abstractWeaForm.getTipPosition());
+
+        this.setValue(abstractWeaForm.getValue());
+
+        this.setValueList(abstractWeaForm.getValueList());
+
+        this.setViewAttr(abstractWeaForm.getViewAttr());
+
+    }
+
     private void init(){
 
         this.colSpan = 2;

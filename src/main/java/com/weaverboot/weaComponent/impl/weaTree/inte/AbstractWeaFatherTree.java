@@ -1,9 +1,13 @@
 package com.weaverboot.weaComponent.impl.weaTree.inte;
 
+import com.weaverboot.tools.enumTools.weaComponent.WeaFatherTreeConditionType;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractWeaFatherTree extends AbstractWeaTree {
+
+    private WeaFatherTreeConditionType conditionType;
 
     private boolean haschild = true;
 
@@ -46,4 +50,11 @@ public abstract class AbstractWeaFatherTree extends AbstractWeaTree {
 
     }
 
+    public WeaFatherTreeConditionType getConditionType() {
+        return conditionType;
+    }
+
+    public void setConditionType(WeaFatherTreeConditionType conditionType) {
+        this.conditionType = conditionType;
+    }
 }
