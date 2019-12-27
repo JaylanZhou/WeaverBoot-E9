@@ -14,13 +14,15 @@ public class DefaultWeaFormGroup extends AbstractWeaFormGroup {
 
     private String titleTip;
 
-    private List<? super com.weaverboot.weaComponent.impl.weaForm.inte.AbstractWeaForm> items;
+    private List<? super AbstractWeaForm> items;
 
-    public List<? super com.weaverboot.weaComponent.impl.weaForm.inte.AbstractWeaForm> getItems() {
+    private String idHide;
+
+    public List<? super AbstractWeaForm> getItems() {
         return items;
     }
 
-    public void setItems(List<? super com.weaverboot.weaComponent.impl.weaForm.inte.AbstractWeaForm> items) {
+    public void setItems(List<? super AbstractWeaForm> items) {
         this.items = items;
     }
 
@@ -61,4 +63,13 @@ public class DefaultWeaFormGroup extends AbstractWeaFormGroup {
         return this;
 
     }
+
+    public String getIdHide() {
+        return idHide;
+    }
+
+    public void setIdHide(String idHide) {
+        this.idHide = idHide;
+    }
+
 }

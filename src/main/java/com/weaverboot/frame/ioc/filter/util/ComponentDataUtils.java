@@ -7,7 +7,6 @@ import com.weaverboot.weaComponent.impl.weaTree.inte.AbstractWeaFatherTree;
 import com.weaverboot.weaResultMsg.impl.formResult.inte.AbstractWeaFormReciveComponentResultMsg;
 import com.weaverboot.weaComponent.impl.weaTab.inte.AbstractWeaTab;
 
-@Deprecated
 public class ComponentDataUtils {
 
     private ComponentDataUtils(){}

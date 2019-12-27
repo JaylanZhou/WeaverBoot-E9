@@ -404,7 +404,7 @@ public class WeaTableTools {
 
                     AbstractWeaTableColumn col = weaTableColumnFactory.buildWeaTableColumn(abstractWeaTable); //暂时以默认字段为根据，日后调整
 
-                    col.setHide(WeaBooleanEnum.TRUE.getStringVal().equals(el.getAttributeValue("hide")) ? WeaBooleanEnum.TRUE : WeaBooleanEnum.FALSE);
+                    col.setHide(WeaBooleanEnum.TRUE.getBooleanStringVal().equals(el.getAttributeValue("hide")) ? WeaBooleanEnum.TRUE : WeaBooleanEnum.FALSE);
 
                     col.setWidth(el.getAttributeValue("width"));
 

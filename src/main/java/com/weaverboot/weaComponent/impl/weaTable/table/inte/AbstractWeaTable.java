@@ -122,9 +122,37 @@ public abstract class AbstractWeaTable extends AbstractWeaComponent {
 
     public abstract <T extends AbstractWeaTableColumn> T readWeaTableColumnWithName(String columnText,Class<T> tClass);
 
+    public abstract <T extends AbstractWeaTableColumn> List<T> readWeaTableColumnWithNameArray(String columnText,Class<T> tClass);
+
+    public abstract <T extends AbstractWeaTableColumn> T readWeaTableColumnWithColumn(String column,Class<T> tClass);
+
+    public abstract <T extends AbstractWeaTableColumn> List<T> readWeaTableColumnWithColumnArray(String column,Class<T> tClass);
+
+    public abstract <T extends AbstractWeaTableColumn> void addWeaTableColumn(int index,T t);
+
+    public abstract <T extends AbstractWeaTableColumn> void addWeaTableColumn(T t);
+
+    public abstract void removeWeaTableColumn(int index);
+
+    public abstract void removeWeaTableColumnWithName(String columnText);
+
+    public abstract void removeWeaTableColumnWithNameAll(String columnText);
+
     public abstract <T extends AbstractWeaTableOperate> T readWeaTableOperate(int index, Class<T> tClass);
 
-    public abstract <T extends AbstractWeaTableOperate> T readWeaTableOperateWithName(String columnText,Class<T> tClass);
+    public abstract <T extends AbstractWeaTableOperate> T readWeaTableOperateWithName(String operateText,Class<T> tClass);
+
+    public abstract <T extends AbstractWeaTableOperate> List<T> readWeaTableOperateWithNameArray(String operateText,Class<T> tClass);
+
+    public abstract <T extends AbstractWeaTableOperate> void addWeaTableOperate(int index, T t);
+
+    public abstract <T extends AbstractWeaTableOperate> void addWeaTableOperate(T t);
+
+    public abstract void removeWeaTableOperate(int index);
+
+    public abstract void removeWeaTableOperateWithName(String operateText);
+
+    public abstract void removeWeaTableOperateWithNameAll(String operateText);
 
     public abstract <T extends AbstractWeaCheckboxPopedom> T readWeaCheckboxPopedom(int index,Class<T> tClass);
 
