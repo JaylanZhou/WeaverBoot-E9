@@ -8,6 +8,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ *
+ * 选择框组件
+ *
+ * @Author : Jaylan Zhou
+ *
+ * @Date : 2020-01-02
+ *
+ */
+
+
 public class SelectWeaForm extends AbstractWeaForm {
 
     private final ConditionType conditionType = ConditionType.SELECT;

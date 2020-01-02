@@ -478,6 +478,53 @@ public class ReflectTools {
 		declaredFieldsCache.clear();
 	}
 
+	public static List<Field> getAllFields(Class<?> type){
+
+		Field[] typeFields = type.getDeclaredFields();
+
+		List<Field> fieldList = new ArrayList<>();
+
+		Class<?> superClass = type.getSuperclass();
+
+		for (Field f : typeFields
+			 ) {
+
+			if (!f.isAccessible()){
+
+				f.setAccessible(true);
+
+			}
+
+			fieldList.add(f);
+
+		}
+
+		while (superClass != Object.class){
+
+			Field[] fields = superClass.getDeclaredFields();
+
+			for (Field f : fields
+				 ) {
+
+				if (!f.isAccessible()){
+
+					f.setAccessible(true);
+
+				}
+
+				fieldList.add(f);
+
+			}
+
+			superClass = superClass.getSuperclass();
+
+		}
+
+
+		return fieldList;
+
+	}
+
 
 	@FunctionalInterface
 	public interface MethodCallback {

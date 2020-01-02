@@ -3,6 +3,17 @@ package com.weaverboot.weaComponent.impl.weaForm.impl;
 import com.api.browser.util.ConditionType;
 import com.weaverboot.weaComponent.impl.weaForm.inte.AbstractWeaForm;
 
+/**
+ *
+ * 暂未启用
+ *
+ * @Author : Jaylan Zhou
+ *
+ * @Date : 2020-01-02
+ *
+ */
+
+
 public class TimeRangePickerWeaForm extends AbstractWeaForm {
 
     private final ConditionType conditionType = ConditionType.TIMERANGEPICKER;

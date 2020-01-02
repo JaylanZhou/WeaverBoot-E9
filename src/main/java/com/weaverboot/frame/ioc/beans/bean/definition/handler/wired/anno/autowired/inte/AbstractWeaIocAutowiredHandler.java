@@ -174,6 +174,15 @@ public abstract class AbstractWeaIocAutowiredHandler implements WeaIocAutowiredH
 
     }
 
+    /**
+     *
+     * 识别WeaIocPrimary注解
+     *
+     * @param objectSet
+     * @param fieldType
+     * @return
+     */
+
     private Object getWiredInterfaceObject(Set<Object> objectSet,String fieldType){
 
         boolean hasPrimayObject = false;

@@ -1,5 +1,14 @@
 package com.weaverboot.weaComponent.impl.weaForm.selectOptions;
 
+/**
+ *
+ * 选择框的值 描述类
+ *
+ * @Author : Jaylan Zhou
+ *
+ * @Date : 2020-01-02
+ *
+ */
 
 public class DefaultSelectOption {
 

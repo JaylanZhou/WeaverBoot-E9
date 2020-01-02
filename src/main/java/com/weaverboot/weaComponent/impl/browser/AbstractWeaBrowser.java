@@ -6,6 +6,15 @@ import com.weaverboot.weaComponent.inte.AbstractWeaComponent;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+/**
+ *
+ * 浏览按钮 - 基类
+ *
+ * @Author : Jaylan Zhou
+ *
+ * @Date : 2020-01-02
+ *
+ */
 
 public abstract class AbstractWeaBrowser extends AbstractWeaComponent {
 

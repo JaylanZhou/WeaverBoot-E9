@@ -1,7 +1,6 @@
 package com.weaverboot.weaResultMsg.impl.formResult.inte;
 
 import com.alibaba.fastjson.JSONObject;
-import com.weaverboot.weaComponent.impl.weaForm.weaFormGroup.DefaultWeaFormGroup;
 import com.weaverboot.weaComponent.impl.weaForm.weaFormGroup.inte.AbstractWeaFormGroup;
 import com.weaverboot.weaResultMsg.inte.AbstractWeaComponentResultMsg;
 import com.weaverboot.weaComponent.impl.weaTab.inte.AbstractWeaTab;
@@ -10,13 +9,25 @@ import com.weaverboot.weaComponent.impl.weaTree.inte.AbstractWeaFatherTree;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ * Form 消息体类 - 公共基类
+ *
+ * 此类为接收消息体与发送消息体的公共基类
+ *
+ * @Author : Jaylan Zhou
+ *
+ * @Date : 2020-01-02
+ *
+ */
+
 public abstract class AbstractWeaFormComponentResultMsg extends AbstractWeaComponentResultMsg {
 
-    private List<? super AbstractWeaFormGroup> condition;
+    private List<? super AbstractWeaFormGroup> condition; //分组列表List
 
-    private List<? super AbstractWeaFatherTree> weaTree;
+    private List<? super AbstractWeaFatherTree> weaTree; //父级树列表List
 
-    private List<? super AbstractWeaTab> weaTab;
+    private List<? super AbstractWeaTab> weaTab; //标签页列表List
 
     public List<? super AbstractWeaFormGroup> getCondition() {
         return condition;
@@ -83,6 +94,15 @@ public abstract class AbstractWeaFormComponentResultMsg extends AbstractWeaCompo
     public void setWeaTab(List<? super AbstractWeaTab> weaTab) {
         this.weaTab = weaTab;
     }
+
+    /**
+     *
+     * Form 消息体的共有方法 - 序列化
+     *
+     * 此方法指定将消息体类通过 fastjson 序列化成json报文
+     *
+     * @return 消息体类序列化后的json报文
+     */
 
     @Override
     public String resultToSerialization() {

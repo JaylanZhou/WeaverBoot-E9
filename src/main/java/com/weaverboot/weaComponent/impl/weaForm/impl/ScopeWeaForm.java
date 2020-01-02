@@ -3,6 +3,17 @@ package com.weaverboot.weaComponent.impl.weaForm.impl;
 import com.api.browser.util.ConditionType;
 import com.weaverboot.weaComponent.impl.weaForm.inte.AbstractWeaForm;
 
+/**
+ *
+ * input 区间组件
+ *
+ * @Author : Jaylan Zhou
+ *
+ * @Date : 2020-01-02
+ *
+ */
+
+
 public class ScopeWeaForm extends AbstractWeaForm {
 
     private final ConditionType conditionType = ConditionType.SCOPE;

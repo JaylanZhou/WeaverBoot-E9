@@ -9,6 +9,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ *
+ * 组件 - 公共基类
+ *
+ * 此类含有所有组件的共有属性及共有方法
+ *
+ * @Author : Jaylan Zhou
+ *
+ * @Date : 2020-01-02
+ *
+ */
+
+
 public abstract class AbstractWeaForm extends AbstractWeaComponent {
 
 

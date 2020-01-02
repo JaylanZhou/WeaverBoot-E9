@@ -5,6 +5,17 @@ import com.weaverboot.weaComponent.impl.weaForm.inte.AbstractWeaForm;
 
 import java.util.List;
 
+/**
+ *
+ * 上传组件
+ *
+ * @Author : Jaylan Zhou
+ *
+ * @Date : 2020-01-02
+ *
+ */
+
+
 public class UploadWeaForm extends AbstractWeaForm {
 
     private final ConditionType conditionType = ConditionType.UPLOAD;
@@ -27,8 +38,7 @@ public class UploadWeaForm extends AbstractWeaForm {
 
     }
 
-    /***附件上传URL 附件上传目录**/
-    private String uploadUrl;
+    private String uploadUrl; //上传目录
 
     private String category;
 
