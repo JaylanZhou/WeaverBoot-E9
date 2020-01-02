@@ -1,6 +1,6 @@
 package com.weaverboot.weaResultMsg.inte;
 
-public interface WeaResultMsgInte {
+public interface WeaResultMsg {
 
     String resultToSerialization();
 

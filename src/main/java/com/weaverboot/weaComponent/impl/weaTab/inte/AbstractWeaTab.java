@@ -1,5 +1,6 @@
 package com.weaverboot.weaComponent.impl.weaTab.inte;
 
+import com.weaverboot.tools.enumTools.weaComponent.WeaTabConditionType;
 import com.weaverboot.weaComponent.inte.AbstractWeaComponent;
 
 public abstract class AbstractWeaTab extends AbstractWeaComponent {
@@ -13,6 +14,8 @@ public abstract class AbstractWeaTab extends AbstractWeaComponent {
     private String title;
 
     private String state;
+
+    private WeaTabConditionType conditionType;
 
     public String getColor() {
         return color;
@@ -52,5 +55,13 @@ public abstract class AbstractWeaTab extends AbstractWeaComponent {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public WeaTabConditionType getConditionType() {
+        return conditionType;
+    }
+
+    public void setConditionType(WeaTabConditionType conditionType) {
+        this.conditionType = conditionType;
     }
 }

@@ -17,6 +17,12 @@ public class SwitchWeaForm extends AbstractWeaForm {
 
     }
 
+    public SwitchWeaForm(){
+
+        super();
+
+    }
+
     public ConditionType getConditionType() {
         return conditionType;
     }

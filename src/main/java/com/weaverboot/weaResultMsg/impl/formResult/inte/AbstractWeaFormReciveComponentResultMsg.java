@@ -1,136 +1,333 @@
 package com.weaverboot.weaResultMsg.impl.formResult.inte;
 
-import com.alibaba.fastjson.JSONObject;
-import com.weaverboot.weaComponent.impl.weaForm.inte.AbstractWeaForm;
+import com.weaverboot.tools.baseTools.BaseTools;
+import com.weaverboot.tools.logTools.LogTools;
 import com.weaverboot.weaComponent.impl.weaForm.weaFormGroup.inte.AbstractWeaFormGroup;
 import com.weaverboot.weaComponent.impl.weaTab.inte.AbstractWeaTab;
-import com.weaverboot.weaComponent.impl.weaTree.inte.AbstractWeaChildTree;
 import com.weaverboot.weaComponent.impl.weaTree.inte.AbstractWeaFatherTree;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class AbstractWeaFormReciveComponentResultMsg extends AbstractWeaFormComponentResultMsg {
 
-    public <T extends AbstractWeaFormGroup> T readWeaFormGroup(int groupIndex,Class<T> tClass){
+    public AbstractWeaFormGroup readWeaFormGroup(int groupIndex){
 
-        JSONObject jsonObject = (JSONObject) this.getCondition().get(groupIndex);
-
-        T abstractWeaFormGroup = jsonObject.parseObject(jsonObject.toJSONString(),tClass);
-
-        return abstractWeaFormGroup;
+        return (AbstractWeaFormGroup) this.getCondition().get(groupIndex);
 
     }
 
-    public void saveWeaFormGroup(int groupIndex,AbstractWeaFormGroup abstractWeaFormGroup){
+    public AbstractWeaFormGroup readWeaFormGroupWithTitle(String title){
 
-        this.getCondition().set(groupIndex,abstractWeaFormGroup);
+        for (int i = 0; i < this.getCondition().size(); i++) {
 
-    }
+            AbstractWeaFormGroup ab = (AbstractWeaFormGroup) this.getCondition().get(i);
 
-    public <T extends AbstractWeaFatherTree>T readFatherTreeNode(int fatherIndex, Class<T> tClass){
+            if (BaseTools.notNullString(ab.getTitle()) && ab.getTitle().equals(title)){
 
-        //checkFatherNum(fatherIndex);
+                return ab;
 
-        JSONObject jsonObject = (JSONObject) this.getWeaTree().get(fatherIndex);
+            }
 
-        T abstractWeaFatherTree = jsonObject.parseObject(jsonObject.toJSONString(),tClass);
+        }
 
-        return abstractWeaFatherTree;
+        LogTools.writeLog("未找到名为" + title + "的组");
 
-    }
-
-    public void saveFatherTreeNode(int fatherIndex, AbstractWeaFatherTree abstractWeaFatherTree){
-
-        //checkFatherNum(fatherIndex);
-
-        this.getWeaTree().set(fatherIndex,abstractWeaFatherTree);
+        return null;
 
     }
 
-    public <T extends AbstractWeaChildTree>T readChildTreeNode(AbstractWeaFatherTree abstractWeaFatherTree, int childIndex, Class<T> tClass) throws IllegalAccessException, InstantiationException {
+    public List<AbstractWeaFormGroup> readWeaFormGroupWithTitleAll(String title){
 
-        JSONObject jsonObject = (JSONObject) abstractWeaFatherTree.getChilds().get(childIndex);
+        List<AbstractWeaFormGroup> abstractWeaFormGroupList = new ArrayList<>();
 
-        T abstractWeaChildTree = jsonObject.parseObject(jsonObject.toJSONString(),tClass);
+        for (int i = 0; i < this.getCondition().size(); i++) {
 
-        return abstractWeaChildTree;
+            AbstractWeaFormGroup ab = (AbstractWeaFormGroup) this.getCondition().get(i);
+
+            if (BaseTools.notNullString(ab.getTitle()) && ab.getTitle().equals(title)){
+
+                abstractWeaFormGroupList.add(ab);
+
+            }
+
+        }
+
+        if (BaseTools.notNullList(abstractWeaFormGroupList)){
+
+            return abstractWeaFormGroupList;
+
+        }
+
+        LogTools.writeLog("未找到名为" + title + "的组");
+
+        return null;
 
     }
 
-    public void saveChildTreeNode(AbstractWeaFatherTree abstractWeaFatherTree,int childIndex,AbstractWeaChildTree abstractWeaChildTree){
+    public void removeWeaFormGroup(int groupIndex) {
 
-        //checkChildNum(abstractWeaFatherTree,childIndex);
-
-        abstractWeaFatherTree.getChilds().set(childIndex,abstractWeaChildTree);
+        this.getCondition().remove(groupIndex);
 
     }
 
-//    public <T extends AbstractWeaTab>T readWeaTab(int itemIndex, Class<T> tClass){
-//
-//        JSONObject jsonObject = (JSONObject) this.getWeaTab().get(itemIndex);
-//
-//        T abstractWeaTab = JSONObject.parseObject(jsonObject.toJSONString(),tClass);
-//
-//        return abstractWeaTab;
-//
-//    }
-//
-//    public void saveWeaTab(int itemIndex, AbstractWeaTab abstractWeaTab){
-//
-//        this.getWeaTab().set(itemIndex,abstractWeaTab);
-//
-//    }
-//
-//    private void checkGroupAndItemNum(int groupIndex, int itemIndex){
-//
-//        int groupNum = this.getCondition().size();
-//
-//        int groupMax = groupNum - 1;
-//
-//        if (groupNum < groupIndex){
-//
-//            throw new RuntimeException("当前group的最大个数为" + groupNum + ",您最大可选择" + groupMax);
-//
-//        } else {
-//
-//            int itemNum = this.getCondition().get(groupIndex).getItems().size();
-//
-//            int itemMax = itemNum - 1;
-//
-//            if (itemNum < itemIndex) {
-//
-//                throw new RuntimeException("分组" + groupIndex + "的条数最大为" + itemNum + ",您最大可选择" + itemMax);
-//
-//            }
-//
-//        }
-//
-//    }
-//
-//    private void checkFatherNum(int fatherIndex){
-//
-//        int fatherNum = this.getWeaTree().size();
-//
-//        int fahterMax = fatherNum - 1;
-//
-//        if (fatherNum < fatherIndex){
-//
-//            throw new RuntimeException("当前父级树的最大个数为" + fatherNum + ",您最大可选择" + fahterMax);
-//
-//        }
-//
-//    }
-//
-//    private void checkChildNum(AbstractWeaFatherTree abstractWeaFatherTree,int childIndex){
-//
-//        int childNum = abstractWeaFatherTree.getChilds().size();
-//
-//        int childMax = childNum - 1;
-//
-//        if (childNum < childIndex){
-//
-//            throw new RuntimeException("当前父级树的最大个数为" + childNum + ",您最大可选择" + childIndex);
-//
-//        }
-//
-//    }
+    public void removeWeaFormGroupWithTitle(String title) {
+
+        for (int i = 0; i < this.getCondition().size(); i++) {
+
+            AbstractWeaFormGroup abstractWeaFormGroup = (AbstractWeaFormGroup) this.getCondition().get(i);
+
+            if (BaseTools.notNullString(abstractWeaFormGroup.getTitle()) && abstractWeaFormGroup.getTitle().equals(title)) {
+
+                this.getCondition().remove(i);
+
+                break;
+
+            }
+
+        }
+
+    }
+
+    public void removeWeaFormGroupWithTitleAll(String title) {
+
+        for (int i = 0; i < this.getCondition().size(); i++) {
+
+            AbstractWeaFormGroup abstractWeaFormGroup = (AbstractWeaFormGroup) this.getCondition().get(i);
+
+            if (BaseTools.notNullString(abstractWeaFormGroup.getTitle()) && abstractWeaFormGroup.getTitle().equals(title)) {
+
+                this.getCondition().remove(i);
+
+            }
+
+        }
+
+    }
+
+    public void addWeaFormGroup(int groupIndex,AbstractWeaFormGroup abstractWeaFormGroup){
+
+        this.getCondition().add(groupIndex,abstractWeaFormGroup);
+
+    }
+
+    public void addWeaFormGroup(AbstractWeaFormGroup abstractWeaFormGroup){
+
+        this.getCondition().add(abstractWeaFormGroup);
+
+    }
+
+
+    public AbstractWeaFatherTree readWeaFatherTree(int treeIndex){
+
+        return (AbstractWeaFatherTree) this.getWeaTree().get(treeIndex);
+
+    }
+
+    public AbstractWeaFatherTree readWeaFatherTreeWithName(String name){
+
+        for (int i = 0; i < this.getWeaTree().size(); i++) {
+
+            AbstractWeaFatherTree ab = (AbstractWeaFatherTree) this.getWeaTree().get(i);
+
+            if (BaseTools.notNullString(ab.getName()) && ab.getName().equals(name)){
+
+                return ab;
+
+            }
+
+        }
+
+        LogTools.writeLog("未找到名为" + name + "的父树");
+
+        return null;
+
+    }
+
+    public List<AbstractWeaFatherTree> readWeaFatherTreeWithNameAll(String name){
+
+        List<AbstractWeaFatherTree> abstractWeaFatherTreeList = new ArrayList<>();
+
+        for (int i = 0; i < this.getWeaTree().size(); i++) {
+
+            AbstractWeaFatherTree ab = (AbstractWeaFatherTree) this.getWeaTree().get(i);
+
+            if (BaseTools.notNullString(ab.getName()) && ab.getName().equals(name)){
+
+                abstractWeaFatherTreeList.add(ab);
+
+            }
+
+        }
+
+        if (BaseTools.notNullList(abstractWeaFatherTreeList)){
+
+            return abstractWeaFatherTreeList;
+
+        }
+
+        LogTools.writeLog("未找到名为" + name + "的父树");
+
+        return null;
+
+    }
+
+    public void removeWeaFatherTree(int fatherTreeIndex) {
+
+        this.getWeaTree().remove(fatherTreeIndex);
+
+    }
+
+    public void removeWeaFatherTreeWithName(String name) {
+
+        for (int i = 0; i < this.getWeaTree().size(); i++) {
+
+            AbstractWeaFatherTree abstractWeaFatherTree = (AbstractWeaFatherTree) this.getWeaTree().get(i);
+
+            if (BaseTools.notNullString(abstractWeaFatherTree.getName()) && abstractWeaFatherTree.getName().equals(name)) {
+
+                this.getCondition().remove(i);
+
+                break;
+
+            }
+
+        }
+
+    }
+
+    public void removeWeaFatherTreeWithNameAll(String title) {
+
+        for (int i = 0; i < this.getWeaTree().size(); i++) {
+
+            AbstractWeaFormGroup abstractWeaFormGroup = (AbstractWeaFormGroup) this.getWeaTree().get(i);
+
+            if (BaseTools.notNullString(abstractWeaFormGroup.getTitle()) && abstractWeaFormGroup.getTitle().equals(title)) {
+
+                this.getCondition().remove(i);
+
+            }
+
+        }
+
+    }
+
+    public void addWeaFatherTree(int treeIndex,AbstractWeaFatherTree abstractWeaFatherTree){
+
+        this.getWeaTree().add(treeIndex,abstractWeaFatherTree);
+
+    }
+
+    public void addWeaFatherTree(AbstractWeaFatherTree abstractWeaFatherTree){
+
+        this.getWeaTree().add(abstractWeaFatherTree);
+
+    }
+
+    public AbstractWeaTab readWeaTab(int tabIndex){
+
+        return (AbstractWeaTab) this.getWeaTab().get(tabIndex);
+
+    }
+
+    public AbstractWeaTab readWeaTabWithTitle(String title){
+
+        for (int i = 0; i < this.getWeaTree().size(); i++) {
+
+            AbstractWeaTab ab = (AbstractWeaTab) this.getWeaTab().get(i);
+
+            if (BaseTools.notNullString(ab.getTitle()) && ab.getTitle().equals(title)){
+
+                return ab;
+
+            }
+
+        }
+
+        LogTools.writeLog("未找到名为" + title + "的标签页");
+
+        return null;
+
+    }
+
+    public List<AbstractWeaTab> readWeaTabWithTitleAll(String title){
+
+        List<AbstractWeaTab> abstractWeaTabList = new ArrayList<>();
+
+        for (int i = 0; i < this.getWeaTab().size(); i++) {
+
+            AbstractWeaTab ab = (AbstractWeaTab) this.getWeaTab().get(i);
+
+            if (BaseTools.notNullString(ab.getTitle()) && ab.getTitle().equals(title)){
+
+                abstractWeaTabList.add(ab);
+
+            }
+
+        }
+
+        if (BaseTools.notNullList(abstractWeaTabList)){
+
+            return abstractWeaTabList;
+
+        }
+
+        LogTools.writeLog("未找到名为" + title + "的标签");
+
+        return null;
+
+    }
+
+    public void removeWeaTab(int weaTabIndex) {
+
+        this.getWeaTab().remove(weaTabIndex);
+
+    }
+
+    public void removeWeaTabWithTitle(String title) {
+
+        for (int i = 0; i < this.getWeaTab().size(); i++) {
+
+            AbstractWeaTab abstractWeaTab = (AbstractWeaTab) this.getWeaTab().get(i);
+
+            if (BaseTools.notNullString(abstractWeaTab.getTitle()) && abstractWeaTab.getTitle().equals(title)) {
+
+                this.getWeaTab().remove(i);
+
+                break;
+
+            }
+
+        }
+
+    }
+
+    public void removeWeaTabWithTitleAll(String title) {
+
+        for (int i = 0; i < this.getWeaTab().size(); i++) {
+
+            AbstractWeaTab abstractWeaTab = (AbstractWeaTab) this.getWeaTab().get(i);
+
+            if (BaseTools.notNullString(abstractWeaTab.getTitle()) && abstractWeaTab.getTitle().equals(title)) {
+
+                this.getWeaTab().remove(i);
+
+            }
+
+        }
+
+    }
+
+    public void addWeaTab(int tabIndex,AbstractWeaTab abstractWeaTab){
+
+        this.getWeaTab().add(tabIndex,abstractWeaTab);
+
+    }
+
+    public void addWeaTab(AbstractWeaTab abstractWeaTab){
+
+        this.getWeaTab().add(abstractWeaTab);
+
+    }
 
 }

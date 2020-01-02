@@ -89,7 +89,7 @@ public abstract class AbstractWeaTable extends AbstractWeaComponent {
     private String countColumnsDbType;
 
     //移动端属性 single multi
-    private WeaMobileShowTypeEnum mobileshowtype= WeaMobileShowTypeEnum.ListView;
+    private WeaMobileShowTypeEnum mobileshowtype;
 
     //移动端模版属性
     private String mobileshowtemplate;
@@ -106,7 +106,7 @@ public abstract class AbstractWeaTable extends AbstractWeaComponent {
 
         this.openPrimaryKeyOrder = WeaBooleanEnum.FALSE.FALSE;
 
-        this.mobileshowtype = WeaMobileShowTypeEnum.ListView;
+        //this.mobileshowtype = WeaMobileShowTypeEnum.ListView;
 
         this.columns = new ArrayList();
 

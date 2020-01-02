@@ -154,7 +154,7 @@ public abstract class AbstractWeaForm extends AbstractWeaComponent {
 
         this.setBelong(abstractWeaForm.getBelong());
 
-        this.setBase64(abstractWeaForm.isBase64());
+        this.setIsBase64(abstractWeaForm.getIsBase64());
 
         this.setCheckbox(abstractWeaForm.isCheckbox());
 
@@ -210,7 +210,7 @@ public abstract class AbstractWeaForm extends AbstractWeaComponent {
 
         this.setPrecision(abstractWeaForm.getPrecision());
 
-        this.setQuickSearch(abstractWeaForm.isQuickSearch());
+        this.setIsQuickSearch(abstractWeaForm.getIsQuickSearch());
 
         this.setRegExp(abstractWeaForm.getRegExp());
 
@@ -366,19 +366,19 @@ public abstract class AbstractWeaForm extends AbstractWeaComponent {
         this.colSpan = colSpan;
     }
 
-    public boolean isQuickSearch() {
+    public boolean getIsQuickSearch() {
         return isQuickSearch;
     }
 
-    public void setQuickSearch(boolean quickSearch) {
+    public void setIsQuickSearch(boolean quickSearch) {
         isQuickSearch = quickSearch;
     }
 
-    public boolean isBase64() {
+    public boolean getIsBase64() {
         return isBase64;
     }
 
-    public void setBase64(boolean base64) {
+    public void setIsBase64(boolean base64) {
         isBase64 = base64;
     }
 

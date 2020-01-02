@@ -12,4 +12,5 @@ import java.util.List;
 public class WeaFormReciveComponentResultMsg extends AbstractWeaFormReciveComponentResultMsg {
 
     private List<DefaultWeaFormGroup> condition;
+
 }

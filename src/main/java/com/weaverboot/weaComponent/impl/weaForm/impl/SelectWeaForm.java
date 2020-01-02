@@ -8,14 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class SelectWeaForm extends com.weaverboot.weaComponent.impl.weaForm.inte.AbstractWeaForm {
+public class SelectWeaForm extends AbstractWeaForm {
 
     private final ConditionType conditionType = ConditionType.SELECT;
 
-    /**
-     * 选择框联动数据
-     */
-    private Map<String, AbstractWeaForm> selectLinkageDatas;
     /**
      * 选择框联动时定义select所占宽度 支持百分比、固定宽度
      */
@@ -48,7 +44,7 @@ public class SelectWeaForm extends com.weaverboot.weaComponent.impl.weaForm.inte
 
     }
 
-    public com.weaverboot.weaComponent.impl.weaForm.selectOptions.DefaultSelectOption addOption(String showname, String key){
+    public DefaultSelectOption addOption(String showname, String key){
 
         if (options == null){
 
@@ -56,7 +52,7 @@ public class SelectWeaForm extends com.weaverboot.weaComponent.impl.weaForm.inte
 
         }
 
-        com.weaverboot.weaComponent.impl.weaForm.selectOptions.DefaultSelectOption defaultSelectOption = new com.weaverboot.weaComponent.impl.weaForm.selectOptions.DefaultSelectOption(showname,key);
+        DefaultSelectOption defaultSelectOption = new DefaultSelectOption(showname,key);
 
         options.add(defaultSelectOption);
 
@@ -68,13 +64,6 @@ public class SelectWeaForm extends com.weaverboot.weaComponent.impl.weaForm.inte
         return conditionType;
     }
 
-    public Map<String, com.weaverboot.weaComponent.impl.weaForm.inte.AbstractWeaForm> getSelectLinkageDatas() {
-        return selectLinkageDatas;
-    }
-
-    public void setSelectLinkageDatas(Map<String, AbstractWeaForm> selectLinkageDatas) {
-        this.selectLinkageDatas = selectLinkageDatas;
-    }
 
     public String getSelectWidth() {
         return selectWidth;

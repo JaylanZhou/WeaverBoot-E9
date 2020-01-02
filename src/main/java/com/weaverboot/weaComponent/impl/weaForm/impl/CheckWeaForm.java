@@ -17,6 +17,12 @@ public class CheckWeaForm extends AbstractWeaForm {
 
     }
 
+    public CheckWeaForm(){
+
+        super();
+
+    }
+
     public ConditionType getConditionType() {
         return conditionType;
     }

@@ -12,7 +12,7 @@ import com.weaverboot.weaComponent.impl.weaTree.impl.DefaultWeaFatherTree;
 import com.weaverboot.weaComponent.impl.weaTree.inte.AbstractWeaChildTree;
 import com.weaverboot.weaComponent.impl.weaTree.inte.AbstractWeaFatherTree;
 import com.weaverboot.weaResultMsg.impl.formResult.inte.AbstractWeaFormReciveComponentResultMsg;
-
+import weaver.wechat.util.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -188,7 +188,7 @@ public class WeaFormParseTools {
 
     private static AbstractWeaForm getAbstractWeaForm(JSONObject jsonObject){
 
-        String conditionType = jsonObject.getString("conditionType");
+        String conditionType = Utils.null2String(jsonObject.getString("conditionType"));
 
         if (!BaseTools.notNullString(conditionType)){
 
@@ -338,7 +338,7 @@ public class WeaFormParseTools {
 
     private static AbstractWeaChildTree getAbstractWeaChildTree(JSONObject weaChildTreeJsonObject){
 
-        String conditionType = weaChildTreeJsonObject.getString("conditionType");
+        String conditionType = Utils.null2String(weaChildTreeJsonObject.getString("conditionType"));
 
         switch (conditionType){
 
@@ -356,7 +356,7 @@ public class WeaFormParseTools {
 
     private static Class<? extends AbstractWeaFormGroup> getAbstractWeaFormGroupClass(JSONObject groupJsonObject){
 
-        String type = groupJsonObject.getString("conditionType");
+        String type = Utils.null2String(groupJsonObject.getString("conditionType"));
 
         switch (type){
 
@@ -374,7 +374,7 @@ public class WeaFormParseTools {
 
     private static Class<? extends AbstractWeaFatherTree> getAbstractWeaFatherTreeClass(JSONObject weaFatherTreeJsonObject){
 
-        String type = weaFatherTreeJsonObject.getString("conditionType");
+        String type = Utils.null2String(weaFatherTreeJsonObject.getString("conditionType"));
 
         switch (type){
 
@@ -392,7 +392,7 @@ public class WeaFormParseTools {
 
     private static Class<? extends AbstractWeaTab> getAbstractWeaTabClass(JSONObject weaTabJsonObject){
 
-        String type = weaTabJsonObject.get("conditionType").toString();
+        String type = Utils.null2String(weaTabJsonObject.get("conditionType").toString());
 
         switch (type){
 

@@ -2,6 +2,7 @@ package com.weaverboot.weaComponent.impl.weaForm.weaFormGroup.inte;
 
 import com.weaverboot.tools.baseTools.BaseTools;
 import com.weaverboot.tools.enumTools.weaComponent.WeaFormGroupConditionType;
+import com.weaverboot.tools.logTools.LogTools;
 import com.weaverboot.weaComponent.impl.weaForm.inte.AbstractWeaForm;
 
 import java.util.ArrayList;
@@ -75,7 +76,7 @@ public abstract class AbstractWeaFormGroup {
         this.idHide = idHide;
     }
 
-    public <T extends AbstractWeaForm> T transFormItem(int itemIndex, Class<T> tClass) {
+    public <T extends AbstractWeaForm> T readFormItem(int itemIndex, Class<T> tClass) {
 
         AbstractWeaForm abstractWeaForm = (AbstractWeaForm) this.getItems().get(itemIndex);
 
@@ -97,7 +98,7 @@ public abstract class AbstractWeaFormGroup {
 
     }
 
-    public <T extends AbstractWeaForm> T transFormItemWithLabel(String labelName, Class<T> tClass) {
+    public <T extends AbstractWeaForm> T readFormItemWithLabel(String labelName, Class<T> tClass) {
 
         for (int i = 0; i < items.size(); i++) {
 
@@ -125,11 +126,13 @@ public abstract class AbstractWeaFormGroup {
 
         }
 
-        throw new RuntimeException("未找到label为" + labelName + "的form组件");
+        LogTools.writeLog("未找到label为" + labelName + "的form组件");
+
+        return null;
 
     }
 
-    public <T extends AbstractWeaForm> List<T> transFormItemWithLabelList(String labelName, Class<T> tClass) {
+    public <T extends AbstractWeaForm> List<T> readFormItemWithLabelList(String labelName, Class<T> tClass) {
 
         List<T> tList = new ArrayList<>();
 
@@ -165,67 +168,12 @@ public abstract class AbstractWeaFormGroup {
 
         }
 
-        throw new RuntimeException("未找到label为" + labelName + "的form组件");
+        LogTools.writeLog("未找到label为" + labelName + "的form组件");
+
+        return null;
 
     }
 
-    public <T extends AbstractWeaForm> T readFormItem(int itemIndex, Class<T> tClass) {
-
-        try {
-
-            return (T) this.getItems().get(itemIndex);
-
-        } catch (Exception e) {
-
-            throw new RuntimeException("创建" + tClass + "对象发生错误");
-
-        }
-
-    }
-
-    public <T extends AbstractWeaForm> T readFormItemWithLabel(String labelName, Class<T> tClass) {
-
-        for (int i = 0; i < items.size(); i++) {
-
-            AbstractWeaForm abstractWeaForm = (AbstractWeaForm) items.get(i);
-
-            if (BaseTools.notNullString(labelName) && abstractWeaForm.getLabel().equals(labelName)) {
-
-                return (T) abstractWeaForm;
-
-            }
-
-        }
-
-        throw new RuntimeException("未找到label为" + labelName + "的form组件");
-
-    }
-
-    public <T extends AbstractWeaForm> List<T> readFormItemWithLabelList(String labelName, Class<T> tClass) {
-
-        List<T> tList = new ArrayList<>();
-
-        for (int i = 0; i < items.size(); i++) {
-
-            AbstractWeaForm abstractWeaForm = (AbstractWeaForm) items.get(i);
-
-            if (BaseTools.notNullString(labelName) && abstractWeaForm.getLabel().equals(labelName)) {
-
-                tList.add((T) abstractWeaForm);
-
-            }
-
-        }
-
-        if (BaseTools.notNullList(tList)){
-
-            return tList;
-
-        }
-
-        throw new RuntimeException("未找到label为" + labelName + "的form组件");
-
-    }
 
     public void removeFormItem(int itemIndex) {
 
@@ -239,7 +187,7 @@ public abstract class AbstractWeaFormGroup {
 
             AbstractWeaForm abstractWeaForm = (AbstractWeaForm) items.get(i);
 
-            if (BaseTools.notNullString(labelName) && abstractWeaForm.getLabel().equals(labelName)) {
+            if (BaseTools.notNullString(abstractWeaForm.getLabel()) && abstractWeaForm.getLabel().equals(labelName)) {
 
                 this.getItems().remove(i);
 
@@ -257,7 +205,7 @@ public abstract class AbstractWeaFormGroup {
 
             AbstractWeaForm abstractWeaForm = (AbstractWeaForm) items.get(i);
 
-            if (BaseTools.notNullString(labelName) && abstractWeaForm.getLabel().equals(labelName)) {
+            if (BaseTools.notNullString(abstractWeaForm.getLabel()) && abstractWeaForm.getLabel().equals(labelName)) {
 
                 this.getItems().remove(i);
 

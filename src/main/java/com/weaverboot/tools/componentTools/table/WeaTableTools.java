@@ -175,10 +175,13 @@ public class WeaTableTools {
 
         abstractWeaTable.setRandomFieldOpen(WeaBooleanEnum.TRUE.getStringVal().equals(root.getAttributeValue("randomfieldopen"))? WeaBooleanEnum.TRUE: WeaBooleanEnum.FALSE);
 
-        abstractWeaTable.setMobileshowtype(WeaMobileShowTypeEnum.ListView.getStringVal().equals(root.getAttributeValue("mobileshowtype"))? WeaMobileShowTypeEnum.ListView: WeaMobileShowTypeEnum.Table);
+        if (BaseTools.notNullString(root.getAttributeValue("mobileshowtype"))) {
 
-        abstractWeaTable.setMobileshowtemplate(root.getAttributeValue("mobileshowtemplate"));
+            abstractWeaTable.setMobileshowtype(WeaMobileShowTypeEnum.ListView.getStringVal().equals(root.getAttributeValue("mobileshowtype")) ? WeaMobileShowTypeEnum.ListView : WeaMobileShowTypeEnum.Table);
 
+            abstractWeaTable.setMobileshowtemplate(root.getAttributeValue("mobileshowtemplate"));
+
+        }
 //        abstractWeaTable.setCounttransmethod(BoolAttr.TRUE.getStringVal().equals(root.getAttributeValue("counttransmethod"))?BoolAttr.TRUE:BoolAttr.FALSE);
 
 //        abstractWeaTable.setConfigMethod(root.getAttributeValue("configmethod"));
@@ -333,7 +336,11 @@ public class WeaTableTools {
 
                 pdom.setAsync(Boolean.valueOf(popedom.getAttributeValue("async")));
 
-                pdom.setOtherpara(popedom.getAttributeValue("otherpara"));
+                if (BaseTools.notNullString(popedom.getAttributeValue("otherpara"))) {
+
+                    pdom.setOtherpara(popedom.getAttributeValue("otherpara"));
+
+                }
 
                 pdom.setOtherpara2(popedom.getAttributeValue("otherpara2"));
 
@@ -359,7 +366,11 @@ public class WeaTableTools {
 
                     opt.setHref(el.getAttributeValue("href"));
 
-                    opt.setOtherpara(el.getAttributeValue("otherpara"));
+                    if (BaseTools.notNullString(el.getAttributeValue("otherpara"))) {
+
+                        opt.setOtherpara(el.getAttributeValue("otherpara"));
+
+                    }
 
                     opt.setIndex(el.getAttributeValue("index"));
 
@@ -536,7 +547,11 @@ public class WeaTableTools {
 
         }
 
-        tableString.append(" pagesize=\"").append(weaTable.getPagesize()).append(SUF_MARK);
+        if (BaseTools.notNullString(weaTable.getPagesize())) {
+
+            tableString.append(" pagesize=\"").append(weaTable.getPagesize()).append(SUF_MARK);
+
+        }
 
         if (weaTable.getDatasource() != null) {
 
@@ -563,7 +578,17 @@ public class WeaTableTools {
 
         }
 
-        tableString.append(" mobileshowtype=\"").append(weaTable.getMobileshowtype().getStringVal()).append(SUF_MARK);
+        if (BaseTools.notNullString(weaTable.getInstanceid())){
+
+            tableString.append(" instanceid=\"").append(weaTable.getInstanceid()).append(SUF_MARK);
+
+        }
+
+        if (weaTable.getMobileshowtype() != null) {
+
+            tableString.append(" mobileshowtype=\"").append(weaTable.getMobileshowtype().getStringVal()).append(SUF_MARK);
+
+        }
 
 
         if(weaTable.getMobileshowtemplate() != null) {
@@ -709,11 +734,25 @@ public class WeaTableTools {
 
                 tableString.append(" async=\"").append(popedom.isAsync()).append("\"");
 
-                tableString.append(" transmethod=\"").append(Util.null2String(popedom.getTransmethod())).append("\"");
+                if (BaseTools.notNullString(popedom.getTransmethod())) {
 
-                tableString.append(" otherpara=\"").append(Util.null2String(popedom.getOtherpara())).append("\"");
+                    tableString.append(" transmethod=\"").append(Util.null2String(popedom.getTransmethod())).append("\"");
 
-                tableString.append(" otherpara2=\"").append(Util.null2String(popedom.getOtherpara2())).append("\" ></popedom>");
+                }
+
+                if (BaseTools.notNullString(popedom.getOtherpara())) {
+
+                    tableString.append(" otherpara=\"").append(Util.null2String(popedom.getOtherpara())).append("\"");
+
+                }
+
+                if (BaseTools.notNullString(popedom.getOtherpara2())) {
+
+                    tableString.append(" otherpara2=\"").append(Util.null2String(popedom.getOtherpara2())).append("\"");
+
+                }
+
+                tableString.append(" > </popedom>");
 
             }
 
@@ -726,13 +765,29 @@ public class WeaTableTools {
 
                     tableString.append("<operate ");
 
-                    tableString.append(" href=\"").append(Util.null2String(operate.getHref())).append("\"");
+                    if (BaseTools.notNullString(operate.getHref())) {
 
-                    tableString.append(" text=\"").append(Util.null2String(operate.getText())).append("\"");
+                        tableString.append(" href=\"").append(operate.getHref()).append("\"");
 
-                    tableString.append(" otherpara=\"").append(Util.null2String(operate.getOtherpara())).append("\"");
+                    }
 
-                    tableString.append(" index=\"").append(Util.null2String(operate.getIndex())).append("\"");
+                    if (BaseTools.notNullString(operate.getText())) {
+
+                        tableString.append(" text=\"").append(operate.getText()).append("\"");
+
+                    }
+
+                    if (BaseTools.notNullString(operate.getOtherpara())) {
+
+                        tableString.append(" otherpara=\"").append(operate.getOtherpara()).append("\"");
+
+                    }
+
+                    if (BaseTools.notNullString(operate.getIndex())) {
+
+                        tableString.append(" index=\"").append(operate.getIndex()).append("\"");
+
+                    }
 
                     if(!"".equals(Util.null2String(operate.getLinkvaluecolumn())))tableString.append(" linkvaluecolumn=\"").append(Util.null2String(operate.getLinkvaluecolumn())).append("\"");
 
