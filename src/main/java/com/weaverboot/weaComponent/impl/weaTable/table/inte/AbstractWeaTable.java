@@ -14,7 +14,9 @@ import java.util.List;
 
 /**
  *
- * WeaTable 默认实现类
+ * WeaTable 公共基类
+ *
+ * 所有的table具体实现类都拓展自此类
  *
  * @Author : Jaylan Zhou
  *

@@ -9,8 +9,27 @@ import com.weaverboot.weaComponent.impl.weaTable.table.inte.AbstractWeaTable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ * AbstractWeaTable - 默认通用实现类
+ *
+ * @Author : Jaylan Zhou
+ *
+ * @Date : 2020-01-02
+ *
+ */
+
 public class DefaultWeaTable extends AbstractWeaTable {
 
+    /**
+     *
+     * 根据
+     *
+     * @param index
+     * @param tClass
+     * @param <T>
+     * @return
+     */
 
     @Override
     public <T extends AbstractWeaTableColumn> T readWeaTableColumn(int index, Class<T> tClass) {

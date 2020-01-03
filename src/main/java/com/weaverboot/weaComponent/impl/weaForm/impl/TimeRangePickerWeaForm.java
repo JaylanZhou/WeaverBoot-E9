@@ -22,6 +22,14 @@ public class TimeRangePickerWeaForm extends AbstractWeaForm {
 
     private String endValue;
 
+    private String format;
+
+    private String formatPattern;
+
+    private boolean textDecoration;
+
+    private boolean noInput;
+
     public TimeRangePickerWeaForm(String label,String ... name){
 
         super();
@@ -57,4 +65,37 @@ public class TimeRangePickerWeaForm extends AbstractWeaForm {
     public void setEndValue(String endValue) {
         this.endValue = endValue;
     }
+
+    public String getFormat() {
+        return format;
+    }
+
+    public void setFormat(String format) {
+        this.format = format;
+    }
+
+    public boolean getTextDecoration() {
+        return textDecoration;
+    }
+
+    public void setTextDecoration(boolean textDecoration) {
+        this.textDecoration = textDecoration;
+    }
+
+    public String getFormatPattern() {
+        return formatPattern;
+    }
+
+    public void setFormatPattern(String formatPattern) {
+        this.formatPattern = formatPattern;
+    }
+
+    public boolean getNoInput() {
+        return noInput;
+    }
+
+    public void setNoInput(boolean noInput) {
+        this.noInput = noInput;
+    }
+
 }

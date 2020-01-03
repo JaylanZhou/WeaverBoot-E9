@@ -4,7 +4,7 @@ import com.weaverboot.tools.baseTools.BaseTools;
 import com.weaverboot.tools.logTools.LogTools;
 import com.weaverboot.weaComponent.impl.weaForm.weaFormGroup.inte.AbstractWeaFormGroup;
 import com.weaverboot.weaComponent.impl.weaTab.inte.AbstractWeaTab;
-import com.weaverboot.weaComponent.impl.weaTree.inte.AbstractWeaFatherTree;
+import com.weaverboot.weaComponent.impl.weaTree.inte.AbstractWeaTree;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -212,9 +212,9 @@ public abstract class AbstractWeaFormReciveComponentResultMsg extends AbstractWe
      *
      */
 
-    public AbstractWeaFatherTree readWeaFatherTree(int treeIndex){
+    public AbstractWeaTree readWeaFatherTree(int treeIndex){
 
-        return (AbstractWeaFatherTree) this.getWeaTree().get(treeIndex);
+        return (AbstractWeaTree) this.getWeaTree().get(treeIndex);
 
     }
 
@@ -229,11 +229,11 @@ public abstract class AbstractWeaFormReciveComponentResultMsg extends AbstractWe
      *
      */
 
-    public AbstractWeaFatherTree readWeaFatherTreeWithName(String name){
+    public AbstractWeaTree readWeaFatherTreeWithName(String name){
 
         for (int i = 0; i < this.getWeaTree().size(); i++) {
 
-            AbstractWeaFatherTree ab = (AbstractWeaFatherTree) this.getWeaTree().get(i);
+            AbstractWeaTree ab = (AbstractWeaTree) this.getWeaTree().get(i);
 
             if (BaseTools.notNullString(ab.getName()) && ab.getName().equals(name)){
 
@@ -260,25 +260,25 @@ public abstract class AbstractWeaFormReciveComponentResultMsg extends AbstractWe
      *
      */
 
-    public List<AbstractWeaFatherTree> readWeaFatherTreeWithNameAll(String name){
+    public List<AbstractWeaTree> readWeaFatherTreeWithNameAll(String name){
 
-        List<AbstractWeaFatherTree> abstractWeaFatherTreeList = new ArrayList<>();
+        List<AbstractWeaTree> AbstractWeaTreeList = new ArrayList<>();
 
         for (int i = 0; i < this.getWeaTree().size(); i++) {
 
-            AbstractWeaFatherTree ab = (AbstractWeaFatherTree) this.getWeaTree().get(i);
+            AbstractWeaTree ab = (AbstractWeaTree) this.getWeaTree().get(i);
 
             if (BaseTools.notNullString(ab.getName()) && ab.getName().equals(name)){
 
-                abstractWeaFatherTreeList.add(ab);
+                AbstractWeaTreeList.add(ab);
 
             }
 
         }
 
-        if (BaseTools.notNullList(abstractWeaFatherTreeList)){
+        if (BaseTools.notNullList(AbstractWeaTreeList)){
 
-            return abstractWeaFatherTreeList;
+            return AbstractWeaTreeList;
 
         }
 
@@ -316,9 +316,9 @@ public abstract class AbstractWeaFormReciveComponentResultMsg extends AbstractWe
 
         for (int i = 0; i < this.getWeaTree().size(); i++) {
 
-            AbstractWeaFatherTree abstractWeaFatherTree = (AbstractWeaFatherTree) this.getWeaTree().get(i);
+            AbstractWeaTree AbstractWeaTree = (AbstractWeaTree) this.getWeaTree().get(i);
 
-            if (BaseTools.notNullString(abstractWeaFatherTree.getName()) && abstractWeaFatherTree.getName().equals(name)) {
+            if (BaseTools.notNullString(AbstractWeaTree.getName()) && AbstractWeaTree.getName().equals(name)) {
 
                 this.getCondition().remove(i);
 
@@ -360,13 +360,13 @@ public abstract class AbstractWeaFormReciveComponentResultMsg extends AbstractWe
      * 在该索引位置添加父级树
      *
      * @param treeIndex 添加的位置索引，从0开始
-     * @param abstractWeaFatherTree 添加的父级树
+     * @param AbstractWeaTree 添加的父级树
      *
      */
 
-    public void addWeaFatherTree(int treeIndex,AbstractWeaFatherTree abstractWeaFatherTree){
+    public void addWeaFatherTree(int treeIndex,AbstractWeaTree AbstractWeaTree){
 
-        this.getWeaTree().add(treeIndex,abstractWeaFatherTree);
+        this.getWeaTree().add(treeIndex,AbstractWeaTree);
 
     }
 
@@ -374,13 +374,13 @@ public abstract class AbstractWeaFormReciveComponentResultMsg extends AbstractWe
      *
      * 在父级树列表的尾部添加一个父级树
      *
-     * @param abstractWeaFatherTree 添加的父级树
+     * @param AbstractWeaTree 添加的父级树
      *
      */
 
-    public void addWeaFatherTree(AbstractWeaFatherTree abstractWeaFatherTree){
+    public void addWeaFatherTree(AbstractWeaTree AbstractWeaTree){
 
-        this.getWeaTree().add(abstractWeaFatherTree);
+        this.getWeaTree().add(AbstractWeaTree);
 
     }
 

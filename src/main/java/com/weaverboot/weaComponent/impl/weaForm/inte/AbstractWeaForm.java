@@ -25,11 +25,7 @@ import java.util.Map;
 public abstract class AbstractWeaForm extends AbstractWeaComponent {
 
 
-    /**
-     * 自定义类型，当conditionType为custom时使用
-     **/
 
-    private String customType;
 
     /**
      * 不同类型组件可能需要不同参数，扩展个Map存储，前端可合并到父级传输到组件
@@ -69,9 +65,6 @@ public abstract class AbstractWeaForm extends AbstractWeaComponent {
 
     private boolean hide;
 
-    private int length;
-
-    private int stringLength;
 
     /**
      * 布局参数
@@ -103,34 +96,16 @@ public abstract class AbstractWeaForm extends AbstractWeaComponent {
     private String inputType;
 
     /**
-     * 数字框精度设置   2:保留2位
-     */
-
-    private int precision;
-
-    private String min;
-
-    private String max;
-
-    private String step;
-
-    /**
      * 前端是否校验必填及显示信息 数据格式 required|string @梁勇
      */
 
     private String rules;
-
-    private String regExp;
 
     private String helpfulTip;
 
     private Map<String, Object> helpfulTipProps = new HashMap<String, Object>();
 
     private int showOrder; //顺序
-
-    private boolean checkbox; //字段是否可以复选
-
-    private boolean checkboxValue; //字段复选的值
 
     private String tip; //inputnumber组件里文字说明
 
@@ -139,8 +114,6 @@ public abstract class AbstractWeaForm extends AbstractWeaComponent {
     private String placeholder;
 
     private boolean entSearch; //true 输入回车搜索 默认false
-
-    private boolean dateGroup; //日期区间设置不限。
 
     private List<String> valueList = new ArrayList<String>();
 
@@ -169,10 +142,6 @@ public abstract class AbstractWeaForm extends AbstractWeaComponent {
 
         this.setIsBase64(abstractWeaForm.getIsBase64());
 
-        this.setCheckbox(abstractWeaForm.isCheckbox());
-
-        this.setCheckboxValue(abstractWeaForm.isCheckboxValue());
-
         this.setClassName(abstractWeaForm.getClassName());
 
         this.setColSpan(abstractWeaForm.getColSpan());
@@ -180,10 +149,6 @@ public abstract class AbstractWeaForm extends AbstractWeaComponent {
         this.setCompDef(abstractWeaForm.getCompDef());
 
         this.setCompValue(abstractWeaForm.getCompValue());
-
-        this.setCustomType(abstractWeaForm.getCustomType());
-
-        this.setDateGroup(abstractWeaForm.isDateGroup());
 
         this.setDisplay(abstractWeaForm.getDisplay());
 
@@ -209,33 +174,19 @@ public abstract class AbstractWeaForm extends AbstractWeaComponent {
 
         this.setLabelcol(abstractWeaForm.getLabelcol());
 
-        this.setLength(abstractWeaForm.getLength());
-
-        this.setMax(abstractWeaForm.getMax());
-
-        this.setMin(abstractWeaForm.getMin());
-
         this.setOtherParams(abstractWeaForm.getOtherParams());
 
         this.setParentDomkey(abstractWeaForm.getParentDomkey());
 
         this.setPlaceholder(abstractWeaForm.getPlaceholder());
 
-        this.setPrecision(abstractWeaForm.getPrecision());
-
         this.setIsQuickSearch(abstractWeaForm.getIsQuickSearch());
-
-        this.setRegExp(abstractWeaForm.getRegExp());
 
         this.setRelatekey(abstractWeaForm.getRelatekey());
 
         this.setRules(abstractWeaForm.getRules());
 
         this.setShowOrder(abstractWeaForm.getShowOrder());
-
-        this.setStep(abstractWeaForm.getStep());
-
-        this.setStringLength(abstractWeaForm.getStringLength());
 
         this.setTip(abstractWeaForm.getTip());
 
@@ -249,6 +200,18 @@ public abstract class AbstractWeaForm extends AbstractWeaComponent {
 
     }
 
+    /**
+     *
+     * 组件部分属性初始化默认值
+     *
+     * 初始化的值为：
+     *
+     * 列宽：2
+     *
+     *
+     *
+     */
+
     private void init(){
 
         this.colSpan = 2;
@@ -257,14 +220,6 @@ public abstract class AbstractWeaForm extends AbstractWeaComponent {
 
         this.viewAttr = 2;
 
-    }
-
-    public String getCustomType() {
-        return customType;
-    }
-
-    public void setCustomType(String customType) {
-        this.customType = customType;
     }
 
     public Map<String, Object> getOtherParams() {
@@ -339,22 +294,6 @@ public abstract class AbstractWeaForm extends AbstractWeaComponent {
         this.hide = hide;
     }
 
-    public int getLength() {
-        return length;
-    }
-
-    public void setLength(int length) {
-        this.length = length;
-    }
-
-    public int getStringLength() {
-        return stringLength;
-    }
-
-    public void setStringLength(int stringLength) {
-        this.stringLength = stringLength;
-    }
-
     public int getLabelcol() {
         return labelcol;
     }
@@ -403,53 +342,12 @@ public abstract class AbstractWeaForm extends AbstractWeaComponent {
         this.inputType = inputType;
     }
 
-
-    public int getPrecision() {
-        return precision;
-    }
-
-    public void setPrecision(int precision) {
-        this.precision = precision;
-    }
-
-    public String getMin() {
-        return min;
-    }
-
-    public void setMin(String min) {
-        this.min = min;
-    }
-
-    public String getMax() {
-        return max;
-    }
-
-    public void setMax(String max) {
-        this.max = max;
-    }
-
-    public String getStep() {
-        return step;
-    }
-
-    public void setStep(String step) {
-        this.step = step;
-    }
-
     public String getRules() {
         return rules;
     }
 
     public void setRules(String rules) {
         this.rules = rules;
-    }
-
-    public String getRegExp() {
-        return regExp;
-    }
-
-    public void setRegExp(String regExp) {
-        this.regExp = regExp;
     }
 
     public String getHelpfulTip() {
@@ -474,22 +372,6 @@ public abstract class AbstractWeaForm extends AbstractWeaComponent {
 
     public void setShowOrder(int showOrder) {
         this.showOrder = showOrder;
-    }
-
-    public boolean isCheckbox() {
-        return checkbox;
-    }
-
-    public void setCheckbox(boolean checkbox) {
-        this.checkbox = checkbox;
-    }
-
-    public boolean isCheckboxValue() {
-        return checkboxValue;
-    }
-
-    public void setCheckboxValue(boolean checkboxValue) {
-        this.checkboxValue = checkboxValue;
     }
 
     public String getTip() {
@@ -522,14 +404,6 @@ public abstract class AbstractWeaForm extends AbstractWeaComponent {
 
     public void setEntSearch(boolean entSearch) {
         this.entSearch = entSearch;
-    }
-
-    public boolean isDateGroup() {
-        return dateGroup;
-    }
-
-    public void setDateGroup(boolean dateGroup) {
-        this.dateGroup = dateGroup;
     }
 
     public List<String> getValueList() {
@@ -587,4 +461,5 @@ public abstract class AbstractWeaForm extends AbstractWeaComponent {
     public void setHasBorder(boolean hasBorder) {
         this.hasBorder = hasBorder;
     }
+
 }

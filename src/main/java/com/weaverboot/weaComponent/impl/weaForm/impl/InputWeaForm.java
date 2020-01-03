@@ -18,6 +18,10 @@ public class InputWeaForm extends AbstractWeaForm {
 
     private final ConditionType conditionType = ConditionType.INPUT;
 
+    private String regExp; //过滤数据的正则表达式
+
+    private boolean textDecoration; //是否有下划线
+
     public InputWeaForm(String label,String ... name){
 
         super();
@@ -34,9 +38,23 @@ public class InputWeaForm extends AbstractWeaForm {
 
     }
 
+    public boolean getTextDecoration() {
+        return textDecoration;
+    }
+
+    public void setTextDecoration(boolean textDecoration) {
+        this.textDecoration = textDecoration;
+    }
+
     public ConditionType getConditionType() {
         return conditionType;
     }
 
+    public String getRegExp() {
+        return regExp;
+    }
 
+    public void setRegExp(String regExp) {
+        this.regExp = regExp;
+    }
 }

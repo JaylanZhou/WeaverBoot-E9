@@ -18,6 +18,8 @@ public class PasswordWeaForm extends AbstractWeaForm {
 
     private final ConditionType conditionType = ConditionType.PASSWORD;
 
+    private boolean passwordStrength;
+
     public PasswordWeaForm(String label,String ... name){
 
         super();
@@ -38,4 +40,11 @@ public class PasswordWeaForm extends AbstractWeaForm {
         return conditionType;
     }
 
+    public boolean getPasswordStrength() {
+        return passwordStrength;
+    }
+
+    public void setPasswordStrength(boolean passwordStrength) {
+        this.passwordStrength = passwordStrength;
+    }
 }

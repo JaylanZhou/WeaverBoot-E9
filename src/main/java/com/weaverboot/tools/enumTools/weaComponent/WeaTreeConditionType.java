@@ -5,13 +5,13 @@ package com.weaverboot.tools.enumTools.weaComponent;
  * @Date : 2019-12-27 16:18
  * @Version : 1.0
  */
-public enum WeaChildTreeConditionType {
+public enum WeaTreeConditionType {
 
     DEFAULT("0");
 
     private String stringVal;
 
-    private WeaChildTreeConditionType(String stringVal) {
+    private WeaTreeConditionType(String stringVal) {
         this.stringVal = stringVal;
     }
 

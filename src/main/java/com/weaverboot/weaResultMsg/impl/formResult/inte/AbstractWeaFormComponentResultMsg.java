@@ -2,9 +2,9 @@ package com.weaverboot.weaResultMsg.impl.formResult.inte;
 
 import com.alibaba.fastjson.JSONObject;
 import com.weaverboot.weaComponent.impl.weaForm.weaFormGroup.inte.AbstractWeaFormGroup;
+import com.weaverboot.weaComponent.impl.weaTree.inte.AbstractWeaTree;
 import com.weaverboot.weaResultMsg.inte.AbstractWeaComponentResultMsg;
 import com.weaverboot.weaComponent.impl.weaTab.inte.AbstractWeaTab;
-import com.weaverboot.weaComponent.impl.weaTree.inte.AbstractWeaFatherTree;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ public abstract class AbstractWeaFormComponentResultMsg extends AbstractWeaCompo
 
     private List<? super AbstractWeaFormGroup> condition; //分组列表List
 
-    private List<? super AbstractWeaFatherTree> weaTree; //父级树列表List
+    private List<? super AbstractWeaTree> weaTree; //父级树列表List
 
     private List<? super AbstractWeaTab> weaTab; //标签页列表List
 
@@ -51,7 +51,7 @@ public abstract class AbstractWeaFormComponentResultMsg extends AbstractWeaCompo
 
     }
 
-    public AbstractWeaFormComponentResultMsg addTree(AbstractWeaFatherTree abstractWeaFatherTree){
+    public AbstractWeaFormComponentResultMsg addTree(AbstractWeaTree AbstractWeaTree){
 
         if (weaTree == null){
 
@@ -59,7 +59,7 @@ public abstract class AbstractWeaFormComponentResultMsg extends AbstractWeaCompo
 
         }
 
-        weaTree.add(abstractWeaFatherTree);
+        weaTree.add(AbstractWeaTree);
 
         return this;
 
@@ -79,11 +79,11 @@ public abstract class AbstractWeaFormComponentResultMsg extends AbstractWeaCompo
 
     }
 
-    public List<? super AbstractWeaFatherTree> getWeaTree() {
+    public List<? super AbstractWeaTree> getWeaTree() {
         return weaTree;
     }
 
-    public void setWeaTree(List<? super AbstractWeaFatherTree> weaTree) {
+    public void setWeaTree(List<? super AbstractWeaTree> weaTree) {
         this.weaTree = weaTree;
     }
 

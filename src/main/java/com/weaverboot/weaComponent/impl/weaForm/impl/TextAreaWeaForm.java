@@ -22,9 +22,19 @@ public class TextAreaWeaForm extends AbstractWeaForm {
      * @description ：多行文本框行数控制
      */
 
-    private String minRows;
+    private int minRows;
 
-    private String maxRows;
+    private int maxRows;
+
+    private String regExp;
+
+    private int length;
+
+    private int stringLength;
+
+    private boolean disabled;
+
+    private boolean textDecoration;
 
     public TextAreaWeaForm(String label,String ... name){
 
@@ -46,21 +56,59 @@ public class TextAreaWeaForm extends AbstractWeaForm {
         return conditionType;
     }
 
-
-    public String getMinRows() {
+    public int getMinRows() {
         return minRows;
     }
 
-    public void setMinRows(String minRows) {
+    public void setMinRows(int minRows) {
         this.minRows = minRows;
     }
 
-    public String getMaxRows() {
+    public int getMaxRows() {
         return maxRows;
     }
 
-    public void setMaxRows(String maxRows) {
+    public void setMaxRows(int maxRows) {
         this.maxRows = maxRows;
     }
 
+    public int getLength() {
+        return length;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
+    }
+
+    public int getStringLength() {
+        return stringLength;
+    }
+
+    public void setStringLength(int stringLength) {
+        this.stringLength = stringLength;
+    }
+
+    public boolean getDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
+    }
+
+    public boolean getTextDecoration() {
+        return textDecoration;
+    }
+
+    public void setTextDecoration(boolean textDecoration) {
+        this.textDecoration = textDecoration;
+    }
+
+    public String getRegExp() {
+        return regExp;
+    }
+
+    public void setRegExp(String regExp) {
+        this.regExp = regExp;
+    }
 }

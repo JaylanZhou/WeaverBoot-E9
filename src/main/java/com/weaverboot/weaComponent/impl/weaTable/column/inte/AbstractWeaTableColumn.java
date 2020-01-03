@@ -8,7 +8,9 @@ import com.weaverboot.weaComponent.inte.AbstractWeaComponent;
 
 /**
  *
- * 默认 WeaTable 实现组件
+ * WeaTableColumn - 基类
+ *
+ * 所有的 WeaTableColumn 具体实现类均由此类拓展
  *
  * @Author : Jaylan Zhou
  * @Date : 2019-12-23 11:21

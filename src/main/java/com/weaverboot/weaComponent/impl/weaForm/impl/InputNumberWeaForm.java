@@ -18,6 +18,18 @@ public class InputNumberWeaForm extends AbstractWeaForm {
 
     private final ConditionType conditionType = ConditionType.INPUTNUMBER;
 
+    /**
+     * 数字框精度设置   2:保留2位
+     */
+
+    private int precision;
+
+    private String min;
+
+    private String max;
+
+    private String step;
+
     public InputNumberWeaForm(String label, String ... name){
 
         super();
@@ -38,5 +50,35 @@ public class InputNumberWeaForm extends AbstractWeaForm {
         return conditionType;
     }
 
+    public int getPrecision() {
+        return precision;
+    }
 
+    public void setPrecision(int precision) {
+        this.precision = precision;
+    }
+
+    public String getMin() {
+        return min;
+    }
+
+    public void setMin(String min) {
+        this.min = min;
+    }
+
+    public String getMax() {
+        return max;
+    }
+
+    public void setMax(String max) {
+        this.max = max;
+    }
+
+    public String getStep() {
+        return step;
+    }
+
+    public void setStep(String step) {
+        this.step = step;
+    }
 }

@@ -5,7 +5,7 @@ import com.weaverboot.weaComponent.impl.weaForm.inte.AbstractWeaForm;
 
 /**
  *
- * 人力资源组件
+ * 人力资源组件（暂未启用）
  *
  * @Author : Jaylan Zhou
  *

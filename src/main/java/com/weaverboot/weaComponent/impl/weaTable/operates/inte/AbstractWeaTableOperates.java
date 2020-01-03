@@ -8,6 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ *
+ * table 操作组 - 基类
+ *
+ * 所有的 table 操作组均拓展自此类
+ *
  * @Author : Jaylan Zhou
  * @Date : 2019-12-24 10:31
  * @Version : 1.0

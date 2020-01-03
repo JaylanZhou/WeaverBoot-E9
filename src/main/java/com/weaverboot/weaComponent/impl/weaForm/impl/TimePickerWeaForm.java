@@ -18,6 +18,14 @@ public class TimePickerWeaForm extends AbstractWeaForm {
 
     private final ConditionType conditionType = ConditionType.TIMEPICKER;
 
+    private String format;
+
+    private String formatPattern;
+
+    private boolean textDecoration;
+
+    private boolean noInput;
+
     public TimePickerWeaForm(String label,String ... name){
 
         super();
@@ -38,4 +46,35 @@ public class TimePickerWeaForm extends AbstractWeaForm {
         return conditionType;
     }
 
+    public String getFormat() {
+        return format;
+    }
+
+    public void setFormat(String format) {
+        this.format = format;
+    }
+
+    public String getFormatPattern() {
+        return formatPattern;
+    }
+
+    public void setFormatPattern(String formatPattern) {
+        this.formatPattern = formatPattern;
+    }
+
+    public boolean getTextDecoration() {
+        return textDecoration;
+    }
+
+    public void setTextDecoration(boolean textDecoration) {
+        this.textDecoration = textDecoration;
+    }
+
+    public boolean getNoInput() {
+        return noInput;
+    }
+
+    public void setNoInput(boolean noInput) {
+        this.noInput = noInput;
+    }
 }

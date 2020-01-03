@@ -6,6 +6,7 @@ import com.weaverboot.frame.ioc.beans.context.inte.WeaApplicationContext;
 import com.weaverboot.frame.ioc.container.WeaIocContainer;
 import com.weaverboot.frame.ioc.beans.bean.definition.handler.replace.weaReplaceParam.impl.WeaAfterReplaceParam;
 import com.weaverboot.frame.ioc.beans.bean.definition.handler.replace.weaReplaceParam.impl.WeaBeforeReplaceParam;
+import com.weaverboot.tools.logTools.LogTools;
 import weaver.general.BaseBean;
 
 import java.lang.reflect.InvocationTargetException;
@@ -45,9 +46,19 @@ public class WeaIocReplaceUriUtils {
                 for (String s : methodMap.keySet()
                      ) {
 
-                    Method method = methodMap.get(s);
+                    try {
 
-                    weaAfterReplaceParam.setData((String) method.invoke(weaApplicationContext.getBean(ab.getBeanId()),weaAfterReplaceParam));
+                        Method method = methodMap.get(s);
+
+                        weaAfterReplaceParam.setData((String) method.invoke(weaApplicationContext.getBean(ab.getBeanId()),weaAfterReplaceParam));
+
+                    } catch (Exception e){
+
+                        LogTools.writeLog("执行方法" + methodMap.get(s).getName() + "时发生错误，原因为:" + e.getMessage());
+
+                        continue;
+
+                    }
 
                 }
 
@@ -75,9 +86,19 @@ public class WeaIocReplaceUriUtils {
                 for (String s : methodMap.keySet()
                 ) {
 
-                    Method method = methodMap.get(s);
+                    try {
 
-                    method.invoke(weaApplicationContext.getBean(ab.getBeanId()),weaBeforeReplaceParam);
+                        Method method = methodMap.get(s);
+
+                        method.invoke(weaApplicationContext.getBean(ab.getBeanId()),weaBeforeReplaceParam);
+
+                    } catch (Exception e){
+
+                        LogTools.writeLog("执行方法" + methodMap.get(s).getName() + "时发生错误，原因为:" + e.getMessage());
+
+                        continue;
+
+                    }
 
                 }
 

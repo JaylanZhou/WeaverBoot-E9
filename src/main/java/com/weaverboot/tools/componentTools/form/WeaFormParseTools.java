@@ -7,10 +7,8 @@ import com.weaverboot.weaComponent.impl.weaForm.weaFormGroup.DefaultWeaFormGroup
 import com.weaverboot.weaComponent.impl.weaForm.weaFormGroup.inte.AbstractWeaFormGroup;
 import com.weaverboot.weaComponent.impl.weaTab.impl.DefaultWeaTab;
 import com.weaverboot.weaComponent.impl.weaTab.inte.AbstractWeaTab;
-import com.weaverboot.weaComponent.impl.weaTree.impl.DefaultWeaChildTree;
-import com.weaverboot.weaComponent.impl.weaTree.impl.DefaultWeaFatherTree;
-import com.weaverboot.weaComponent.impl.weaTree.inte.AbstractWeaChildTree;
-import com.weaverboot.weaComponent.impl.weaTree.inte.AbstractWeaFatherTree;
+import com.weaverboot.weaComponent.impl.weaTree.impl.DefaultWeaTree;
+import com.weaverboot.weaComponent.impl.weaTree.inte.AbstractWeaTree;
 import com.weaverboot.weaResultMsg.impl.formResult.inte.AbstractWeaFormReciveComponentResultMsg;
 import weaver.wechat.util.Utils;
 import java.util.ArrayList;
@@ -34,7 +32,7 @@ public class WeaFormParseTools {
 
         parseWeaFormGroup(t,t.getCondition());
 
-        parseWeaFatherTree(t,t.getWeaTree());
+        parseWeaTree(t,t.getWeaTree());
 
         parseWeaTab(t,t.getWeaTab());
 
@@ -108,42 +106,40 @@ public class WeaFormParseTools {
      * @param weaFatherTreeJson
      */
 
-    private static void parseWeaFatherTree(AbstractWeaFormReciveComponentResultMsg abstractWeaFormReciveComponentResultMsg,List<? super AbstractWeaFatherTree> weaFatherTreeJson){
-
-        List<AbstractWeaFatherTree> abstractWeaFatherTreeList = new ArrayList<>();
+    private static void parseWeaTree(AbstractWeaFormReciveComponentResultMsg abstractWeaFormReciveComponentResultMsg,List<? super AbstractWeaTree> weaFatherTreeJson){
 
         if (BaseTools.notNullList(weaFatherTreeJson)){
 
-        for (int i = 0; i < weaFatherTreeJson.size(); i++) {
-
-            JSONObject jsonObject = (JSONObject) weaFatherTreeJson.get(i);
-
-            AbstractWeaFatherTree abstractWeaFatherTree = JSONObject.parseObject(jsonObject.toJSONString(), getAbstractWeaFatherTreeClass(jsonObject));
-
-            List<? super AbstractWeaChildTree> childTreeJsonArray = abstractWeaFatherTree.getChilds();
-
-                if (BaseTools.notNullList(childTreeJsonArray)) {
-
-                    List<AbstractWeaChildTree> abstractWeaChildTreeList = new ArrayList<>();
-
-                    for (int j = 0; j < childTreeJsonArray.size(); j++) {
-
-                        abstractWeaChildTreeList.add(getAbstractWeaChildTree((JSONObject) childTreeJsonArray.get(j)));
-
-                    }
-
-                    abstractWeaFatherTree.setChilds(abstractWeaChildTreeList);
-
-                }
-
-                abstractWeaFatherTreeList.add(abstractWeaFatherTree);
-
-            }
-
+            abstractWeaFormReciveComponentResultMsg.setWeaTree(handleWeaTree(weaFatherTreeJson));
 
         }
 
-        abstractWeaFormReciveComponentResultMsg.setWeaTree(abstractWeaFatherTreeList);
+
+    }
+
+    private static List<? super AbstractWeaTree> handleWeaTree(List<? super AbstractWeaTree> weaTreeJson){
+
+        List<? super AbstractWeaTree> fatherTreeList = new ArrayList<>();
+
+        for (int i = 0; i < weaTreeJson.size(); i++) {
+
+            JSONObject jsonObject = (JSONObject) weaTreeJson.get(i);
+
+            AbstractWeaTree abstractWeaFatherTree = JSONObject.parseObject(jsonObject.toJSONString(), getAbstractWeaTreeClass(jsonObject));
+
+            List<? super AbstractWeaTree> childTreeJsonArray = abstractWeaFatherTree.getChilds();
+
+            if (BaseTools.notNullList(childTreeJsonArray)) {
+
+                abstractWeaFatherTree.setChilds(handleWeaTree(childTreeJsonArray));
+
+            }
+
+            fatherTreeList.add(abstractWeaFatherTree);
+
+        }
+
+        return fatherTreeList;
 
     }
 
@@ -254,7 +250,7 @@ public class WeaFormParseTools {
 
             case "CHECKBOX" :
 
-                return JSONObject.parseObject(jsonString,CheckWeaForm.class);
+                return JSONObject.parseObject(jsonString, CheckBoxWeaForm.class);
 
             case "SWITCH" :
 
@@ -336,24 +332,6 @@ public class WeaFormParseTools {
 
     }
 
-    private static AbstractWeaChildTree getAbstractWeaChildTree(JSONObject weaChildTreeJsonObject){
-
-        String conditionType = Utils.null2String(weaChildTreeJsonObject.getString("conditionType"));
-
-        switch (conditionType){
-
-            case "0" :
-
-                return weaChildTreeJsonObject.parseObject(weaChildTreeJsonObject.toJSONString(),DefaultWeaChildTree.class);
-
-            default :
-
-                return weaChildTreeJsonObject.parseObject(weaChildTreeJsonObject.toJSONString(),DefaultWeaChildTree.class);
-
-        }
-
-    }
-
     private static Class<? extends AbstractWeaFormGroup> getAbstractWeaFormGroupClass(JSONObject groupJsonObject){
 
         String type = Utils.null2String(groupJsonObject.getString("conditionType"));
@@ -372,7 +350,7 @@ public class WeaFormParseTools {
 
     }
 
-    private static Class<? extends AbstractWeaFatherTree> getAbstractWeaFatherTreeClass(JSONObject weaFatherTreeJsonObject){
+    private static Class<? extends AbstractWeaTree> getAbstractWeaTreeClass(JSONObject weaFatherTreeJsonObject){
 
         String type = Utils.null2String(weaFatherTreeJsonObject.getString("conditionType"));
 
@@ -380,11 +358,11 @@ public class WeaFormParseTools {
 
             case "0" :
 
-                return DefaultWeaFatherTree.class;
+                return DefaultWeaTree.class;
 
             default :
 
-                return DefaultWeaFatherTree.class;
+                return DefaultWeaTree.class;
 
         }
 

@@ -60,6 +60,18 @@ public class SelectLinkageWeaForm extends AbstractWeaForm {
 
     }
 
+    /**
+     *
+     * 添加级联属性
+     *
+     * 当选择 key 的下拉框值时，会出现添加的级联组件
+     *
+     * @param key 此组件中下拉框值的key
+     * @param abstractWeaForm 添加的级联组件
+     * @return 返回本类，以便链式调用
+     *
+     */
+
     public SelectLinkageWeaForm putLinkageDatas(String key,AbstractWeaForm abstractWeaForm){
 
         if (this.selectLinkageDatas == null){
@@ -73,6 +85,16 @@ public class SelectLinkageWeaForm extends AbstractWeaForm {
         return this;
 
     }
+
+    /**
+     *
+     * 添加选项值
+     *
+     * @param showname 选项的显示名称
+     * @param key 选项的值
+     * @return 返回新建的选项类，以便进行选项的属性链式操作
+     *
+     */
 
     public DefaultSelectOption addOption(String showname, String key){
 

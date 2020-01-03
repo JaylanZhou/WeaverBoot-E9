@@ -55,6 +55,16 @@ public class SelectWeaForm extends AbstractWeaForm {
 
     }
 
+    /**
+     *
+     * 添加选项值
+     *
+     * @param showname 选项的显示名称
+     * @param key 选项的值
+     * @return 返回新建的选项类，以便进行选项的属性链式操作
+     *
+     */
+
     public DefaultSelectOption addOption(String showname, String key){
 
         if (options == null){

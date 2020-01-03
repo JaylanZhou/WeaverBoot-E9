@@ -20,12 +20,34 @@ public class DatePickerWeaForm extends AbstractWeaForm {
 
     private String format;
 
+    private boolean textDecoration;
+
+    private String formatPattern;
+
+    private boolean noInput;
+
     public String getFormat() {
         return format;
     }
 
     public void setFormat(String format) {
         this.format = format;
+    }
+
+    public boolean getTextDecoration() {
+        return textDecoration;
+    }
+
+    public void setTextDecoration(boolean textDecoration) {
+        this.textDecoration = textDecoration;
+    }
+
+    public String getFormatPattern() {
+        return formatPattern;
+    }
+
+    public void setFormatPattern(String formatPattern) {
+        this.formatPattern = formatPattern;
     }
 
     public DatePickerWeaForm(String label, String ... name){
@@ -42,6 +64,14 @@ public class DatePickerWeaForm extends AbstractWeaForm {
 
         super();
 
+    }
+
+    public boolean getNoInput() {
+        return noInput;
+    }
+
+    public void setNoInput(boolean noInput) {
+        this.noInput = noInput;
     }
 
     public ConditionType getConditionType() {

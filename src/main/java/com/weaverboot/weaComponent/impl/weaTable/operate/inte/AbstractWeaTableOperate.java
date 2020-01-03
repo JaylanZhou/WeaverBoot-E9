@@ -3,31 +3,34 @@ package com.weaverboot.weaComponent.impl.weaTable.operate.inte;
 import com.weaverboot.weaComponent.inte.WeaComponent;
 
 /**
+ *
+ * table 操作菜单 - 基类
+ *
  * @Author : Jaylan Zhou
  * @Date : 2019-12-24 10:25
  * @Version : 1.0
  */
 public abstract class AbstractWeaTableOperate implements WeaComponent {
 
-    private String otherpara;
+    private String otherpara; //其他字段，配合
 
-    private String text;
+    private String text; //操作菜单名称
 
     private String linkvaluecolumn;
 
     private String linkkey;
 
-    private String href;
+    private String href; //操作菜单地址
 
     private String target;
 
-    private String index;
+    private String index; //操作菜单索引
 
-    private String cusWidth;
+    private String cusWidth; //操作菜单宽度
 
-    private String cusHeight;
+    private String cusHeight; //操作菜单高度
 
-    private String isalwaysshow;
+    private String isalwaysshow; //是否一直显示
 
     public AbstractWeaTableOperate() {
     }

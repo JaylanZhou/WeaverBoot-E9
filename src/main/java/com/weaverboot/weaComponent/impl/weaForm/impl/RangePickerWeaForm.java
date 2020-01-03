@@ -22,6 +22,10 @@ public class RangePickerWeaForm extends AbstractWeaForm {
 
     private String endValue;
 
+    private boolean textDecoration;
+
+    private boolean dateGroup; //日期区间设置不限。
+
     public RangePickerWeaForm(String label, String ... name){
 
         super();
@@ -56,5 +60,21 @@ public class RangePickerWeaForm extends AbstractWeaForm {
 
     public void setEndValue(String endValue) {
         this.endValue = endValue;
+    }
+
+    public boolean getTextDecoration() {
+        return textDecoration;
+    }
+
+    public void setTextDecoration(boolean textDecoration) {
+        this.textDecoration = textDecoration;
+    }
+
+    public boolean getDateGroup() {
+        return dateGroup;
+    }
+
+    public void setDateGroup(boolean dateGroup) {
+        this.dateGroup = dateGroup;
     }
 }
