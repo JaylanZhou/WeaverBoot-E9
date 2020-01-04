@@ -2,6 +2,10 @@ package com.weaverboot.weaComponent.impl.weaForm.impl;
 
 import com.api.browser.util.ConditionType;
 import com.weaverboot.weaComponent.impl.weaForm.inte.AbstractWeaForm;
+import com.weaverboot.weaComponent.impl.weaForm.selectOptions.WeaDateOptions;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -17,6 +21,10 @@ import com.weaverboot.weaComponent.impl.weaForm.inte.AbstractWeaForm;
 public class DateWeaForm extends AbstractWeaForm {
 
     private final ConditionType conditionType = ConditionType.DATE;
+
+    private List<WeaDateOptions> datas;
+
+    private boolean textDecoration;
 
     public DateWeaForm(String label,String ... name){
 
@@ -38,4 +46,43 @@ public class DateWeaForm extends AbstractWeaForm {
         return conditionType;
     }
 
+    /**
+     *
+     * 为日期组合类添加选项
+     *
+     * @param name 选项名称
+     * @param value 选项值
+     * @return 返回本类，方便链式调用
+     *
+     */
+
+    public DateWeaForm addOption(String name,String value){
+
+        if (this.datas == null){
+
+            this.datas = new ArrayList<>();
+
+        }
+
+        datas.add(new WeaDateOptions(name,value));
+
+        return this;
+
+    }
+
+    public List<WeaDateOptions> getDatas() {
+        return datas;
+    }
+
+    public void setDatas(List<WeaDateOptions> datas) {
+        this.datas = datas;
+    }
+
+    public boolean getTextDecoration() {
+        return textDecoration;
+    }
+
+    public void setTextDecoration(boolean textDecoration) {
+        this.textDecoration = textDecoration;
+    }
 }

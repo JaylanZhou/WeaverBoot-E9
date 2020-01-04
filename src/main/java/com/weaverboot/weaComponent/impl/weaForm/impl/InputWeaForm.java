@@ -22,6 +22,8 @@ public class InputWeaForm extends AbstractWeaForm {
 
     private boolean textDecoration; //是否有下划线
 
+    private String tip; //文字提示
+
     public InputWeaForm(String label,String ... name){
 
         super();
@@ -57,4 +59,13 @@ public class InputWeaForm extends AbstractWeaForm {
     public void setRegExp(String regExp) {
         this.regExp = regExp;
     }
+
+    public String getTip() {
+        return tip;
+    }
+
+    public void setTip(String tip) {
+        this.tip = tip;
+    }
+
 }

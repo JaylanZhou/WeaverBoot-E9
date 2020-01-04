@@ -24,6 +24,8 @@ public class InputNumberWeaForm extends AbstractWeaForm {
 
     private int precision;
 
+    private String tip; //文字说明
+
     private String min;
 
     private String max;
@@ -81,4 +83,13 @@ public class InputNumberWeaForm extends AbstractWeaForm {
     public void setStep(String step) {
         this.step = step;
     }
+
+    public String getTip() {
+        return tip;
+    }
+
+    public void setTip(String tip) {
+        this.tip = tip;
+    }
+
 }

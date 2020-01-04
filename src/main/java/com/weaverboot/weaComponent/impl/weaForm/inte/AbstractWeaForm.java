@@ -59,7 +59,7 @@ public abstract class AbstractWeaForm extends AbstractWeaComponent {
      * 浏览数据定义相关
      */
 
-    private int viewAttr = 2;
+    private int viewAttr;
 
     private Object value;
 
@@ -70,7 +70,7 @@ public abstract class AbstractWeaForm extends AbstractWeaComponent {
      * 布局参数
      */
 
-    private int labelcol = 6;
+    private int labelcol;
 
     private int fieldcol;
 
@@ -79,7 +79,7 @@ public abstract class AbstractWeaForm extends AbstractWeaComponent {
      * 定义一行显示条件数，默认值为2,当值为1时标识该条件单独占一行
      */
 
-    private int colSpan = 2;
+    private int colSpan;
 
     /**
      * isQuickSearch
@@ -107,8 +107,6 @@ public abstract class AbstractWeaForm extends AbstractWeaComponent {
 
     private int showOrder; //顺序
 
-    private String tip; //inputnumber组件里文字说明
-
     private String display;
 
     private String placeholder;
@@ -126,8 +124,6 @@ public abstract class AbstractWeaForm extends AbstractWeaComponent {
 
     public Object compValue;
 
-    private String className;
-
     private boolean hasBorder = false;
 
     public AbstractWeaForm(){
@@ -141,8 +137,6 @@ public abstract class AbstractWeaForm extends AbstractWeaComponent {
         this.setBelong(abstractWeaForm.getBelong());
 
         this.setIsBase64(abstractWeaForm.getIsBase64());
-
-        this.setClassName(abstractWeaForm.getClassName());
 
         this.setColSpan(abstractWeaForm.getColSpan());
 
@@ -188,8 +182,6 @@ public abstract class AbstractWeaForm extends AbstractWeaComponent {
 
         this.setShowOrder(abstractWeaForm.getShowOrder());
 
-        this.setTip(abstractWeaForm.getTip());
-
         this.setTipPosition(abstractWeaForm.getTipPosition());
 
         this.setValue(abstractWeaForm.getValue());
@@ -217,6 +209,8 @@ public abstract class AbstractWeaForm extends AbstractWeaComponent {
         this.colSpan = 2;
 
         this.fieldcol = 10;
+
+        this.labelcol = 6;
 
         this.viewAttr = 2;
 
@@ -374,14 +368,6 @@ public abstract class AbstractWeaForm extends AbstractWeaComponent {
         this.showOrder = showOrder;
     }
 
-    public String getTip() {
-        return tip;
-    }
-
-    public void setTip(String tip) {
-        this.tip = tip;
-    }
-
     public String getDisplay() {
         return display;
     }
@@ -444,14 +430,6 @@ public abstract class AbstractWeaForm extends AbstractWeaComponent {
 
     public void setCompValue(Object compValue) {
         this.compValue = compValue;
-    }
-
-    public String getClassName() {
-        return className;
-    }
-
-    public void setClassName(String className) {
-        this.className = className;
     }
 
     public boolean isHasBorder() {
