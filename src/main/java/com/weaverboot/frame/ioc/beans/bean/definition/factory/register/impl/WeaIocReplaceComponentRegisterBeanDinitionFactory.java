@@ -44,7 +44,11 @@ public class WeaIocReplaceComponentRegisterBeanDinitionFactory extends AbstractW
 
         AbstractWeaBeanDefinition weaBeanDefinition = new DefaultWeaBeanDefinition();
 
-        String beanId = super.beforeRegisrer(weaBeanDefinition,clazz,annotation);
+        this.getWeaCreateWeaBeanDefinitionPostProcessor().initWeaBeanDefinition(weaBeanDefinition,clazz,annotation);
+
+        getWeaCreateWeaBeanDefinitionPostProcessor().postProcessBeforeRegister(weaBeanDefinition);
+
+        String beanId = weaBeanDefinition.getBeanClassName();
 
         if (clazz.isAnnotationPresent(WeaIocReplaceComponent.class)) {
 
@@ -60,11 +64,9 @@ public class WeaIocReplaceComponentRegisterBeanDinitionFactory extends AbstractW
 
         }
 
-        weaBeanDefinition.setBeanId(beanId);
+        getWeaCreateWeaBeanDefinitionPostProcessor().initEarlyContainer(beanId,weaBeanDefinition);
 
-        WeaIocContainer.setEarlyBeandefinition(beanId, weaBeanDefinition);
-
-        WeaIocContainer.getEarlyBeandifinitionList().add(beanId);
+        getWeaCreateWeaBeanDefinitionPostProcessor().postProcessAfterRegister(weaBeanDefinition);
 
         return weaBeanDefinition;
 

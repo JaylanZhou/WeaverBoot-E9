@@ -1,6 +1,5 @@
 package com.weaverboot.frame.ioc.beans.bean.definition.utils;
 
-import com.weaverboot.frame.ioc.beans.bean.definition.handler.init.inte.WeaInitBeanDefinitionHandler;
 import com.weaverboot.frame.ioc.anno.classAnno.WeaIocComponent;
 import com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefinition;
 

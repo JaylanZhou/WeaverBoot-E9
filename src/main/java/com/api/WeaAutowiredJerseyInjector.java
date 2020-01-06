@@ -5,16 +5,14 @@ import com.sun.jersey.core.spi.component.ComponentScope;
 import com.sun.jersey.spi.inject.Injectable;
 import com.sun.jersey.spi.inject.InjectableProvider;
 import com.weaverboot.frame.ioc.anno.fieldAnno.WeaAutowired;
-import com.weaverboot.frame.ioc.beans.bean.definition.handler.wired.anno.autowired.inte.WeaIocAutowiredHandler;
+import com.weaverboot.frame.ioc.handler.wired.anno.autowired.inte.WeaIocAutowiredHandler;
 import com.weaverboot.frame.ioc.beans.context.impl.DefaultWeaApplicationContext;
 import com.weaverboot.frame.ioc.beans.context.inte.WeaApplicationContext;
 import com.weaverboot.frame.ioc.prop.WeaIocProperties;
 import com.weaverboot.tools.baseTools.BaseTools;
 import com.weaverboot.tools.logTools.LogTools;
-import weaver.general.BaseBean;
 
 import javax.ws.rs.ext.Provider;
-import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
 
 /**

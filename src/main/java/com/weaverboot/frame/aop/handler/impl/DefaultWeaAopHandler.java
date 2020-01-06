@@ -9,9 +9,9 @@ public class DefaultWeaAopHandler extends AbstractWeaAopHandler {
 
 
     @Override
-    public void initReplace(AbstractWeaBeanDefinition abstractWeaBeanDefinition,Object object) throws InstantiationException, IllegalAccessException, ClassNotFoundException, IOException {
+    public void initReplace(AbstractWeaBeanDefinition abstractWeaBeanDefinition) throws InstantiationException, IllegalAccessException, ClassNotFoundException, IOException {
 
-        getWeaIocReplaceHandler().getReplaceForm(abstractWeaBeanDefinition,object);
+        getWeaIocReplaceHandler().getReplaceForm(abstractWeaBeanDefinition);
 
     }
 

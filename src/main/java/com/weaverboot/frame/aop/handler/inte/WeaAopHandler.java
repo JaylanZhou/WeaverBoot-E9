@@ -6,6 +6,6 @@ import java.io.IOException;
 
 public interface WeaAopHandler {
 
-    void initReplace(AbstractWeaBeanDefinition abstractWeaBeanDefinition,Object object) throws InstantiationException, IllegalAccessException, ClassNotFoundException, IOException;
+    void initReplace(AbstractWeaBeanDefinition abstractWeaBeanDefinition) throws InstantiationException, IllegalAccessException, ClassNotFoundException, IOException;
 
 }

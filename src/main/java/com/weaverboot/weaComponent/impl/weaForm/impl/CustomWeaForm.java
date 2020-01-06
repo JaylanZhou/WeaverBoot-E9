@@ -40,12 +40,10 @@ public class CustomWeaForm extends AbstractWeaForm {
         return conditionType;
     }
 
-    @Override
     public String getCustomType() {
         return customType;
     }
 
-    @Override
     public void setCustomType(String customType) {
         this.customType = customType;
     }

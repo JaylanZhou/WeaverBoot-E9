@@ -1,8 +1,8 @@
 package com.weaverboot.frame.ioc.filter;
 
 import com.engine.common.util.ParamUtil;
-import com.weaverboot.frame.ioc.beans.bean.definition.handler.replace.weaReplaceParam.impl.WeaAfterReplaceParam;
-import com.weaverboot.frame.ioc.beans.bean.definition.handler.replace.weaReplaceParam.impl.WeaBeforeReplaceParam;
+import com.weaverboot.frame.ioc.handler.replace.weaReplaceParam.impl.WeaAfterReplaceParam;
+import com.weaverboot.frame.ioc.handler.replace.weaReplaceParam.impl.WeaBeforeReplaceParam;
 import com.weaverboot.frame.ioc.beans.bean.definition.utils.WeaIocReplaceUriUtils;
 import com.weaverboot.frame.ioc.filter.wrapper.ComponentResponseWrapper;
 import com.weaverboot.tools.logTools.LogTools;
@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 public class WeaComponentFilter implements Filter {

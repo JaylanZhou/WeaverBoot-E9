@@ -1,6 +1,6 @@
 package com.weaverboot.frame.ioc.prop.init;
 
-import com.weaverboot.frame.ioc.beans.bean.definition.handler.scan.impl.DefaultWeaScanBeanDefinitionHandler;
+import com.weaverboot.frame.ioc.handler.scan.impl.DefaultWeaScanBeanDefinitionHandler;
 import com.weaverboot.frame.ioc.beans.context.impl.DefaultWeaApplicationContext;
 import com.weaverboot.frame.ioc.beans.context.inte.WeaApplicationContext;
 import com.weaverboot.tools.logTools.LogTools;

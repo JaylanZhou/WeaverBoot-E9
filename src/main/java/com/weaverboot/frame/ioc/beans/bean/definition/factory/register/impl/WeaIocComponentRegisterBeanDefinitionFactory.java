@@ -2,9 +2,6 @@ package com.weaverboot.frame.ioc.beans.bean.definition.factory.register.impl;
 
 import com.weaverboot.frame.ioc.anno.classAnno.WeaIocComponent;
 import com.weaverboot.frame.ioc.beans.bean.definition.factory.register.inte.AbstractWeaRegisterBeanDefinitionFactory;
-import com.weaverboot.frame.ioc.beans.bean.definition.handler.register.inte.WeaRegisterIocAnnoHandler;
-import com.weaverboot.frame.ioc.beans.context.impl.DefaultWeaApplicationContext;
-import com.weaverboot.frame.ioc.beans.context.inte.WeaApplicationContext;
 import com.weaverboot.frame.ioc.container.WeaIocContainer;
 import com.weaverboot.frame.ioc.beans.bean.definition.impl.DefaultWeaBeanDefinition;
 import com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefinition;
@@ -47,7 +44,11 @@ public class WeaIocComponentRegisterBeanDefinitionFactory extends AbstractWeaReg
 
         AbstractWeaBeanDefinition weaBeanDefinition = new DefaultWeaBeanDefinition();
 
-        String beanId = super.beforeRegisrer(weaBeanDefinition,clazz,annotation);
+        getWeaCreateWeaBeanDefinitionPostProcessor().initWeaBeanDefinition(weaBeanDefinition,clazz,annotation);
+
+        getWeaCreateWeaBeanDefinitionPostProcessor().postProcessBeforeRegister(weaBeanDefinition);
+
+        String beanId = weaBeanDefinition.getBeanClassName();
 
         if (clazz.isAnnotationPresent(WeaIocComponent.class)) {
 
@@ -63,11 +64,9 @@ public class WeaIocComponentRegisterBeanDefinitionFactory extends AbstractWeaReg
 
         }
 
-        weaBeanDefinition.setBeanId(beanId);
+        getWeaCreateWeaBeanDefinitionPostProcessor().initEarlyContainer(beanId,weaBeanDefinition);
 
-        WeaIocContainer.setEarlyBeandefinition(beanId, weaBeanDefinition);
-
-        WeaIocContainer.getEarlyBeandifinitionList().add(beanId);
+        getWeaCreateWeaBeanDefinitionPostProcessor().postProcessAfterRegister(weaBeanDefinition);
 
         return weaBeanDefinition;
 

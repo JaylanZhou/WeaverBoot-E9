@@ -1,24 +1,19 @@
 package com.weaverboot.frame.ioc.prop;
 
-import com.weaverboot.frame.ioc.anno.fieldAnno.WeaIocValue;
-import com.weaverboot.frame.ioc.beans.bean.definition.handler.init.inte.WeaInitBeanDefinitionHandler;
-import com.weaverboot.frame.ioc.beans.bean.definition.handler.replace.impl.DefaultWeaIocReplaceHandler;
-import com.weaverboot.frame.ioc.beans.bean.definition.handler.replace.inte.WeaIocReplaceHandler;
-import com.weaverboot.frame.ioc.beans.bean.definition.handler.init.impl.DefaultWeaInitBeanDefinitionHandler;
-import com.weaverboot.frame.ioc.beans.bean.definition.handler.register.impl.DefaultWeaRegisterBeanDefinitionHandler;
-import com.weaverboot.frame.ioc.beans.bean.definition.handler.register.impl.DefaultWeaRegisterIocAnnoHandler;
-import com.weaverboot.frame.ioc.beans.bean.definition.handler.register.inte.WeaRegisterBeanDefinitionHandler;
-import com.weaverboot.frame.ioc.beans.bean.definition.handler.register.inte.WeaRegisterIocAnnoHandler;
-import com.weaverboot.frame.ioc.beans.bean.definition.handler.wired.anno.autowired.impl.DefaultWeaIocAutowiredHandler;
-import com.weaverboot.frame.ioc.beans.bean.definition.handler.wired.anno.autowired.inte.WeaIocAutowiredHandler;
-import com.weaverboot.frame.ioc.beans.bean.definition.handler.wired.anno.value.impl.DefaultWeaIocValueHandler;
-import com.weaverboot.frame.ioc.beans.bean.definition.handler.wired.anno.value.inte.WeaIocValueHandler;
-import com.weaverboot.frame.ioc.beans.bean.definition.handler.wired.factory.impl.DefaultWeaWiredBeanDefinitionFactory;
-import com.weaverboot.frame.ioc.beans.bean.definition.handler.wired.factory.inte.WeaWiredBeanDefinitionFactory;
-import com.weaverboot.frame.ioc.beans.bean.definition.handler.wired.impl.WeaIocReplaceComponentWiredBeanDefinitionHandler;
-import com.weaverboot.frame.ioc.beans.bean.definition.handler.wired.inte.WeaWiredBeanDefinitionHandler;
-import com.weaverboot.tools.baseTools.BaseTools;
-import weaver.general.BaseBean;
+import com.weaverboot.frame.ioc.handler.replace.impl.DefaultWeaIocReplaceHandler;
+import com.weaverboot.frame.ioc.handler.replace.inte.WeaIocReplaceHandler;
+import com.weaverboot.frame.ioc.handler.register.impl.DefaultWeaRegisterIocAnnoHandler;
+import com.weaverboot.frame.ioc.handler.register.inte.WeaRegisterIocAnnoHandler;
+import com.weaverboot.frame.ioc.handler.wired.anno.autowired.impl.DefaultWeaIocAutowiredHandler;
+import com.weaverboot.frame.ioc.handler.wired.anno.autowired.inte.WeaIocAutowiredHandler;
+import com.weaverboot.frame.ioc.handler.wired.anno.value.impl.DefaultWeaIocValueHandler;
+import com.weaverboot.frame.ioc.handler.wired.anno.value.inte.WeaIocValueHandler;
+import com.weaverboot.frame.ioc.handler.wired.factory.impl.DefaultWeaWiredBeanDefinitionFactory;
+import com.weaverboot.frame.ioc.handler.wired.factory.inte.WeaWiredBeanDefinitionFactory;
+import com.weaverboot.frame.ioc.postProcessor.register.impl.DefaultWeaCreateWeaBeanDefinitionPostProcessor;
+import com.weaverboot.frame.ioc.postProcessor.register.inte.WeaCreateWeaBeanDefinitionPostProcessor;
+import com.weaverboot.frame.ioc.postProcessor.wired.impl.DefaultWeaWiredBeanPostProcessor;
+import com.weaverboot.frame.ioc.postProcessor.wired.inte.WeaWiredBeanPostProcessor;
 import weaver.general.GCONST;
 
 import java.io.*;
@@ -51,6 +46,10 @@ public class WeaIocProperties {
     public static Class<? extends WeaIocAutowiredHandler> DEFAULT_WEA_IOC_AUTOWIRED_HANDLER = DefaultWeaIocAutowiredHandler.class;
 
     public static Class<? extends WeaIocValueHandler> DEFAULT_WEA_IOC_VALUE_HANDLER = DefaultWeaIocValueHandler.class;
+
+    public static Class<? extends WeaWiredBeanPostProcessor> DEFAULT_WEA_BEAN_POST_PROCESSOR = DefaultWeaWiredBeanPostProcessor.class;
+
+    public static Class<? extends WeaCreateWeaBeanDefinitionPostProcessor> DEFAULT_WEA_CREATE_WEA_BEAN_DEFINITION_POST_PROCESSOR = DefaultWeaCreateWeaBeanDefinitionPostProcessor.class;
 
     static {
 

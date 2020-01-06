@@ -4,10 +4,9 @@ import com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefini
 import com.weaverboot.frame.ioc.beans.context.impl.DefaultWeaApplicationContext;
 import com.weaverboot.frame.ioc.beans.context.inte.WeaApplicationContext;
 import com.weaverboot.frame.ioc.container.WeaIocContainer;
-import com.weaverboot.frame.ioc.beans.bean.definition.handler.replace.weaReplaceParam.impl.WeaAfterReplaceParam;
-import com.weaverboot.frame.ioc.beans.bean.definition.handler.replace.weaReplaceParam.impl.WeaBeforeReplaceParam;
+import com.weaverboot.frame.ioc.handler.replace.weaReplaceParam.impl.WeaAfterReplaceParam;
+import com.weaverboot.frame.ioc.handler.replace.weaReplaceParam.impl.WeaBeforeReplaceParam;
 import com.weaverboot.tools.logTools.LogTools;
-import weaver.general.BaseBean;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

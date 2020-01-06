@@ -29,4 +29,68 @@ public class LogTools {
 
     }
 
+    public static void info(String value){
+
+        if (logger != null){
+
+            logger.debug(value);
+
+        } else {
+
+            baseBean.writeLog(value);
+
+        }
+
+        System.out.println(value);
+
+    }
+
+    public static void debug(String value){
+
+        if (logger != null){
+
+            logger.debug(value);
+
+        } else {
+
+            baseBean.writeLog(value);
+
+        }
+
+        System.out.println(value);
+
+    }
+
+    public static void error(String value){
+
+        if (logger != null){
+
+            logger.debug(value);
+
+        } else {
+
+            baseBean.writeLog(value);
+
+        }
+
+        System.out.println(value);
+
+    }
+
+    public static void warn(String value){
+
+        if (logger != null){
+
+            logger.debug(value);
+
+        } else {
+
+            baseBean.writeLog(value);
+
+        }
+
+        System.out.println(value);
+
+    }
+
 }

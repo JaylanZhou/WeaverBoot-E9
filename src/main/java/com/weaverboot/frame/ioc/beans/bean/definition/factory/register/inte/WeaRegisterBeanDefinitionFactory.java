@@ -1,6 +1,8 @@
 package com.weaverboot.frame.ioc.beans.bean.definition.factory.register.inte;
 
 import com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefinition;
+import com.weaverboot.frame.ioc.handler.register.inte.WeaRegisterIocAnnoHandler;
+import com.weaverboot.frame.ioc.postProcessor.register.inte.WeaCreateWeaBeanDefinitionPostProcessor;
 
 import java.lang.annotation.Annotation;
 
@@ -28,6 +30,10 @@ public interface WeaRegisterBeanDefinitionFactory {
      * @throws ClassNotFoundException
      */
 
-    AbstractWeaBeanDefinition creatWeaBeanDefinition(Class clazz, Annotation annotation) throws InstantiationException, IllegalAccessException, ClassNotFoundException;
+    AbstractWeaBeanDefinition creatWeaBeanDefinition(Class clazz, Annotation annotation) throws IllegalAccessException, ClassNotFoundException, InstantiationException;
+
+    WeaCreateWeaBeanDefinitionPostProcessor getWeaCreateWeaBeanDefinitionPostProcessor() throws IllegalAccessException, InstantiationException;
+
+    void setWeaCreateWeaBeanDefinitionPostProcessor(WeaCreateWeaBeanDefinitionPostProcessor weaCreateWeaBeanDefinitionPostProcessor);
 
 }

@@ -56,7 +56,6 @@ public class CheckBoxWeaForm extends AbstractWeaForm {
         return checkbox;
     }
 
-    @Override
     public void setCheckbox(boolean checkbox) {
         this.checkbox = checkbox;
     }
@@ -65,7 +64,6 @@ public class CheckBoxWeaForm extends AbstractWeaForm {
         return checkboxValue;
     }
 
-    @Override
     public void setCheckboxValue(boolean checkboxValue) {
         this.checkboxValue = checkboxValue;
     }

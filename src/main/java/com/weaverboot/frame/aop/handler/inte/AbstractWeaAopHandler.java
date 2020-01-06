@@ -1,6 +1,6 @@
 package com.weaverboot.frame.aop.handler.inte;
 
-import com.weaverboot.frame.ioc.beans.bean.definition.handler.replace.inte.WeaIocReplaceHandler;
+import com.weaverboot.frame.ioc.handler.replace.inte.WeaIocReplaceHandler;
 import com.weaverboot.frame.ioc.prop.WeaIocProperties;
 
 public abstract class AbstractWeaAopHandler implements WeaAopHandler {
