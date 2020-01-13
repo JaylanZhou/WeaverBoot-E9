@@ -1,5 +1,7 @@
 package com.weaverboot.frame.aop.advisor.advisor.inte;
 
+import com.weaverboot.frame.aop.advice.inte.WeaAopAdvice;
+
 /**
  * @Author : Jaylan Zhou
  * @Date : 2019-12-20 13:31
@@ -7,17 +9,14 @@ package com.weaverboot.frame.aop.advisor.advisor.inte;
  */
 public abstract class AbstractWeaAopAdvisor implements WeaAopAdvisor {
 
-    protected String adviceBeanName;
+    private String adviceBeanName;
 
-    protected String expression;
+    private Class<? extends WeaAopAdvice> adviceBeanClass;
 
-    public AbstractWeaAopAdvisor(String adviceBeanName,String expression){
+    private String expression;
 
-        this.adviceBeanName = adviceBeanName;
+    private int order;
 
-        this.expression = expression;
-
-    }
 
     @Override
     public String getAdviceBeanName() {
@@ -29,7 +28,35 @@ public abstract class AbstractWeaAopAdvisor implements WeaAopAdvisor {
     @Override
     public String getExpression() {
 
-        return this.getExpression();
+        return this.expression;
 
+    }
+
+
+    public void setAdviceBeanName(String adviceBeanName) {
+        this.adviceBeanName = adviceBeanName;
+    }
+
+    @Override
+    public Class<? extends WeaAopAdvice> getAdviceBeanClass() {
+        return adviceBeanClass;
+    }
+
+
+    public void setAdviceBeanClass(Class<? extends WeaAopAdvice> adviceBeanClass) {
+        this.adviceBeanClass = adviceBeanClass;
+    }
+
+    public void setExpression(String expression) {
+        this.expression = expression;
+    }
+
+    @Override
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
     }
 }

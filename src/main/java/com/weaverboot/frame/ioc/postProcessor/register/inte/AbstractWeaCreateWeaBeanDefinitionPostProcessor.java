@@ -1,9 +1,16 @@
 package com.weaverboot.frame.ioc.postProcessor.register.inte;
 
+import com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefinition;
+import com.weaverboot.frame.ioc.container.WeaIocContainer;
 import com.weaverboot.frame.ioc.handler.register.inte.WeaRegisterIocAnnoHandler;
 import com.weaverboot.frame.ioc.prop.WeaIocProperties;
 
+import java.lang.annotation.Annotation;
+
 /**
+ *
+ * 默认创建BeanDefinition时的前后置方法类
+ *
  * @Author : Jaylan Zhou
  * @Date : 2020-01-06 11:43
  * @Version : 1.0
@@ -37,6 +44,53 @@ public abstract class AbstractWeaCreateWeaBeanDefinitionPostProcessor implements
     @Override
     public void setWeaRegisterIocAnnoHandler(WeaRegisterIocAnnoHandler weaRegisterIocAnnoHandler) {
         this.weaRegisterIocAnnoHandler = weaRegisterIocAnnoHandler;
+    }
+
+    /**
+     *
+     * 初始化BeanDefinition属性
+     *
+     * @param abstractWeaBeanDefinition
+     * @param clazz
+     * @param annotation
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     */
+
+    @Override
+    public void initWeaBeanDefinition(AbstractWeaBeanDefinition abstractWeaBeanDefinition, Class clazz, Annotation annotation) throws InstantiationException, IllegalAccessException {
+
+        abstractWeaBeanDefinition.setBeanClassName(clazz.getName());
+
+        abstractWeaBeanDefinition.setBeanClass(clazz);
+
+        abstractWeaBeanDefinition.setBeanAnnotation(annotation);
+
+        WeaRegisterIocAnnoHandler weaRegisterIocAnnoHandler = getWeaRegisterIocAnnoHandler();
+
+        weaRegisterIocAnnoHandler.handleLazyInit(abstractWeaBeanDefinition);
+
+        weaRegisterIocAnnoHandler.handlePrototype(abstractWeaBeanDefinition);
+
+    }
+
+    /**
+     *
+     * 向待创建容器中加入此beandifition
+     *
+     * @param beanId
+     * @param weaBeanDefinition
+     */
+
+    @Override
+    public void initEarlyContainer(String beanId, AbstractWeaBeanDefinition weaBeanDefinition) {
+
+        weaBeanDefinition.setBeanId(beanId);
+
+        WeaIocContainer.setEarlyBeandefinition(beanId, weaBeanDefinition);
+
+        WeaIocContainer.getEarlyBeandifinitionList().add(beanId);
+
     }
 
 }

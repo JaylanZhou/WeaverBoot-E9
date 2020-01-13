@@ -1,5 +1,6 @@
 package com.weaverboot.frame.ioc.handler.wired.inte;
 
+import com.weaverboot.frame.aop.handler.aspectPointcut.inte.WeaAspectPointcutHandler;
 import com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefinition;
 import com.weaverboot.frame.ioc.handler.wired.anno.autowired.inte.WeaIocAutowiredHandler;
 import com.weaverboot.frame.ioc.handler.wired.anno.value.inte.WeaIocValueHandler;
@@ -22,5 +23,9 @@ public interface WeaWiredBeanDefinitionHandler {
     WeaIocValueHandler getWeaIocValueHandler() throws IllegalAccessException, InstantiationException;
 
     void setWeaIocValueHandler(WeaIocValueHandler weaIocValueHandler);
+
+    WeaAspectPointcutHandler getWeaAspectPointCutHandler() throws IllegalAccessException, InstantiationException;
+
+    void setWeaAspectPointCutHandler(WeaAspectPointcutHandler weaAspectPointCutHandler);
 
 }

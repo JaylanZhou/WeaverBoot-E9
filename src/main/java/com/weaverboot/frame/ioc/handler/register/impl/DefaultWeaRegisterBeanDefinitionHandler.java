@@ -5,6 +5,7 @@ import com.weaverboot.frame.ioc.beans.bean.definition.factory.register.inte.WeaR
 import com.weaverboot.frame.ioc.beans.bean.definition.factory.register.inte.WeaRegisterBeanDefinitionFactory;
 import com.weaverboot.frame.ioc.beans.bean.definition.utils.WeaIocCheckUtils;
 import com.weaverboot.frame.ioc.handler.register.inte.WeaRegisterBeanDefinitionHandler;
+import com.weaverboot.tools.logTools.LogTools;
 
 import java.lang.annotation.Annotation;
 
@@ -26,7 +27,7 @@ public class DefaultWeaRegisterBeanDefinitionHandler implements WeaRegisterBeanD
 
         if (annotation != null){
 
-            System.out.println("注册了！" + clazz.getName());
+            LogTools.info("注册了！" + clazz.getName());
 
             WeaRegisterBeanDefinitionFactory weaRegisterBeanDefinitionFactory = weaRBDFFactory.getFactory(clazz);
 

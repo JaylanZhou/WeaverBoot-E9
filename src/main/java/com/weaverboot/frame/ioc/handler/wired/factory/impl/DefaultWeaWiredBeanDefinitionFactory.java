@@ -1,15 +1,13 @@
 package com.weaverboot.frame.ioc.handler.wired.factory.impl;
 
+import com.weaverboot.frame.aop.anno.aspect.WeaAopAspect;
 import com.weaverboot.frame.ioc.anno.classAnno.WeaIocComponent;
 import com.weaverboot.frame.ioc.anno.classAnno.WeaIocConfiguration;
 import com.weaverboot.frame.ioc.anno.classAnno.WeaIocReplaceComponent;
 import com.weaverboot.frame.ioc.anno.classAnno.WeaIocService;
 import com.weaverboot.frame.ioc.anno.methodAnno.WeaIocBean;
 import com.weaverboot.frame.ioc.handler.wired.factory.inte.AbstractWeaWiredBeanDefinitionFactory;
-import com.weaverboot.frame.ioc.handler.wired.impl.WeaIocComponentWiredBeanDefinitionHandler;
-import com.weaverboot.frame.ioc.handler.wired.impl.WeaIocConfigurationWiredBeanDefinitionHandler;
-import com.weaverboot.frame.ioc.handler.wired.impl.WeaIocReplaceComponentWiredBeanDefinitionHandler;
-import com.weaverboot.frame.ioc.handler.wired.impl.WeaIocServiceWiredBeanDefinitionHandler;
+import com.weaverboot.frame.ioc.handler.wired.impl.*;
 import com.weaverboot.frame.ioc.handler.wired.inte.WeaWiredBeanDefinitionHandler;
 import com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefinition;
 
@@ -42,7 +40,11 @@ public class DefaultWeaWiredBeanDefinitionFactory extends AbstractWeaWiredBeanDe
 
             return new WeaIocComponentWiredBeanDefinitionHandler();
 
-        } else{
+        } else if(annotation.annotationType().equals(WeaAopAspect.class)){
+
+            return new WeaAopAspectWiredBeanDefinitionHandler();
+
+        }else{
 
             throw new RuntimeException("未找到对应的注册类型");
 

@@ -1,7 +1,10 @@
 package com.weaverboot.frame.ioc.beans.bean.definition.inte;
 
+import com.weaverboot.frame.aop.pointcut.inte.WeaAopPointCut;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
+import java.util.List;
 
 public abstract class AbstractWeaBeanDefinition implements WeaBeanDefinition {
 
@@ -38,6 +41,14 @@ public abstract class AbstractWeaBeanDefinition implements WeaBeanDefinition {
     private String description;
 
     private Annotation componentType;
+
+    private boolean proxyTargetClass;
+
+    private boolean useCglib;
+
+    private boolean exposeProxy;
+
+    private List<WeaAopPointCut> weaAopPointCutList;
 
 
     public String getBeanClassName() {
@@ -166,5 +177,37 @@ public abstract class AbstractWeaBeanDefinition implements WeaBeanDefinition {
 
     public void setComponentType(Annotation componentType) {
         this.componentType = componentType;
+    }
+
+    public boolean getProxyTargetClass() {
+        return proxyTargetClass;
+    }
+
+    public void setProxyTargetClass(boolean proxyTargetClass) {
+        this.proxyTargetClass = proxyTargetClass;
+    }
+
+    public boolean getExposeProxy() {
+        return exposeProxy;
+    }
+
+    public void setExposeProxy(boolean exposeProxy) {
+        this.exposeProxy = exposeProxy;
+    }
+
+    public boolean getUseCglib() {
+        return useCglib;
+    }
+
+    public void setUseCglib(boolean useCglib) {
+        this.useCglib = useCglib;
+    }
+
+    public List<WeaAopPointCut> getWeaAopPointCutList() {
+        return weaAopPointCutList;
+    }
+
+    public void setWeaAopPointCutList(List<WeaAopPointCut> weaAopPointCutList) {
+        this.weaAopPointCutList = weaAopPointCutList;
     }
 }

@@ -8,6 +8,7 @@ import com.weaverboot.frame.ioc.anno.methodAnno.WeaIocBean;
 import com.weaverboot.frame.ioc.beans.bean.definition.factory.register.inte.AbstractWeaRegisterBeanDefinitionFactory;
 import com.weaverboot.frame.ioc.beans.bean.definition.impl.DefaultWeaBeanDefinition;
 import com.weaverboot.frame.ioc.beans.bean.definition.impl.DefaultWeaFactoryBean;
+import com.weaverboot.frame.ioc.beans.bean.definition.impl.WeaRootBeanDefinition;
 import com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefinition;
 import com.weaverboot.frame.ioc.container.WeaIocContainer;
 import com.weaverboot.tools.baseTools.BaseTools;
@@ -48,7 +49,7 @@ public class WeaIocConfigurationRegisterBeanDefinitionFactory extends AbstractWe
 
         }
 
-        AbstractWeaBeanDefinition weaBeanDefinition = new DefaultWeaBeanDefinition();
+        AbstractWeaBeanDefinition weaBeanDefinition = new WeaRootBeanDefinition();
 
         getWeaCreateWeaBeanDefinitionPostProcessor().initWeaBeanDefinition(weaBeanDefinition,clazz,annotation);
 

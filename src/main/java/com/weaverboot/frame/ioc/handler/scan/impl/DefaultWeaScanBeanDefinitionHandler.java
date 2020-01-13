@@ -61,11 +61,11 @@ public class DefaultWeaScanBeanDefinitionHandler implements WeaScanBeanDefinitio
 
                         } catch (Exception e){
 
-                            LogTools.writeLog("扫描发生错误，原因为:" + e.getMessage());
+                            LogTools.error("扫描发生错误，原因为:" + e.getMessage());
 
                         } catch (Throwable t){
 
-                            LogTools.writeLog("扫描发生错误，原因为:" + t.getMessage());
+                            LogTools.error("扫描发生错误，原因为:" + t.getMessage());
 
                         }
 

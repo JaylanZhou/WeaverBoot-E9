@@ -1,11 +1,11 @@
-package com.weaverboot.frame.aop.handler.impl;
+package com.weaverboot.frame.aop.handler.replace.impl;
 
 import com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefinition;
-import com.weaverboot.frame.aop.handler.inte.AbstractWeaAopHandler;
+import com.weaverboot.frame.aop.handler.replace.inte.AbstractWeaAopReplaceHandler;
 
 import java.io.IOException;
 
-public class DefaultWeaAopHandler extends AbstractWeaAopHandler {
+public class WeaAopReplaceReplaceHandler extends AbstractWeaAopReplaceHandler {
 
 
     @Override

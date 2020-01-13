@@ -28,7 +28,7 @@ public class DefaultWeaInitBeanDefinitionHandler extends AbstractWeaInitBeanDefi
 
             AbstractWeaBeanDefinition abstractWeaBeanDefinition = WeaIocContainer.getEarlyBeanDefinition(beanId);
 
-            if (abstractWeaBeanDefinition != null && !abstractWeaBeanDefinition.isLazyInit()){
+            if (abstractWeaBeanDefinition != null && abstractWeaBeanDefinition.isLazyInit() == false && abstractWeaBeanDefinition.isSingleton()){
 
                 try {
 
@@ -36,7 +36,7 @@ public class DefaultWeaInitBeanDefinitionHandler extends AbstractWeaInitBeanDefi
 
                 } catch (Exception e){
 
-                    LogTools.writeLog(abstractWeaBeanDefinition.getBeanClassName() + "注册错误，原因为:" + e.getMessage());
+                    LogTools.error(abstractWeaBeanDefinition.getBeanClassName() + "注册错误，原因为:" + e.getMessage());
 
                     continue;
 

@@ -104,6 +104,12 @@ public abstract class AbstractWeaFormGroup {
 
         try {
 
+            if (abstractWeaForm.getClass().getName().equals(tClass.getName())){
+
+                return (T) abstractWeaForm;
+
+            }
+
             T resultForm = tClass.newInstance();
 
             resultForm.copyCommonAttr(abstractWeaForm);
@@ -143,13 +149,19 @@ public abstract class AbstractWeaFormGroup {
 
                     if (BaseTools.notNullString(labelName) && abstractWeaForm.getLabel().equals(labelName)) {
 
-                    T resultForm = tClass.newInstance();
+                        if (abstractWeaForm.getClass().getName().equals(tClass.getName())){
 
-                    resultForm.copyCommonAttr(abstractWeaForm);
+                            return (T) abstractWeaForm;
 
-                    this.getItems().set(i,resultForm);
+                        }
 
-                    return resultForm;
+                        T resultForm = tClass.newInstance();
+
+                        resultForm.copyCommonAttr(abstractWeaForm);
+
+                        this.getItems().set(i,resultForm);
+
+                        return resultForm;
 
                 }
 

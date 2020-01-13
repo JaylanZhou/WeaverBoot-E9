@@ -20,7 +20,7 @@ public class TimePickerWeaForm extends AbstractWeaForm {
 
     private String format;
 
-    private String formatPattern;
+    private int formatPattern;
 
     private boolean textDecoration;
 
@@ -54,11 +54,11 @@ public class TimePickerWeaForm extends AbstractWeaForm {
         this.format = format;
     }
 
-    public String getFormatPattern() {
+    public int getFormatPattern() {
         return formatPattern;
     }
 
-    public void setFormatPattern(String formatPattern) {
+    public void setFormatPattern(int formatPattern) {
         this.formatPattern = formatPattern;
     }
 

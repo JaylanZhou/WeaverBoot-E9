@@ -1,5 +1,8 @@
 package com.weaverboot.frame.ioc.handler.wired.inte;
 
+import com.weaverboot.frame.aop.handler.aspectPointcut.inte.WeaAspectPointcutHandler;
+import com.weaverboot.frame.aop.prop.WeaAopProperties;
+import com.weaverboot.frame.ioc.beans.bean.definition.impl.WeaRootBeanDefinition;
 import com.weaverboot.frame.ioc.handler.wired.anno.autowired.inte.WeaIocAutowiredHandler;
 import com.weaverboot.frame.ioc.handler.wired.anno.value.inte.WeaIocValueHandler;
 import com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefinition;
@@ -30,6 +33,8 @@ public abstract class AbstractWeaWiredBeanDefinitionHandler implements WeaWiredB
 
     private WeaWiredBeanPostProcessor weaBeanPostProcessor;
 
+    private WeaAspectPointcutHandler weaAspectPointcutHandler;
+
     protected static Object lockObject = new Object();
 
     @Override
@@ -37,7 +42,7 @@ public abstract class AbstractWeaWiredBeanDefinitionHandler implements WeaWiredB
 
         if (weaBeanPostProcessor == null){
 
-            return WeaIocProperties.DEFAULT_WEA_BEAN_POST_PROCESSOR.newInstance();
+            weaBeanPostProcessor = WeaIocProperties.DEFAULT_WEA_BEAN_POST_PROCESSOR.newInstance();
 
         }
 
@@ -62,7 +67,7 @@ public abstract class AbstractWeaWiredBeanDefinitionHandler implements WeaWiredB
 
         if (weaIocAutowiredHandler == null){
 
-            return WeaIocProperties.DEFAULT_WEA_IOC_AUTOWIRED_HANDLER.newInstance();
+            weaIocAutowiredHandler = WeaIocProperties.DEFAULT_WEA_IOC_AUTOWIRED_HANDLER.newInstance();
 
         }
 
@@ -86,7 +91,7 @@ public abstract class AbstractWeaWiredBeanDefinitionHandler implements WeaWiredB
 
         if (weaIocValueHandler == null){
 
-            return WeaIocProperties.DEFAULT_WEA_IOC_VALUE_HANDLER.newInstance();
+            weaIocValueHandler = WeaIocProperties.DEFAULT_WEA_IOC_VALUE_HANDLER.newInstance();
 
         }
 
@@ -95,6 +100,27 @@ public abstract class AbstractWeaWiredBeanDefinitionHandler implements WeaWiredB
 
     public void setWeaIocValueHandler(WeaIocValueHandler weaIocValueHandler) {
         this.weaIocValueHandler = weaIocValueHandler;
+    }
+
+    @Override
+    public WeaAspectPointcutHandler getWeaAspectPointCutHandler() throws IllegalAccessException, InstantiationException {
+
+        if (weaAspectPointcutHandler == null){
+
+            weaAspectPointcutHandler = WeaAopProperties.DEFAULT_WEA_ASPECT_POINTCUT_HANDLER.newInstance();
+
+        }
+
+        return weaAspectPointcutHandler;
+
+    }
+
+    @Override
+    public void setWeaAspectPointCutHandler(WeaAspectPointcutHandler weaAspectPointCutHandler) {
+
+        this.weaAspectPointcutHandler = weaAspectPointCutHandler;
+
+
     }
 
     /**
@@ -111,6 +137,18 @@ public abstract class AbstractWeaWiredBeanDefinitionHandler implements WeaWiredB
 
         WeaFactoryBean weaFactoryBean = abstractWeaBeanDefinition.getWeaFactoryBean();
 
+        if (!(abstractWeaBeanDefinition instanceof WeaRootBeanDefinition)) { //日后用作是否开启动态代理配置用
+
+            Object object = this.getWeaAspectPointCutHandler().registerProxy(abstractWeaBeanDefinition);
+
+            if (object != null){
+
+                return object;
+
+            }
+
+        }
+
         if (abstractWeaBeanDefinition.getWeaFactoryBean() != null){
 
             return weaFactoryBean.createBean();
@@ -122,7 +160,6 @@ public abstract class AbstractWeaWiredBeanDefinitionHandler implements WeaWiredB
         }
 
     }
-
 
     /**
      *

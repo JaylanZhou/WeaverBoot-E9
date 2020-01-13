@@ -13,7 +13,7 @@ import java.lang.annotation.Annotation;
 public interface WeaCreateWeaBeanDefinitionPostProcessor {
 
     //bean初始化前增强
-    void postProcessBeforeRegister(AbstractWeaBeanDefinition abstractWeaBeanDefinition) throws InstantiationException, IllegalAccessException;
+    void postProcessBeforeRegister(AbstractWeaBeanDefinition abstractWeaBeanDefinition);
 
     //bean初始化后增强
     void postProcessAfterRegister(AbstractWeaBeanDefinition abstractWeaBeanDefinition);

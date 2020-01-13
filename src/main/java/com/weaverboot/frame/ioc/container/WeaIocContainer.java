@@ -1,6 +1,8 @@
 package com.weaverboot.frame.ioc.container;
 
 
+import com.weaverboot.frame.aop.advisor.advisor.inte.WeaAopAdvisor;
+import com.weaverboot.frame.aop.pointcut.inte.WeaAopPointCut;
 import com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefinition;
 
 import java.lang.reflect.Method;
@@ -20,6 +22,8 @@ public class WeaIocContainer {
     private volatile static Map<String,AbstractWeaBeanDefinition> BEING_CREATE_BEANDEFINITION_MAP = new ConcurrentHashMap<>();
 
     private volatile static List<String> EARLY_BEANDIFINITION_LIST = new ArrayList<>();
+
+    public volatile static List<WeaAopPointCut> WEA_AOP_ADVISOR_LIST = new ArrayList<>();
 
     private volatile static Map<String, Map<AbstractWeaBeanDefinition, Map<String,Method>>> REPLACE_AFTER_API_MAP = new ConcurrentHashMap<>();
 

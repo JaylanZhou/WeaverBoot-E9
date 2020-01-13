@@ -210,7 +210,7 @@ public class WeaFormParseTools {
 
             case "DATE" :
 
-                return JSONObject.parseObject(jsonString, DateWeaForm.class);
+                return JSONObject.parseObject(jsonString, DateGroupWeaForm.class);
 
             case "DATEPICKER" :
 

@@ -27,6 +27,8 @@ public class LogTools {
 
         }
 
+        System.out.println(value);
+
     }
 
     public static void info(String value){

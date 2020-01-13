@@ -1,5 +1,7 @@
 package com.weaverboot.frame.ioc.beans.bean.definition.factory.register.impl;
 
+import com.weaverboot.frame.aop.anno.aspect.WeaAopAspect;
+import com.weaverboot.frame.aop.anno.pointcut.WeaAopPointCut;
 import com.weaverboot.frame.ioc.anno.classAnno.WeaIocComponent;
 import com.weaverboot.frame.ioc.anno.classAnno.WeaIocConfiguration;
 import com.weaverboot.frame.ioc.anno.classAnno.WeaIocReplaceComponent;
@@ -46,6 +48,10 @@ public class DefaultWeaRBDFFactory extends AbstractWeaRBDFFactory {
         } else if (abstractWeaBeanDefinitionClass.isAnnotationPresent(WeaIocConfiguration.class)){
 
             return new WeaIocConfigurationRegisterBeanDefinitionFactory();
+
+        } else if (abstractWeaBeanDefinitionClass.isAnnotationPresent(WeaAopAspect.class)){
+
+            return new WeaIocAspectRegisterBeanDefinitionFactory();
 
         } else {
 

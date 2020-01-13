@@ -289,8 +289,6 @@ public class HttpClientBuildTools {
 
     public static HttpGet getHttpGet(String url, Map<String,String> param, Map<String,String> header) throws URISyntaxException {
 
-        url = setParamToHttp(url,param);
-
         URI uri = getUri(url,param);
 
         HttpGet httpGet = new HttpGet(uri);

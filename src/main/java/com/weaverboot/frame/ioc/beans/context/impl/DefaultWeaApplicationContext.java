@@ -1,6 +1,8 @@
 package com.weaverboot.frame.ioc.beans.context.impl;
 
 import com.weaverboot.frame.ioc.handler.init.inte.WeaInitBeanDefinitionHandler;
+import com.weaverboot.frame.ioc.handler.wired.anno.autowired.impl.DefaultWeaIocAutowiredHandler;
+import com.weaverboot.frame.ioc.handler.wired.anno.autowired.inte.WeaIocAutowiredHandler;
 import com.weaverboot.frame.ioc.handler.wired.factory.inte.WeaWiredBeanDefinitionFactory;
 import com.weaverboot.frame.ioc.handler.wired.inte.WeaWiredBeanDefinitionHandler;
 import com.weaverboot.frame.ioc.container.WeaIocContainer;
@@ -24,11 +26,15 @@ public class DefaultWeaApplicationContext implements WeaApplicationContext {
 
     private WeaInitBeanDefinitionHandler weaInitBeanDefinitionHandler;
 
+    private WeaIocAutowiredHandler weaIocAutowiredHandler;
+
     public DefaultWeaApplicationContext() {
 
         weaInitBeanDefinitionHandler = new DefaultWeaInitBeanDefinitionHandler();
 
         weaScanBeanDefinitionHandler = new DefaultWeaScanBeanDefinitionHandler();
+
+        weaIocAutowiredHandler = new DefaultWeaIocAutowiredHandler();
 
     }
 
@@ -54,57 +60,55 @@ public class DefaultWeaApplicationContext implements WeaApplicationContext {
     @Override
     public Object getBean(String beanId) {
 
-        if (WeaIocContainer.getBeanDefinition(beanId) == null) {
+        try {
 
-            if (WeaIocContainer.getBeingCreateBeanDefinition(beanId) == null){
+            if (WeaIocContainer.getBeanDefinition(beanId) == null) {
 
-                if (WeaIocContainer.getEarlyBeanDefinition(beanId) == null) {
+                if (WeaIocContainer.getBeingCreateBeanDefinition(beanId) == null) {
 
-                    return null;
+                    if (WeaIocContainer.getEarlyBeanDefinition(beanId) == null) {
 
-                } else {
-
-                    AbstractWeaBeanDefinition abstractWeaBeanDefinition;
-
-                    if (WeaIocContainer.getBeingCreateBeanDefinition(beanId) != null) {
-
-                        abstractWeaBeanDefinition = WeaIocContainer.getBeingCreateBeanDefinition(beanId);
+                        return null;
 
                     } else {
 
-                        abstractWeaBeanDefinition = WeaIocContainer.getEarlyBeanDefinition(beanId);
+                        AbstractWeaBeanDefinition abstractWeaBeanDefinition;
 
-                    }
+                        if (WeaIocContainer.getBeingCreateBeanDefinition(beanId) != null) {
 
-                    try {
+                            abstractWeaBeanDefinition = WeaIocContainer.getBeingCreateBeanDefinition(beanId);
+
+                        } else {
+
+                            abstractWeaBeanDefinition = WeaIocContainer.getEarlyBeanDefinition(beanId);
+
+                        }
 
                         WeaWiredBeanDefinitionFactory weaWiredBeanDefinitionFactory = WeaIocProperties.DEFAULT_WEA_WIRED_BEAN_DEFINITION_FACTORY.newInstance();
 
                         WeaWiredBeanDefinitionHandler weaWiredBeanDefinitionHandler = weaWiredBeanDefinitionFactory.getHandler(abstractWeaBeanDefinition);
 
-                        Object object = weaWiredBeanDefinitionHandler.wiredBean(abstractWeaBeanDefinition);
-
-                        return object;
-
-                    } catch (Exception e) {
-
-                        LogTools.writeLog("获取bean发生错误，原因为:" + e.getMessage());
-
-                        throw new RuntimeException("获取bean发生错误，原因为:" + e.getMessage());
+                        return weaWiredBeanDefinitionHandler.wiredBean(abstractWeaBeanDefinition);
 
                     }
 
+                } else {
+
+                    return WeaIocContainer.getBeingCreateBeanDefinition(beanId);
+
                 }
 
-             } else {
+            } else {
 
-                return WeaIocContainer.getBeingCreateBeanDefinition(beanId);
+                return WeaIocContainer.getBeanDefinition(beanId).getBeanObject();
 
             }
 
-        } else {
+        } catch (Exception e){
 
-            return WeaIocContainer.getBeanDefinition(beanId).getBeanObject();
+            LogTools.error("获取bean发生错误，原因为:" + e.getMessage());
+
+            return null;
 
         }
 
@@ -115,12 +119,62 @@ public class DefaultWeaApplicationContext implements WeaApplicationContext {
 
         String beanId = tClass.getName();
 
-        Object object = getBean(beanId);
+        try {
 
-        return (T) object;
+            if (WeaIocContainer.getBeanDefinition(beanId) == null) {
+
+                if (WeaIocContainer.getBeingCreateBeanDefinition(beanId) == null) {
+
+                    if (WeaIocContainer.getEarlyBeanDefinition(beanId) == null) {
+
+                        return (T) weaIocAutowiredHandler.checkIsImplBeanAndWired(tClass, false);
+
+                    } else {
+
+                        AbstractWeaBeanDefinition abstractWeaBeanDefinition;
+
+                        if (WeaIocContainer.getBeingCreateBeanDefinition(beanId) != null) {
+
+                            abstractWeaBeanDefinition = WeaIocContainer.getBeingCreateBeanDefinition(beanId);
+
+                        } else {
+
+                            abstractWeaBeanDefinition = WeaIocContainer.getEarlyBeanDefinition(beanId);
+
+                        }
+
+                        WeaWiredBeanDefinitionFactory weaWiredBeanDefinitionFactory = WeaIocProperties.DEFAULT_WEA_WIRED_BEAN_DEFINITION_FACTORY.newInstance();
+
+                        WeaWiredBeanDefinitionHandler weaWiredBeanDefinitionHandler = weaWiredBeanDefinitionFactory.getHandler(abstractWeaBeanDefinition);
+
+                        return (T) weaWiredBeanDefinitionHandler.wiredBean(abstractWeaBeanDefinition);
+
+                    }
+
+                } else {
+
+                    return (T) WeaIocContainer.getBeingCreateBeanDefinition(beanId);
+
+                }
+
+            } else {
+
+                return (T) WeaIocContainer.getBeanDefinition(beanId).getBeanObject();
+
+            }
+
+        } catch (Exception e){
+
+            LogTools.error("获取bean发生错误，原因为:" + e.getMessage());
+
+            return null;
+
+        }
+
     }
 
     @Override
+    @Deprecated
     public Map<String, Object> getBeansWithAnnotation(Class<Annotation> annotationClass) {
 
         try {
@@ -159,21 +213,9 @@ public class DefaultWeaApplicationContext implements WeaApplicationContext {
 
             }
 
-        } catch (IllegalAccessException e) {
+        } catch (Exception e) {
 
-            e.printStackTrace();
-
-        } catch (ClassNotFoundException e) {
-
-            e.printStackTrace();
-
-        } catch (InstantiationException e) {
-
-            e.printStackTrace();
-
-        } catch (IOException e) {
-
-            e.printStackTrace();
+            LogTools.error("未找到标有该注解的类");
 
         }
 

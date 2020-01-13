@@ -1,6 +1,6 @@
 package com.weaverboot.frame.ioc.postProcessor.wired.impl;
 
-import com.weaverboot.frame.aop.handler.inte.WeaAopHandler;
+import com.weaverboot.frame.aop.handler.replace.inte.WeaAopReplaceHandler;
 import com.weaverboot.frame.aop.prop.WeaAopProperties;
 import com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefinition;
 import com.weaverboot.frame.ioc.beans.bean.definition.utils.WeaIocCheckUtils;
@@ -27,9 +27,9 @@ public class WeaReplaceComponentWiredBeanPostProcessor extends AbstractWeaWiredB
 
         try {
 
-            WeaAopHandler weaAopHandler = WeaAopProperties.DEFAULT_WEA_AOP_HANDLER.newInstance();
+            WeaAopReplaceHandler weaAopReplaceHandler = WeaAopProperties.DEFAULT_WEA_AOP_HANDLER.newInstance();
 
-            weaAopHandler.initReplace(abstractWeaBeanDefinition);
+            weaAopReplaceHandler.initReplace(abstractWeaBeanDefinition);
 
             String beanId = abstractWeaBeanDefinition.getBeanId();
 

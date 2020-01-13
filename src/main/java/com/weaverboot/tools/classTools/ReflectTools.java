@@ -22,10 +22,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.UndeclaredThrowableException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 
@@ -549,6 +546,33 @@ public class ReflectTools {
 	public interface FieldFilter {
 
 		boolean matches(Field field);
+	}
+
+	//获取类的所有方法,包括继承的父类和实现的接口里面的方法
+	public static List<Method> getAllMethodForClass(Class<?> beanClass) {
+
+		List<Method> allMethods = new LinkedList<>();
+
+		//获取beanClass的所有接口
+		Set<Class<?>> classes = new LinkedHashSet<>(ClassTools.getAllInterfacesForClassAsSet(beanClass));
+
+		classes.add(beanClass);
+
+		//遍历所有的类和接口反射获取到所有的方法
+		for (Class<?> clazz : classes) {
+
+			Method[] methods = ReflectTools.getAllDeclaredMethods(clazz);
+
+			for (Method m : methods) {
+
+				allMethods.add(m);
+
+			}
+
+		}
+
+		return allMethods;
+
 	}
 
 

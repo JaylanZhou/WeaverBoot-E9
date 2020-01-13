@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  *
- * 日期格式(E8) 组件
+ * 日期组合 组件
  *
  * @Author : Jaylan Zhou
  *
@@ -18,7 +18,7 @@ import java.util.List;
  */
 
 
-public class DateWeaForm extends AbstractWeaForm {
+public class DateGroupWeaForm extends AbstractWeaForm {
 
     private final ConditionType conditionType = ConditionType.DATE;
 
@@ -26,7 +26,7 @@ public class DateWeaForm extends AbstractWeaForm {
 
     private boolean textDecoration;
 
-    public DateWeaForm(String label,String ... name){
+    public DateGroupWeaForm(String label, String ... name){
 
         super();
 
@@ -36,7 +36,7 @@ public class DateWeaForm extends AbstractWeaForm {
 
     }
 
-    public DateWeaForm(){
+    public DateGroupWeaForm(){
 
         super();
 
@@ -56,7 +56,7 @@ public class DateWeaForm extends AbstractWeaForm {
      *
      */
 
-    public DateWeaForm addOption(String name,String value){
+    public DateGroupWeaForm addOption(String name, String value){
 
         if (this.datas == null){
 

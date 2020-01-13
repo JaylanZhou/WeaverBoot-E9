@@ -22,7 +22,7 @@ public class DatePickerWeaForm extends AbstractWeaForm {
 
     private boolean textDecoration;
 
-    private String formatPattern;
+    private int formatPattern;
 
     private boolean noInput;
 
@@ -42,11 +42,11 @@ public class DatePickerWeaForm extends AbstractWeaForm {
         this.textDecoration = textDecoration;
     }
 
-    public String getFormatPattern() {
+    public int getFormatPattern() {
         return formatPattern;
     }
 
-    public void setFormatPattern(String formatPattern) {
+    public void setFormatPattern(int formatPattern) {
         this.formatPattern = formatPattern;
     }
 
