@@ -20,6 +20,16 @@ public class DefaultWeaRegisterBeanDefinitionHandler implements WeaRegisterBeanD
     }
 
 
+    /**
+     *
+     * 注册 BeanDefinition
+     *
+     * @param clazz
+     * @throws IllegalAccessException
+     * @throws InstantiationException
+     * @throws ClassNotFoundException
+     */
+
     @Override
     public void registerBeanDefinition(Class clazz) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
 
@@ -27,7 +37,7 @@ public class DefaultWeaRegisterBeanDefinitionHandler implements WeaRegisterBeanD
 
         if (annotation != null){
 
-            LogTools.info("注册了！" + clazz.getName());
+            LogTools.info("注册了：" + clazz.getName());
 
             WeaRegisterBeanDefinitionFactory weaRegisterBeanDefinitionFactory = weaRBDFFactory.getFactory(clazz);
 

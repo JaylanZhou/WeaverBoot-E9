@@ -5,6 +5,7 @@ import com.weaverboot.frame.ioc.anno.classAnno.WeaIocConfiguration;
 import com.weaverboot.frame.ioc.anno.classAnno.WeaLazyInit;
 import com.weaverboot.frame.ioc.anno.classAnno.WeaPrototype;
 import com.weaverboot.frame.ioc.anno.methodAnno.WeaIocBean;
+import com.weaverboot.frame.ioc.anno.parameterAnno.WeaParam;
 import com.weaverboot.frame.ioc.beans.bean.definition.factory.register.inte.AbstractWeaRegisterBeanDefinitionFactory;
 import com.weaverboot.frame.ioc.beans.bean.definition.impl.DefaultWeaBeanDefinition;
 import com.weaverboot.frame.ioc.beans.bean.definition.impl.DefaultWeaFactoryBean;
@@ -15,6 +16,9 @@ import com.weaverboot.tools.baseTools.BaseTools;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -148,7 +152,36 @@ public class WeaIocConfigurationRegisterBeanDefinitionFactory extends AbstractWe
 
                 }
 
-                abstractWeaBeanDefinition.setWeaFactoryBean(new DefaultWeaFactoryBean(clazz,method));
+                Parameter[] parameters = method.getParameters();
+
+                if (parameters == null || parameters.length == 0){
+
+                    abstractWeaBeanDefinition.setWeaFactoryBean(new DefaultWeaFactoryBean(clazz,method,null));
+
+                } else {
+
+                    List<String> beanIds = new ArrayList<>();
+
+                    for (Parameter parameter : parameters
+                         ) {
+
+                        if (parameter.isAnnotationPresent(WeaParam.class)){
+
+                            WeaParam weaParam = parameter.getAnnotation(WeaParam.class);
+
+                            beanIds.add(weaParam.name());
+
+                        } else {
+
+                            beanIds.add(parameter.getType().getName());
+
+                        }
+
+                    }
+
+                    abstractWeaBeanDefinition.setWeaFactoryBean(new DefaultWeaFactoryBean(clazz,method,beanIds));
+
+                }
 
                 WeaIocContainer.setEarlyBeandefinition(beanId, abstractWeaBeanDefinition);
 

@@ -2,6 +2,7 @@ package com.weaverboot.frame.ioc.beans.bean.definition.utils;
 
 import com.weaverboot.frame.ioc.anno.classAnno.WeaIocComponent;
 import com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefinition;
+import com.weaverboot.tools.logTools.LogTools;
 
 import java.lang.annotation.Annotation;
 
@@ -43,7 +44,7 @@ public class WeaIocCheckUtils {
 
             abstractWeaBeanDefinition.setBeanObject(object);
 
-            System.out.println("注册了实体:" + object.getClass().getName());
+            LogTools.info("注册了实体:" + object.getClass().getName());
 
         }
 

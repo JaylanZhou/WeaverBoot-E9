@@ -76,8 +76,6 @@ public abstract class AbstractWeaIocAutowiredHandler implements WeaIocAutowiredH
 
                 if (WeaIocContainer.getEarlyBeanDefinition(beanId) == null) { //如果初始化未创建集合中还没有，检查是否是接口
 
-                    System.out.println("需要检查的beanid :" + beanId);
-
                     return checkIsImplBeanAndWired(field.getType(),isCustomBeanId); //检查是否是接口，是否有对应的实现类并注入，否则报错
 
                 } else { //如果初始化未创建的集合中有，则优先注入此对象

@@ -1,5 +1,7 @@
 package com.weaverboot.frame.ioc.prop;
 
+import com.weaverboot.frame.ioc.beans.context.impl.DefaultWeaApplicationContext;
+import com.weaverboot.frame.ioc.beans.context.inte.WeaApplicationContext;
 import com.weaverboot.frame.ioc.handler.replace.impl.DefaultWeaIocReplaceHandler;
 import com.weaverboot.frame.ioc.handler.replace.inte.WeaIocReplaceHandler;
 import com.weaverboot.frame.ioc.handler.register.impl.DefaultWeaRegisterIocAnnoHandler;
@@ -27,6 +29,8 @@ public class WeaIocProperties {
 
     public static InputStream IOC_INPUTSTREAM;
 
+    private final static String BASIC_SCAN_PACKAGE = "com.weaverboot.frame.ioc.conf;";
+
     public static String SCAN_PACKAGE;
 
     private static String IOC_PROPERTIES_NAME = "weaverboot";
@@ -36,6 +40,8 @@ public class WeaIocProperties {
     private static String PROPERTIES_SUFFIX = ".properties";
 
     public static String CUSTOM_PROPERTIES_URL = "";
+
+    public static Class<? extends WeaApplicationContext> DEFAULT_WEA_APPLICATION_CONTEXT = DefaultWeaApplicationContext.class;
 
     public static Class<? extends WeaRegisterIocAnnoHandler> DEFAULT_WEA_REGISTER_IOC_ANNO_HANDLER = DefaultWeaRegisterIocAnnoHandler.class;
 
@@ -86,7 +92,7 @@ public class WeaIocProperties {
 
         }
 
-        SCAN_PACKAGE = IOC_PROPERTIES.getProperty("scanPackage");
+        SCAN_PACKAGE = BASIC_SCAN_PACKAGE + IOC_PROPERTIES.getProperty("scanPackage");
 
     }
 

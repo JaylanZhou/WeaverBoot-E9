@@ -33,7 +33,7 @@ public class DefaultWeaIocAutowiredHandler extends AbstractWeaIocAutowiredHandle
 
             }
 
-            Object resultObject = checkDependcy(beanId,field,isCustomBeanId);
+            Object resultObject = checkDependcy(beanId,field,isCustomBeanId); //依赖注入
 
             field.setAccessible(true);
 

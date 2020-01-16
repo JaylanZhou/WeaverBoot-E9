@@ -52,12 +52,11 @@ public class DefaultWeaScanBeanDefinitionHandler implements WeaScanBeanDefinitio
 
                         try {
 
+                            faName = WeaIocFormatUtils.formatClassName(faName, basePath);
 
-                        faName = WeaIocFormatUtils.formatClassName(faName, basePath);
+                            Class clazz = this.getClass().getClassLoader().loadClass(faName);
 
-                        Class clazz = this.getClass().getClassLoader().loadClass(faName);
-
-                        weaRegisterBeanDefinitionHandler.registerBeanDefinition(clazz);
+                            weaRegisterBeanDefinitionHandler.registerBeanDefinition(clazz);
 
                         } catch (Exception e){
 

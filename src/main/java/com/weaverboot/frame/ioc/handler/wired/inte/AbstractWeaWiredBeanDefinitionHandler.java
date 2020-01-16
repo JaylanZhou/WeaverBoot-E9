@@ -174,7 +174,7 @@ public abstract class AbstractWeaWiredBeanDefinitionHandler implements WeaWiredB
      */
 
     @Override
-    public synchronized Object wiredBean(AbstractWeaBeanDefinition abstractWeaBeanDefinition) throws IllegalAccessException, ClassNotFoundException, InstantiationException, IOException {
+    public Object wiredBean(AbstractWeaBeanDefinition abstractWeaBeanDefinition) throws IllegalAccessException, ClassNotFoundException, InstantiationException, IOException {
 
         Object object = createBean(abstractWeaBeanDefinition);
 

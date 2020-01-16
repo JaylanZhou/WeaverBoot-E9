@@ -23,6 +23,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ *
+ * 应用上下文 - 默认实现类
+ *
+ * @Author : Jaylan Zhou
+ *
+ * @Date : 2020-01-16
+ *
+ */
+
 public class DefaultWeaApplicationContext implements WeaApplicationContext {
 
     private WeaScanBeanDefinitionHandler weaScanBeanDefinitionHandler;
@@ -41,6 +51,12 @@ public class DefaultWeaApplicationContext implements WeaApplicationContext {
 
     }
 
+    /**
+     *
+     * 初始化上下文容器
+     *
+     */
+
     @Override
     public void refresh() {
 
@@ -48,11 +64,11 @@ public class DefaultWeaApplicationContext implements WeaApplicationContext {
 
             WeaIocContainer.cleanContainer();
 
-            weaScanBeanDefinitionHandler.scanBeanDefinition();
+            weaScanBeanDefinitionHandler.scanBeanDefinition(); //扫描配置包
 
-            weaInitBeanDefinitionHandler.initBeanDefinition();
+            weaInitBeanDefinitionHandler.initBeanDefinition(); //初始化容器
 
-            WeaIocReplaceUriUtils.orderReplaceApiAdvice();
+            WeaIocReplaceUriUtils.orderReplaceApiAdvice(); //对前后置接口进行排序
 
         } catch (Exception e) {
 
@@ -61,6 +77,14 @@ public class DefaultWeaApplicationContext implements WeaApplicationContext {
         }
 
     }
+
+    /**
+     *
+     * 根据bean ID 获取实例
+     *
+     * @param beanId
+     * @return
+     */
 
     @Override
     public Object getBean(String beanId) {
@@ -118,6 +142,15 @@ public class DefaultWeaApplicationContext implements WeaApplicationContext {
         }
 
     }
+
+    /**
+     *
+     * 通过类型获取实现类
+     *
+     * @param tClass 获取类的类型
+     * @param <T> 类的泛型
+     * @return 容器中类的实例
+     */
 
     @Override
     public <T> T getBean(Class<T> tClass) {
@@ -178,6 +211,16 @@ public class DefaultWeaApplicationContext implements WeaApplicationContext {
 
     }
 
+    /**
+     *
+     * 获取某一注解的全部实例
+     *
+     * 此方法尚未实现完成
+     *
+     * @param annotationClass
+     * @return
+     */
+
     @Override
     @Deprecated
     public Map<String, Object> getBeansWithAnnotation(Class<Annotation> annotationClass) {
@@ -227,12 +270,28 @@ public class DefaultWeaApplicationContext implements WeaApplicationContext {
         return null;
     }
 
+    /**
+     *
+     * 获取某API接口的后置通知集合
+     *
+     * @param apiUrl api接口地址
+     * @return api后置通知集合
+     */
+
     @Override
     public List<WeaReplaceApiAdvice> getReplaceAfterApi(String apiUrl) {
 
         return WeaIocContainer.getReplaceAfter(apiUrl);
 
     }
+
+    /**
+     *
+     * 获取某API接口的前置通知集合
+     *
+     * @param apiUrl api接口地址
+     * @return api前置通知集合
+     */
 
     @Override
     public List<WeaReplaceApiAdvice> getReplaceBeforeApi(String apiUrl) {
