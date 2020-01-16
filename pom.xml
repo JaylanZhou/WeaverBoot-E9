@@ -6,7 +6,7 @@
 
   <groupId>com.weaver</groupId>
   <artifactId>WeaverBoot-E9</artifactId>
-  <version>0.0.6</version>
+  <version>0.0.7</version>
 
   <name>WeaverBoot-E9</name>
   <!-- FIXME change it to the project's website -->
@@ -58,11 +58,6 @@
       <groupId>com.sun.jersey.contribs</groupId>
       <artifactId>jersey-multipart</artifactId>
       <version>1.19.1</version>
-    </dependency>
-    <dependency>
-      <groupId>com.weaver</groupId>
-      <artifactId>RSA</artifactId>
-      <version>0.0.1</version>
     </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>

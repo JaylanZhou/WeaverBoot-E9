@@ -18,7 +18,7 @@ import java.util.List;
 
 public class DefaultWeaFactoryBean extends AbstractWeaFactoryBean {
 
-    public DefaultWeaFactoryBean(Class clazz, Method method, List<String> beanIds){
+    public DefaultWeaFactoryBean(Class clazz, Method method, List<Object> beanIds){
 
         super();
 
@@ -30,7 +30,7 @@ public class DefaultWeaFactoryBean extends AbstractWeaFactoryBean {
 
     }
 
-    public DefaultWeaFactoryBean(Class clazz, Method method, List<String> beanIds, WeaApplicationContext weaApplicationContext){
+    public DefaultWeaFactoryBean(Class clazz, Method method, List<Object> beanIds, WeaApplicationContext weaApplicationContext){
 
         super(weaApplicationContext);
 

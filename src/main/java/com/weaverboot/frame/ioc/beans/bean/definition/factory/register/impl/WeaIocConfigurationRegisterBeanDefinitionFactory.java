@@ -160,7 +160,7 @@ public class WeaIocConfigurationRegisterBeanDefinitionFactory extends AbstractWe
 
                 } else {
 
-                    List<String> beanIds = new ArrayList<>();
+                    List<Object> beanIds = new ArrayList<>();
 
                     for (Parameter parameter : parameters
                          ) {
@@ -173,7 +173,7 @@ public class WeaIocConfigurationRegisterBeanDefinitionFactory extends AbstractWe
 
                         } else {
 
-                            beanIds.add(parameter.getType().getName());
+                            beanIds.add(parameter.getType());
 
                         }
 

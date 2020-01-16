@@ -17,7 +17,7 @@ public abstract class AbstractWeaFactoryBean implements WeaFactoryBean {
 
     private Method constructorMethod;
 
-    private List<String> beanIds;
+    private List<Object> beanIds;
 
     private WeaApplicationContext weaApplicationContext;
 
@@ -56,7 +56,17 @@ public abstract class AbstractWeaFactoryBean implements WeaFactoryBean {
 
                     for (int i = 0; i < beanIds.size(); i++) {
 
-                        args[i] = weaApplicationContext.getBean(beanIds.get(i));
+                        Object object = beanIds.get(i);
+
+                        if (object instanceof Class) {
+
+                            args[i] = weaApplicationContext.getBean((Class)beanIds.get(i));
+
+                        } else {
+
+                            args[i] = weaApplicationContext.getBean((String)beanIds.get(i));
+
+                        }
 
                     }
 
@@ -110,11 +120,11 @@ public abstract class AbstractWeaFactoryBean implements WeaFactoryBean {
         this.constructorMethod = constructorMethod;
     }
 
-    public List<String> getBeanIds() {
+    public List<Object> getBeanIds() {
         return beanIds;
     }
 
-    public void setBeanIds(List<String> beanIds) {
+    public void setBeanIds(List<Object> beanIds) {
         this.beanIds = beanIds;
     }
 }

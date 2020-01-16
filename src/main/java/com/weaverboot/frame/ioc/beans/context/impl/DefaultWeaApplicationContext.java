@@ -45,8 +45,6 @@ public class DefaultWeaApplicationContext implements WeaApplicationContext {
 
         weaInitBeanDefinitionHandler = new DefaultWeaInitBeanDefinitionHandler();
 
-        weaScanBeanDefinitionHandler = new DefaultWeaScanBeanDefinitionHandler();
-
         weaIocAutowiredHandler = new DefaultWeaIocAutowiredHandler();
 
     }
@@ -63,6 +61,8 @@ public class DefaultWeaApplicationContext implements WeaApplicationContext {
         try {
 
             WeaIocContainer.cleanContainer();
+
+            weaScanBeanDefinitionHandler = new DefaultWeaScanBeanDefinitionHandler();
 
             weaScanBeanDefinitionHandler.scanBeanDefinition(); //扫描配置包
 
