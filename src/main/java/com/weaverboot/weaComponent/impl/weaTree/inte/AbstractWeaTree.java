@@ -17,7 +17,7 @@ public abstract class AbstractWeaTree extends AbstractWeaComponent {
 
     private String domid;
 
-    private boolean isopen = false;
+    private boolean isopen;
 
     private String linkUrl;
 
@@ -35,7 +35,7 @@ public abstract class AbstractWeaTree extends AbstractWeaComponent {
 
     private String shadowInfo;
 
-    private boolean haschild = true;
+    private boolean haschild;
 
     private List<? super AbstractWeaTree> childs;
 
@@ -153,7 +153,11 @@ public abstract class AbstractWeaTree extends AbstractWeaComponent {
 
     public AbstractWeaTree addChild(AbstractWeaTree abstractWeaTree){
 
-        this.setHaschild(true);
+        if (this.haschild == false) {
+
+            this.setHaschild(true);
+
+        }
 
         if(this.childs == null){
 

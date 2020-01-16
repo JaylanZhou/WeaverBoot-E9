@@ -126,6 +126,8 @@ public abstract class AbstractWeaForm extends AbstractWeaComponent {
 
     private boolean hasBorder = false;
 
+    public Map<String,String> style;
+
     public AbstractWeaForm(){
 
         init();
@@ -190,6 +192,8 @@ public abstract class AbstractWeaForm extends AbstractWeaComponent {
 
         this.setViewAttr(abstractWeaForm.getViewAttr());
 
+        this.setStyle(abstractWeaForm.getStyle());
+
     }
 
     /**
@@ -213,6 +217,20 @@ public abstract class AbstractWeaForm extends AbstractWeaComponent {
         this.labelcol = 6;
 
         this.viewAttr = 2;
+
+    }
+
+    public AbstractWeaForm addStyle(String key,String value){
+
+        if (this.style == null){
+
+            this.style = new HashMap<>();
+
+        }
+
+        style.put(key,value);
+
+        return this;
 
     }
 
@@ -440,4 +458,11 @@ public abstract class AbstractWeaForm extends AbstractWeaComponent {
         this.hasBorder = hasBorder;
     }
 
+    public Map<String, String> getStyle() {
+        return style;
+    }
+
+    public void setStyle(Map<String, String> style) {
+        this.style = style;
+    }
 }

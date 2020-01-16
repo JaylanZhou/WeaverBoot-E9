@@ -212,7 +212,7 @@ public abstract class AbstractWeaFormReciveComponentResultMsg extends AbstractWe
      *
      */
 
-    public AbstractWeaTree readWeaFatherTree(int treeIndex){
+    public AbstractWeaTree readWeaTree(int treeIndex){
 
         return (AbstractWeaTree) this.getWeaTree().get(treeIndex);
 
@@ -229,7 +229,7 @@ public abstract class AbstractWeaFormReciveComponentResultMsg extends AbstractWe
      *
      */
 
-    public AbstractWeaTree readWeaFatherTreeWithName(String name){
+    public AbstractWeaTree readWeaTreeWithName(String name){
 
         for (int i = 0; i < this.getWeaTree().size(); i++) {
 
@@ -260,7 +260,7 @@ public abstract class AbstractWeaFormReciveComponentResultMsg extends AbstractWe
      *
      */
 
-    public List<AbstractWeaTree> readWeaFatherTreeWithNameAll(String name){
+    public List<AbstractWeaTree> readWeaTreeWithNameAll(String name){
 
         List<AbstractWeaTree> AbstractWeaTreeList = new ArrayList<>();
 
@@ -292,13 +292,13 @@ public abstract class AbstractWeaFormReciveComponentResultMsg extends AbstractWe
      *
      * 根据索引删除父级树
      *
-     * @param fatherTreeIndex 索引，从0开始计算
+     * @param TreeIndex 索引，从0开始计算
      *
      */
 
-    public void removeWeaFatherTree(int fatherTreeIndex) {
+    public void removeWeaTree(int TreeIndex) {
 
-        this.getWeaTree().remove(fatherTreeIndex);
+        this.getWeaTree().remove(TreeIndex);
 
     }
 
@@ -312,7 +312,7 @@ public abstract class AbstractWeaFormReciveComponentResultMsg extends AbstractWe
      *
      */
 
-    public void removeWeaFatherTreeWithName(String name) {
+    public void removeWeaTreeWithName(String name) {
 
         for (int i = 0; i < this.getWeaTree().size(); i++) {
 
@@ -339,7 +339,7 @@ public abstract class AbstractWeaFormReciveComponentResultMsg extends AbstractWe
      * @param title 删除的父级树名称
      */
 
-    public void removeWeaFatherTreeWithNameAll(String title) {
+    public void removeWeaTreeWithNameAll(String title) {
 
         for (int i = 0; i < this.getWeaTree().size(); i++) {
 
@@ -364,7 +364,7 @@ public abstract class AbstractWeaFormReciveComponentResultMsg extends AbstractWe
      *
      */
 
-    public void addWeaFatherTree(int treeIndex,AbstractWeaTree AbstractWeaTree){
+    public void addWeaTree(int treeIndex,AbstractWeaTree AbstractWeaTree){
 
         this.getWeaTree().add(treeIndex,AbstractWeaTree);
 
@@ -378,7 +378,7 @@ public abstract class AbstractWeaFormReciveComponentResultMsg extends AbstractWe
      *
      */
 
-    public void addWeaFatherTree(AbstractWeaTree AbstractWeaTree){
+    public void addWeaTree(AbstractWeaTree AbstractWeaTree){
 
         this.getWeaTree().add(AbstractWeaTree);
 
