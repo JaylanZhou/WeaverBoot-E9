@@ -6,14 +6,13 @@ import com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefini
 import com.weaverboot.frame.ioc.container.WeaIocContainer;
 import com.weaverboot.frame.ioc.anno.classAnno.WeaIocReplaceComponent;
 import com.weaverboot.frame.ioc.handler.replace.inte.AbstractWeaIocReplaceHandler;
+import com.weaverboot.frame.ioc.handler.replace.weaReplaceApiAdvice.WeaReplaceApiAdvice;
 import com.weaverboot.tools.baseTools.BaseTools;
 import com.weaverboot.tools.logTools.LogTools;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class DefaultWeaIocReplaceHandler extends AbstractWeaIocReplaceHandler {
 
@@ -48,44 +47,25 @@ public class DefaultWeaIocReplaceHandler extends AbstractWeaIocReplaceHandler {
 
             if (BaseTools.notNullString(apiUrl)) {
 
-                Map<AbstractWeaBeanDefinition, Map<String, Method>> abstractWeaBeanDefinitionMap = WeaIocContainer.getReplaceAfter(apiUrl);
+                List<WeaReplaceApiAdvice> weaReplaceApiAdviceList = WeaIocContainer.getReplaceAfter(apiUrl);
 
-                if (abstractWeaBeanDefinitionMap != null) {
+                if (BaseTools.notNullList(weaReplaceApiAdviceList)) {
 
-                    Map<String, Method> methodMap = abstractWeaBeanDefinitionMap.get(abstractWeaBeanDefinition);
-
-                    if (methodMap != null) {
-
-                        methodMap.put(method.getAnnotation(WeaReplaceAfter.class).order(), method);
-
-                    } else {
-
-                        methodMap = new TreeMap<>();
-
-                        methodMap.put(method.getAnnotation(WeaReplaceAfter.class).order(), method);
-
-                        abstractWeaBeanDefinitionMap.put(abstractWeaBeanDefinition, methodMap);
-
-                    }
+                    addAfterAdvice(method,abstractWeaBeanDefinition,weaReplaceApiAdviceList);
 
                 } else {
 
-                    abstractWeaBeanDefinitionMap = new HashMap<>();
+                    weaReplaceApiAdviceList = new ArrayList<>();
 
-                    Map<String, Method> methodMap = new TreeMap<>();
+                    addAfterAdvice(method,abstractWeaBeanDefinition,weaReplaceApiAdviceList);
 
-                    methodMap.put(method.getAnnotation(WeaReplaceAfter.class).order(), method);
-
-                    abstractWeaBeanDefinitionMap.put(abstractWeaBeanDefinition, methodMap);
-
-                    WeaIocContainer.setReplaceAfter(apiUrl, abstractWeaBeanDefinitionMap);
+                    WeaIocContainer.setReplaceAfter(apiUrl, weaReplaceApiAdviceList);
 
                 }
 
-                LogTools.info("注册了url:" + apiUrl + "以及方法:" + method.getName());
+                LogTools.info("注册了url:" + apiUrl + "以及后置方法:" + method.getName());
 
             }
-
 
         }
 
@@ -97,43 +77,53 @@ public class DefaultWeaIocReplaceHandler extends AbstractWeaIocReplaceHandler {
 
             String apiUrl = method.getAnnotation(WeaReplaceBefore.class).value();
 
-            Map<AbstractWeaBeanDefinition, Map<String,Method>> abstractWeaBeanDefinitionMap = WeaIocContainer.getReplaceBefore(apiUrl);
+            List<WeaReplaceApiAdvice> weaReplaceApiAdviceList = WeaIocContainer.getReplaceBefore(apiUrl);
 
-            if (abstractWeaBeanDefinitionMap != null) {
+            if (BaseTools.notNullList(weaReplaceApiAdviceList)) {
 
-                Map<String,Method> methodMap = abstractWeaBeanDefinitionMap.get(abstractWeaBeanDefinition);
-
-                if (methodMap != null){
-
-                    methodMap.put(method.getAnnotation(WeaReplaceBefore.class).order(),method);
-
-                } else {
-
-                    methodMap = new TreeMap<>();
-
-                    methodMap.put(method.getAnnotation(WeaReplaceBefore.class).order(),method);
-
-                    abstractWeaBeanDefinitionMap.put(abstractWeaBeanDefinition,methodMap);
-
-                }
+                addBeforeAdvice(method,abstractWeaBeanDefinition,weaReplaceApiAdviceList);
 
             } else {
 
-                abstractWeaBeanDefinitionMap = new HashMap<>();
+                weaReplaceApiAdviceList = new ArrayList<>();
 
-                Map<String,Method> methodMap = new TreeMap<>();
+                addBeforeAdvice(method,abstractWeaBeanDefinition,weaReplaceApiAdviceList);
 
-                methodMap.put(method.getAnnotation(WeaReplaceBefore.class).order(),method);
-
-                abstractWeaBeanDefinitionMap.put(abstractWeaBeanDefinition, methodMap);
-
-                WeaIocContainer.setReplaceBefore(apiUrl, abstractWeaBeanDefinitionMap);
+                WeaIocContainer.setReplaceBefore(apiUrl, weaReplaceApiAdviceList);
 
             }
 
-            LogTools.info("注册了url:" + apiUrl + "以及方法:" + method.getName());
+            LogTools.info("注册了url:" + apiUrl + "以及前置方法:" + method.getName());
 
         }
+
+    }
+
+    private void addAfterAdvice(Method method,AbstractWeaBeanDefinition abstractWeaBeanDefinition,List<WeaReplaceApiAdvice> apiAdviceList){
+
+        WeaReplaceApiAdvice weaReplaceApiAdvice = new WeaReplaceApiAdvice();
+
+        weaReplaceApiAdvice.setMethod(method);
+
+        weaReplaceApiAdvice.setAbstractWeaBeanDefinition(abstractWeaBeanDefinition);
+
+        weaReplaceApiAdvice.setOrder(method.getAnnotation(WeaReplaceAfter.class).order());
+
+        apiAdviceList.add(weaReplaceApiAdvice);
+
+    }
+
+    private void addBeforeAdvice(Method method,AbstractWeaBeanDefinition abstractWeaBeanDefinition,List<WeaReplaceApiAdvice> apiAdviceList){
+
+        WeaReplaceApiAdvice weaReplaceApiAdvice = new WeaReplaceApiAdvice();
+
+        weaReplaceApiAdvice.setMethod(method);
+
+        weaReplaceApiAdvice.setAbstractWeaBeanDefinition(abstractWeaBeanDefinition);
+
+        weaReplaceApiAdvice.setOrder(method.getAnnotation(WeaReplaceBefore.class).order());
+
+        apiAdviceList.add(weaReplaceApiAdvice);
 
     }
 

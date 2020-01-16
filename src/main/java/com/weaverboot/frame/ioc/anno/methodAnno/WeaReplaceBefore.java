@@ -21,6 +21,6 @@ public @interface WeaReplaceBefore {
 
     String value();
 
-    String order() default "0";
+    int order();
 
 }

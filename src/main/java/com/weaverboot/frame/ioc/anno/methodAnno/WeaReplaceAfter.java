@@ -21,7 +21,7 @@ public @interface WeaReplaceAfter {
 
     String value(); //拦截的api地址
 
-    String order(); //此方法在链中执行的顺序
+    int order(); //此方法在链中执行的顺序
 
 
 }

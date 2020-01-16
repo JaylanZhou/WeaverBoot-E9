@@ -1,6 +1,8 @@
 package com.weaverboot.frame.ioc.beans.context.impl;
 
+import com.weaverboot.frame.ioc.beans.bean.definition.utils.WeaIocReplaceUriUtils;
 import com.weaverboot.frame.ioc.handler.init.inte.WeaInitBeanDefinitionHandler;
+import com.weaverboot.frame.ioc.handler.replace.weaReplaceApiAdvice.WeaReplaceApiAdvice;
 import com.weaverboot.frame.ioc.handler.wired.anno.autowired.impl.DefaultWeaIocAutowiredHandler;
 import com.weaverboot.frame.ioc.handler.wired.anno.autowired.inte.WeaIocAutowiredHandler;
 import com.weaverboot.frame.ioc.handler.wired.factory.inte.WeaWiredBeanDefinitionFactory;
@@ -18,6 +20,7 @@ import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class DefaultWeaApplicationContext implements WeaApplicationContext {
@@ -48,6 +51,8 @@ public class DefaultWeaApplicationContext implements WeaApplicationContext {
             weaScanBeanDefinitionHandler.scanBeanDefinition();
 
             weaInitBeanDefinitionHandler.initBeanDefinition();
+
+            WeaIocReplaceUriUtils.orderReplaceApiAdvice();
 
         } catch (Exception e) {
 
@@ -223,14 +228,14 @@ public class DefaultWeaApplicationContext implements WeaApplicationContext {
     }
 
     @Override
-    public Map<AbstractWeaBeanDefinition, Map<String, Method>> getReplaceAfterApi(String apiUrl) {
+    public List<WeaReplaceApiAdvice> getReplaceAfterApi(String apiUrl) {
 
         return WeaIocContainer.getReplaceAfter(apiUrl);
 
     }
 
     @Override
-    public Map<AbstractWeaBeanDefinition, Map<String, Method>> getReplaceBeforeApi(String apiUrl) {
+    public List<WeaReplaceApiAdvice> getReplaceBeforeApi(String apiUrl) {
 
         return WeaIocContainer.getReplaceBefore(apiUrl);
 

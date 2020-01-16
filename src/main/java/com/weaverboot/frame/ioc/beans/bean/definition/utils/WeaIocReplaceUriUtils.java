@@ -4,24 +4,30 @@ import com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefini
 import com.weaverboot.frame.ioc.beans.context.impl.DefaultWeaApplicationContext;
 import com.weaverboot.frame.ioc.beans.context.inte.WeaApplicationContext;
 import com.weaverboot.frame.ioc.container.WeaIocContainer;
+import com.weaverboot.frame.ioc.handler.replace.weaReplaceApiAdvice.WeaReplaceApiAdvice;
+import com.weaverboot.frame.ioc.handler.replace.weaReplaceApiAdvice.WeaReplaceApiAdviceComparator;
 import com.weaverboot.frame.ioc.handler.replace.weaReplaceParam.impl.WeaAfterReplaceParam;
 import com.weaverboot.frame.ioc.handler.replace.weaReplaceParam.impl.WeaBeforeReplaceParam;
+import com.weaverboot.tools.baseTools.BaseTools;
 import com.weaverboot.tools.logTools.LogTools;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 
 public class WeaIocReplaceUriUtils {
 
 
-    public static boolean checkAfterUrl(String apiUrl){
+    public static boolean checkAfterUrl(String apiUrl) {
 
         return WeaIocContainer.getReplaceAfter(apiUrl) != null;
 
     }
 
-    public static boolean checkBeforeUrl(String apiUrl){
+    public static boolean checkBeforeUrl(String apiUrl) {
 
         return WeaIocContainer.getReplaceBefore(apiUrl) != null;
 
@@ -31,33 +37,24 @@ public class WeaIocReplaceUriUtils {
 
         WeaApplicationContext weaApplicationContext = new DefaultWeaApplicationContext();
 
-        Map<AbstractWeaBeanDefinition, Map<String,Method>> resultMap = WeaIocContainer.getReplaceAfter(weaAfterReplaceParam.getApiUrl());
+        List<WeaReplaceApiAdvice> weaReplaceApiAdviceList = WeaIocContainer.getReplaceAfter(weaAfterReplaceParam.getApiUrl());
 
-        String replaceBody = weaAfterReplaceParam.getData();
+        if (BaseTools.notNullList(weaReplaceApiAdviceList)) {
 
-        if (resultMap != null) {
-
-            for (AbstractWeaBeanDefinition ab : resultMap.keySet()
+            for (WeaReplaceApiAdvice weaReplaceApiAdvice : weaReplaceApiAdviceList
             ) {
 
-                Map<String,Method> methodMap = resultMap.get(ab);
+                try {
 
-                for (String s : methodMap.keySet()
-                     ) {
+                    Method method = weaReplaceApiAdvice.getMethod();
 
-                    try {
+                    weaAfterReplaceParam.setData((String) method.invoke(weaApplicationContext.getBean(weaReplaceApiAdvice.getAbstractWeaBeanDefinition().getBeanId()), weaAfterReplaceParam));
 
-                        Method method = methodMap.get(s);
+                } catch (Exception e) {
 
-                        weaAfterReplaceParam.setData((String) method.invoke(weaApplicationContext.getBean(ab.getBeanId()),weaAfterReplaceParam));
+                    LogTools.writeLog("执行方法" + weaReplaceApiAdvice.getMethod().getName() + "时发生错误，原因为:" + e.getMessage());
 
-                    } catch (Exception e){
-
-                        LogTools.writeLog("执行方法" + methodMap.get(s).getName() + "时发生错误，原因为:" + e.getMessage());
-
-                        continue;
-
-                    }
+                    continue;
 
                 }
 
@@ -71,33 +68,26 @@ public class WeaIocReplaceUriUtils {
 
     public static void invokeReplaceApiBeforeMethod(WeaBeforeReplaceParam weaBeforeReplaceParam) throws InvocationTargetException, IllegalAccessException {
 
-        Map<AbstractWeaBeanDefinition, Map<String,Method>> resultMap = WeaIocContainer.getReplaceBefore(weaBeforeReplaceParam.getApiUrl());
+        List<WeaReplaceApiAdvice> weaReplaceApiAdviceList = WeaIocContainer.getReplaceBefore(weaBeforeReplaceParam.getApiUrl());
 
         WeaApplicationContext weaApplicationContext = new DefaultWeaApplicationContext();
 
-        if (resultMap != null) {
+        if (BaseTools.notNullList(weaReplaceApiAdviceList)) {
 
-            for (AbstractWeaBeanDefinition ab : resultMap.keySet()
+            for (WeaReplaceApiAdvice weaReplaceApiAdvice : weaReplaceApiAdviceList
             ) {
 
-                Map<String,Method> methodMap = resultMap.get(ab);
+                try {
 
-                for (String s : methodMap.keySet()
-                ) {
+                    Method method = weaReplaceApiAdvice.getMethod();
 
-                    try {
+                    method.invoke(weaApplicationContext.getBean(weaReplaceApiAdvice.getAbstractWeaBeanDefinition().getBeanId()), weaBeforeReplaceParam);
 
-                        Method method = methodMap.get(s);
+                } catch (Exception e) {
 
-                        method.invoke(weaApplicationContext.getBean(ab.getBeanId()),weaBeforeReplaceParam);
+                    LogTools.writeLog("执行方法" + weaReplaceApiAdvice.getMethod().getName() + "时发生错误，原因为:" + e.getMessage());
 
-                    } catch (Exception e){
-
-                        LogTools.writeLog("执行方法" + methodMap.get(s).getName() + "时发生错误，原因为:" + e.getMessage());
-
-                        continue;
-
-                    }
+                    continue;
 
                 }
 
@@ -105,6 +95,29 @@ public class WeaIocReplaceUriUtils {
 
         }
 
+    }
+
+    public static void orderReplaceApiAdvice(){
+
+        Comparator comparator = new WeaReplaceApiAdviceComparator();
+
+        for (String key : WeaIocContainer.getReplaceBeforeApiMap().keySet()
+             ) {
+
+            List<WeaReplaceApiAdvice> weaReplaceApiAdviceList = WeaIocContainer.getReplaceBeforeApiMap().get(key);
+
+            Collections.sort(weaReplaceApiAdviceList,comparator);
+
+        }
+
+        for (String key : WeaIocContainer.getReplaceAfterApiMap().keySet()
+        ) {
+
+            List<WeaReplaceApiAdvice> weaReplaceApiAdviceList = WeaIocContainer.getReplaceAfterApiMap().get(key);
+
+            Collections.sort(weaReplaceApiAdviceList,comparator);
+
+        }
 
     }
 

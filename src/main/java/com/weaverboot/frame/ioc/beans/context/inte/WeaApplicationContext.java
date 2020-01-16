@@ -1,9 +1,11 @@
 package com.weaverboot.frame.ioc.beans.context.inte;
 
 import com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefinition;
+import com.weaverboot.frame.ioc.handler.replace.weaReplaceApiAdvice.WeaReplaceApiAdvice;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.List;
 import java.util.Map;
 
 public interface WeaApplicationContext {
@@ -16,8 +18,8 @@ public interface WeaApplicationContext {
 
     Map<String,Object> getBeansWithAnnotation(Class<Annotation> annotationClass);
 
-    Map<AbstractWeaBeanDefinition, Map<String,Method>> getReplaceAfterApi(String apiUrl);
+    List<WeaReplaceApiAdvice> getReplaceAfterApi(String apiUrl);
 
-    Map<AbstractWeaBeanDefinition, Map<String,Method>> getReplaceBeforeApi(String apiUrl);
+    List<WeaReplaceApiAdvice> getReplaceBeforeApi(String apiUrl);
 
 }

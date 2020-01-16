@@ -4,6 +4,7 @@ package com.weaverboot.frame.ioc.container;
 import com.weaverboot.frame.aop.advisor.advisor.inte.WeaAopAdvisor;
 import com.weaverboot.frame.aop.pointcut.inte.WeaAopPointCut;
 import com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefinition;
+import com.weaverboot.frame.ioc.handler.replace.weaReplaceApiAdvice.WeaReplaceApiAdvice;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -25,9 +26,9 @@ public class WeaIocContainer {
 
     public volatile static List<WeaAopPointCut> WEA_AOP_ADVISOR_LIST = new ArrayList<>();
 
-    private volatile static Map<String, Map<AbstractWeaBeanDefinition, Map<String,Method>>> REPLACE_AFTER_API_MAP = new ConcurrentHashMap<>();
+    private volatile static Map<String, List<WeaReplaceApiAdvice>> REPLACE_AFTER_API_MAP = new ConcurrentHashMap<>();
 
-    private volatile static Map<String, Map<AbstractWeaBeanDefinition, Map<String,Method>>> REPLACE_BEFORE_API_MAP = new ConcurrentHashMap<>();
+    private volatile static Map<String, List<WeaReplaceApiAdvice>> REPLACE_BEFORE_API_MAP = new ConcurrentHashMap<>();
 
 
     public static AbstractWeaBeanDefinition getBeanDefinition(String beanId){
@@ -72,25 +73,25 @@ public class WeaIocContainer {
 
     }
 
-    public static Map<AbstractWeaBeanDefinition,Map<String,Method>> getReplaceAfter(String apiUrl){
+    public static List<WeaReplaceApiAdvice> getReplaceAfter(String apiUrl){
 
         return REPLACE_AFTER_API_MAP.get(apiUrl);
 
     }
 
-    public static void setReplaceAfter(String apiUrl,Map<AbstractWeaBeanDefinition, Map<String,Method>> methodMap){
+    public static void setReplaceAfter(String apiUrl,List<WeaReplaceApiAdvice> methodMap){
 
         REPLACE_AFTER_API_MAP.put(apiUrl,methodMap);
 
     }
 
-    public static Map<AbstractWeaBeanDefinition,Map<String,Method>> getReplaceBefore(String apiUrl){
+    public static List<WeaReplaceApiAdvice> getReplaceBefore(String apiUrl){
 
         return REPLACE_BEFORE_API_MAP.get(apiUrl);
 
     }
 
-    public static void setReplaceBefore(String apiUrl,Map<AbstractWeaBeanDefinition, Map<String,Method>> methodMap){
+    public static void setReplaceBefore(String apiUrl,List<WeaReplaceApiAdvice> methodMap){
 
         REPLACE_BEFORE_API_MAP.put(apiUrl,methodMap);
 
@@ -117,19 +118,19 @@ public class WeaIocContainer {
         BEANDEFINITION_MAP = beandefinitionMap;
     }
 
-    public static Map<String, Map<AbstractWeaBeanDefinition, Map<String, Method>>> getReplaceAfterApiMap() {
+    public static Map<String, List<WeaReplaceApiAdvice>> getReplaceAfterApiMap() {
         return REPLACE_AFTER_API_MAP;
     }
 
-    public static void setReplaceAfterApiMap(Map<String, Map<AbstractWeaBeanDefinition, Map<String, Method>>> replaceAfterApiMap) {
+    public static void setReplaceAfterApiMap(Map<String, List<WeaReplaceApiAdvice>> replaceAfterApiMap) {
         REPLACE_AFTER_API_MAP = replaceAfterApiMap;
     }
 
-    public static Map<String, Map<AbstractWeaBeanDefinition, Map<String, Method>>> getReplaceBeforeApiMap() {
+    public static Map<String, List<WeaReplaceApiAdvice>> getReplaceBeforeApiMap() {
         return REPLACE_BEFORE_API_MAP;
     }
 
-    public static void setReplaceBeforeApiMap(Map<String, Map<AbstractWeaBeanDefinition, Map<String, Method>>> replaceBeforeApiMap) {
+    public static void setReplaceBeforeApiMap(Map<String, List<WeaReplaceApiAdvice>> replaceBeforeApiMap) {
         REPLACE_BEFORE_API_MAP = replaceBeforeApiMap;
     }
 
