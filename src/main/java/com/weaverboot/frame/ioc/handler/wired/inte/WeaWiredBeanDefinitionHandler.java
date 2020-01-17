@@ -12,6 +12,8 @@ public interface WeaWiredBeanDefinitionHandler {
 
     Object wiredBean(AbstractWeaBeanDefinition abstractWeaBeanDefinition) throws IllegalAccessException, ClassNotFoundException, InstantiationException, IOException;
 
+    Object createBean(AbstractWeaBeanDefinition abstractWeaBeanDefinition) throws IllegalAccessException, InstantiationException;
+
     WeaWiredBeanPostProcessor getWeaBeanPostProcessor() throws IllegalAccessException, InstantiationException;
 
     void setWeaBeanPostProcessor(WeaWiredBeanPostProcessor weaBeanPostProcessor);

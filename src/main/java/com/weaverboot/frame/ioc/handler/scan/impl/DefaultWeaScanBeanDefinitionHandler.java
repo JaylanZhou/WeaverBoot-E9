@@ -38,45 +38,55 @@ public class DefaultWeaScanBeanDefinitionHandler implements WeaScanBeanDefinitio
 
         if (BaseTools.notNullString(WeaIocProperties.SCAN_PACKAGE)) {
 
-            List<File> fileList = getScanPackageList(WeaIocProperties.SCAN_PACKAGE);
+            scanLogic(WeaIocProperties.SCAN_PACKAGE);
 
-            for (File f : fileList
+        } else {
+
+            throw new RuntimeException("扫描包为空，请检查weaverboot.properties的scanPackage属性");
+
+        }
+
+    }
+
+    private void scanLogic(String packageName){
+
+        List<File> fileList = getScanPackageList(packageName);
+
+        for (File f : fileList
+        ) {
+
+            for (File fa : f.listFiles()
             ) {
 
-                for (File fa : f.listFiles()
-                ) {
+                String faName = fa.getPath();
 
-                    String faName = fa.getPath();
+                if (faName.endsWith(CLASS_SUFFIX)) {
 
-                    if (faName.endsWith(CLASS_SUFFIX)) {
+                    try {
 
-                        try {
+                        faName = WeaIocFormatUtils.formatClassName(faName, basePath);
 
-                            faName = WeaIocFormatUtils.formatClassName(faName, basePath);
+                        Class clazz = this.getClass().getClassLoader().loadClass(faName);
 
-                            Class clazz = this.getClass().getClassLoader().loadClass(faName);
+                        weaRegisterBeanDefinitionHandler.registerBeanDefinition(clazz);
 
-                            weaRegisterBeanDefinitionHandler.registerBeanDefinition(clazz);
+                    } catch (Exception e){
 
-                        } catch (Exception e){
+                        LogTools.error("扫描发生错误，名称:" + faName + ",原因为:" + e.getMessage());
 
-                            LogTools.error("扫描发生错误，原因为:" + e.getMessage());
+                        continue;
 
-                        } catch (Throwable t){
+                    } catch (Throwable t){
 
-                            LogTools.error("扫描发生错误，原因为:" + t.getMessage());
+                        LogTools.error("扫描发生错误，名称:" + faName + ",原因为:" + t.getMessage());
 
-                        }
+                        continue;
 
                     }
 
                 }
 
             }
-
-        } else {
-
-            throw new RuntimeException("扫描包为空，请检查weaverboot.properties的scanPackage属性");
 
         }
 

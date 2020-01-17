@@ -16,6 +16,10 @@ import com.weaverboot.frame.ioc.postProcessor.register.impl.DefaultWeaCreateWeaB
 import com.weaverboot.frame.ioc.postProcessor.register.inte.WeaCreateWeaBeanDefinitionPostProcessor;
 import com.weaverboot.frame.ioc.postProcessor.wired.impl.DefaultWeaWiredBeanPostProcessor;
 import com.weaverboot.frame.ioc.postProcessor.wired.inte.WeaWiredBeanPostProcessor;
+import com.weaverboot.frame.ioc.resource.patcher.WeaAntPathMatcher;
+import com.weaverboot.tools.baseTools.BaseTools;
+import com.weaverboot.tools.logTools.LogTools;
+import weaver.general.BaseBean;
 import weaver.general.GCONST;
 
 import java.io.*;
@@ -29,7 +33,7 @@ public class WeaIocProperties {
 
     public static InputStream IOC_INPUTSTREAM;
 
-    private final static String BASIC_SCAN_PACKAGE = "com.weaverboot.frame.ioc.conf;";
+    public final static String BASIC_SCAN_PACKAGE = "com.weaverboot.frame.ioc.conf.**;";
 
     public static String SCAN_PACKAGE;
 
@@ -38,6 +42,8 @@ public class WeaIocProperties {
     private static String SCAN_PACKAGE_NAME = "scanPackage";
 
     private static String PROPERTIES_SUFFIX = ".properties";
+
+    private static String EFFECT_PROPERTIES_NAME = "weaverboot.effect.properties.name";
 
     public static String CUSTOM_PROPERTIES_URL = "";
 
@@ -59,34 +65,46 @@ public class WeaIocProperties {
 
     static {
 
-        IOC_PROPERTIES = new Properties();
+        String effect = null;
 
         try {
 
-            IOC_INPUTSTREAM = new FileInputStream(new File(GCONST.getPropertyPath() + IOC_PROPERTIES_NAME + PROPERTIES_SUFFIX));
+           webConfigLoad();
 
-            BufferedReader bf = new BufferedReader(new InputStreamReader(IOC_INPUTSTREAM));
+            if (BaseTools.notNullString(effect = IOC_PROPERTIES.getProperty(EFFECT_PROPERTIES_NAME))){
 
-            IOC_PROPERTIES.load(bf);
+                IOC_PROPERTIES_NAME = effect;
+
+                webConfigLoad();
+
+            }
 
         } catch (FileNotFoundException e) {
 
                 try {
 
-                    InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("weaverboot.properties");
+                    localConfigLoad();
 
-                    BufferedReader bf = new BufferedReader(new InputStreamReader(inputStream));
+                    if (BaseTools.notNullString(effect = IOC_PROPERTIES.getProperty(EFFECT_PROPERTIES_NAME))){
 
-                    IOC_PROPERTIES.load(bf);
+                        IOC_PROPERTIES_NAME = effect;
+
+                        localConfigLoad();
+
+                    }
 
                 } catch (IOException ex) {
 
-                    throw new RuntimeException("未找到weaverboot.properties文件");
+                    LogTools.error("未找到" + IOC_PROPERTIES_NAME + PROPERTIES_SUFFIX + "文件");
+
+                    throw new RuntimeException("未找到" + IOC_PROPERTIES_NAME + PROPERTIES_SUFFIX + "文件");
 
                 }
 
 
         } catch (IOException e) {
+
+            LogTools.error("流读取配置文件失败，原因为:" + e.getMessage());
 
             throw new RuntimeException("流读取配置文件失败，原因为:" + e.getMessage());
 
@@ -95,5 +113,30 @@ public class WeaIocProperties {
         SCAN_PACKAGE = BASIC_SCAN_PACKAGE + IOC_PROPERTIES.getProperty("scanPackage");
 
     }
+
+    private static void webConfigLoad() throws IOException {
+
+        IOC_INPUTSTREAM = new FileInputStream(new File(GCONST.getPropertyPath() + IOC_PROPERTIES_NAME + PROPERTIES_SUFFIX));
+
+        BufferedReader bf = new BufferedReader(new InputStreamReader(IOC_INPUTSTREAM));
+
+        IOC_PROPERTIES = new Properties();
+
+        IOC_PROPERTIES.load(bf);
+
+    }
+
+    private static void localConfigLoad() throws IOException {
+
+        InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(IOC_PROPERTIES_NAME + PROPERTIES_SUFFIX);
+
+        BufferedReader bf = new BufferedReader(new InputStreamReader(inputStream));
+
+        IOC_PROPERTIES = new Properties();
+
+        IOC_PROPERTIES.load(bf);
+
+    }
+
 
 }

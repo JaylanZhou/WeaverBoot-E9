@@ -133,7 +133,8 @@ public abstract class AbstractWeaWiredBeanDefinitionHandler implements WeaWiredB
      * @throws InstantiationException
      */
 
-    protected Object createBean(AbstractWeaBeanDefinition abstractWeaBeanDefinition) throws IllegalAccessException, InstantiationException {
+    @Override
+    public Object createBean(AbstractWeaBeanDefinition abstractWeaBeanDefinition) throws IllegalAccessException, InstantiationException {
 
         WeaFactoryBean weaFactoryBean = abstractWeaBeanDefinition.getWeaFactoryBean();
 
