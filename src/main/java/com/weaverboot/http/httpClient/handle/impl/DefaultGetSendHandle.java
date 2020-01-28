@@ -38,7 +38,7 @@ public class DefaultGetSendHandle implements GetSendHandle {
 
         }catch (Exception e){
 
-            LogTools.writeLog("框架报错，原因为:" + e.getMessage());
+            LogTools.error("框架报错，原因为:" + e.getMessage());
 
             throw new RuntimeException(e.getMessage());
 
@@ -50,7 +50,7 @@ public class DefaultGetSendHandle implements GetSendHandle {
 
             } catch (IOException e) {
 
-                LogTools.writeLog("框架报错：关闭连接失败，原因为 " + e.getMessage());
+                LogTools.error("框架报错：关闭连接失败，原因为 " + e.getMessage());
 
                 throw new RuntimeException(e.getMessage());
 
@@ -75,7 +75,7 @@ public class DefaultGetSendHandle implements GetSendHandle {
 
         }catch (Exception e){
 
-            LogTools.writeLog("框架报错，原因为:" + e.getMessage());
+            LogTools.error("框架报错，原因为:" + e.getMessage());
 
             throw new RuntimeException(e.getMessage());
 
@@ -87,7 +87,7 @@ public class DefaultGetSendHandle implements GetSendHandle {
 
             } catch (IOException e) {
 
-                LogTools.writeLog("框架报错，原因为:" + e.getMessage());
+                LogTools.error("框架报错，原因为:" + e.getMessage());
 
                 throw new RuntimeException(e.getMessage());
 

@@ -43,7 +43,7 @@ public class DefaultOptionsSendHandle implements OptionsSendHandle {
 
         } catch (IOException e) {
 
-            LogTools.writeLog("框架报错，原因为:" + e.getMessage());
+            LogTools.error("框架报错，原因为:" + e.getMessage());
 
             throw new RuntimeException(e.getMessage());
 
@@ -70,7 +70,7 @@ public class DefaultOptionsSendHandle implements OptionsSendHandle {
 
         } catch (IOException e) {
 
-            LogTools.writeLog("框架报错，原因为:" + e.getMessage());
+            LogTools.error("框架报错，原因为:" + e.getMessage());
 
             throw new RuntimeException(e.getMessage());
 

@@ -238,27 +238,27 @@ public class HttpClientBuildTools {
 
             resultString = EntityUtils.toString(response.getEntity(), encodeCondition.toString());
 
-            LogTools.writeLog("返回成功:\n" + resultString);
+            LogTools.info("返回成功:\n" + resultString);
 
 
         }else if(response.getStatusLine().getStatusCode() == 400){
 
             resultString = EntityUtils.toString(response.getEntity(), encodeCondition.toString());
 
-            LogTools.writeLog("400错误:\n" + resultString);
+            LogTools.error("400错误:\n" + resultString);
 
 
         }else if(response.getStatusLine().getStatusCode() == 404){
 
             resultString = EntityUtils.toString(response.getEntity(), encodeCondition.toString());
 
-            LogTools.writeLog("404错误:\n" + resultString);
+            LogTools.error("404错误:\n" + resultString);
 
         }else if(response.getStatusLine().getStatusCode() == 500){
 
             resultString = EntityUtils.toString(response.getEntity(), encodeCondition.toString());
 
-            LogTools.writeLog("500错误:\n" + resultString);
+            LogTools.error("500错误:\n" + resultString);
 
         }else{
 
@@ -268,7 +268,7 @@ public class HttpClientBuildTools {
 
             }
 
-            LogTools.writeLog("返回信息:\n" + resultString);
+            LogTools.error("返回信息:\n" + resultString);
 
             resultString = String.valueOf(response.getStatusLine().getStatusCode());
 

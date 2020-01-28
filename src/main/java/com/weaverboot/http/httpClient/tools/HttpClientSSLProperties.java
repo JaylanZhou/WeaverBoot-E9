@@ -1,5 +1,6 @@
 package com.weaverboot.http.httpClient.tools;
 
+import com.weaverboot.tools.logTools.LogTools;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 
@@ -95,11 +96,11 @@ public class HttpClientSSLProperties {
 
         } catch (NoSuchAlgorithmException e) {
 
-            e.printStackTrace();
+            LogTools.error("SSL信任链接失败，原因为:" + e.getMessage());
 
         } catch (KeyManagementException e) {
 
-            e.printStackTrace();
+            LogTools.error("SSL信任链接失败，原因为:" + e.getMessage());
 
         }
 

@@ -225,7 +225,7 @@ public class HttpConnectionPoolTools {
                 if (i > 3){
 
                     //重试超过3次,放弃请求
-                    LogTools.writeLog("连接请求失败超过3次，放弃请求");
+                    LogTools.error("连接请求失败超过3次，放弃请求");
 
                     return false;
 
@@ -234,7 +234,7 @@ public class HttpConnectionPoolTools {
                 if (e instanceof NoHttpResponseException){
 
                     //服务器没有响应,可能是服务器断开了连接,应该重试
-                    LogTools.writeLog("连接失败，服务器无响应");
+                    LogTools.error("连接失败，服务器无响应");
 
                     return true;
 
@@ -243,7 +243,7 @@ public class HttpConnectionPoolTools {
                 if (e instanceof SSLHandshakeException){
 
                     // SSL握手异常
-                    LogTools.writeLog("连接失败，SSL握手异常");
+                    LogTools.error("连接失败，SSL握手异常");
 
                     return false;
 
@@ -252,7 +252,7 @@ public class HttpConnectionPoolTools {
                 if (e instanceof InterruptedIOException){
 
                     //超时
-                    LogTools.writeLog("连接失败，请求超时");
+                    LogTools.error("连接失败，请求超时");
 
                     return false;
 
@@ -261,7 +261,7 @@ public class HttpConnectionPoolTools {
                 if (e instanceof UnknownHostException){
 
                     // 服务器不可达
-                    LogTools.writeLog("连接失败，无法找到服务器地址");
+                    LogTools.error("连接失败，无法找到服务器地址");
 
                     return false;
 
@@ -270,7 +270,7 @@ public class HttpConnectionPoolTools {
                 if (e instanceof ConnectTimeoutException){
 
                     // 连接超时
-                    LogTools.writeLog("连接超时");
+                    LogTools.error("连接超时");
 
                     return false;
 
@@ -278,7 +278,7 @@ public class HttpConnectionPoolTools {
 
                 if (e instanceof SSLException){
 
-                    LogTools.writeLog("连接失败，SSL异常");
+                    LogTools.error("连接失败，SSL异常");
 
                     return false;
 
