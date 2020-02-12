@@ -2,6 +2,7 @@ package com.weaverboot.frame.ioc.handler.wired.inte;
 
 import com.weaverboot.frame.aop.handler.aspectPointcut.inte.WeaAspectPointcutHandler;
 import com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefinition;
+import com.weaverboot.frame.ioc.handler.postProcessor.wired.inte.WeaIocWiredBeanPostProcessorHandler;
 import com.weaverboot.frame.ioc.handler.wired.anno.autowired.inte.WeaIocAutowiredHandler;
 import com.weaverboot.frame.ioc.handler.wired.anno.value.inte.WeaIocValueHandler;
 import com.weaverboot.frame.ioc.postProcessor.wired.inte.WeaWiredBeanPostProcessor;
@@ -14,10 +15,6 @@ public interface WeaWiredBeanDefinitionHandler {
 
     Object createBean(AbstractWeaBeanDefinition abstractWeaBeanDefinition) throws IllegalAccessException, InstantiationException;
 
-    WeaWiredBeanPostProcessor getWeaBeanPostProcessor() throws IllegalAccessException, InstantiationException;
-
-    void setWeaBeanPostProcessor(WeaWiredBeanPostProcessor weaBeanPostProcessor);
-
     WeaIocAutowiredHandler getWeaIocAutowiredHandler() throws IllegalAccessException, InstantiationException;
 
     void setWeaIocAutowiredHandler(WeaIocAutowiredHandler weaIocAutowiredHandler);
@@ -29,5 +26,9 @@ public interface WeaWiredBeanDefinitionHandler {
     WeaAspectPointcutHandler getWeaAspectPointCutHandler() throws IllegalAccessException, InstantiationException;
 
     void setWeaAspectPointCutHandler(WeaAspectPointcutHandler weaAspectPointCutHandler);
+
+    WeaIocWiredBeanPostProcessorHandler getWeaIocWiredBeanPostProcessorHandler() throws IllegalAccessException, InstantiationException;
+
+    void setWeaIocWiredBeanPostProcessorHandler(WeaIocWiredBeanPostProcessorHandler weaIocWiredBeanPostProcessorHandler);
 
 }

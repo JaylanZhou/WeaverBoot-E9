@@ -1,12 +1,16 @@
 package com.weaverboot.frame.ioc.beans.bean.definition.factory.register.impl;
 
+import com.weaverboot.frame.aop.handler.replace.inte.WeaAopReplaceHandler;
+import com.weaverboot.frame.aop.prop.WeaAopProperties;
 import com.weaverboot.frame.ioc.anno.classAnno.WeaIocReplaceComponent;
 import com.weaverboot.frame.ioc.beans.bean.definition.factory.register.inte.AbstractWeaRegisterBeanDefinitionFactory;
 import com.weaverboot.frame.ioc.beans.bean.definition.impl.DefaultWeaBeanDefinition;
 import com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefinition;
 import com.weaverboot.frame.ioc.container.WeaIocContainer;
 import com.weaverboot.tools.baseTools.BaseTools;
+import com.weaverboot.tools.logTools.LogTools;
 
+import java.io.IOException;
 import java.lang.annotation.Annotation;
 
 /**
@@ -67,6 +71,18 @@ public class WeaIocReplaceComponentRegisterBeanDinitionFactory extends AbstractW
         getWeaCreateWeaBeanDefinitionPostProcessor().initEarlyContainer(beanId,weaBeanDefinition);
 
         getWeaCreateWeaBeanDefinitionPostProcessor().postProcessAfterRegister(weaBeanDefinition);
+
+        WeaAopReplaceHandler weaAopReplaceHandler = WeaAopProperties.DEFAULT_WEA_AOP_HANDLER.newInstance();
+
+        try {
+
+            weaAopReplaceHandler.initReplace(weaBeanDefinition);
+
+        } catch (IOException e) {
+
+            LogTools.error("接口拦截类" + beanId + "注入失败，原因为:" + e.getMessage());
+
+        }
 
         return weaBeanDefinition;
 

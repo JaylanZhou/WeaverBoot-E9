@@ -1,7 +1,10 @@
 package com.weaverboot.frame.ioc.prop;
 
+import com.weaverboot.frame.ioc.anno.classAnno.WeaIocWiredBeanPostProcessor;
 import com.weaverboot.frame.ioc.beans.context.impl.DefaultWeaApplicationContext;
 import com.weaverboot.frame.ioc.beans.context.inte.WeaApplicationContext;
+import com.weaverboot.frame.ioc.handler.postProcessor.wired.impl.DefaultWeaIocWiredBeanPostProcessorHandler;
+import com.weaverboot.frame.ioc.handler.postProcessor.wired.inte.WeaIocWiredBeanPostProcessorHandler;
 import com.weaverboot.frame.ioc.handler.replace.impl.DefaultWeaIocReplaceHandler;
 import com.weaverboot.frame.ioc.handler.replace.inte.WeaIocReplaceHandler;
 import com.weaverboot.frame.ioc.handler.register.impl.DefaultWeaRegisterIocAnnoHandler;
@@ -14,12 +17,8 @@ import com.weaverboot.frame.ioc.handler.wired.factory.impl.DefaultWeaWiredBeanDe
 import com.weaverboot.frame.ioc.handler.wired.factory.inte.WeaWiredBeanDefinitionFactory;
 import com.weaverboot.frame.ioc.postProcessor.register.impl.DefaultWeaCreateWeaBeanDefinitionPostProcessor;
 import com.weaverboot.frame.ioc.postProcessor.register.inte.WeaCreateWeaBeanDefinitionPostProcessor;
-import com.weaverboot.frame.ioc.postProcessor.wired.impl.DefaultWeaWiredBeanPostProcessor;
-import com.weaverboot.frame.ioc.postProcessor.wired.inte.WeaWiredBeanPostProcessor;
-import com.weaverboot.frame.ioc.resource.patcher.WeaAntPathMatcher;
 import com.weaverboot.tools.baseTools.BaseTools;
 import com.weaverboot.tools.logTools.LogTools;
-import weaver.general.BaseBean;
 import weaver.general.GCONST;
 
 import java.io.*;
@@ -59,9 +58,9 @@ public class WeaIocProperties {
 
     public static Class<? extends WeaIocValueHandler> DEFAULT_WEA_IOC_VALUE_HANDLER = DefaultWeaIocValueHandler.class;
 
-    public static Class<? extends WeaWiredBeanPostProcessor> DEFAULT_WEA_BEAN_POST_PROCESSOR = DefaultWeaWiredBeanPostProcessor.class;
-
     public static Class<? extends WeaCreateWeaBeanDefinitionPostProcessor> DEFAULT_WEA_CREATE_WEA_BEAN_DEFINITION_POST_PROCESSOR = DefaultWeaCreateWeaBeanDefinitionPostProcessor.class;
+
+    public static Class<? extends WeaIocWiredBeanPostProcessorHandler> DEFAULT_WEA_IOC_WIRED_BEAN_POST_PROCESSOR_HANDLER = DefaultWeaIocWiredBeanPostProcessorHandler.class;
 
     static {
 

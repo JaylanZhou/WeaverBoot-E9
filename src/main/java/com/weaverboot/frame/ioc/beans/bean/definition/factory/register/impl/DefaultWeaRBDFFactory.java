@@ -2,10 +2,7 @@ package com.weaverboot.frame.ioc.beans.bean.definition.factory.register.impl;
 
 import com.weaverboot.frame.aop.anno.aspect.WeaAopAspect;
 import com.weaverboot.frame.aop.anno.pointcut.WeaAopPointCut;
-import com.weaverboot.frame.ioc.anno.classAnno.WeaIocComponent;
-import com.weaverboot.frame.ioc.anno.classAnno.WeaIocConfiguration;
-import com.weaverboot.frame.ioc.anno.classAnno.WeaIocReplaceComponent;
-import com.weaverboot.frame.ioc.anno.classAnno.WeaIocService;
+import com.weaverboot.frame.ioc.anno.classAnno.*;
 import com.weaverboot.frame.ioc.beans.bean.definition.factory.register.inte.AbstractWeaRBDFFactory;
 import com.weaverboot.frame.ioc.beans.bean.definition.factory.register.inte.WeaRegisterBeanDefinitionFactory;
 import com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefinition;
@@ -52,6 +49,10 @@ public class DefaultWeaRBDFFactory extends AbstractWeaRBDFFactory {
         } else if (abstractWeaBeanDefinitionClass.isAnnotationPresent(WeaAopAspect.class)){
 
             return new WeaIocAspectRegisterBeanDefinitionFactory();
+
+        } else if (abstractWeaBeanDefinitionClass.isAnnotationPresent(WeaIocWiredBeanPostProcessor.class)){
+
+            return new WeaIocWiredBeanPostProcessorDefinitionFactory();
 
         } else {
 

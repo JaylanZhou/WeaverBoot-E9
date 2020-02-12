@@ -3,6 +3,9 @@ package com.weaverboot.frame.ioc.handler.wired.inte;
 import com.weaverboot.frame.aop.handler.aspectPointcut.inte.WeaAspectPointcutHandler;
 import com.weaverboot.frame.aop.prop.WeaAopProperties;
 import com.weaverboot.frame.ioc.beans.bean.definition.impl.WeaRootBeanDefinition;
+import com.weaverboot.frame.ioc.beans.bean.definition.utils.WeaIocCheckUtils;
+import com.weaverboot.frame.ioc.container.WeaIocContainer;
+import com.weaverboot.frame.ioc.handler.postProcessor.wired.inte.WeaIocWiredBeanPostProcessorHandler;
 import com.weaverboot.frame.ioc.handler.wired.anno.autowired.inte.WeaIocAutowiredHandler;
 import com.weaverboot.frame.ioc.handler.wired.anno.value.inte.WeaIocValueHandler;
 import com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefinition;
@@ -31,28 +34,11 @@ public abstract class AbstractWeaWiredBeanDefinitionHandler implements WeaWiredB
 
     private WeaIocValueHandler weaIocValueHandler;
 
-    private WeaWiredBeanPostProcessor weaBeanPostProcessor;
-
     private WeaAspectPointcutHandler weaAspectPointcutHandler;
 
+    private WeaIocWiredBeanPostProcessorHandler weaIocWiredBeanPostProcessorHandler;
+
     protected static Object lockObject = new Object();
-
-    @Override
-    public WeaWiredBeanPostProcessor getWeaBeanPostProcessor() throws IllegalAccessException, InstantiationException {
-
-        if (weaBeanPostProcessor == null){
-
-            weaBeanPostProcessor = WeaIocProperties.DEFAULT_WEA_BEAN_POST_PROCESSOR.newInstance();
-
-        }
-
-        return weaBeanPostProcessor;
-    }
-
-    @Override
-    public void setWeaBeanPostProcessor(WeaWiredBeanPostProcessor weaBeanPostProcessor) {
-        this.weaBeanPostProcessor = weaBeanPostProcessor;
-    }
 
     /**
      *
@@ -123,6 +109,23 @@ public abstract class AbstractWeaWiredBeanDefinitionHandler implements WeaWiredB
 
     }
 
+    @Override
+    public WeaIocWiredBeanPostProcessorHandler getWeaIocWiredBeanPostProcessorHandler() throws IllegalAccessException, InstantiationException {
+
+        if (this.weaIocWiredBeanPostProcessorHandler == null){
+
+            weaIocWiredBeanPostProcessorHandler = WeaIocProperties.DEFAULT_WEA_IOC_WIRED_BEAN_POST_PROCESSOR_HANDLER.newInstance();
+
+        }
+
+        return weaIocWiredBeanPostProcessorHandler;
+    }
+
+    @Override
+    public void setWeaIocWiredBeanPostProcessorHandler(WeaIocWiredBeanPostProcessorHandler weaIocWiredBeanPostProcessorHandler) {
+        this.weaIocWiredBeanPostProcessorHandler = weaIocWiredBeanPostProcessorHandler;
+    }
+
     /**
      *
      * 创建实体类
@@ -181,7 +184,17 @@ public abstract class AbstractWeaWiredBeanDefinitionHandler implements WeaWiredB
 
         abstractWeaBeanDefinition.setBeanObject(object);
 
-        this.getWeaBeanPostProcessor().postProcessBeforeInitialization(abstractWeaBeanDefinition);
+        String beanId = abstractWeaBeanDefinition.getBeanId();
+
+        if (WeaIocCheckUtils.checkIsSingleton(abstractWeaBeanDefinition)) { //检查是否是单例创建
+
+            WeaIocContainer.getEarlyBeandefinitionMap().remove(beanId);
+
+            WeaIocContainer.setBeingCreateBeandefinition(beanId, abstractWeaBeanDefinition);
+
+        }
+
+        this.getWeaIocWiredBeanPostProcessorHandler().handlePostProcessBeforeInitialization(object,beanId);
 
         List<Field> fields = ReflectTools.getAllFields(abstractWeaBeanDefinition.getBeanClass());
 
@@ -194,7 +207,15 @@ public abstract class AbstractWeaWiredBeanDefinitionHandler implements WeaWiredB
 
         }
 
-        this.getWeaBeanPostProcessor().postProcessAfterInitialization(abstractWeaBeanDefinition);
+        if (WeaIocCheckUtils.checkIsSingleton(abstractWeaBeanDefinition)){
+
+            WeaIocContainer.getBeingCreateBeandefinitionMap().remove(beanId);
+
+            WeaIocContainer.getBeandefinitionMap().put(beanId,abstractWeaBeanDefinition);
+
+        }
+
+        this.getWeaIocWiredBeanPostProcessorHandler().handlePostProcessAfterInitialization(object,beanId);
 
         return object;
 

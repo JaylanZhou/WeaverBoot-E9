@@ -10,9 +10,9 @@ import com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefini
 public interface WeaWiredBeanPostProcessor {
 
     //bean初始化前增强
-    void postProcessBeforeInitialization(AbstractWeaBeanDefinition abstractWeaBeanDefinition);
+    void postProcessBeforeInitialization(Object bean,String beanName);
 
     //bean初始化后增强
-    void postProcessAfterInitialization(AbstractWeaBeanDefinition abstractWeaBeanDefinition);
+    void postProcessAfterInitialization(Object bean,String beanName);
 
 }

@@ -2,6 +2,7 @@ package com.weaverboot.frame.ioc.beans.context.impl;
 
 import com.weaverboot.frame.ioc.beans.bean.definition.utils.WeaIocReplaceUriUtils;
 import com.weaverboot.frame.ioc.handler.init.inte.WeaInitBeanDefinitionHandler;
+import com.weaverboot.frame.ioc.handler.postProcessor.wired.comparator.WeaIocWiredBeanPostProcessorListComparator;
 import com.weaverboot.frame.ioc.handler.replace.weaReplaceApiAdvice.WeaReplaceApiAdvice;
 import com.weaverboot.frame.ioc.handler.wired.anno.autowired.impl.DefaultWeaIocAutowiredHandler;
 import com.weaverboot.frame.ioc.handler.wired.anno.autowired.inte.WeaIocAutowiredHandler;
@@ -19,6 +20,7 @@ import com.weaverboot.tools.logTools.LogTools;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,6 +67,8 @@ public class DefaultWeaApplicationContext implements WeaApplicationContext {
             weaScanBeanDefinitionHandler = new DefaultWeaScanBeanDefinitionHandler();
 
             weaScanBeanDefinitionHandler.scanBeanDefinition(); //扫描配置包
+
+            initBeanPostProcessors(); //注册初始化拓展接口
 
             weaInitBeanDefinitionHandler.initBeanDefinition(); //初始化容器
 
@@ -297,6 +301,12 @@ public class DefaultWeaApplicationContext implements WeaApplicationContext {
     public List<WeaReplaceApiAdvice> getReplaceBeforeApi(String apiUrl) {
 
         return WeaIocContainer.getReplaceBefore(apiUrl);
+
+    }
+
+    private void initBeanPostProcessors(){
+
+        Collections.sort(WeaIocContainer.getWeaWiredBeanPostProcessorList(),new WeaIocWiredBeanPostProcessorListComparator());
 
     }
 

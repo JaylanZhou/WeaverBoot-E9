@@ -4,7 +4,9 @@ package com.weaverboot.frame.ioc.container;
 import com.weaverboot.frame.aop.advisor.advisor.inte.WeaAopAdvisor;
 import com.weaverboot.frame.aop.pointcut.inte.WeaAopPointCut;
 import com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefinition;
+import com.weaverboot.frame.ioc.beans.bean.definition.inte.WeaBeanDefinition;
 import com.weaverboot.frame.ioc.handler.replace.weaReplaceApiAdvice.WeaReplaceApiAdvice;
+import com.weaverboot.frame.ioc.postProcessor.wired.inte.WeaWiredBeanPostProcessor;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -29,6 +31,8 @@ public class WeaIocContainer {
     private volatile static Map<String, List<WeaReplaceApiAdvice>> REPLACE_AFTER_API_MAP = new ConcurrentHashMap<>();
 
     private volatile static Map<String, List<WeaReplaceApiAdvice>> REPLACE_BEFORE_API_MAP = new ConcurrentHashMap<>();
+
+    private volatile static List<AbstractWeaBeanDefinition> WIRED_BEAN_POST_PROCESSOR = new ArrayList<>();
 
 
     public static AbstractWeaBeanDefinition getBeanDefinition(String beanId){
@@ -157,4 +161,18 @@ public class WeaIocContainer {
     public static void setBeingCreateBeandefinitionMap(Map<String, AbstractWeaBeanDefinition> beingCreateBeandefinitionMap) {
         BEING_CREATE_BEANDEFINITION_MAP = beingCreateBeandefinitionMap;
     }
+
+    public static void addWiredBeanPostProcessor(AbstractWeaBeanDefinition weaWiredBeanPostProcessor){
+
+        WIRED_BEAN_POST_PROCESSOR.add(weaWiredBeanPostProcessor);
+
+    }
+
+    public static List<AbstractWeaBeanDefinition> getWeaWiredBeanPostProcessorList(){
+
+        return WIRED_BEAN_POST_PROCESSOR;
+
+    }
+
+
 }
