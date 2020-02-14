@@ -11,6 +11,11 @@ import com.weaverboot.frame.ioc.handler.register.impl.DefaultWeaRegisterIocAnnoH
 import com.weaverboot.frame.ioc.handler.register.inte.WeaRegisterIocAnnoHandler;
 import com.weaverboot.frame.ioc.handler.wired.anno.autowired.impl.DefaultWeaIocAutowiredHandler;
 import com.weaverboot.frame.ioc.handler.wired.anno.autowired.inte.WeaIocAutowiredHandler;
+import com.weaverboot.frame.ioc.handler.wired.anno.impl.DefaultWeaWiredColumnAnnoInvokeHandler;
+import com.weaverboot.frame.ioc.handler.wired.anno.impl.DefaultWeaWiredMethodAnnoInvokeHandler;
+import com.weaverboot.frame.ioc.handler.wired.anno.inte.WeaWiredColumnAnnoInovkeHandler;
+import com.weaverboot.frame.ioc.handler.wired.anno.inte.WeaWiredFieldAnnoHandler;
+import com.weaverboot.frame.ioc.handler.wired.anno.inte.WeaWiredMethodAnnoInvokeHandler;
 import com.weaverboot.frame.ioc.handler.wired.anno.value.impl.DefaultWeaIocValueHandler;
 import com.weaverboot.frame.ioc.handler.wired.anno.value.inte.WeaIocValueHandler;
 import com.weaverboot.frame.ioc.handler.wired.factory.impl.DefaultWeaWiredBeanDefinitionFactory;
@@ -61,6 +66,10 @@ public class WeaIocProperties {
     public static Class<? extends WeaCreateWeaBeanDefinitionPostProcessor> DEFAULT_WEA_CREATE_WEA_BEAN_DEFINITION_POST_PROCESSOR = DefaultWeaCreateWeaBeanDefinitionPostProcessor.class;
 
     public static Class<? extends WeaIocWiredBeanPostProcessorHandler> DEFAULT_WEA_IOC_WIRED_BEAN_POST_PROCESSOR_HANDLER = DefaultWeaIocWiredBeanPostProcessorHandler.class;
+
+    public static Class<? extends WeaWiredColumnAnnoInovkeHandler> DEFAULT_WEA_WIRED_COLUMN_ANNO_INVOKE_HANDLER = DefaultWeaWiredColumnAnnoInvokeHandler.class;
+
+    public static Class<? extends WeaWiredMethodAnnoInvokeHandler> DEFAULT_WEA_WIRED_METHOD_ANNO_INVOKE_HANDLER = DefaultWeaWiredMethodAnnoInvokeHandler.class;
 
     static {
 

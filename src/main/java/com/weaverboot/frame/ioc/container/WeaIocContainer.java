@@ -1,14 +1,18 @@
 package com.weaverboot.frame.ioc.container;
 
 
-import com.weaverboot.frame.aop.advisor.advisor.inte.WeaAopAdvisor;
 import com.weaverboot.frame.aop.pointcut.inte.WeaAopPointCut;
+import com.weaverboot.frame.ioc.anno.fieldAnno.WeaAutowired;
+import com.weaverboot.frame.ioc.anno.fieldAnno.WeaIocValue;
 import com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefinition;
-import com.weaverboot.frame.ioc.beans.bean.definition.inte.WeaBeanDefinition;
 import com.weaverboot.frame.ioc.handler.replace.weaReplaceApiAdvice.WeaReplaceApiAdvice;
-import com.weaverboot.frame.ioc.postProcessor.wired.inte.WeaWiredBeanPostProcessor;
+import com.weaverboot.frame.ioc.handler.wired.anno.impl.WeaWiredColumnAnnoHanlder;
+import com.weaverboot.frame.ioc.handler.wired.anno.impl.WeaWiredValueFieldAnnoHandler;
+import com.weaverboot.frame.ioc.handler.wired.anno.impl.WeaWiredValueMethodAnnoHandler;
+import com.weaverboot.frame.ioc.handler.wired.anno.inte.WeaWiredFieldAnnoHandler;
+import com.weaverboot.frame.ioc.handler.wired.anno.inte.WeaWiredMethodAnnoHandler;
 
-import java.lang.reflect.Method;
+import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +37,10 @@ public class WeaIocContainer {
     private volatile static Map<String, List<WeaReplaceApiAdvice>> REPLACE_BEFORE_API_MAP = new ConcurrentHashMap<>();
 
     private volatile static List<AbstractWeaBeanDefinition> WIRED_BEAN_POST_PROCESSOR = new ArrayList<>();
+
+    private volatile static Map<Class<? extends Annotation>, Class<? extends WeaWiredFieldAnnoHandler>> WIRED_FIELD_ANNO_HANDLER_MAP = new ConcurrentHashMap<>();
+
+    private volatile static Map<Class<? extends Annotation>, Class<? extends WeaWiredMethodAnnoHandler>> WIRED_METHOD_ANNO_HANDLER = new ConcurrentHashMap<>();
 
 
     public static AbstractWeaBeanDefinition getBeanDefinition(String beanId){
@@ -174,5 +182,29 @@ public class WeaIocContainer {
 
     }
 
+    public static Map<Class<? extends Annotation>, Class<? extends WeaWiredFieldAnnoHandler>> getWiredFieldAnnoHandlerMap(){
+
+        if (WIRED_FIELD_ANNO_HANDLER_MAP.isEmpty()){
+
+            WIRED_FIELD_ANNO_HANDLER_MAP.put(WeaAutowired.class, WeaWiredColumnAnnoHanlder.class);
+
+            WIRED_FIELD_ANNO_HANDLER_MAP.put(WeaIocValue.class, WeaWiredValueFieldAnnoHandler.class);
+
+        }
+
+        return WIRED_FIELD_ANNO_HANDLER_MAP;
+
+    }
+    public static Map<Class<? extends Annotation>, Class<? extends WeaWiredMethodAnnoHandler>> getWiredMethodAnnoHandlerMap(){
+
+        if (WIRED_METHOD_ANNO_HANDLER.isEmpty()){
+
+            WIRED_METHOD_ANNO_HANDLER.put(WeaIocValue.class, WeaWiredValueMethodAnnoHandler.class);
+
+        }
+
+        return WIRED_METHOD_ANNO_HANDLER;
+
+    }
 
 }

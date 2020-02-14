@@ -7,6 +7,10 @@ import com.weaverboot.frame.ioc.beans.bean.definition.utils.WeaIocCheckUtils;
 import com.weaverboot.frame.ioc.container.WeaIocContainer;
 import com.weaverboot.frame.ioc.handler.postProcessor.wired.inte.WeaIocWiredBeanPostProcessorHandler;
 import com.weaverboot.frame.ioc.handler.wired.anno.autowired.inte.WeaIocAutowiredHandler;
+import com.weaverboot.frame.ioc.handler.wired.anno.inte.WeaWiredColumnAnnoInovkeHandler;
+import com.weaverboot.frame.ioc.handler.wired.anno.inte.WeaWiredFieldAnnoHandler;
+import com.weaverboot.frame.ioc.handler.wired.anno.inte.WeaWiredMethodAnnoHandler;
+import com.weaverboot.frame.ioc.handler.wired.anno.inte.WeaWiredMethodAnnoInvokeHandler;
 import com.weaverboot.frame.ioc.handler.wired.anno.value.inte.WeaIocValueHandler;
 import com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefinition;
 import com.weaverboot.frame.ioc.beans.bean.definition.inte.WeaFactoryBean;
@@ -16,6 +20,7 @@ import com.weaverboot.tools.classTools.ReflectTools;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.List;
 
 /**
@@ -37,6 +42,10 @@ public abstract class AbstractWeaWiredBeanDefinitionHandler implements WeaWiredB
     private WeaAspectPointcutHandler weaAspectPointcutHandler;
 
     private WeaIocWiredBeanPostProcessorHandler weaIocWiredBeanPostProcessorHandler;
+
+    private WeaWiredColumnAnnoInovkeHandler weaWiredColumnAnnoInovkeHandler;
+
+    private WeaWiredMethodAnnoInvokeHandler weaWiredMethodAnnoInvokeHandler;
 
     protected static Object lockObject = new Object();
 
@@ -126,6 +135,36 @@ public abstract class AbstractWeaWiredBeanDefinitionHandler implements WeaWiredB
         this.weaIocWiredBeanPostProcessorHandler = weaIocWiredBeanPostProcessorHandler;
     }
 
+    public WeaWiredColumnAnnoInovkeHandler getWeaWiredColumnAnnoInovkeHandler() throws IllegalAccessException, InstantiationException {
+
+        if (weaWiredColumnAnnoInovkeHandler == null){
+
+            return WeaIocProperties.DEFAULT_WEA_WIRED_COLUMN_ANNO_INVOKE_HANDLER.newInstance();
+
+        }
+
+        return weaWiredColumnAnnoInovkeHandler;
+    }
+
+    public void setWeaWiredColumnAnnoInovkeHandler(WeaWiredColumnAnnoInovkeHandler weaWiredColumnAnnoInovkeHandler) {
+        this.weaWiredColumnAnnoInovkeHandler = weaWiredColumnAnnoInovkeHandler;
+    }
+
+    public WeaWiredMethodAnnoInvokeHandler getWeaWiredMethodAnnoInvokeHandler() throws IllegalAccessException, InstantiationException {
+
+        if (weaWiredMethodAnnoInvokeHandler == null){
+
+            return WeaIocProperties.DEFAULT_WEA_WIRED_METHOD_ANNO_INVOKE_HANDLER.newInstance();
+
+        }
+
+        return weaWiredMethodAnnoInvokeHandler;
+    }
+
+    public void setWeaWiredMethodAnnoInvokeHandler(WeaWiredMethodAnnoInvokeHandler weaWiredMethodAnnoInvokeHandler) {
+        this.weaWiredMethodAnnoInvokeHandler = weaWiredMethodAnnoInvokeHandler;
+    }
+
     /**
      *
      * 创建实体类
@@ -194,16 +233,23 @@ public abstract class AbstractWeaWiredBeanDefinitionHandler implements WeaWiredB
 
         }
 
-        this.getWeaIocWiredBeanPostProcessorHandler().handlePostProcessBeforeInitialization(object,beanId);
+        this.getWeaIocWiredBeanPostProcessorHandler().handlePostProcessBeforeInitialization(object,beanId); //初始化前置操作拓展点
 
         List<Field> fields = ReflectTools.getAllFields(abstractWeaBeanDefinition.getBeanClass());
+
+        List<Method> methods = ReflectTools.getAllMethodForClass(abstractWeaBeanDefinition.getBeanClass());
 
         for (Field field : fields
         ) {
 
-            getWeaIocAutowiredHandler().autoWiredField(field,object);
+            this.getWeaWiredColumnAnnoInovkeHandler().invokeWiredColumn(field,object,beanId);
 
-            getWeaIocValueHandler().valueField(field,object);
+        }
+
+        for (Method method : methods
+             ) {
+
+            this.getWeaWiredMethodAnnoInvokeHandler().invokeWiredMethod(method,object,beanId);
 
         }
 
@@ -215,7 +261,7 @@ public abstract class AbstractWeaWiredBeanDefinitionHandler implements WeaWiredB
 
         }
 
-        this.getWeaIocWiredBeanPostProcessorHandler().handlePostProcessAfterInitialization(object,beanId);
+        this.getWeaIocWiredBeanPostProcessorHandler().handlePostProcessAfterInitialization(object,beanId); //初始化后置操作拓展点
 
         return object;
 

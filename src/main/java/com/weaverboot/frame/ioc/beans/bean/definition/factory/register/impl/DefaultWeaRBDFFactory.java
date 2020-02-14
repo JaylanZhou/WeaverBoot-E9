@@ -54,6 +54,10 @@ public class DefaultWeaRBDFFactory extends AbstractWeaRBDFFactory {
 
             return new WeaIocWiredBeanPostProcessorDefinitionFactory();
 
+        } else if (abstractWeaBeanDefinitionClass.isAnnotationPresent(WeaIocCustomAnnoation.class)){
+
+            return new WeaIocCustomAnnoationFactory();
+
         } else {
 
             throw new RuntimeException("未找到对应的注册类型");

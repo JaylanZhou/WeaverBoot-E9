@@ -18,8 +18,6 @@ public class DefaultWeaIocValueHandler extends AbstractWeaIocValueHandler {
 
     private String set_suffix = "set";
 
-    private BaseBean baseBean = new BaseBean();
-
 
     @Override
     public void valueField(Field field, Object object) throws IllegalAccessException, IOException {
