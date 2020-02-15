@@ -63,7 +63,7 @@ public class WeaIocCustomAnnoationFactory extends AbstractWeaRegisterBeanDefinit
 
                 if (WeaIocContainer.getWiredFieldAnnoHandlerMap().containsKey(weaIocCustomAnnoation.customAnnoation())){
 
-                    LogTools.error("自定义注解" + weaIocCustomAnnoation.getClass().getName() + "已存在，无法再次注入！");
+                    LogTools.error("自定义注解" + weaIocCustomAnnoation.customAnnoation().getName() + "已存在，无法再次注入！");
 
                 } else {
 
@@ -73,7 +73,7 @@ public class WeaIocCustomAnnoationFactory extends AbstractWeaRegisterBeanDefinit
 
             } else {
 
-                LogTools.error("字段自定义注解" + weaIocCustomAnnoation.getClass().getName() + "的逻辑类" + clazz.getName() + "需要实现WeaWiredFieldAnnoHandler类");
+                LogTools.error("字段自定义注解" + weaIocCustomAnnoation.customAnnoation().getName() + "的逻辑类" + clazz.getName() + "需要实现WeaWiredFieldAnnoHandler类");
 
             }
 
@@ -84,7 +84,7 @@ public class WeaIocCustomAnnoationFactory extends AbstractWeaRegisterBeanDefinit
 
                 if (WeaIocContainer.getWiredMethodAnnoHandlerMap().containsKey(weaIocCustomAnnoation.customAnnoation())){
 
-                    LogTools.error("自定义注解" + weaIocCustomAnnoation.getClass().getName() + "已存在，无法再次注入！");
+                    LogTools.error("自定义注解" + weaIocCustomAnnoation.customAnnoation().getName() + "已存在，无法再次注入！");
 
                 } else {
 
@@ -94,7 +94,7 @@ public class WeaIocCustomAnnoationFactory extends AbstractWeaRegisterBeanDefinit
 
             } else {
 
-                LogTools.error("方法自定义注解" + weaIocCustomAnnoation.getClass().getName() + "的逻辑类" + clazz.getName() + "需要实现WeaWiredMethodAnnoHandler类");
+                LogTools.error("方法自定义注解" + weaIocCustomAnnoation.customAnnoation().getName() + "的逻辑类" + clazz.getName() + "需要实现WeaWiredMethodAnnoHandler类");
 
             }
 
