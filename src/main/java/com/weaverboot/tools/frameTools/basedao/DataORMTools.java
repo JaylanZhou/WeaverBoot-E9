@@ -42,7 +42,7 @@ public class DataORMTools  {
 
         if (outLog) {
 
-            LogTools.writeLog("事务执行语句:" + sql);
+            LogTools.info("事务执行语句:" + sql);
 
         }
 
