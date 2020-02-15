@@ -137,7 +137,7 @@ public class RefTools extends BaseBean {
 
             if (outLog) {
 
-                LogTools.writeLog("事务执行语句:" + sql);
+                LogTools.info("事务执行语句:" + sql);
 
             }
 
@@ -175,7 +175,7 @@ public class RefTools extends BaseBean {
 
             if (outLog){
 
-                LogTools.writeLog("执行语句:" + sql);
+                LogTools.info("执行语句:" + sql);
 
             }
 

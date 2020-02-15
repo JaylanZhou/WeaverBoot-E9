@@ -160,7 +160,7 @@ public class HttpConnectionPoolTools {
                             //关闭5s空闲的连接
                             manager.closeIdleConnections(5000, TimeUnit.MILLISECONDS);
 
-                            LogTools.writeLog("关闭空闲连接");
+                            LogTools.info("关闭空闲连接");
 
                         }
 

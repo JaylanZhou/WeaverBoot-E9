@@ -51,7 +51,7 @@ public class ExcuteTools {
 
             if (outLog) {
 
-                LogTools.writeLog("事务执行语句:" + sql);
+                LogTools.info("事务执行语句:" + sql);
 
             }
 
@@ -87,7 +87,7 @@ public class ExcuteTools {
 
             if (outLog){
 
-                LogTools.writeLog("执行语句:" + sql);
+                LogTools.info("执行语句:" + sql);
 
             }
 
@@ -153,7 +153,7 @@ public class ExcuteTools {
 
             if (outLog) {
 
-                LogTools.writeLog("事务执行语句:" + sql);
+                LogTools.info("事务执行语句:" + sql);
 
             }
 
@@ -181,7 +181,7 @@ public class ExcuteTools {
 
             if (outLog) {
 
-                LogTools.writeLog("执行语句:" + sql);
+                LogTools.info("执行语句:" + sql);
 
             }
 
@@ -213,7 +213,6 @@ public class ExcuteTools {
      *
      * @param columns 类中变量数组
      * @param sql 传入的SQL语句
-     * @param dbname 外部数据源配置名称
      * @return
      * @throws Exception
      */
@@ -228,7 +227,7 @@ public class ExcuteTools {
 
         if (outLog) {
 
-            LogTools.writeLog("执行语句:" + sql);
+            LogTools.info("执行语句:" + sql);
 
         }
 
@@ -276,8 +275,6 @@ public class ExcuteTools {
 
     public static List getResultListCustom(Object obj,String sql,Class tClass,boolean outLog) throws Exception {
 
-        BaseBean baseBean = new BaseBean();
-
         List result = new ArrayList();
 
         List<Field> annoFieldList = new ArrayList<Field>();
@@ -294,7 +291,7 @@ public class ExcuteTools {
 
             if (outLog) {
 
-                LogTools.writeLog("事务执行语句:" + sql);
+                LogTools.info("事务执行语句:" + sql);
 
             }
 
@@ -334,7 +331,7 @@ public class ExcuteTools {
 
             if (outLog) {
 
-                LogTools.writeLog("执行语句:" + sql);
+                LogTools.info("执行语句:" + sql);
 
             }
 
@@ -391,13 +388,13 @@ public class ExcuteTools {
 
             if (outLog) {
 
-                LogTools.writeLog("执行事务:" + sql);
+                LogTools.info("执行事务:" + sql);
 
             }
 
             if(!isSuccess){
 
-                LogTools.writeLog("您于 " + TimeUtil.getCurrentDateString() + " 的操作失败，执行的Sql语句为: " + sql);
+                LogTools.error("您于 " + TimeUtil.getCurrentDateString() + " 的操作失败，执行的Sql语句为: " + sql);
                 throw new RuntimeException("操作失败，请联系管理员！");
 
             }
@@ -410,13 +407,13 @@ public class ExcuteTools {
 
             if (outLog) {
 
-                LogTools.writeLog("执行语句:" + sql);
+                LogTools.info("执行语句:" + sql);
 
             }
 
             if (!isSuccess) {
 
-                LogTools.writeLog("您于 " + TimeUtil.getCurrentDateString() + " 的操作失败，执行的Sql语句为: " + sql);
+                LogTools.error("您于 " + TimeUtil.getCurrentDateString() + " 的操作失败，执行的Sql语句为: " + sql);
                 throw new RuntimeException("操作失败，请联系管理员！");
 
             }

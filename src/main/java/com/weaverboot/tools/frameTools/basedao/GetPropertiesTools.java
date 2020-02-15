@@ -268,7 +268,7 @@ public class GetPropertiesTools {
 
             if (outLog) {
 
-                LogTools.writeLog("事务执行语句:" + sql);
+                LogTools.info("事务执行语句:" + sql);
 
             }
 
@@ -304,7 +304,7 @@ public class GetPropertiesTools {
 
             if (outLog){
 
-                LogTools.writeLog("执行语句:" + sql);
+                LogTools.info("执行语句:" + sql);
 
             }
 
@@ -367,7 +367,7 @@ public class GetPropertiesTools {
 
             if (outLog) {
 
-                LogTools.writeLog("事务执行语句:" + sql);
+                LogTools.info("事务执行语句:" + sql);
 
             }
 
@@ -395,7 +395,7 @@ public class GetPropertiesTools {
 
             if (outLog) {
 
-                LogTools.writeLog("执行语句:" + sql);
+                LogTools.info("执行语句:" + sql);
 
             }
 
@@ -444,7 +444,7 @@ public class GetPropertiesTools {
 
         if (outLog) {
 
-            LogTools.writeLog("执行语句:" + sql);
+            LogTools.info("执行语句:" + sql);
 
         }
 
@@ -510,7 +510,7 @@ public class GetPropertiesTools {
 
             if (outLog) {
 
-                LogTools.writeLog("事务执行语句:" + sql);
+                LogTools.info("事务执行语句:" + sql);
 
             }
 
@@ -550,7 +550,7 @@ public class GetPropertiesTools {
 
             if (outLog) {
 
-                LogTools.writeLog("执行语句:" + sql);
+                LogTools.info("执行语句:" + sql);
 
             }
 
@@ -686,13 +686,13 @@ public class GetPropertiesTools {
 
             if(outLog) {
 
-                LogTools.writeLog("执行自定义事务:" + sql);
+                LogTools.info("执行自定义事务:" + sql);
 
             }
 
             if(!isSuccess){
 
-                LogTools.writeLog("您于 " + TimeUtil.getCurrentDateString() + " 的操作失败，执行的Sql语句为: " + sql);
+                LogTools.error("您于 " + TimeUtil.getCurrentDateString() + " 的操作失败，执行的Sql语句为: " + sql);
                 throw new RuntimeException("操作失败，请联系管理员！");
 
             }
@@ -705,13 +705,13 @@ public class GetPropertiesTools {
 
             if(outLog){
 
-                LogTools.writeLog("执行自定义语句:" + sql);
+                LogTools.info("执行自定义语句:" + sql);
 
             }
 
             if (!isSuccess) {
 
-                LogTools.writeLog("您于 " + TimeUtil.getCurrentDateString() + " 的操作失败，执行的Sql语句为: " + sql);
+                LogTools.error("您于 " + TimeUtil.getCurrentDateString() + " 的操作失败，执行的Sql语句为: " + sql);
                 throw new RuntimeException("操作失败，请联系管理员！");
 
             }
@@ -748,7 +748,7 @@ public class GetPropertiesTools {
 
             if(outLog) {
 
-                LogTools.writeLog("事务执行自定义语句:" + sql);
+                LogTools.info("事务执行自定义语句:" + sql);
 
             }
 
@@ -776,7 +776,7 @@ public class GetPropertiesTools {
 
             if(outLog){
 
-                LogTools.writeLog("执行自定义语句:" + sql);
+                LogTools.info("执行自定义语句:" + sql);
 
             }
 
@@ -825,7 +825,7 @@ public class GetPropertiesTools {
 
         if(outLog){
 
-           LogTools.writeLog("执行自定义外部数据源查询:" + sql);
+           LogTools.info("执行自定义外部数据源查询:" + sql);
 
         }
 
@@ -870,7 +870,7 @@ public class GetPropertiesTools {
 
             if(outLog) {
 
-                LogTools.writeLog("事务执行自定义语句:" + sql);
+                LogTools.info("事务执行自定义语句:" + sql);
 
             }
 
@@ -898,7 +898,7 @@ public class GetPropertiesTools {
 
             if(outLog){
 
-                LogTools.writeLog("执行自定义语句:" + sql);
+                LogTools.info("执行自定义语句:" + sql);
 
             }
 
@@ -944,7 +944,7 @@ public class GetPropertiesTools {
 
         if(outLog){
 
-            LogTools.writeLog("执行自定义查询语句:" + sql);
+            LogTools.info("执行自定义查询语句:" + sql);
 
         }
 
