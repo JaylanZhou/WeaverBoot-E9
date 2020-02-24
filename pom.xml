@@ -41,13 +41,8 @@
     </dependency>
     <dependency>
       <groupId>com.weaver</groupId>
-      <artifactId>weaver-ecology-1</artifactId>
-      <version>3.28</version>
-    </dependency>
-    <dependency>
-      <groupId>com.weaver</groupId>
-      <artifactId>weaver-ecology-2</artifactId>
-      <version>3.28</version>
+      <artifactId>e9-classbean</artifactId>
+      <version>1.0.0</version>
     </dependency>
     <dependency>
       <groupId>com.sun.jersey</groupId>
@@ -99,15 +94,28 @@
       <artifactId>log4j</artifactId>
       <version>1.2.13</version>
     </dependency>
-
-
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi</artifactId>
+      <version>4.0.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi-ooxml-schemas</artifactId>
+      <version>4.0.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi-scratchpad</artifactId>
+      <version>4.0.1</version>
+    </dependency>
   </dependencies>
 
   <distributionManagement>
     <repository>
       <id>weaver-ebu2</id>
       <name>weaver-ebu2</name>
-      <url>http://62.234.60.223:8081/repository/weaver-ebu2/</url>
+      <url>http://114.116.228.6:8081/repository/weaver-ebu2/</url>
     </repository>
     <!--    <snapshotRepository>-->
     <!--      <id>user-snapshots</id>-->

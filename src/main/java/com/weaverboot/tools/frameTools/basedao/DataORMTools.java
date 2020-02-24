@@ -138,7 +138,7 @@ public class DataORMTools  {
      * @return 转换后的值
      */
 
-    private static <T> T tarnsData(String value,Class<T> tClass){
+    public static <T> T tarnsData(String value,Class<T> tClass){
 
         String className = tClass.getName();
 

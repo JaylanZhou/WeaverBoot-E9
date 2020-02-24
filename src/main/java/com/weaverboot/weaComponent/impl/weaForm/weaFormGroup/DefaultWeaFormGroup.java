@@ -19,6 +19,14 @@ public class DefaultWeaFormGroup extends AbstractWeaFormGroup {
 
     private final WeaFormGroupConditionType conditionType = WeaFormGroupConditionType.DEFAULT; //默认实现类的标记：DEFAULT
 
+    public DefaultWeaFormGroup(){}
+
+    public DefaultWeaFormGroup(String title){
+
+        this.setTitle(title);
+
+    }
+
     @Override
     public WeaFormGroupConditionType getConditionType() {
         return conditionType;

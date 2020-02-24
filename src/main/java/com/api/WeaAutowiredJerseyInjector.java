@@ -51,6 +51,7 @@ public class WeaAutowiredJerseyInjector implements InjectableProvider<WeaAutowir
 
     @Override
     public ComponentScope getScope() {
+
         return ComponentScope.PerRequest;
     }
 

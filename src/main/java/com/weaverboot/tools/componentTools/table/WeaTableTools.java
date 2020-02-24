@@ -602,9 +602,17 @@ public class WeaTableTools {
         // sql
         tableString.append("<sql backfields=\"").append(weaTable.getBackfields()).append(SUF_MARK);
 
-        tableString.append(" sqlform=\"").append(Util.toHtmlForSplitPage(weaTable.getSqlform())).append(SUF_MARK);
+        if (BaseTools.notNullString(weaTable.getSqlform())) {
 
-        tableString.append(" sqlwhere=\"").append(Util.toHtmlForSplitPage(weaTable.getSqlwhere())).append(SUF_MARK);
+            tableString.append(" sqlform=\"").append(Util.toHtmlForSplitPage(weaTable.getSqlform())).append(SUF_MARK);
+
+        }
+
+        if (BaseTools.notNullString(weaTable.getSqlwhere())) {
+
+            tableString.append(" sqlwhere=\"").append(Util.toHtmlForSplitPage(weaTable.getSqlwhere())).append(SUF_MARK);
+
+        }
 
         if(!"".equals(Util.null2String(weaTable.getSqlorderby()))){
 

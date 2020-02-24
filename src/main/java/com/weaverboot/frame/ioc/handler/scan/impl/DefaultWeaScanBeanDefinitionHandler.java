@@ -100,8 +100,7 @@ public class DefaultWeaScanBeanDefinitionHandler implements WeaScanBeanDefinitio
 
         String[] scanPackges = scanPackgeString.split(SPLIT_SCANPACKAGE_FLAG);
 
-        for (String scanPackage : scanPackges
-             ) {
+
 
 
             File file = new File(basePath);
@@ -112,11 +111,10 @@ public class DefaultWeaScanBeanDefinitionHandler implements WeaScanBeanDefinitio
 
                 for (int i = 0; i < files.length; i++) {
 
-                    checkPath(fileList, files[i], scanPackage);
+                    checkPath(fileList, files[i],scanPackges);
 
                 }
 
-            }
 
         }
 
@@ -124,26 +122,31 @@ public class DefaultWeaScanBeanDefinitionHandler implements WeaScanBeanDefinitio
 
     }
 
-    private void checkPath(List<File> fileList,File file,String scanPackge){
+    private void checkPath(List<File> fileList,File file,String[] scanPackges){
 
-        if (file.isDirectory()) {
+            if (file.isDirectory()) {
 
-            String path = WeaIocFormatUtils.formatFilePath(file.getPath());
+                String path = WeaIocFormatUtils.formatFilePath(file.getPath());
 
-            if (weaPathMatcher.match(scanPackge, path.replaceAll(basePath, ""))) {
+                    for (String scanPackage : scanPackges
+                    ) {
+                        if (weaPathMatcher.match(scanPackage, path.replaceAll(basePath, ""))) {
 
-                fileList.add(file);
+                            fileList.add(file);
+
+                            break;
+
+                        }
+
+                }
+
+                File[] files = file.listFiles();
+
+                for (int i = 0; i < files.length; i++) {
+
+                    checkPath(fileList,files[i],scanPackges);
 
             }
-
-            File[] files = file.listFiles();
-
-            for (int i = 0; i < files.length; i++) {
-
-                checkPath(fileList,files[i],scanPackge);
-
-            }
-
         }
 
     }
