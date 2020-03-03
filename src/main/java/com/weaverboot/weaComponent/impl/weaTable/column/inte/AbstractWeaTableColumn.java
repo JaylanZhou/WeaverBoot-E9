@@ -77,6 +77,8 @@ public abstract class AbstractWeaTableColumn extends AbstractWeaComponent {
     ///字段固定列
     private String fixed=null;//left,right,none
 
+    private int order;
+
 
 
     public WeaAlignEnum getAlign() {
@@ -285,5 +287,13 @@ public abstract class AbstractWeaTableColumn extends AbstractWeaComponent {
 
     public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
+    }
+
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
     }
 }

@@ -3,6 +3,7 @@ package com.weaverboot.http.httpClient.handle.impl;
 import com.weaverboot.http.httpClient.handle.inte.PostSendHandle;
 import com.weaverboot.http.httpClient.tools.HttpClientBuildTools;
 import com.weaverboot.http.httpClient.tools.HttpConnectionPoolTools;
+import com.weaverboot.http.resultMsg.WeaHttpResultMsg;
 import com.weaverboot.tools.enumTools.frame.EncodeCondition;
 import com.weaverboot.tools.enumTools.frame.http.HttpContentTypeCondition;
 import com.weaverboot.tools.logTools.LogTools;
@@ -25,7 +26,7 @@ public class DefaultPostSendHandle implements PostSendHandle {
     private BaseBean baseBean = new BaseBean();
 
     @Override
-    public String sendPost(String url, String body, EncodeCondition encodeCondition, HttpContentTypeCondition httpContentTypeCondition) {
+    public WeaHttpResultMsg sendPost(String url, String body, EncodeCondition encodeCondition, HttpContentTypeCondition httpContentTypeCondition) {
 
         try {
 
@@ -33,11 +34,11 @@ public class DefaultPostSendHandle implements PostSendHandle {
 
             this.response = HttpConnectionPoolTools.getHttpClient().execute(httpPost);
 
-            String resultString = HttpClientBuildTools.getReturnMessage(response,encodeCondition);
+            WeaHttpResultMsg weaHttpResultMsg = HttpClientBuildTools.getReturnMessage(response,encodeCondition);
 
             HttpClientBuildTools.closeConnection(this.response,param,header);
 
-            return resultString;
+            return weaHttpResultMsg;
 
         } catch (IOException e) {
 
@@ -50,7 +51,7 @@ public class DefaultPostSendHandle implements PostSendHandle {
     }
 
     @Override
-    public String sendPost(String url, String body, EncodeCondition encodeCondition, HttpContentTypeCondition httpContentTypeCondition, String userName, String password) {
+    public WeaHttpResultMsg sendPost(String url, String body, EncodeCondition encodeCondition, HttpContentTypeCondition httpContentTypeCondition, String userName, String password) {
 
         try {
 
@@ -58,11 +59,11 @@ public class DefaultPostSendHandle implements PostSendHandle {
 
             this.response = HttpConnectionPoolTools.getHttpClient(userName,password).execute(httpPost);
 
-            String resultString = HttpClientBuildTools.getReturnMessage(response,encodeCondition);
+            WeaHttpResultMsg weaHttpResultMsg = HttpClientBuildTools.getReturnMessage(response,encodeCondition);
 
             HttpClientBuildTools.closeConnection(this.response,param,header);
 
-            return resultString;
+            return weaHttpResultMsg;
 
         } catch (IOException e) {
 

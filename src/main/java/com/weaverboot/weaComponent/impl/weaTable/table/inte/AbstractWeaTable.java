@@ -1,4 +1,7 @@
 package com.weaverboot.weaComponent.impl.weaTable.table.inte;
+import com.weaverboot.frame.model.BaseModel;
+import com.weaverboot.tools.baseTools.BaseTools;
+import com.weaverboot.tools.componentTools.table.ModelTransWeaTable;
 import com.weaverboot.tools.enumTools.weaComponent.WeaBooleanEnum;
 import com.weaverboot.tools.enumTools.weaComponent.WeaMobileShowTypeEnum;
 import com.weaverboot.tools.enumTools.weaComponent.WeaTableTypeEnum;
@@ -104,6 +107,19 @@ public abstract class AbstractWeaTable extends AbstractWeaComponent {
 
     public AbstractWeaTable() {
 
+        init();
+
+    }
+
+    public AbstractWeaTable(BaseModel baseModel){
+
+        init();
+
+
+    }
+
+    public void init(){
+
         this.tableType = WeaTableTypeEnum.NONE;
 
         this.openPrimaryKeyOrder = WeaBooleanEnum.FALSE.FALSE;
@@ -118,41 +134,206 @@ public abstract class AbstractWeaTable extends AbstractWeaComponent {
 
         this.checkboxList = new ArrayList();
 
+        this.pageID = BaseTools.createUUID();
+
+        this.pageUID = pageID;
+
     }
+
+    /**
+     *
+     * 通过索引读取tablecolumn
+     *
+     * @param index 索引位置
+     * @param tClass tablecolumn类型
+     * @param <T> tablecolumn类型
+     * @return WeaTableColumn
+     *
+     */
 
     public abstract <T extends AbstractWeaTableColumn> T readWeaTableColumn(int index,Class<T> tClass);
 
+    /**
+     *
+     * 通过字段名字读取tablecolumn
+     *
+     * @param columnText 字段名字
+     * @param tClass tablecolumn类型
+     * @param <T> tablecolumn类型
+     * @return WeaTableColumn
+     *
+     */
+
     public abstract <T extends AbstractWeaTableColumn> T readWeaTableColumnWithName(String columnText,Class<T> tClass);
+
+    /**
+     *
+     * 通过字段名字读取所有同名的tablecolumn
+     *
+     * @param columnText 字段名字
+     * @param tClass tablecolumn类型
+     * @param <T> tablecolumn类型
+     * @return WeaTableColumn
+     *
+     */
 
     public abstract <T extends AbstractWeaTableColumn> List<T> readWeaTableColumnWithNameArray(String columnText,Class<T> tClass);
 
+    /**
+     *
+     * 通过数据库字段名读取tablecolumn
+     *
+     * @param column 数据库字段名
+     * @param tClass tablecolumn类型
+     * @param <T> tablecolumn类型
+     * @return WeaTableColumn
+     *
+     */
+
     public abstract <T extends AbstractWeaTableColumn> T readWeaTableColumnWithColumn(String column,Class<T> tClass);
+
+    /**
+     *
+     * 通过数据库字段名读取所有同名tablecolumn
+     *
+     * @param column 数据库字段名
+     * @param tClass tablecolumn类型
+     * @param <T> tablecolumn类型
+     * @return WeaTableColumn
+     *
+     */
 
     public abstract <T extends AbstractWeaTableColumn> List<T> readWeaTableColumnWithColumnArray(String column,Class<T> tClass);
 
+    /**
+     *
+     * 向对应索引字段的位置添加一个tablecolumn
+     *
+     * @param index
+     * @param t
+     * @param <T>
+     */
+
     public abstract <T extends AbstractWeaTableColumn> void addWeaTableColumn(int index,T t);
+
+    /**
+     *
+     * 在字段列表最后添加 tablecolumn
+     *
+     * @param t
+     * @param <T>
+     */
 
     public abstract <T extends AbstractWeaTableColumn> void addWeaTableColumn(T t);
 
+    /**
+     *
+     * 移除对应位置的column
+     *
+     * @param index
+     */
+
     public abstract void removeWeaTableColumn(int index);
+
+    /**
+     *
+     * 通过名称移除column
+     *
+     * @param columnText
+     */
 
     public abstract void removeWeaTableColumnWithName(String columnText);
 
+    /**
+     *
+     * 移除所有此名称的column
+     *
+     * @param columnText
+     */
+
     public abstract void removeWeaTableColumnWithNameAll(String columnText);
+
+    /**
+     *
+     * 读取对应位置的operate
+     *
+     * @param index
+     * @param tClass
+     * @param <T>
+     * @return
+     */
 
     public abstract <T extends AbstractWeaTableOperate> T readWeaTableOperate(int index, Class<T> tClass);
 
+    /**
+     *
+     * 读取对应名称的 operate
+     *
+     * @param operateText
+     * @param tClass
+     * @param <T>
+     * @return
+     */
+
     public abstract <T extends AbstractWeaTableOperate> T readWeaTableOperateWithName(String operateText,Class<T> tClass);
+
+    /**
+     *
+     * 读取所有此名称的 operate
+     *
+     * @param operateText
+     * @param tClass
+     * @param <T>
+     * @return
+     */
 
     public abstract <T extends AbstractWeaTableOperate> List<T> readWeaTableOperateWithNameArray(String operateText,Class<T> tClass);
 
+    /**
+     *
+     * 在操作菜单组的对应位置添加一个 operate
+     *
+     * @param index
+     * @param t
+     * @param <T>
+     */
+
     public abstract <T extends AbstractWeaTableOperate> void addWeaTableOperate(int index, T t);
+
+    /**
+     *
+     * 在操作菜单的尾部添加一个operate
+     *
+     * @param t
+     * @param <T>
+     */
 
     public abstract <T extends AbstractWeaTableOperate> void addWeaTableOperate(T t);
 
+    /**
+     *
+     * 移除对应位置的operate
+     *
+     * @param index
+     */
+
     public abstract void removeWeaTableOperate(int index);
 
+    /**
+     *
+     * 移除第一个叫此名称的operate
+     *
+     * @param operateText
+     */
+
     public abstract void removeWeaTableOperateWithName(String operateText);
+
+    /**
+     *
+     * 移除所有此名称的operate
+     *
+     * @param operateText
+     */
 
     public abstract void removeWeaTableOperateWithNameAll(String operateText);
 
@@ -351,7 +532,15 @@ public abstract class AbstractWeaTable extends AbstractWeaComponent {
     }
 
     public List<AbstractWeaTableColumn> getColumns() {
+
+        if (!BaseTools.notNullList(this.columns)) {
+
+            this.columns = new ArrayList<>();
+
+        }
+
         return columns;
+
     }
 
     public void setColumns(List<AbstractWeaTableColumn> columns) {

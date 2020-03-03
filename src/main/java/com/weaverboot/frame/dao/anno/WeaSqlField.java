@@ -5,8 +5,10 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface TableName {
+public @interface WeaSqlField {
 
     String value();
+
+    String groupBy() default "";
 
 }

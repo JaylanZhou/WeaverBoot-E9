@@ -1,6 +1,9 @@
 package com.weaverboot.weaComponent.impl.weaTable.table.impl;
 
+import com.weaverboot.frame.model.BaseModel;
 import com.weaverboot.tools.baseTools.BaseTools;
+import com.weaverboot.tools.componentTools.table.ModelTransWeaTable;
+import com.weaverboot.tools.enumTools.frame.SelectCondition;
 import com.weaverboot.weaComponent.impl.weaTable.checkboxPopedom.inte.AbstractWeaCheckboxPopedom;
 import com.weaverboot.weaComponent.impl.weaTable.column.inte.AbstractWeaTableColumn;
 import com.weaverboot.weaComponent.impl.weaTable.operate.inte.AbstractWeaTableOperate;
@@ -8,6 +11,7 @@ import com.weaverboot.weaComponent.impl.weaTable.table.inte.AbstractWeaTable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -21,6 +25,37 @@ import java.util.List;
 
 public class DefaultWeaTable extends AbstractWeaTable {
 
+
+    public DefaultWeaTable(){
+
+        super();
+
+    }
+
+    public DefaultWeaTable(BaseModel baseModel, SelectCondition selectCondition){
+
+        super();
+
+        ModelTransWeaTable.parseBaseModel(baseModel,this,selectCondition,null);
+
+    }
+
+    public DefaultWeaTable(BaseModel baseModel, SelectCondition selectCondition, Map<String,String> conditionMap){
+
+        super();
+
+        ModelTransWeaTable.parseBaseModel(baseModel,this,selectCondition,conditionMap);
+
+    }
+
+    public DefaultWeaTable(BaseModel baseModel, Map<String,String> conditionMap){
+
+        super();
+
+        ModelTransWeaTable.parseBaseModel(baseModel,this,SelectCondition.AND,conditionMap);
+
+    }
+
     /**
      *
      * 根据
@@ -30,7 +65,6 @@ public class DefaultWeaTable extends AbstractWeaTable {
      * @param <T>
      * @return
      */
-
     @Override
     public <T extends AbstractWeaTableColumn> T readWeaTableColumn(int index, Class<T> tClass) {
 

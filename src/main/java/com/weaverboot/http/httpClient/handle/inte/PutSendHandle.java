@@ -1,13 +1,14 @@
 package com.weaverboot.http.httpClient.handle.inte;
 
+import com.weaverboot.http.resultMsg.WeaHttpResultMsg;
 import com.weaverboot.tools.enumTools.frame.EncodeCondition;
 import com.weaverboot.tools.enumTools.frame.http.HttpContentTypeCondition;
 
 public interface PutSendHandle {
 
-    String sendPut(String url, String body, EncodeCondition encodeCondition, HttpContentTypeCondition httpContentTypeCondition);
+    WeaHttpResultMsg sendPut(String url, String body, EncodeCondition encodeCondition, HttpContentTypeCondition httpContentTypeCondition);
 
-    String sendPut(String url, String body, EncodeCondition encodeCondition, HttpContentTypeCondition httpContentTypeCondition, String userName, String password);
+    WeaHttpResultMsg sendPut(String url, String body, EncodeCondition encodeCondition, HttpContentTypeCondition httpContentTypeCondition, String userName, String password);
 
     void setParams(String name, String value);
 

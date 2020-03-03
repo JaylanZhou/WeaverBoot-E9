@@ -1,5 +1,6 @@
 package com.weaverboot.http.httpClient.tools;
 
+import com.weaverboot.http.resultMsg.WeaHttpResultMsg;
 import com.weaverboot.tools.enumTools.frame.EncodeCondition;
 import com.weaverboot.tools.enumTools.frame.http.HttpContentTypeCondition;
 import com.weaverboot.tools.enumTools.frame.http.HttpMethodCondition;
@@ -228,33 +229,35 @@ public class HttpClientBuildTools {
      * @throws IOException
      */
 
-    public static String getReturnMessage(CloseableHttpResponse response,EncodeCondition encodeCondition) throws IOException {
+    public static WeaHttpResultMsg getReturnMessage(CloseableHttpResponse response, EncodeCondition encodeCondition) throws IOException {
 
         String resultString = "";
 
-        BaseBean baseBean = new BaseBean();
+        int httpStatus = response.getStatusLine().getStatusCode();
 
-        if(response.getStatusLine().getStatusCode() == 200){
+        WeaHttpResultMsg weaHttpResultMsg = new WeaHttpResultMsg();
+
+        if(httpStatus == 200){
 
             resultString = EntityUtils.toString(response.getEntity(), encodeCondition.toString());
 
             LogTools.info("返回成功:\n" + resultString);
 
 
-        }else if(response.getStatusLine().getStatusCode() == 400){
+        }else if(httpStatus == 400){
 
             resultString = EntityUtils.toString(response.getEntity(), encodeCondition.toString());
 
             LogTools.error("400错误:\n" + resultString);
 
 
-        }else if(response.getStatusLine().getStatusCode() == 404){
+        }else if(httpStatus == 404){
 
             resultString = EntityUtils.toString(response.getEntity(), encodeCondition.toString());
 
             LogTools.error("404错误:\n" + resultString);
 
-        }else if(response.getStatusLine().getStatusCode() == 500){
+        }else if(httpStatus == 500){
 
             resultString = EntityUtils.toString(response.getEntity(), encodeCondition.toString());
 
@@ -268,13 +271,16 @@ public class HttpClientBuildTools {
 
             }
 
-            LogTools.error("返回信息:\n" + resultString);
+            LogTools.error("返回信息:\n" + resultString + ",请求状态:" + httpStatus);
 
-            resultString = String.valueOf(response.getStatusLine().getStatusCode());
 
         }
 
-        return resultString;
+        weaHttpResultMsg.setData(resultString);
+
+        weaHttpResultMsg.setHttpStatus(httpStatus);
+
+        return weaHttpResultMsg;
 
     }
 

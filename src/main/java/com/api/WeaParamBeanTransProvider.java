@@ -53,6 +53,18 @@ public class WeaParamBeanTransProvider implements MessageBodyReader<Object> {
     @Override
     public Object readFrom(Class<Object> aClass, Type type, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, String> multivaluedMap, InputStream inputStream) throws IOException, WebApplicationException {
 
+        WeaParamBean weaParamBean = null;
+
+        for (int i = 0; i < annotations.length; i++) {
+
+            if (annotations[i] instanceof WeaParamBean){
+
+                weaParamBean = (WeaParamBean) annotations[i];
+
+            }
+
+        }
+
         Class clazz = (Class) type;
 
         if (request == null && response == null){
@@ -80,7 +92,7 @@ public class WeaParamBeanTransProvider implements MessageBodyReader<Object> {
 
                     if (method != null) {
 
-                        method.invoke(model, transType(paramMap.get(name),field.getType()));
+                        method.invoke(model, transType(paramMap.get(name),field.getType(),weaParamBean));
 
                     }
 
@@ -100,7 +112,7 @@ public class WeaParamBeanTransProvider implements MessageBodyReader<Object> {
 
     }
 
-    private <T>T transType(Object o,Class<T> tClass){
+    private <T>T transType(Object o,Class<T> tClass,WeaParamBean weaParamBean){
 
         if (o instanceof String[]){
 
@@ -108,7 +120,15 @@ public class WeaParamBeanTransProvider implements MessageBodyReader<Object> {
 
             String resultString = resultStrings[resultStrings.length - 1];
 
-            return DataORMTools.tarnsData(resultString,tClass);
+            if (BaseTools.notNullString(resultString) || weaParamBean.reciveEmpty()) {
+
+                return DataORMTools.tarnsData(resultString, tClass);
+
+            } else {
+
+                return null;
+
+            }
 
         } else {
 

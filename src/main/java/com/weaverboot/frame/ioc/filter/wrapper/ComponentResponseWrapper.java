@@ -66,8 +66,6 @@ public class ComponentResponseWrapper extends HttpServletResponseWrapper {
             }
         }
 
-        BaseBean baseBean = new BaseBean();
-
         return bytes.toByteArray();
     }
 

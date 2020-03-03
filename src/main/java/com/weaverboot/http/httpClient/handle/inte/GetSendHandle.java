@@ -1,5 +1,6 @@
 package com.weaverboot.http.httpClient.handle.inte;
 
+import com.weaverboot.http.resultMsg.WeaHttpResultMsg;
 import com.weaverboot.tools.enumTools.frame.EncodeCondition;
 
 import java.io.IOException;
@@ -16,7 +17,7 @@ public interface GetSendHandle {
      * @throws IOException
      */
 
-    String sendGet(String url, EncodeCondition encodeCondition) throws Exception;
+    WeaHttpResultMsg sendGet(String url, EncodeCondition encodeCondition) throws Exception;
 
     /**
      *
@@ -30,7 +31,7 @@ public interface GetSendHandle {
      * @throws IOException
      */
 
-    String sendGet(String url, EncodeCondition encodeCondition, String userName, String password) throws Exception;
+    WeaHttpResultMsg sendGet(String url, EncodeCondition encodeCondition, String userName, String password) throws Exception;
 
     void setParams(String name, String value);
 

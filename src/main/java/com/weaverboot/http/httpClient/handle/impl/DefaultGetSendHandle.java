@@ -3,6 +3,7 @@ package com.weaverboot.http.httpClient.handle.impl;
 import com.weaverboot.http.httpClient.handle.inte.GetSendHandle;
 import com.weaverboot.http.httpClient.tools.HttpClientBuildTools;
 import com.weaverboot.http.httpClient.tools.HttpConnectionPoolTools;
+import com.weaverboot.http.resultMsg.WeaHttpResultMsg;
 import com.weaverboot.tools.enumTools.frame.EncodeCondition;
 import com.weaverboot.tools.logTools.LogTools;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -24,7 +25,7 @@ public class DefaultGetSendHandle implements GetSendHandle {
     private BaseBean baseBean = new BaseBean();
 
     @Override
-    public String sendGet(String url, EncodeCondition encodeCondition) throws Exception {
+    public WeaHttpResultMsg sendGet(String url, EncodeCondition encodeCondition) throws Exception {
 
         try {
 
@@ -32,9 +33,9 @@ public class DefaultGetSendHandle implements GetSendHandle {
 
             response = HttpConnectionPoolTools.getHttpClient().execute(httpGet);
 
-            String resultString = HttpClientBuildTools.getReturnMessage(response,encodeCondition);
+            WeaHttpResultMsg weaHttpResultMsg = HttpClientBuildTools.getReturnMessage(response,encodeCondition);
 
-            return resultString;
+            return weaHttpResultMsg;
 
         }catch (Exception e){
 
@@ -61,7 +62,7 @@ public class DefaultGetSendHandle implements GetSendHandle {
     }
 
     @Override
-    public String sendGet(String url, EncodeCondition encodeCondition, String userName, String password) throws Exception {
+    public WeaHttpResultMsg sendGet(String url, EncodeCondition encodeCondition, String userName, String password) throws Exception {
 
         try {
 
@@ -69,9 +70,9 @@ public class DefaultGetSendHandle implements GetSendHandle {
 
             this.response = HttpConnectionPoolTools.getHttpClient(userName,password).execute(httpGet);
 
-            String resultString = HttpClientBuildTools.getReturnMessage(this.response,encodeCondition);
+            WeaHttpResultMsg weaHttpResultMsg = HttpClientBuildTools.getReturnMessage(this.response,encodeCondition);
 
-            return resultString;
+            return weaHttpResultMsg;
 
         }catch (Exception e){
 

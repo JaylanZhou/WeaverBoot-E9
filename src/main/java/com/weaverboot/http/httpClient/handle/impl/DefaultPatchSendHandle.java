@@ -3,6 +3,7 @@ package com.weaverboot.http.httpClient.handle.impl;
 import com.weaverboot.http.httpClient.handle.inte.PatchSendHandle;
 import com.weaverboot.http.httpClient.tools.HttpClientBuildTools;
 import com.weaverboot.http.httpClient.tools.HttpConnectionPoolTools;
+import com.weaverboot.http.resultMsg.WeaHttpResultMsg;
 import com.weaverboot.tools.enumTools.frame.EncodeCondition;
 import com.weaverboot.tools.enumTools.frame.http.HttpContentTypeCondition;
 import com.weaverboot.tools.logTools.LogTools;
@@ -26,7 +27,7 @@ public class DefaultPatchSendHandle implements PatchSendHandle {
 
 
     @Override
-    public String sendPatch(String url, String body, EncodeCondition encodeCondition, HttpContentTypeCondition httpContentTypeCondition) {
+    public WeaHttpResultMsg sendPatch(String url, String body, EncodeCondition encodeCondition, HttpContentTypeCondition httpContentTypeCondition) {
 
         HttpPatch httpPatch = null;
 
@@ -36,11 +37,11 @@ public class DefaultPatchSendHandle implements PatchSendHandle {
 
             this.response = HttpConnectionPoolTools.getHttpClient().execute(httpPatch);
 
-            String resultString = HttpClientBuildTools.getReturnMessage(response,encodeCondition);
+            WeaHttpResultMsg weaHttpResultMsg = HttpClientBuildTools.getReturnMessage(response,encodeCondition);
 
             HttpClientBuildTools.closeConnection(this.response,param,header);
 
-            return resultString;
+            return weaHttpResultMsg;
 
         } catch (IOException e) {
 
@@ -53,7 +54,7 @@ public class DefaultPatchSendHandle implements PatchSendHandle {
     }
 
     @Override
-    public String sendPatch(String url, String body, EncodeCondition encodeCondition, HttpContentTypeCondition httpContentTypeCondition, String userName, String password) {
+    public WeaHttpResultMsg sendPatch(String url, String body, EncodeCondition encodeCondition, HttpContentTypeCondition httpContentTypeCondition, String userName, String password) {
 
         HttpPatch httpPatch = null;
 
@@ -63,11 +64,11 @@ public class DefaultPatchSendHandle implements PatchSendHandle {
 
             this.response = HttpConnectionPoolTools.getHttpClient(userName,password).execute(httpPatch);
 
-            String resultString = HttpClientBuildTools.getReturnMessage(response,encodeCondition);
+            WeaHttpResultMsg weaHttpResultMsg = HttpClientBuildTools.getReturnMessage(response,encodeCondition);
 
             HttpClientBuildTools.closeConnection(this.response,param,header);
 
-            return resultString;
+            return weaHttpResultMsg;
 
         } catch (IOException e) {
 

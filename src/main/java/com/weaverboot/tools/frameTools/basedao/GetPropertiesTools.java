@@ -1,5 +1,6 @@
 package com.weaverboot.tools.frameTools.basedao;
 
+import com.weaverboot.frame.dao.anno.TableInfo;
 import com.weaverboot.tools.baseTools.BaseTools;
 import com.weaverboot.tools.enumTools.frame.OrderByCondition;
 import com.weaverboot.tools.logTools.LogTools;
@@ -597,9 +598,27 @@ public class GetPropertiesTools {
 
     public static String getTableName(Object t,Class tClass) throws Exception {
 
-        Method method = tClass.getMethod("getTableName");
+        String tableName;
 
-        String tableName = (String) method.invoke(t);
+        if (tClass.isAnnotationPresent(TableInfo.class)){
+
+            TableInfo tableInfo = (TableInfo) tClass.getAnnotation(TableInfo.class);
+
+            tableName = tableInfo.value();
+
+        } else {
+
+            Method method = tClass.getMethod("getTableName");
+
+            tableName = (String) method.invoke(t);
+
+        }
+
+        if (!BaseTools.notNullString(tableName)){
+
+            throw new RuntimeException("请为" + tClass + "指定表名");
+
+        }
 
         return tableName;
 

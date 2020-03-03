@@ -4,6 +4,7 @@ import com.weaverboot.http.httpClient.handle.inte.OptionsSendHandle;
 import com.weaverboot.http.httpClient.tools.HttpClientBuildTools;
 import com.weaverboot.http.httpClient.tools.HttpConnectionPoolTools;
 import com.weaverboot.http.httpClient.tools.HttpMethodWithEntity;
+import com.weaverboot.http.resultMsg.WeaHttpResultMsg;
 import com.weaverboot.tools.enumTools.frame.EncodeCondition;
 import com.weaverboot.tools.enumTools.frame.http.HttpContentTypeCondition;
 import com.weaverboot.tools.logTools.LogTools;
@@ -25,7 +26,7 @@ public class DefaultOptionsSendHandle implements OptionsSendHandle {
     private BaseBean baseBean = new BaseBean();
 
     @Override
-    public String sendOptions(String url, String body, EncodeCondition encodeCondition, HttpContentTypeCondition httpContentTypeCondition) {
+    public WeaHttpResultMsg sendOptions(String url, String body, EncodeCondition encodeCondition, HttpContentTypeCondition httpContentTypeCondition) {
 
         HttpMethodWithEntity httpOptions = null;
 
@@ -35,11 +36,11 @@ public class DefaultOptionsSendHandle implements OptionsSendHandle {
 
             this.response = HttpConnectionPoolTools.getHttpClient().execute(httpOptions);
 
-            String resultString = HttpClientBuildTools.getReturnMessage(response,encodeCondition);
+            WeaHttpResultMsg weaHttpResultMsg = HttpClientBuildTools.getReturnMessage(response,encodeCondition);
 
             HttpClientBuildTools.closeConnection(this.response,param,header);
 
-            return resultString;
+            return weaHttpResultMsg;
 
         } catch (IOException e) {
 
@@ -52,7 +53,7 @@ public class DefaultOptionsSendHandle implements OptionsSendHandle {
     }
 
     @Override
-    public String sendOptions(String url, String body, EncodeCondition encodeCondition, HttpContentTypeCondition httpContentTypeCondition, String userName, String password) {
+    public WeaHttpResultMsg sendOptions(String url, String body, EncodeCondition encodeCondition, HttpContentTypeCondition httpContentTypeCondition, String userName, String password) {
 
         HttpMethodWithEntity httpOptions = null;
 
@@ -62,11 +63,11 @@ public class DefaultOptionsSendHandle implements OptionsSendHandle {
 
             this.response = HttpConnectionPoolTools.getHttpClient(userName,password).execute(httpOptions);
 
-            String resultString = HttpClientBuildTools.getReturnMessage(response,encodeCondition);
+            WeaHttpResultMsg weaHttpResultMsg = HttpClientBuildTools.getReturnMessage(response,encodeCondition);
 
             HttpClientBuildTools.closeConnection(this.response,param,header);
 
-            return resultString;
+            return weaHttpResultMsg;
 
         } catch (IOException e) {
 

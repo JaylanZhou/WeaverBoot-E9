@@ -1,13 +1,14 @@
 package com.weaverboot.http.httpClient.handle.inte;
 
+import com.weaverboot.http.resultMsg.WeaHttpResultMsg;
 import com.weaverboot.tools.enumTools.frame.EncodeCondition;
 import com.weaverboot.tools.enumTools.frame.http.HttpContentTypeCondition;
 
 public interface DeleteSendHandle {
 
-    String sendDelete(String url, String body, EncodeCondition encodeCondition, HttpContentTypeCondition httpContentTypeCondition);
+    WeaHttpResultMsg sendDelete(String url, String body, EncodeCondition encodeCondition, HttpContentTypeCondition httpContentTypeCondition);
 
-    String sendDelete(String url, String body, EncodeCondition encodeCondition, HttpContentTypeCondition httpContentTypeCondition, String userName, String password);
+    WeaHttpResultMsg sendDelete(String url, String body, EncodeCondition encodeCondition, HttpContentTypeCondition httpContentTypeCondition, String userName, String password);
 
     void setParams(String name, String value);
 

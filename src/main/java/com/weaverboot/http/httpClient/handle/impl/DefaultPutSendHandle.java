@@ -3,6 +3,7 @@ package com.weaverboot.http.httpClient.handle.impl;
 import com.weaverboot.http.httpClient.handle.inte.PutSendHandle;
 import com.weaverboot.http.httpClient.tools.HttpClientBuildTools;
 import com.weaverboot.http.httpClient.tools.HttpConnectionPoolTools;
+import com.weaverboot.http.resultMsg.WeaHttpResultMsg;
 import com.weaverboot.tools.enumTools.frame.EncodeCondition;
 import com.weaverboot.tools.enumTools.frame.http.HttpContentTypeCondition;
 import com.weaverboot.tools.logTools.LogTools;
@@ -26,7 +27,7 @@ public class DefaultPutSendHandle implements PutSendHandle {
 
 
     @Override
-    public String sendPut(String url, String body, EncodeCondition encodeCondition, HttpContentTypeCondition httpContentTypeCondition) {
+    public WeaHttpResultMsg sendPut(String url, String body, EncodeCondition encodeCondition, HttpContentTypeCondition httpContentTypeCondition) {
 
         HttpPut httpPut = null;
 
@@ -36,11 +37,11 @@ public class DefaultPutSendHandle implements PutSendHandle {
 
             this.response = HttpConnectionPoolTools.getHttpClient().execute(httpPut);
 
-            String resultString = HttpClientBuildTools.getReturnMessage(response,encodeCondition);
+            WeaHttpResultMsg weaHttpResultMsg = HttpClientBuildTools.getReturnMessage(response,encodeCondition);
 
             HttpClientBuildTools.closeConnection(this.response,param,header);
 
-            return resultString;
+            return weaHttpResultMsg;
 
         } catch (IOException e) {
 
@@ -53,7 +54,7 @@ public class DefaultPutSendHandle implements PutSendHandle {
     }
 
     @Override
-    public String sendPut(String url, String body, EncodeCondition encodeCondition, HttpContentTypeCondition httpContentTypeCondition, String userName, String password) {
+    public WeaHttpResultMsg sendPut(String url, String body, EncodeCondition encodeCondition, HttpContentTypeCondition httpContentTypeCondition, String userName, String password) {
 
         HttpPut httpPut = null;
 
@@ -63,11 +64,11 @@ public class DefaultPutSendHandle implements PutSendHandle {
 
             this.response = HttpConnectionPoolTools.getHttpClient(userName,password).execute(httpPut);
 
-            String resultString = HttpClientBuildTools.getReturnMessage(response,encodeCondition);
+            WeaHttpResultMsg weaHttpResultMsg = HttpClientBuildTools.getReturnMessage(response,encodeCondition);
 
             HttpClientBuildTools.closeConnection(this.response,param,header);
 
-            return resultString;
+            return weaHttpResultMsg;
 
         } catch (IOException e) {
 
