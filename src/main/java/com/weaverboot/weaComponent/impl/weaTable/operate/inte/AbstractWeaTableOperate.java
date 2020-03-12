@@ -35,6 +35,14 @@ public abstract class AbstractWeaTableOperate implements WeaComponent {
     public AbstractWeaTableOperate() {
     }
 
+    public AbstractWeaTableOperate(String text, String href) {
+
+        this.text = text;
+
+        this.href = href;
+
+    }
+
     public AbstractWeaTableOperate(String text, String href, String index) {
 
         this.text = text;

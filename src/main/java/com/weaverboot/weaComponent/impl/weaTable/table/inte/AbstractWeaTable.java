@@ -214,7 +214,7 @@ public abstract class AbstractWeaTable extends AbstractWeaComponent {
      * @param <T>
      */
 
-    public abstract <T extends AbstractWeaTableColumn> void addWeaTableColumn(int index,T t);
+    public abstract <T extends AbstractWeaTableColumn> AbstractWeaTable addWeaTableColumn(int index,T t);
 
     /**
      *
@@ -224,7 +224,7 @@ public abstract class AbstractWeaTable extends AbstractWeaComponent {
      * @param <T>
      */
 
-    public abstract <T extends AbstractWeaTableColumn> void addWeaTableColumn(T t);
+    public abstract <T extends AbstractWeaTableColumn> AbstractWeaTable addWeaTableColumn(T t);
 
     /**
      *
@@ -298,7 +298,7 @@ public abstract class AbstractWeaTable extends AbstractWeaComponent {
      * @param <T>
      */
 
-    public abstract <T extends AbstractWeaTableOperate> void addWeaTableOperate(int index, T t);
+    public abstract <T extends AbstractWeaTableOperate> AbstractWeaTable addWeaTableOperate(int index, T t);
 
     /**
      *
@@ -308,7 +308,7 @@ public abstract class AbstractWeaTable extends AbstractWeaComponent {
      * @param <T>
      */
 
-    public abstract <T extends AbstractWeaTableOperate> void addWeaTableOperate(T t);
+    public abstract <T extends AbstractWeaTableOperate> AbstractWeaTable addWeaTableOperate(T t);
 
     /**
      *

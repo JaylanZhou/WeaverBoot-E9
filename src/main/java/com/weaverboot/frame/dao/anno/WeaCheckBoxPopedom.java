@@ -5,12 +5,12 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface TableInfo {
+public @interface WeaCheckBoxPopedom {
 
     String value();
 
-    String poolname() default "";
+    String transMethod() default "";
 
-    String primaryKey() default "";
+    String params() default "";
 
 }

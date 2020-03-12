@@ -56,15 +56,6 @@ public class DefaultWeaTable extends AbstractWeaTable {
 
     }
 
-    /**
-     *
-     * 根据
-     *
-     * @param index
-     * @param tClass
-     * @param <T>
-     * @return
-     */
     @Override
     public <T extends AbstractWeaTableColumn> T readWeaTableColumn(int index, Class<T> tClass) {
 
@@ -169,16 +160,20 @@ public class DefaultWeaTable extends AbstractWeaTable {
     }
 
     @Override
-    public <T extends AbstractWeaTableColumn> void addWeaTableColumn(int index, T t) {
+    public <T extends AbstractWeaTableColumn> AbstractWeaTable addWeaTableColumn(int index, T t) {
 
         this.getColumns().add(index,t);
+
+        return this;
 
     }
 
     @Override
-    public <T extends AbstractWeaTableColumn> void addWeaTableColumn(T t) {
+    public <T extends AbstractWeaTableColumn> AbstractWeaTable addWeaTableColumn(T t) {
 
         this.getColumns().add(t);
+
+        return this;
 
     }
 
@@ -287,16 +282,32 @@ public class DefaultWeaTable extends AbstractWeaTable {
     }
 
     @Override
-    public <T extends AbstractWeaTableOperate> void addWeaTableOperate(int index, T t) {
+    public <T extends AbstractWeaTableOperate> AbstractWeaTable addWeaTableOperate(int index, T t) {
+
+        if (BaseTools.notNullString(t.getIndex())){
+
+            t.setIndex(String.valueOf(index));
+
+        }
 
         this.getOperates().getOperate().add(index,t);
+
+        return this;
 
     }
 
     @Override
-    public <T extends AbstractWeaTableOperate> void addWeaTableOperate(T t) {
+    public <T extends AbstractWeaTableOperate> AbstractWeaTable addWeaTableOperate(T t) {
 
         this.getOperates().getOperate().add(t);
+
+        if (BaseTools.notNullString(t.getIndex())){
+
+            t.setIndex(String.valueOf(this.getOperates().getOperate().size()));
+
+        }
+
+        return this;
 
     }
 

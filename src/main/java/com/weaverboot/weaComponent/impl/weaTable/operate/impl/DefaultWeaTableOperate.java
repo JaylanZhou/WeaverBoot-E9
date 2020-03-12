@@ -24,4 +24,10 @@ public class DefaultWeaTableOperate extends AbstractWeaTableOperate {
 
     }
 
+    public DefaultWeaTableOperate(String text, String href) {
+
+        super(text, href);
+
+    }
+
 }

@@ -9,6 +9,8 @@ import com.weaverboot.tools.frameTools.basedao.BuildSQLTools;
 import com.weaverboot.tools.frameTools.basedao.GetPropertiesTools;
 import com.weaverboot.tools.logTools.LogTools;
 import com.weaverboot.tools.parseTools.ModelTransTableParserTool;
+import com.weaverboot.weaComponent.impl.weaTable.checkboxPopedom.impl.DefaultWeaCheckboxPopedom;
+import com.weaverboot.weaComponent.impl.weaTable.checkboxPopedom.inte.AbstractWeaCheckboxPopedom;
 import com.weaverboot.weaComponent.impl.weaTable.column.anno.WeaMobileTransMethod;
 import com.weaverboot.weaComponent.impl.weaTable.column.anno.WeaTransMethod;
 import com.weaverboot.weaComponent.impl.weaTable.column.comparator.WeaTableColumnComparator;
@@ -75,6 +77,34 @@ public class ModelTransWeaTable {
                 abstractWeaTable.setSqlorderby(orderBy);
 
                 abstractWeaTable.setSqlsortway(GetPropertiesTools.getOrderByCondition(baseModel,baseModelClass).toString());
+
+            }
+
+            if (baseModelClass.isAnnotationPresent(WeaCheckBoxPopedom.class)){
+
+                WeaCheckBoxPopedom weaCheckBoxPopedom = (WeaCheckBoxPopedom) baseModelClass.getAnnotation(WeaCheckBoxPopedom.class);
+
+                String transmethod = weaCheckBoxPopedom.transMethod();
+
+                String params = weaCheckBoxPopedom.params();
+
+                AbstractWeaCheckboxPopedom abstractWeaCheckboxPopedom = new DefaultWeaCheckboxPopedom();
+
+                abstractWeaCheckboxPopedom.setId(weaCheckBoxPopedom.value());
+
+                if (BaseTools.notNullString(transmethod)){
+
+                    abstractWeaCheckboxPopedom.setShowmethod(transmethod);
+
+                }
+
+                if (BaseTools.notNullString(params)){
+
+                    abstractWeaCheckboxPopedom.setPopedompara(params);
+
+                }
+
+                abstractWeaTable.setCheckboxpopedom(abstractWeaCheckboxPopedom);
 
             }
 
@@ -277,6 +307,12 @@ public class ModelTransWeaTable {
                     if (BaseTools.notNullString(tableInfo.poolname())){
 
                         abstractWeaTable.setPoolname(tableInfo.poolname());
+
+                    }
+
+                    if (BaseTools.notNullString(tableInfo.primaryKey())){
+
+                        abstractWeaTable.setSqlprimarykey(tableInfo.primaryKey());
 
                     }
 

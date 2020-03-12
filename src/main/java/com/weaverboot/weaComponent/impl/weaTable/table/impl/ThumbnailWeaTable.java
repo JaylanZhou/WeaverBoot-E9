@@ -4,6 +4,7 @@ import com.weaverboot.frame.model.BaseModel;
 import com.weaverboot.tools.baseTools.BaseTools;
 import com.weaverboot.tools.componentTools.table.ModelTransWeaTable;
 import com.weaverboot.tools.enumTools.frame.SelectCondition;
+import com.weaverboot.tools.enumTools.weaComponent.WeaTableTypeEnum;
 import com.weaverboot.weaComponent.impl.weaTable.checkboxPopedom.inte.AbstractWeaCheckboxPopedom;
 import com.weaverboot.weaComponent.impl.weaTable.column.inte.AbstractWeaTableColumn;
 import com.weaverboot.weaComponent.impl.weaTable.operate.inte.AbstractWeaTableOperate;
@@ -13,40 +14,73 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @Author : Jaylan Zhou
- * @Date : 2019-12-25 16:27
- * @Version : 1.0
- */
-public class DocWeaTable extends AbstractWeaTable {
+public class ThumbnailWeaTable extends AbstractWeaTable {
 
-    public DocWeaTable(){
+    private boolean showThumbnails;
+
+    private int imageNumberPerRow;
+
+    public boolean getShowThumbnails() {
+        return showThumbnails;
+    }
+
+    public void setShowThumbnails(boolean showThumbnails) {
+        this.showThumbnails = showThumbnails;
+    }
+
+    public int getImageNumberPerRow() {
+        return imageNumberPerRow;
+    }
+
+    public void setImageNumberPerRow(int imageNumberPerRow) {
+        this.imageNumberPerRow = imageNumberPerRow;
+    }
+
+    public ThumbnailWeaTable(){
 
         super();
+
+        initThumbnail();
 
     }
 
-    public DocWeaTable(BaseModel baseModel, SelectCondition selectCondition){
+    public ThumbnailWeaTable(BaseModel baseModel, SelectCondition selectCondition){
 
         super();
+
+        initThumbnail();
 
         ModelTransWeaTable.parseBaseModel(baseModel,this,selectCondition,null);
 
     }
 
-    public DocWeaTable(BaseModel baseModel, SelectCondition selectCondition, Map<String,String> conditionMap){
+    public ThumbnailWeaTable(BaseModel baseModel, SelectCondition selectCondition, Map<String,String> conditionMap){
 
         super();
+
+        initThumbnail();
 
         ModelTransWeaTable.parseBaseModel(baseModel,this,selectCondition,conditionMap);
 
     }
 
-    public DocWeaTable(BaseModel baseModel, Map<String,String> conditionMap){
+    public ThumbnailWeaTable(BaseModel baseModel, Map<String,String> conditionMap){
 
         super();
 
+        initThumbnail();
+
         ModelTransWeaTable.parseBaseModel(baseModel,this,SelectCondition.AND,conditionMap);
+
+    }
+
+    private void initThumbnail(){
+
+        this.imageNumberPerRow = 5;
+
+        this.showThumbnails = true;
+
+        this.setTableType(WeaTableTypeEnum.THUMBNAIL);
 
     }
 
@@ -366,5 +400,4 @@ public class DocWeaTable extends AbstractWeaTable {
         }
 
     }
-
 }
