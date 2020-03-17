@@ -3,7 +3,15 @@ package com.weaverboot.weaComponent.impl.weaForm.impl;
 import com.api.browser.bean.BrowserBean;
 import com.api.browser.util.BrowserInitUtil;
 import com.api.browser.util.ConditionType;
+import com.weaverboot.tools.baseTools.BaseTools;
+import com.weaverboot.tools.enumTools.weaComponent.CustomBrowserEnum;
 import com.weaverboot.weaComponent.impl.weaForm.inte.AbstractWeaForm;
+
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -19,6 +27,22 @@ import com.weaverboot.weaComponent.impl.weaForm.inte.AbstractWeaForm;
 public class BrowserWeaForm extends AbstractWeaForm {
 
     private final ConditionType conditionType = ConditionType.BROWSER;
+
+    private static final String TYPE_PREFIX = "browser.";
+
+    private static final String TYPE_KEY = "type";
+
+    private static final String FIELD_DB_TYPE_KEY = "fielddbtype";
+
+    private static final String URL_PREFIX = "/api/public/browser";
+
+    private static final String DATA_URL_PREFIX = URL_PREFIX + "/data/";
+
+    private static final String COMPLETE_URL_PREFIX = URL_PREFIX + "/complete/";
+
+    private static final String CONDITION_URL_PREFIX = URL_PREFIX + "/condition/";
+
+    private static final String URL_FIX = "/";
 
     /**
      * 组件参数
@@ -80,6 +104,42 @@ public class BrowserWeaForm extends AbstractWeaForm {
 
     }
 
+    public BrowserWeaForm(String label, String browserId, CustomBrowserEnum customBrowserEnum,int languageId,String ... name){
+
+        String browserTypeId = customBrowserEnum.toString();
+
+        BrowserBean browserBean = initBrowserBean(browserTypeId,languageId);
+
+        browserBean.setDataURL(DATA_URL_PREFIX + browserTypeId);
+
+        browserBean.setCompleteURL(COMPLETE_URL_PREFIX + browserTypeId);
+
+        browserBean.setConditionURL(CONDITION_URL_PREFIX + browserTypeId);
+
+        browserBean.setDataParams(initCustomDataMap(browserId));
+
+        browserBean.setCompleteParams(initCustomDataMap(browserId));
+
+        browserBean.setConditionDataParams(initCustomDataMap(browserId));
+
+        this.setBrowserConditionParam(browserBean);
+
+        this.init(label,name);
+
+    }
+
+    public Map<String,Object> initCustomDataMap(String browserId){
+
+        Map<String,Object> dataMap = new HashMap<>();
+
+        dataMap.put(TYPE_KEY , TYPE_PREFIX + browserId);
+
+        dataMap.put(FIELD_DB_TYPE_KEY , TYPE_PREFIX + browserId);
+
+        return dataMap;
+
+    }
+
     /**
      *
      * 初始化标签名以及domkey的操作
@@ -128,6 +188,30 @@ public class BrowserWeaForm extends AbstractWeaForm {
         browserInitUtil.initBrowser(browserBean, languageId);
 
         return browserBean;
+
+    }
+
+    public BrowserWeaForm addValue(String id,String name){
+
+        List<Map<String,Object>> replaceDataList = this.getBrowserConditionParam().getReplaceDatas();
+
+        if (!BaseTools.notNullList(replaceDataList)){
+
+            replaceDataList = new ArrayList<>();
+
+            this.getBrowserConditionParam().setReplaceDatas(replaceDataList);
+
+        }
+
+        Map<String,Object> valueMap = new HashMap<>();
+
+        valueMap.put("id",id);
+
+        valueMap.put("name",name);
+
+        replaceDataList.add(valueMap);
+
+        return this;
 
     }
 
