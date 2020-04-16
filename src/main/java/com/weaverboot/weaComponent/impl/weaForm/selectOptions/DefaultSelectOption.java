@@ -12,13 +12,13 @@ package com.weaverboot.weaComponent.impl.weaForm.selectOptions;
 
 public class DefaultSelectOption {
 
-    private String key;
+    private String key; //就是value
 
-    private String showname;
+    private String showname; //展示名称
 
-    private boolean selected;
+    private boolean selected; //是否被选中
 
-    private boolean disabled;
+    private boolean disabled; //是否可选
 
     private boolean visible;//下拉框的值是否显示，默认显示
 

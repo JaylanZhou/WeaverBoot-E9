@@ -316,6 +316,16 @@ public class ModelTransWeaTable {
 
                     }
 
+                    if (BaseTools.notNullString(tableInfo.pageID())){
+
+                        abstractWeaTable.setPageID(tableInfo.pageID());
+
+                    } else {
+
+                        abstractWeaTable.setPageID(tableInfo.value());
+
+                    }
+
                 } else {
 
                     abstractWeaTable.setSqlform(GetPropertiesTools.getTableName(baseModel, baseModelClass));

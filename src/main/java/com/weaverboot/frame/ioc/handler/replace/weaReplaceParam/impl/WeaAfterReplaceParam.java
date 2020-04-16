@@ -37,6 +37,14 @@ public class WeaAfterReplaceParam  {
         return response;
     }
 
+
+
+
+
+
+
+
+
     public void setResponse(HttpServletResponse response) {
         this.response = response;
     }

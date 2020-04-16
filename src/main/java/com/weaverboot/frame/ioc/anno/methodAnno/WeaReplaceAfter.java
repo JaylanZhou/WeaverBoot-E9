@@ -23,5 +23,6 @@ public @interface WeaReplaceAfter {
 
     int order(); //此方法在链中执行的顺序
 
+    String description() default ""; //拦截描述
 
 }

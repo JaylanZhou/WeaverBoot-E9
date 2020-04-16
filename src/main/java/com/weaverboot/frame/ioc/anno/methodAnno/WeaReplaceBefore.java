@@ -23,4 +23,6 @@ public @interface WeaReplaceBefore {
 
     int order();
 
+    String description(); //描述
+
 }

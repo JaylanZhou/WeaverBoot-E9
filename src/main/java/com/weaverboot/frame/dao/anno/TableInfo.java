@@ -13,4 +13,6 @@ public @interface TableInfo {
 
     String primaryKey() default "";
 
+    String pageID() default "";
+
 }

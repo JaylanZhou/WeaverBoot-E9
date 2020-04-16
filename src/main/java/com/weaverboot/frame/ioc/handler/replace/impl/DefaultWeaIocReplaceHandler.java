@@ -101,13 +101,19 @@ public class DefaultWeaIocReplaceHandler extends AbstractWeaIocReplaceHandler {
 
     private void addAfterAdvice(Method method,AbstractWeaBeanDefinition abstractWeaBeanDefinition,List<WeaReplaceApiAdvice> apiAdviceList){
 
+        WeaReplaceAfter weaReplaceAfter = method.getAnnotation(WeaReplaceAfter.class);
+
         WeaReplaceApiAdvice weaReplaceApiAdvice = new WeaReplaceApiAdvice();
 
         weaReplaceApiAdvice.setMethod(method);
 
+        weaReplaceApiAdvice.setMethodName(method.getDeclaringClass().getName()+"."+method.getName());
+
         weaReplaceApiAdvice.setAbstractWeaBeanDefinition(abstractWeaBeanDefinition);
 
-        weaReplaceApiAdvice.setOrder(method.getAnnotation(WeaReplaceAfter.class).order());
+        weaReplaceApiAdvice.setOrder(weaReplaceAfter.order());
+
+        weaReplaceApiAdvice.setDescription(weaReplaceAfter.description());
 
         apiAdviceList.add(weaReplaceApiAdvice);
 
@@ -115,13 +121,19 @@ public class DefaultWeaIocReplaceHandler extends AbstractWeaIocReplaceHandler {
 
     private void addBeforeAdvice(Method method,AbstractWeaBeanDefinition abstractWeaBeanDefinition,List<WeaReplaceApiAdvice> apiAdviceList){
 
+        WeaReplaceBefore weaReplaceBefore = method.getAnnotation(WeaReplaceBefore.class);
+
         WeaReplaceApiAdvice weaReplaceApiAdvice = new WeaReplaceApiAdvice();
 
         weaReplaceApiAdvice.setMethod(method);
 
+        weaReplaceApiAdvice.setMethodName(method.getDeclaringClass().getName()+"."+method.getName());
+
         weaReplaceApiAdvice.setAbstractWeaBeanDefinition(abstractWeaBeanDefinition);
 
-        weaReplaceApiAdvice.setOrder(method.getAnnotation(WeaReplaceBefore.class).order());
+        weaReplaceApiAdvice.setOrder(weaReplaceBefore.order());
+
+        weaReplaceApiAdvice.setDescription(weaReplaceBefore.description());
 
         apiAdviceList.add(weaReplaceApiAdvice);
 

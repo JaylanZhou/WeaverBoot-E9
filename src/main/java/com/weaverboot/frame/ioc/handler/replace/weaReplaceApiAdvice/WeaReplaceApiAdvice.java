@@ -1,5 +1,6 @@
 package com.weaverboot.frame.ioc.handler.replace.weaReplaceApiAdvice;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.weaverboot.frame.ioc.beans.bean.definition.inte.AbstractWeaBeanDefinition;
 
 import java.lang.reflect.Method;
@@ -14,9 +15,15 @@ import java.lang.reflect.Method;
  */
 public class WeaReplaceApiAdvice {
 
+    @JSONField(serialize = false)
     private AbstractWeaBeanDefinition abstractWeaBeanDefinition;
 
+    @JSONField(serialize = false)
     private Method method;
+
+    private String methodName;
+
+    private String description;
 
     private int order;
 
@@ -42,5 +49,21 @@ public class WeaReplaceApiAdvice {
 
     public void setOrder(int order) {
         this.order = order;
+    }
+
+    public String getMethodName() {
+        return methodName;
+    }
+
+    public void setMethodName(String methodName) {
+        this.methodName = methodName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
