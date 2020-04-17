@@ -111,6 +111,14 @@ public abstract class AbstractWeaTable extends AbstractWeaComponent {
 
     }
 
+    public AbstractWeaTable(String pageID) {
+
+        this.pageID = pageID;
+
+        init();
+
+    }
+
     public AbstractWeaTable(BaseModel baseModel){
 
         init();
@@ -134,7 +142,7 @@ public abstract class AbstractWeaTable extends AbstractWeaComponent {
 
         this.checkboxList = new ArrayList();
 
-        this.pageID = BaseTools.createUUID();
+        this.pageID = BaseTools.notNullString(this.pageID) ? pageID : BaseTools.createUUID();
 
         this.pageUID = pageID;
 

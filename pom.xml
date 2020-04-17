@@ -6,7 +6,7 @@
 
   <groupId>com.weaver</groupId>
   <artifactId>WeaverBoot-E9</artifactId>
-  <version>0.1.1</version>
+  <version>1.0.0</version>
 
   <name>WeaverBoot-E9</name>
   <!-- FIXME change it to the project's website -->
@@ -113,9 +113,9 @@
 
   <distributionManagement>
     <repository>
-      <id>weaver-ebu2</id>
-      <name>weaver-ebu2</name>
-      <url>http://114.116.228.6:8081/repository/weaver-ebu2/</url>
+      <id>Weaver</id>
+      <name>Weaver</name>
+      <url>http://10.10.27.24:8081/repository/Weaver/</url>
     </repository>
     <!--    <snapshotRepository>-->
     <!--      <id>user-snapshots</id>-->
