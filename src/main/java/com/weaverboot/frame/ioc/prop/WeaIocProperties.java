@@ -41,6 +41,10 @@ public class WeaIocProperties {
 
     public static String SCAN_PACKAGE;
 
+    public static String SCAN_JAR;
+
+    public static final String BASE_SCAN_JAR = "";
+
     private static String IOC_PROPERTIES_NAME = "weaverboot";
 
     private static String SCAN_PACKAGE_NAME = "scanPackage";
@@ -119,6 +123,8 @@ public class WeaIocProperties {
         }
 
         SCAN_PACKAGE = BASIC_SCAN_PACKAGE + IOC_PROPERTIES.getProperty("scanPackage");
+
+        SCAN_JAR = BASE_SCAN_JAR + IOC_PROPERTIES.getProperty("scanJar");
 
     }
 

@@ -11,8 +11,18 @@ import com.weaverboot.tools.baseTools.BaseTools;
 import com.weaverboot.tools.logTools.LogTools;
 
 import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 public class DefaultWeaScanBeanDefinitionHandler implements WeaScanBeanDefinitionHandler {
 
@@ -22,7 +32,11 @@ public class DefaultWeaScanBeanDefinitionHandler implements WeaScanBeanDefinitio
 
     public static String basePath = "";
 
-    private static String CLASS_SUFFIX = ".class";
+    public static String baseLibPath = "";
+
+    private static final String CLASS_SUFFIX = ".class";
+
+    private static final String JAR_SUFFIX = ".jar";
 
     private static String SPLIT_SCANPACKAGE_FLAG = ";";
 
@@ -49,6 +63,132 @@ public class DefaultWeaScanBeanDefinitionHandler implements WeaScanBeanDefinitio
     }
 
     private void scanLogic(String packageName){
+
+       scanClassBean(packageName);
+
+       scanJar(packageName);
+
+    }
+
+    private void scanJar(String packageName){
+
+        File file = new File(baseLibPath);
+
+        File[] jarList = file.listFiles();
+
+        String[] scanJars = WeaIocProperties.SCAN_JAR.split(";");
+
+        String[] packageNames = packageName.split(";");
+
+        this.checkJar(jarList,scanJars,packageNames);
+
+    }
+
+    private void checkJar(File[] jarList,String[] scarJars,String[] packageNames){
+
+        for (File jarFile : jarList
+        ) {
+
+            if (jarFile.isDirectory()){
+
+                checkJar(jarFile.listFiles(),scarJars,packageNames);
+
+            } else {
+
+                String jarFileName = jarFile.getName();
+
+                if (jarFileName.endsWith(JAR_SUFFIX)){
+
+                    for (String scanJar : scarJars
+                         ) {
+
+                        if (weaPathMatcher.match(scanJar,jarFileName)){
+
+                            loadJar(jarFile,packageNames);
+
+                            break;
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+    private void loadJar(File jarFile,String[] packageNames){
+
+        try {
+
+            URL url = jarFile.toURI().toURL();
+
+            ClassLoader urlClassLoader = new URLClassLoader(new URL[]{url});
+
+            JarFile jarZip = new JarFile(jarFile.getPath());
+
+            Enumeration<JarEntry> entrys = jarZip.entries();
+
+            while (entrys.hasMoreElements()){
+
+                JarEntry jarEntry = entrys.nextElement();
+
+                if (jarEntry.getName().endsWith(CLASS_SUFFIX)){
+
+                    String classPath = jarEntry.getName();
+
+                    String classPackageName = classPath.substring(0,classPath.lastIndexOf("/")).replaceAll("/",".");
+
+                    for (String packageName : packageNames
+                         ) {
+
+                        if (weaPathMatcher.match(packageName,classPackageName)){
+
+                            Class tClass = urlClassLoader.loadClass(classPath.replaceAll("/",".").replaceAll(".class",""));
+
+                            this.weaRegisterBeanDefinitionHandler.registerBeanDefinition(tClass);
+
+                            break;
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+
+
+        } catch (MalformedURLException e) {
+
+            LogTools.error("URL资源加载失败，原因为:" + e.getMessage());
+
+        } catch (IOException e) {
+
+            LogTools.error("Jar包扫描IO错误，原因为:" + e.getMessage());
+
+        } catch (ClassNotFoundException e) {
+
+            LogTools.error("扫描jar包ClassNotFound,原因为:" + e.getMessage());
+
+        } catch (IllegalAccessException e) {
+
+            LogTools.error("扫描jar包参数错误，原因为:" + e.getMessage());
+
+        } catch (InstantiationException e) {
+
+            LogTools.error("注册jar包中的扫描类错误，原因为：" + e.getMessage());
+
+        }
+
+
+    }
+
+    private void scanClassBean(String packageName){
 
         List<File> fileList = getScanPackageList(packageName);
 
@@ -161,11 +301,13 @@ public class DefaultWeaScanBeanDefinitionHandler implements WeaScanBeanDefinitio
 
             if (!basePath.startsWith("/")) {
 
-                basePath = "/" + basePath;
+                baseLibPath = basePath = "/" + basePath;
 
             }
 
             basePath = (basePath + "classbean/").replaceAll("\\\\", "/");
+
+            baseLibPath = (baseLibPath + "WEB-INF/lib/").replaceAll("\\\\", "/");
 
         }
 
