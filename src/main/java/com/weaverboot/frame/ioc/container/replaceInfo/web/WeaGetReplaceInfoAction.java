@@ -6,6 +6,7 @@ import com.weaverboot.frame.ioc.container.replaceInfo.model.WeaReplaceInfoResult
 import com.weaverboot.frame.ioc.container.replaceInfo.service.impl.WeaReplaceInfoServiceImpl;
 import com.weaverboot.frame.ioc.container.replaceInfo.service.inte.WeaReplaceInfoService;
 
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -20,7 +21,7 @@ public class WeaGetReplaceInfoAction {
 
     private WeaReplaceInfoService weaReplaceInfoService = new WeaReplaceInfoServiceImpl();
 
-    @POST
+    @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/getInfoList")
     public String replaceInfo(@WeaParamBean WeaReplaceInfo weaReplaceInfo){

@@ -12,12 +12,7 @@ import com.weaverboot.tools.logTools.LogTools;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -124,10 +119,6 @@ public class DefaultWeaScanBeanDefinitionHandler implements WeaScanBeanDefinitio
 
         try {
 
-            URL url = jarFile.toURI().toURL();
-
-            ClassLoader urlClassLoader = new URLClassLoader(new URL[]{url});
-
             JarFile jarZip = new JarFile(jarFile.getPath());
 
             Enumeration<JarEntry> entrys = jarZip.entries();
@@ -147,7 +138,7 @@ public class DefaultWeaScanBeanDefinitionHandler implements WeaScanBeanDefinitio
 
                         if (weaPathMatcher.match(packageName,classPackageName)){
 
-                            Class tClass = urlClassLoader.loadClass(classPath.replaceAll("/",".").replaceAll(".class",""));
+                            Class tClass = this.getClass().getClassLoader().loadClass(classPath.replaceAll("/",".").replaceAll(".class",""));
 
                             this.weaRegisterBeanDefinitionHandler.registerBeanDefinition(tClass);
 
@@ -302,6 +293,10 @@ public class DefaultWeaScanBeanDefinitionHandler implements WeaScanBeanDefinitio
             if (!basePath.startsWith("/")) {
 
                 baseLibPath = basePath = "/" + basePath;
+
+            } else {
+
+                baseLibPath = basePath;
 
             }
 
